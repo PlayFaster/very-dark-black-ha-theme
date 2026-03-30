@@ -1,0 +1,7 @@
+{
+  "name": "Very Dark Black HA Theme",
+  "type": "theme",
+  "homeassistant": "2024.1.0",
+  "hacs": "1.6.0",
+  "render_readme": true
+}
