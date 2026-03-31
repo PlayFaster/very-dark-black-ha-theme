@@ -3,12 +3,21 @@
   "dockerComposeFile": "docker-compose.yml",
   "service": "homeassistant",
   "workspaceFolder": "/workspaces/very-dark-black-ha-theme",
+  "postCreateCommand": "pip install -r requirements_test.txt",
   "customizations": {
     "vscode": {
       "extensions": [
+        "redhat.vscode-yaml",
         "keesschollaart.vscode-home-assistant"
-      ]
+      ],
+      "settings": {
+        "yaml.schemas": {
+          "https://raw.githubusercontent.com/hacs/default/master/hacs.json": "hacs.json"
+        },
+        "yaml.validate": true
+      }
     }
   },
-  "remoteUser": "root" 
+  "remoteUser": "root",
+  "overrideCommand": false
 }
