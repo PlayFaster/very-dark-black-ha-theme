@@ -1,0 +1,14 @@
+{
+  "name": "HA Theme Dev",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "homeassistant",
+  "workspaceFolder": "/workspaces/very-dark-black-ha-theme",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "keesschollaart.vscode-home-assistant"
+      ]
+    }
+  },
+  "remoteUser": "root" 
+}
