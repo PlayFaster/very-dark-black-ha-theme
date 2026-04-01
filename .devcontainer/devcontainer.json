@@ -3,7 +3,7 @@
   "dockerComposeFile": "docker-compose.yml",
   "service": "homeassistant",
   "workspaceFolder": "/workspaces/very-dark-black-ha-theme",
-  "postCreateCommand": "pip install -r requirements_test.txt",
+  "postCreateCommand": "pip install -r .validate/requirements_test.txt",
   "customizations": {
     "vscode": {
       "extensions": [

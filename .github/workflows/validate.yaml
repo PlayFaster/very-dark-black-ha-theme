@@ -9,7 +9,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: "0 0 * * *" # Daily
+    - cron: "0 0 * * *"  # Daily
 
 jobs:
   validate:
