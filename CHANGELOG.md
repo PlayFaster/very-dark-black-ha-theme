@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 - **Documentation**: Updated README with theme automation examples and detailed compatibility requirements.
+- **Screenshots**: Added screenshots to README.
 
 ### Fixed
 - **Ghost Themes**: Resolved issue where internal helper blocks appeared in the theme selection list.

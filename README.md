@@ -31,7 +31,17 @@ This is a simple theme focused on providing a very dark mode look. It's designed
   - Indigo
   - Silver (Monochrome)
   - **Black Base (Shared Config)**: A utility theme used for shared logic.
+
+## 🖼️ Screenshots
   
+![Black with Purple Preview](.github/images/vdbt_preview_home_purple.png)
+
+![Black with Green Preview](.github/images/vdbt_preview_theme_select_green.png)
+
+![Black with Cyan Preview](.github/images/vdbt_preview_sensors_cyan.png)
+
+![Black with Orange Preview](.github/images/vdbt_preview_home_orange.png)
+    
 ## 🚀 Installation
 
 ### Prerequisites: Enable themes and install card-mod
@@ -88,6 +98,10 @@ actions:
       name_dark: Black with Orange
 mode: single
 ```
+
+## 🛠️ Development
+
+For technical details on the YAML standards, icon logic, and Shoelace tokens used in this theme, see the [Development Reference](docs/theme_dev_reference.md).
 
 ## 🙏 Acknowledgements & Thanks
 
