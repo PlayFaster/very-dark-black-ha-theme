@@ -46,9 +46,13 @@ jobs:
             exit 1
           fi
 
-      # 5. HACS Validation (Checks hacs.json metadata)
-      - name: HACS Validation
-        continue-on-error: true
-        uses: hacs/action@main
+  # 5. HACS Validation (Checks hacs.json metadata)
+  hacs:
+    name: HACS
+    continue-on-error: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: hacs/action@main
         with:
           category: theme
