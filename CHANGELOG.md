@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 
 - **Added**: Added.
 - **More Colours**: Added purple, indigo and silver (monochrome).
+- **Base Theme**: Added Black Base as its needed for shared/anchor. Its Black with HA default blue. 
   
 ### Changed
 
@@ -26,6 +27,7 @@ All notable changes to this project will be documented in this file.
   
 ### Deprecated
 
+- **with Test Option**: Removed the Black with Orange with Test option that displayed TEST in the top left, not that visible and possibly confusing.
 - **Deprecated**: Deprecated.
   
 ### Security

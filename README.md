@@ -30,6 +30,7 @@ This is a simple theme focused on providing a very dark mode look. It's designed
   - Purple
   - Indigo
   - Silver (Monochrome)
+  - **Black Base (Shared Config)**: A utility theme used for shared logic.
   
 ## 🚀 Installation
 
