@@ -18,22 +18,36 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
-      # 1. HACS Validation (Checks hacs.json metadata)
+      # 1. HACS Validation (Official HACS metadata check)
       - name: HACS Validate
         uses: hacs/action@main
         with:
           category: theme
 
-      # 2. YAML Linting (Checks theme syntax and formatting)
+      # 2. JSON Schema Validation (Parity with local 'hacs_schema.json')
+      - name: JSON Schema Check
+        uses: python-jsonschema/check-jsonschema@main
+        with:
+          files: hacs.json
+          schemafile: .validate/hacs_schema.json
+
+      # 3. YAML Linting (Broadened scope to match local tasks)
       - name: YAML Check
         uses: ibiqlik/action-yamllint@v3
         with:
-          file_or_dir: themes/
+          file_or_dir: .
           config_data: "{extends: relaxed, rules: {line-length: {max: 120}}}"
 
-      # 3. Structural Check (Verifies theme is in the correct folder)
+      # 4. Markdown Link Check (Ensures README links are alive)
+      - name: Check README Links
+        uses: gaurav-nelson/github-action-markdown-link-check@v1
+        with:
+          base-branch: main
+          file-path: README.md
+
+      # 5. Structural Check (Verifies theme is in the correct folder)
       - name: Verify Theme Location
         run: |
           if [ ! -f themes/*.yaml ]; then
