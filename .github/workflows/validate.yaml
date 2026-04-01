@@ -20,28 +20,23 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v6
 
-      # 1. YAML Linting (Checks theme syntax and formatting)
+      # 1. HACS Validation (Checks hacs.json metadata)
+      - name: HACS Validate
+        uses: hacs/action@main
+        with:
+          category: theme
+
+      # 2. YAML Linting (Checks theme syntax and formatting)
       - name: YAML Check
         uses: ibiqlik/action-yamllint@v3
         with:
           file_or_dir: themes/
           config_data: "{extends: relaxed, rules: {line-length: {max: 120}}}"
 
-      # 2. Structural Check (Verifies theme is in the correct folder)
+      # 3. Structural Check (Verifies theme is in the correct folder)
       - name: Verify Theme Location
         run: |
           if [ ! -f themes/*.yaml ]; then
             echo "Error: Theme file must be inside the /themes folder for HACS!"
             exit 1
           fi
-
-  # 3. HACS Validation (Checks hacs.json metadata)
-  hacs:
-    name: HACS
-    continue-on-error: true
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-      - uses: hacs/action@main
-        with:
-          category: theme

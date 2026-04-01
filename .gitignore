@@ -30,6 +30,7 @@ Thumbs.db
 
 # IDEs
 # .vscode/
+*.code-workspace
 .idea/
 
 # Sync
