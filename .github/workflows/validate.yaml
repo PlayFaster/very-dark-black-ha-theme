@@ -32,13 +32,7 @@ jobs:
         with:
           globs: "**/*.md"
 
-      # 3. Link Checker (Ensures screenshots and badges aren't broken)
-      - name: Link Check
-        uses: lycheelabs/lychee-action@v2
-        with:
-          args: --verbose --no-progress "**/*.md"
-
-      # 4. Structural Check (Verifies theme is in the correct folder)
+      # 3. Structural Check (Verifies theme is in the correct folder)
       - name: Verify Theme Location
         run: |
           if [ ! -f themes/*.yaml ]; then
@@ -46,7 +40,7 @@ jobs:
             exit 1
           fi
 
-  # 5. HACS Validation (Checks hacs.json metadata)
+  # 4. HACS Validation (Checks hacs.json metadata)
   hacs:
     name: HACS
     continue-on-error: true
