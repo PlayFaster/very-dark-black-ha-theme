@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - **Added**: Added.
+- **More Colours**: Added purple, indigo and silver (monochrome).
   
 ### Changed
 

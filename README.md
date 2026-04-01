@@ -2,9 +2,18 @@
 
 A Home Assistant dark mode theme that provides black or very dark backgrounds wherever possible along with a choice of primary colours.
   
-## Requirements
+## 📋 Requirements
 
 - **[`card-mod`](https://github.com/thomasloven/lovelace-card-mod)** – The Card Mod integration is required for this theme.
+
+## 📊 Compatibility
+
+To ensure all "Pure Black" features (like custom scrollbars and border removals) work correctly, verify you meet these minimum requirements:
+
+| Dependency | Minimum Version | Reason |
+| :--- | :--- | :--- |
+| **Home Assistant** | `2022.11.0` | Required for `ha-card` border variables. |
+| **card-mod** | `3.0.0` | Required for theme-level CSS injection. |
   
 ## ✨ Features
 
@@ -18,6 +27,9 @@ This is a simple theme focused on providing a very dark mode look. It's designed
   - Red
   - Fuchsia
   - Orange
+  - Purple
+  - Indigo
+  - Silver (Monochrome)
   
 ## 🚀 Installation
 
@@ -54,7 +66,7 @@ frontend:
 
 You can use a Home Assistant automation to change the theme at startup, or based on any other time or condition you wish. 
 
-**Important:** In the [Profile General](https://my.home-assistant.io/redirect/profile) screen, you **must** keep **"Use default theme"** selected under the Theme settings. If you manually select a specific theme in your profile, the automation will not be able to override it.
+**Important:** In the [Profile General](https://my.home-assistant.io/redirect/profile) screen, you **must** keep **"Backend-selected"** selected under the Theme settings. If you manually select a specific theme in your profile, the automation will not be able to override it.
 
 Example automation to set the theme at startup:
 
@@ -76,9 +88,7 @@ actions:
 mode: single
 ```
 
-## Contributors & Acknowledgements
-
-🙏 Special Thanks
+## 🙏 Acknowledgements & Thanks
 
 - Inspired by the excellent [`Frosted Glass`](https://github.com/wessamlauf/homeassistant-frosted-glass-themes) themes of @wessamlauf - thank you!
 - Made possible by @thomasloven and the [`card-mod`](https://github.com/thomasloven/lovelace-card-mod) contributors.

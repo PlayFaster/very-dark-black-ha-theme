@@ -19,6 +19,9 @@ Black with Cyan: &shared_config
   red: &acc_red "#f44336"
   fuchsia: &acc_fuchsia "#ff00ff"
   orange: &acc_orange "#ff9800"
+  purple: &acc_purple "#9c27b0"
+  indigo: &acc_indigo "#5c6bc0"
+  silver: &acc_silver "#e0e0e0"
   graphite: &acc_graphite "#444444"
   charcoal: &acc_charcoal "#333333"
   medium_grey: &acc_medium "#666666"
@@ -177,7 +180,46 @@ Black with Fuchsia:
   ha-color-primary-50: *acc_fuchsia
 
 
-# 5. TEST SYSTEM
+# 5. PURPLE
+Black with Purple:
+  <<: *shared_config
+  card-mod-theme: "Black Purple"
+  primary-color: *acc_purple
+  accent-color: *acc_purple
+  sidebar-selected-icon-color: *acc_purple
+  mdc-theme-primary: *acc_purple
+  paper-item-icon-active-color: *acc_purple
+  state-icon-color: *acc_purple
+  ha-color-primary-50: *acc_purple
+
+
+# 6. INDIGO
+Black with Indigo:
+  <<: *shared_config
+  card-mod-theme: "Black Indigo"
+  primary-color: *acc_indigo
+  accent-color: *acc_indigo
+  sidebar-selected-icon-color: *acc_indigo
+  mdc-theme-primary: *acc_indigo
+  paper-item-icon-active-color: *acc_indigo
+  state-icon-color: *acc_indigo
+  ha-color-primary-50: *acc_indigo
+
+
+# 7. SILVER (Monochrome)
+Black with Silver:
+  <<: *shared_config
+  card-mod-theme: "Black Silver"
+  primary-color: *acc_silver
+  accent-color: *acc_silver
+  sidebar-selected-icon-color: *acc_silver
+  mdc-theme-primary: *acc_silver
+  paper-item-icon-active-color: *acc_silver
+  state-icon-color: *acc_silver
+  ha-color-primary-50: *acc_silver
+
+
+# 8. TEST SYSTEM
 Black with Orange:
   <<: *shared_config
   card-mod-theme: "Black Orange"
@@ -194,7 +236,7 @@ Black with Orange:
   state-icon-color: *acc_orange
 
 
-# 6. TEST SYSTEM (WITH LABEL)
+# 9. TEST SYSTEM (WITH LABEL)
 Black with Orange plus Test:
   <<: *shared_config
   card-mod-theme: "Black Orange Test"

@@ -1,4 +1,5 @@
 {
   "name": "Very Dark Black HA Theme",
-  "country": "IE"
+  "country": "IE",
+  "homeassistant": "2022.11.0"
 }
