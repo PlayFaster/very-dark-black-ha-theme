@@ -34,7 +34,7 @@ jobs:
 
       # 3. Link Checker (Ensures screenshots and badges aren't broken)
       - name: Link Check
-        uses: lycheeverify/lychee-action@v2
+        uses: lycheelabs/lychee-action@v2
         with:
           args: --verbose --no-progress "**/*.md"
 

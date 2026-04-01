@@ -1,12 +1,6 @@
 # Very Dark Black Theme for Home Assistant
 
-![HACS Theme](https://img.shields.io/badge/HACS-Theme-orange.svg)
-  
-![Latest Release](https://img.shields.io/github/v/release/PlayFaster/very-dark-black-ha-theme?label=Release&logo=github)
-  
-[![Validate](https://github.com/PlayFaster/very-dark-black-ha-theme/actions/workflows/validate.yaml/badge.svg)](https://github.com/your-username/very-dark-black-ha-theme/actions)
-  
-![Last Commit](https://img.shields.io/github/last-commit/PlayFaster/very-dark-black-ha-theme?label=Last%20commit)
+![HACS Theme](https://img.shields.io/badge/HACS-Theme-orange.svg)  ![Latest Release](https://img.shields.io/github/v/release/PlayFaster/very-dark-black-ha-theme?label=Release&logo=github)  [![Validate](https://github.com/PlayFaster/very-dark-black-ha-theme/actions/workflows/validate.yaml/badge.svg)](https://github.com/your-username/very-dark-black-ha-theme/actions)  ![Last Commit](https://img.shields.io/github/last-commit/PlayFaster/very-dark-black-ha-theme?label=Last%20commit)
   
 A Home Assistant dark mode theme that provides black or very dark backgrounds wherever possible along with a choice of primary colours.
   
