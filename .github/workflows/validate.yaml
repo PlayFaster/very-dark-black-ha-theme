@@ -26,12 +26,11 @@ jobs:
         with:
           category: theme
 
-      # 2. JSON Schema Validation (Parity with local 'hacs_schema.json')
+      # 2. JSON Schema Validation (Mirroring local validation)
       - name: JSON Schema Check
-        uses: python-jsonschema/check-jsonschema@main
-        with:
-          files: hacs.json
-          schemafile: .validate/hacs_schema.json
+        run: |
+          pip install check-jsonschema
+          check-jsonschema --schemafile .validate/hacs_schema.json hacs.json
 
       # 3. YAML Linting (Broadened scope to match local tasks)
       - name: YAML Check
