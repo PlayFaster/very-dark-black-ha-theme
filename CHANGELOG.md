@@ -10,10 +10,13 @@ All notable changes to this project will be documented in this file.
   
 ### Changed
 
+- **Validation**: Added infrastucture to validate YAML (lint), JSON etc.
+- **Readme Update**: Modified Readme to highlight the option in Home Assisnant to auotmate selecting this or any other theme.
 - **Changed**: Changed.
   
 ### Fixed
 
+- **Ghost Themes**: Fixed two ghost "_" themes with shared settings appearing.
 - **Fixed**: Fixed.
   
 ### Removed

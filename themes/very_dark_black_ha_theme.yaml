@@ -1,64 +1,63 @@
 # ----------------------------------------------------------------
+# VERY DARK BLACK THEME
 # ----------------------------------------------------------------
-# THE MASTER PALETTE (Define your hex codes once here)
-# ----------------------------------------------------------------
-_colors:
-  black: &base_black "#000000"           # Pure Black
-  dark_grey: &base_surface "#0a0a0a"     # Extremely dark grey (Settings/Tabs)
-  border_grey: &base_border "#1a1a1a"    # Very dark grey (Standard Border)
-  glass_border: &base_glass_border "rgba(234, 235, 238, 0.15)"  # Subtle Glass Edge
-  text_white: &base_text "#e1e1e1"       # Off-white (Text)
-  text_grey: &base_subtext "#9b9b9b"     # Medium grey (Sub-text)
-  icon_white: &base_icon "#ffffff"       # Pure White (Icons)
 
-  # Accents
-  cyan: &acc_cyan "#00bcd4"              # Cyan / Light Blue
-  green: &acc_green "#4caf50"            # Green
-  red: &acc_red "#f44336"                # Red
-  fuchsia: &acc_fuchsia "#ff00ff"        # Fuchsia (Backup)
-  orange: &acc_orange "#ff9800"          # Orange (Test)
-  graphite: &acc_graphite "#444444"      # Graphite Grey
-  charcoal: &acc_charcoal "#333333"      # Dark Charcoal
-  medium_grey: &acc_medium "#666666"     # Medium Grey
+# 1. MAIN CYAN (This theme also acts as the base for all others)
+Black with Cyan: &shared_config
+  # --- MASTER PALETTE (Defined here as anchors for the whole file) ---
+  black: &base_black "#000000"
+  dark_grey: &base_surface "#0a0a0a"
+  border_grey: &base_border "#1a1a1a"
+  glass_border: &base_glass_border "rgba(234, 235, 238, 0.15)"
+  text_white: &base_text "#e1e1e1"
+  text_grey: &base_subtext "#9b9b9b"
+  icon_white: &base_icon "#ffffff"
+  
+  # Accent Anchors
+  cyan: &acc_cyan "#00bcd4"
+  green: &acc_green "#4caf50"
+  red: &acc_red "#f44336"
+  fuchsia: &acc_fuchsia "#ff00ff"
+  orange: &acc_orange "#ff9800"
+  graphite: &acc_graphite "#444444"
+  charcoal: &acc_charcoal "#333333"
+  medium_grey: &acc_medium "#666666"
 
-# ----------------------------------------------------------------
-# THE SHARED CONFIGURATION (Anchor: &shared_config)
-# ----------------------------------------------------------------
-_shared_config: &shared_config
-  theme-base: dark             # Forces HA to use dark fallback variables
+  # --- SHARED CONFIGURATION ---
+  theme-base: dark
   modes:
-    dark: {}              # 2025 Fix: Forces browser to stay in dark-mode logic
+    dark: {}
 
-  # 1. Dashboard Background & System Branding
-  lovelace-background: *base_black       # #000000
+  # Dashboard Background & System Branding
+  lovelace-background: *base_black
   primary-background-color: *base_black
   secondary-background-color: *base_surface
   app-header-background-color: *base_black
   sidebar-background-color: *base_black
-  app-theme-color: *base_black           # Browser status bar hint
-
-  # 2. Card Backgrounds & Borders
+  app-theme-color: *base_black
+  
+  # Card Backgrounds & Borders
   ha-card-background: *base_black
   card-background-color: *base_black
   ha-card-border-color: *base_glass_border
-  ha-card-border-width: "0.5px"          # High-DPI "0.5px" Edge
-  ha-card-border-radius: "12px"          # Refined corner radius
+  ha-card-border-width: "0.5px"
+  ha-card-border-radius: "12px"
   ha-card-box-shadow: "none"
 
-  # 3. Text, Icons & Typography Synchronization
-  primary-text-color: *base_text         # #e1e1e1
-  secondary-text-color: *base_subtext    # #9b9b9b
-  paper-item-icon-color: *base_icon      # #ffffff
+  # Text, Icons & Typography Synchronization
+  primary-text-color: *base_text
+  secondary-text-color: *base_subtext
+  paper-item-icon-color: *base_icon
   ha-font-weight-heading: "500"
   ha-font-weight-medium: "500"
-  title-font-weight: "500"               # Legacy card compatibility
-
-  # 4. Sidebar & Navigation
+  title-font-weight: "500"
+  
+  # Sidebar & Navigation
   sidebar-icon-color: *base_subtext
   sidebar-text-color: *base_text
   sidebar-selected-text-color: *base_icon
-
-  # 5. Control States (Off/Unselected)
+  
+  # Control States (Off/Unselected)
   paper-radio-button-unchecked-color: *acc_graphite
   paper-checkbox-unchecked-color: *acc_graphite
   control-item-icon-color: *base_icon
@@ -68,7 +67,7 @@ _shared_config: &shared_config
   mdc-switch-unselected-track-color: *acc_charcoal
   mdc-switch-unselected-handle-color: *acc_medium
 
-  # 6. System UI (Menus/Dialogs/Selections)
+  # System UI (Menus/Dialogs/Selections)
   divider-color: "#222222"
   outline-color: *acc_charcoal
   mdc-dialog-scrim-color: "rgba(0,0,0,0.8)"
@@ -80,7 +79,7 @@ _shared_config: &shared_config
   mdc-ripple-hover-opacity: '0.1'
   mdc-ripple-color: *acc_charcoal
 
-  # 7. Inputs & Text Fields (Transparent Lines)
+  # Inputs & Text Fields (Transparent Lines)
   mdc-text-field-fill-color: *base_black
   mdc-text-field-ink-color: *base_icon
   mdc-text-field-label-ink-color: *base_subtext
@@ -91,18 +90,18 @@ _shared_config: &shared_config
   input-idle-line-color: "transparent"
   mdc-select-idle-line-color: "transparent"
   mdc-text-field-idle-line-color: "transparent"
-
-  # 8. Lists & Notifications
+  
+  # Lists & Notifications
   paper-listbox-background-color: *base_black
   paper-listbox-color: *base_icon
   mdc-snackbar-container-color: *base_border
   mdc-snackbar-content-ink-color: *base_icon
 
-  # 9. Global Card-Mod (Variable-linked Borders & Scrollbars)
+  # Global Card-Mod
   card-mod-card: |
     ha-card {
       background-color: *base_black !important;
-      border: var(--ha-card-border-width) solid var(--ha-card-border-color) !important;
+      border: var(--ha-card-border-width) solid var(--ha-card-border-color) !important; 
     }
     .card-header {
       background-color: *base_black !important;
@@ -111,11 +110,11 @@ _shared_config: &shared_config
     }
     :host {
       --scrollbar-thumb-color: *acc_charcoal !important;
-      color-scheme: dark !important;
+      color-scheme: dark !important;         
     }
     *::-webkit-scrollbar { width: 4px !important; }
     *::-webkit-scrollbar-thumb {
-      background-color: *acc_charcoal !important;
+      background-color: *acc_charcoal !important; 
       border-radius: 8px !important;
     }
 
@@ -125,16 +124,10 @@ _shared_config: &shared_config
     }
     ha-more-info-dialog $ ha-dialog {
         --mdc-dialog-heading-ink-color: *base_icon;
-        --mdc-theme-on-surface: *base_icon;
+        --mdc-theme-on-surface: *base_icon; 
     }
 
-# ----------------------------------------------------------------
-# THE FIVE INDIVIDUAL THEMES
-# ----------------------------------------------------------------
-
-# 1. MAIN CYAN
-Black with Cyan:
-  <<: *shared_config
+  # --- CYAN SPECIFICS ---
   card-mod-theme: "Black Main"
   primary-color: *acc_cyan
   accent-color: *acc_cyan
@@ -142,7 +135,6 @@ Black with Cyan:
   mdc-theme-primary: *acc_cyan
   paper-item-icon-active-color: *acc_cyan
   state-icon-color: *acc_cyan
-  # History/Graph Sync
   ha-color-primary-50: *acc_cyan
 
 
@@ -156,7 +148,6 @@ Black with Green:
   mdc-theme-primary: *acc_green
   paper-item-icon-active-color: *acc_green
   state-icon-color: *acc_green
-  # History/Graph Sync
   ha-color-primary-50: *acc_green
 
 
@@ -170,7 +161,6 @@ Black with Red:
   mdc-theme-primary: *acc_red
   paper-item-icon-active-color: *acc_red
   state-icon-color: *acc_red
-  # History/Graph Sync
   ha-color-primary-50: *acc_red
 
 
@@ -184,9 +174,7 @@ Black with Fuchsia:
   mdc-theme-primary: *acc_fuchsia
   paper-item-icon-active-color: *acc_fuchsia
   state-icon-color: *acc_fuchsia
-  # History/Graph Sync
   ha-color-primary-50: *acc_fuchsia
-  card-mod-root: |
 
 
 # 5. TEST SYSTEM
@@ -195,30 +183,27 @@ Black with Orange:
   card-mod-theme: "Black Orange"
   primary-color: *acc_orange
   accent-color: *acc_orange
-  state-active-color: *acc_red
-  state-switch-active-color: *acc_red
-  state-plug-active-color: *acc_red
-  state-binary_sensor-active-color: *acc_red
-  # History/Graph Sync
+  state-active-color: *acc_red           
+  state-switch-active-color: *acc_red 
+  state-plug-active-color: *acc_red 
+  state-binary_sensor-active-color: *acc_red 
   ha-color-primary-50: *acc_orange
   sidebar-selected-icon-color: *acc_orange
   mdc-theme-primary: *acc_orange
   paper-item-icon-active-color: *acc_orange
   state-icon-color: *acc_orange
-  card-mod-root: |
 
 
-# 5. TEST SYSTEM
+# 6. TEST SYSTEM (WITH LABEL)
 Black with Orange plus Test:
   <<: *shared_config
   card-mod-theme: "Black Orange Test"
   primary-color: *acc_orange
   accent-color: *acc_orange
-  state-active-color: *acc_red
-  state-switch-active-color: *acc_red
-  state-plug-active-color: *acc_red
-  state-binary_sensor-active-color: *acc_red
-  # History/Graph Sync
+  state-active-color: *acc_red           
+  state-switch-active-color: *acc_red 
+  state-plug-active-color: *acc_red 
+  state-binary_sensor-active-color: *acc_red 
   ha-color-primary-50: *acc_orange
   sidebar-selected-icon-color: *acc_orange
   mdc-theme-primary: *acc_orange
@@ -228,8 +213,8 @@ Black with Orange plus Test:
     .header .toolbar:before {
       content: "TEST";
       display: inline-block !important;
-      background-color: *acc_orange !important;
-      color: *base_black !important;
+      background-color: *acc_orange !important; 
+      color: *base_black !important;            
       padding: 2px 8px !important;
       margin-left: 10px !important;
       border-radius: 4px !important;
