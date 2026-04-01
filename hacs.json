@@ -1,5 +1,6 @@
 {
   "name": "Very Dark Black HA Theme",
   "country": "IE",
-  "homeassistant": "2022.11.0"
+  "homeassistant": "2022.11.0",
+  "description": " 🟩 ⬜ 🟧 ⬛  A very dark black theme for Home Assistant  ⬛ 🟪 🟦 🟥 "
 }

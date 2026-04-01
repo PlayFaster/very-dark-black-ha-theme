@@ -19,6 +19,34 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      # 1. YAML Linting (Checks theme syntax and formatting)
+      - name: YAML Check
+        uses: ibiqlik/action-yamllint@v3
+        with:
+          file_or_dir: themes/
+          config_data: "{extends: relaxed, rules: {line-length: {max: 120}}}"
+
+      # 2. Markdown Linting (Checks README and docs for errors)
+      - name: Markdown Check
+        uses: davidanson/markdownlint-cli2-action@v16
+        with:
+          globs: "**/*.md"
+
+      # 3. Link Checker (Ensures screenshots and badges aren't broken)
+      - name: Link Check
+        uses: lycheeverify/lychee-action@v2
+        with:
+          args: --verbose --no-progress "**/*.md"
+
+      # 4. Structural Check (Verifies theme is in the correct folder)
+      - name: Verify Theme Location
+        run: |
+          if [ ! -f themes/*.yaml ]; then
+            echo "Error: Theme file must be inside the /themes folder for HACS!"
+            exit 1
+          fi
+
+      # 5. HACS Validation (Checks hacs.json metadata)
       - name: HACS Validation
         continue-on-error: true
         uses: hacs/action@main
