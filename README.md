@@ -67,7 +67,7 @@ frontend:
 
 You can use a Home Assistant automation to change the theme at startup, or based on any other time or condition you wish. 
 
-**Important:** In the [Profile General](https://my.home-assistant.io/redirect/profile) screen, you **must** keep **"Backend-selected"** selected under the Theme settings. If you manually select a specific theme in your profile, the automation will not be able to override it.
+**Important:** In the [Profile General](https://my.home-assistant.io/redirect/profile) screen, you **must** keep **"Use default theme"** selected under the Theme settings. If you manually select a specific theme in your profile, the automation will not be able to override it.
 
 Example automation to set the theme at startup:
 
