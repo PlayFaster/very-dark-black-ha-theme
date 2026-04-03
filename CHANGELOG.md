@@ -6,18 +6,16 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- **Badges**: Added badges to README.
+- **Card-Mod Dependency Review**: Added a card-mod dependency review document, to understand and record where card-mod is required in the theme.
 - **Added**: Added.
 
 ### Changed
 
-- **Validation**: Additional GitHub and Local validation steps.
-- **Formatting**: Additional local formatting checks.
+- **Readme**: Updated readme to clarifiy that card-mod is recommended but not absolutely required. Added HACS Custom badge. Added repo link in install inctructions.
 - **Changed**: Changed.
 
 ### Fixed
 
-- **Grey Drop-down Placeholder**: Fixed an issue where some element changes introduced in HA 2026.4.x caused drop-down placeholders to be grey.
 - **Fixed**: Fixed.
 
 ### Removed
@@ -31,6 +29,21 @@ All notable changes to this project will be documented in this file.
 ### Security
 
 - **Security**: Security
+
+## [1.3.2] - 2026-04-03
+
+### Fixed
+
+- **Grey Drop-down Placeholder**: Fixed an issue where some element changes introduced in HA 2026.4.x caused drop-down placeholders to be grey.
+
+### Added
+
+- **Badges**: Added badges to README.
+
+### Changed
+
+- **Validation**: Additional GitHub and Local validation steps.
+- **Formatting**: Additional local formatting checks.
 
 ## [1.3.1] - 2026-04-01
 

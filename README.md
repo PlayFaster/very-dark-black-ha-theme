@@ -1,12 +1,12 @@
 # Very Dark Black Theme for Home Assistant
 
-![HACS Theme](https://img.shields.io/badge/HACS-Theme-orange.svg) ![Latest Release](https://img.shields.io/github/v/release/PlayFaster/very-dark-black-ha-theme?label=Release&logo=github) [![Validate](https://github.com/PlayFaster/very-dark-black-ha-theme/actions/workflows/validate.yaml/badge.svg)](https://github.com/PlayFaster/very-dark-black-ha-theme/actions/runs/23833686730/) ![Last Commit](https://img.shields.io/github/last-commit/PlayFaster/very-dark-black-ha-theme?label=Last%20commit)
+![HACS Theme](https://img.shields.io/badge/HACS-Theme-orange.svg) ![HACS Custom](https://img.shields.io/badge/HACS-Custom-orange?logo=homeassistant&logoColor=white) ![Latest Release](https://img.shields.io/github/v/release/PlayFaster/very-dark-black-ha-theme?label=Release&logo=github) [![Validate](https://github.com/PlayFaster/very-dark-black-ha-theme/actions/workflows/validate.yaml/badge.svg)](https://github.com/PlayFaster/very-dark-black-ha-theme/actions/runs/23833686730/) ![Last Commit](https://img.shields.io/github/last-commit/PlayFaster/very-dark-black-ha-theme?label=Last%20commit)
 
 A Home Assistant dark mode theme that provides black or very dark backgrounds wherever possible along with a choice of primary colours.
 
 ## 📋 Requirements
 
-- **[`card-mod`](https://github.com/thomasloven/lovelace-card-mod)** – The Card Mod integration is required for this theme.
+- **[`card-mod`](https://github.com/thomasloven/lovelace-card-mod)** – Highly recommended. The theme will still work without this integration, but `card-mod` is used to polish fine UI details and ensure a consistent experiance across all elements.
 
 ## 📊 Compatibility
 
@@ -60,7 +60,7 @@ frontend:
 
 #### HACS
 
-1. Add this URL as a **Custom Repository** in HACS.
+1. Add this URL as a **Custom Repository** in HACS. `https://github.com/PlayFaster/very-dark-black-ha-theme`
 
 2. Click Download.
 
