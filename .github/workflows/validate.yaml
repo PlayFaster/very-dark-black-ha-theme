@@ -1,7 +1,11 @@
 ---
+# Workflow runs validations specifically for Home Assistant Themes.
+# It contains multiple independent jobs (HACS, Linting, Structure),
+# It generates a SINGLE workflow badge for the README.
+
 name: Validate
 
-'on':
+"on":
   push:
     branches:
       - main
@@ -10,17 +14,71 @@ name: Validate
     branches:
       - main
   schedule:
-    - cron: "0 0 * * *"  # Daily
+    - cron: "0 0 * * *" # Daily at midnight
 
 jobs:
-  validate:
+  # Job 1: Official HACS metadata validation.
+  # Checks hacs.json ensures repository meets HACS Themes requirements.
+  hacs_val:
+    name: "HACS Check"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: HACS Validation
-        continue-on-error: true
         uses: hacs/action@main
         with:
+          # category is set to 'theme' specifically for this workflow
           category: theme
+
+  # Job 2: File-level integrity (JSON, YAML, and Markdown).
+  # Ensures the HACS manifest is valid and the README is high quality.
+  lint_val:
+    name: "File Contents Check"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+
+      - name: JSON Schema Check
+        # Validates hacs.json against the provided schema using standard pip.
+        run: |
+          pip install check-jsonschema
+          check-jsonschema --schemafile .validate/hacs_schema.json hacs.json
+
+      - name: YAML Check
+        # Ensures  theme YAML and GitHub Action files are syntactically correct.
+        uses: ibiqlik/action-yamllint@v3
+        with:
+          file_or_dir: .
+          config_data: "{extends: relaxed, rules: {line-length: {max: 120}}}"
+
+      - name: Check README Links
+        # Validates that all external links in your README are still alive.
+        uses: gaurav-nelson/github-action-markdown-link-check@v1
+        with:
+          base-branch: main
+          file-path: README.md
+
+  # Job 3: Theme-specific structural validation.
+  # Ensures the repository layout matches HACS expectations for themes.
+  structure_val:
+    name: "Structure Check"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Verify Theme Location
+        # HACS requires theme YAML files to be inside the /themes/ directory.
+        run: |
+          if [ ! -f themes/*.yaml ]; then
+            echo "Error: Theme file must be inside the /themes folder for HACS!"
+            exit 1
+          fi
