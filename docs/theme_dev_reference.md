@@ -36,9 +36,24 @@ Dark themes often suffer from "White-on-White" text issues in system menus.
   - `state-icon-active-color`: Controls icons when an entity is "On" or active.
 - **Best Practice**: Define these variables in each individual color variant theme to ensure the icons match the chosen accent (Red, Green, etc.) rather than defaulting to a single global color.
 
-## 5. Modern Token Migration (2025+)
+## 5. Modern Token Migration (2025-2026+)
 
-Home Assistant is moving away from legacy `paper-` variables.
+Home Assistant is moving away from legacy `paper-` and `mdc-` variables toward **Web Awesome** (Shoelace/Lit) and **Material 3** tokens.
 
-- **Shoelace Tokens**: Newer UI elements use Shoelace. Always map your primary color to `sl-color-primary-base`.
-- **Material 3 Tokens**: Map your color to `ha-color-primary-50` to ensure interactive elements like button ripples and sliders use the correct shade.
+- **Web Awesome (2026.4+ Shift)**: The 2026.4 release introduced a shift from component-specific "fill" variables (like `ha-textfield-fill-color`) to **semantic form variables**.
+  - `ha-color-form-background`: The primary background for inputs/selects.
+  - `ha-color-form-background-hover`: Controls the hover state for these containers.
+  - `input-dropdown-icon-color` & `input-label-ink-color`: Essential for ensuring text and icons remain visible against custom backgrounds.
+- **Shoelace Tokens**: Map your primary color to `sl-color-primary-base` for standard UI elements.
+- **Material 3 Tokens**: Map your color to `ha-color-primary-50` for interactive elements like ripples and sliders.
+- **API Sunset**: Be aware that `ha-textfield` is scheduled for removal in **2026.5**. Transitioning to semantic `ha-color-form-background` variables is required for future-proofing.
+
+## 6. Card-Mod & Shadow DOM Changes
+
+The migration to Web Awesome (2026.4) changed the underlying DOM structure of many components.
+
+- **New Selectors**: Avoid legacy selectors like `.dropdown-trigger` or `paper-input-container`. Modern themes should target:
+  - `ha-select`
+  - `ha-input`
+  - `ha-dropdown` (replaces older `ha-button-menu`)
+- **Shadow DOM**: When targeting these new components, verify if the property you are styling is exposed via a CSS variable or if you need to pierce the shadow DOM specifically for that component's internal structure.
