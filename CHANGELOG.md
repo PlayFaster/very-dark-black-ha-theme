@@ -2,14 +2,40 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased] - Now
+## [Unreleased-dev] - Now
 
 ### Added
-- None.
+
+- **Badges**: Added badges to README.
+- **Added**: Added.
+
+### Changed
+
+- **Validation**: Additional GitHub and Local validation steps.
+- **Formatting**: Additional local formatting checks.
+- **Changed**: Changed.
+
+### Fixed
+
+- **Grey Drop-down Placeholder**: Fixed an issue where some element changes introduced in HA 2026.4.x caused drop-down placeholders to be grey.
+- **Fixed**: Fixed.
+
+### Removed
+
+- **Removed**: Removed.
+
+### Deprecated
+
+- **Deprecated**: Deprecated.
+
+### Security
+
+- **Security**: Security
 
 ## [1.3.1] - 2026-04-01
 
 ### Added
+
 - **More Colours**: Added Purple, Indigo, and Silver (monochrome) variants.
 - **Black Base**: Added a "Black Base (Shared Config)" utility theme for consistent inheritance.
 - **Light Fallback**: Added explicit light mode block to ensure the UI stays dark on systems set to light mode.
@@ -17,41 +43,49 @@ All notable changes to this project will be documented in this file.
 - **Validation**: Implemented local infrastructure for YAML linting and JSON schema validation.
 
 ### Changed
+
 - **Documentation**: Updated README with theme automation examples and detailed compatibility requirements.
 - **Screenshots**: Added screenshots to README.
 
 ### Fixed
+
 - **Ghost Themes**: Resolved issue where internal helper blocks appeared in the theme selection list.
 - **UI Visibility**: Fixed "white-on-white" text issues in dropdown menus and selection lists.
 
 ### Removed
+
 - **"with Test" Option**: Removed the "Black with Orange plus Test" variant to simplify the theme list.
 
 ## [1.2.2] - 2026-03-30
 
 ### Changed
+
 - **GitHub**: Initial release to GitHub repository.
 
 ## [1.2.1] - 2026-01-16
 
 ### Added
+
 - **TEST Visibility**: Added option for TEST text near top left, for identifying a test or backup system.
 
 ## [1.1.1] - 2025-12-04
 
 ### Added
+
 - **Multi-Theme**: Added additional highlight colour options to existing cyan - green, red, fuchsia, orange.
 
 ### Fixed
+
 - **Invisible Menu Fix**: Fixed some of the black-on-black invisible menus.
 
 ## [1.0.1] - 2025-11-18
 
 ### Added
+
 - **Initial Release**: Very dark black with cyan text and accents.
 
-***
+---
 
 ### Format
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).

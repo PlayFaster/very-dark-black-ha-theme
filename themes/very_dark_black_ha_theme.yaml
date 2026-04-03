@@ -4,8 +4,8 @@
 # ----------------------------------------------------------------
 
 # Black Base (Shared Config) - Utility theme for inheritance
-Black Base (Shared Config): &base_config
-  # --- 1. Dashboard Background & System Branding ---
+Black Base (Shared Config):
+  &base_config # --- 1. Dashboard Background & System Branding ---
   lovelace-background: &base_black "#000000"
   primary-background-color: *base_black
   secondary-background-color: &base_surface "#0a0a0a"
@@ -65,6 +65,24 @@ Black Base (Shared Config): &base_config
   mdc-select-fill-color: *base_black
   mdc-select-ink-color: "#ffffff"
   mdc-select-outline-color: *acc_graphite
+  ha-select-fill-color: *base_black
+  ha-textfield-fill-color: *base_black
+  input-fill-color: *base_black
+  md-sys-color-surface-container-highest: *base_black
+  md-sys-color-surface-container: *base_black
+  sl-input-filled-background-color: *base_black
+  sl-input-background-color: *base_black
+  ha-filled-text-field-fill-color: *base_black
+  ha-filled-select-fill-color: *base_black
+  md-sys-color-surface-container-high: *base_black
+  md-sys-color-surface-variant: *base_black
+  md-sys-color-surface-container-low: *base_black
+  md-sys-color-surface-container-lowest: *base_black
+  ha-color-form-background: *base_black
+  ha-color-form-background-hover: *base_black
+  ha-color-form-background-disabled: *base_black
+  input-dropdown-icon-color: "#ffffff"
+  input-label-ink-color: "#ffffff"
   input-idle-line-color: "transparent"
   mdc-select-idle-line-color: "transparent"
   mdc-text-field-idle-line-color: "transparent"
@@ -136,7 +154,6 @@ Black with Cyan:
   sl-color-primary-base: *acc_cyan
   mdc-ripple-color: *acc_cyan
 
-
 # 2. MAIN GREEN
 Black with Green:
   <<: *base_config
@@ -154,7 +171,6 @@ Black with Green:
   ha-color-primary-50: *acc_green
   sl-color-primary-base: *acc_green
   mdc-ripple-color: *acc_green
-
 
 # 3. MAIN RED
 Black with Red:
@@ -174,7 +190,6 @@ Black with Red:
   sl-color-primary-base: *acc_red
   mdc-ripple-color: *acc_red
 
-
 # 4. MAIN FUCHSIA
 Black with Fuchsia:
   <<: *base_config
@@ -192,7 +207,6 @@ Black with Fuchsia:
   ha-color-primary-50: *acc_fuchsia
   sl-color-primary-base: *acc_fuchsia
   mdc-ripple-color: *acc_fuchsia
-
 
 # 5. PURPLE
 Black with Purple:
@@ -212,7 +226,6 @@ Black with Purple:
   sl-color-primary-base: *acc_purple
   mdc-ripple-color: *acc_purple
 
-
 # 6. INDIGO
 Black with Indigo:
   <<: *base_config
@@ -231,7 +244,6 @@ Black with Indigo:
   sl-color-primary-base: *acc_indigo
   mdc-ripple-color: *acc_indigo
 
-
 # 7. SILVER (Monochrome)
 Black with Silver:
   <<: *base_config
@@ -249,7 +261,6 @@ Black with Silver:
   ha-color-primary-50: *acc_silver
   sl-color-primary-base: *acc_silver
   mdc-ripple-color: *acc_silver
-
 
 # 8. TEST SYSTEM
 Black with Orange:
