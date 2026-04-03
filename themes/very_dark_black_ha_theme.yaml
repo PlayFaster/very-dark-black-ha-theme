@@ -80,6 +80,9 @@ Black Base (Shared Config):
   md-sys-color-surface-container-lowest: *base_black
   ha-color-form-background: *base_black
   ha-color-form-background-hover: *base_black
+  ha-color-form-background-disabled: *base_black
+  input-dropdown-icon-color: "#ffffff"
+  input-label-ink-color: "#ffffff"
   input-idle-line-color: "transparent"
   mdc-select-idle-line-color: "transparent"
   mdc-text-field-idle-line-color: "transparent"
