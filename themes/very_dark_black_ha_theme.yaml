@@ -65,6 +65,21 @@ Black Base (Shared Config):
   mdc-select-fill-color: *base_black
   mdc-select-ink-color: "#ffffff"
   mdc-select-outline-color: *acc_graphite
+  ha-select-fill-color: *base_black
+  ha-textfield-fill-color: *base_black
+  input-fill-color: *base_black
+  md-sys-color-surface-container-highest: *base_black
+  md-sys-color-surface-container: *base_black
+  sl-input-filled-background-color: *base_black
+  sl-input-background-color: *base_black
+  ha-filled-text-field-fill-color: *base_black
+  ha-filled-select-fill-color: *base_black
+  md-sys-color-surface-container-high: *base_black
+  md-sys-color-surface-variant: *base_black
+  md-sys-color-surface-container-low: *base_black
+  md-sys-color-surface-container-lowest: *base_black
+  ha-color-form-background: *base_black
+  ha-color-form-background-hover: *base_black
   input-idle-line-color: "transparent"
   mdc-select-idle-line-color: "transparent"
   mdc-text-field-idle-line-color: "transparent"
