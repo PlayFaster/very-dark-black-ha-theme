@@ -2,7 +2,7 @@
 
 Theme file analysis to assess the card-mod dependency and identify what could now be handled natively.
 
-![Cardmod Dependency Analysis](.github/images/cardmod_dependency_analysis.svg)
+![Cardmod Dependency Analysis](../.github/images/cardmod_dependency_analysis.svg)
 
 ## Detailed breakdown
 
