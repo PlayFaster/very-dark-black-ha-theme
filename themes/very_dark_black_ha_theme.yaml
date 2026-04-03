@@ -4,8 +4,8 @@
 # ----------------------------------------------------------------
 
 # Black Base (Shared Config) - Utility theme for inheritance
-Black Base (Shared Config): &base_config
-  # --- 1. Dashboard Background & System Branding ---
+Black Base (Shared Config):
+  &base_config # --- 1. Dashboard Background & System Branding ---
   lovelace-background: &base_black "#000000"
   primary-background-color: *base_black
   secondary-background-color: &base_surface "#0a0a0a"
@@ -136,7 +136,6 @@ Black with Cyan:
   sl-color-primary-base: *acc_cyan
   mdc-ripple-color: *acc_cyan
 
-
 # 2. MAIN GREEN
 Black with Green:
   <<: *base_config
@@ -154,7 +153,6 @@ Black with Green:
   ha-color-primary-50: *acc_green
   sl-color-primary-base: *acc_green
   mdc-ripple-color: *acc_green
-
 
 # 3. MAIN RED
 Black with Red:
@@ -174,7 +172,6 @@ Black with Red:
   sl-color-primary-base: *acc_red
   mdc-ripple-color: *acc_red
 
-
 # 4. MAIN FUCHSIA
 Black with Fuchsia:
   <<: *base_config
@@ -192,7 +189,6 @@ Black with Fuchsia:
   ha-color-primary-50: *acc_fuchsia
   sl-color-primary-base: *acc_fuchsia
   mdc-ripple-color: *acc_fuchsia
-
 
 # 5. PURPLE
 Black with Purple:
@@ -212,7 +208,6 @@ Black with Purple:
   sl-color-primary-base: *acc_purple
   mdc-ripple-color: *acc_purple
 
-
 # 6. INDIGO
 Black with Indigo:
   <<: *base_config
@@ -231,7 +226,6 @@ Black with Indigo:
   sl-color-primary-base: *acc_indigo
   mdc-ripple-color: *acc_indigo
 
-
 # 7. SILVER (Monochrome)
 Black with Silver:
   <<: *base_config
@@ -249,7 +243,6 @@ Black with Silver:
   ha-color-primary-50: *acc_silver
   sl-color-primary-base: *acc_silver
   mdc-ripple-color: *acc_silver
-
 
 # 8. TEST SYSTEM
 Black with Orange:
