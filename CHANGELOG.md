@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased-dev] - Now
+## [v1.3.3-dev3] - Now
 
 ### Added
 
@@ -11,11 +11,18 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-- **Readme**: Updated readme to clarifiy that card-mod is recommended but not absolutely required. Added HACS Custom badge. Added repo link in install inctructions.
+- **Readme**: Updated readme file.
+  - Moved features first, requirements second.
+  - Clarifiy that card-mod is recommended but not absolutely required.
+  - Expanded install via HACS instructions including repo link.
+  - Heading badges - added HACS Custom and Licence badges.
+  - Standardized heading icons.
+  - Included Licence info.
 - **Changed**: Changed.
 
 ### Fixed
 
+- **Validate Badge**: Validate badge in Readme was pointing to a run, not latest. Now fixed.
 - **Fixed**: Fixed.
 
 ### Removed
