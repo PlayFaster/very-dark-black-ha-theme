@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [v1.3.3-dev3] - Now
+## [v1.3.3-dev4] - Now
 
 ### Added
 
@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file.
   - Heading badges - added HACS Custom and Licence badges.
   - Standardized heading icons.
   - Included Licence info.
+- **Project Infrastructure**: Updated the validation checks and added Codespell.
 - **Changed**: Changed.
 
 ### Fixed

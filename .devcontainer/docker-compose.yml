@@ -4,9 +4,9 @@ services:
     container_name: very-dark-black-ha-dev
     image: ghcr.io/home-assistant/home-assistant:stable
     volumes:
-      # Mounts your project root into the container
+      # Mount the whole project so the DevContainer workspace works
       - ..:/workspaces/very-dark-black-ha-theme
-      # Handles the simulated HA config
+      # Mount your local dev config
       - ./.devconfig:/config
       # Maps your theme file into the HA themes folder
       # Note: The folder inside /config must be named 'themes'
