@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [v1.3.3-dev4] - Now
+## [v1.3.3-dev5] - Now
 
 ### Added
 
@@ -19,6 +19,7 @@ All notable changes to this project will be documented in this file.
   - Standardized heading icons.
   - Included Licence info.
 - **Project Infrastructure**: Updated the validation checks and added Codespell.
+- **Project Infrastructure**: Improved the DevContainer setup process.
 - **Changed**: Changed.
 
 ### Fixed
