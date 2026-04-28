@@ -75,7 +75,7 @@
     {
       "label": "Markdown: Lint (Auto-Fix)",
       "type": "shell",
-      "command": "git ls-files -z --cached --others --exclude-standard '*.md' | xargs -0 -r markdownlint --config .validate/.markdownlint.json --fix",
+      "command": "git ls-files -z --cached --others --exclude-standard '*.md' | xargs -0 -r markdownlint --config .validate/.markdownlint.json --fix || true",
       "presentation": {
         "reveal": "always",
         "panel": "dedicated"
@@ -95,7 +95,7 @@
     {
       "label": "Prettier: Format (Auto-Fix)",
       "type": "shell",
-      "command": "git ls-files -z --cached --others --exclude-standard '*.md' '*.json' '*.yaml' '*.yml' | xargs -0 -r prettier --config .validate/.prettierrc --write",
+      "command": "git ls-files -z --cached --others --exclude-standard '*.md' '*.json' '*.yaml' '*.yml' | xargs -0 -r prettier --config .validate/.prettierrc --write || true",
       "presentation": {
         "reveal": "always",
         "panel": "dedicated"
@@ -103,9 +103,51 @@
       "problemMatcher": []
     },
     {
-      "label": "Validate All",
+      "label": "Codespell: Check (View Only)",
       "type": "shell",
-      "command": "mkdir -p .reports && (git ls-files -z --cached --others --exclude-standard '*.yml' '*.yaml' | xargs -0 -r yamllint -c .validate/.yamllint | tee .reports/yaml_lint.txt) && (git ls-files -z --cached --others --exclude-standard '*.json' | xargs -0 -r check-jsonschema --schemafile https://json-schema.org/draft/2020-12/schema | tee .reports/json_validation.txt) && (git ls-files -z --cached --others --exclude-standard 'manifest.json' '**/manifest.json' | xargs -0 -r check-jsonschema --schemafile .validate/ha_manifest_schema.json | tee .reports/ha_manifest_validation.txt) && (check-jsonschema --schemafile .validate/hacs_schema.json hacs.json | tee .reports/hacs_validation.txt) && (hass --script check_config --config /config | tee .reports/ha_check_config.txt) && (markdown-link-check README.md | tee .reports/markdown_link_check.txt) && (git ls-files -z --cached --others --exclude-standard '*.md' | xargs -0 -r markdownlint --config .validate/.markdownlint.json | tee .reports/markdown_lint.txt) && (git ls-files -z --cached --others --exclude-standard '*.md' '*.json' '*.yaml' '*.yml' | xargs -0 -r prettier --config .validate/.prettierrc --check | tee .reports/prettier_check.txt)",
+      "command": "mkdir -p .reports && codespell . --skip='./.git,./.venv,./.ruff_cache,./.pytest_cache' | tee .reports/codespell.txt",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Codespell: Fix (Auto-Repair)",
+      "type": "shell",
+      "command": "codespell . --skip='./.git,./.venv,./.ruff_cache,./.pytest_cache' -w || true",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Initialize Reports",
+      "type": "shell",
+      "command": "mkdir -p .reports",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "close": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Validate All",
+      "dependsOn": [
+        "Initialize Reports",
+        "YAML: Lint Project",
+        "JSON: Verify All Files",
+        "HA: Verify Manifest",
+        "HACS: Verify Manifest",
+        "HA: Check Config",
+        "Markdown: Check Links",
+        "Markdown: Lint (View Only)",
+        "Prettier: Check (View Only)",
+        "Codespell: Check (View Only)"
+      ],
+      "dependsOrder": "sequence",
       "group": {
         "kind": "test",
         "isDefault": true
@@ -114,6 +156,21 @@
         "reveal": "always",
         "panel": "dedicated",
         "clear": true
+      }
+    },
+    {
+      "label": "Fix All",
+      "dependsOn": [
+        "Markdown: Lint (Auto-Fix)",
+        "Prettier: Format (Auto-Fix)",
+        "Codespell: Fix (Auto-Repair)"
+      ],
+      "dependsOrder": "sequence",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "close": false
       }
     }
   ]
