@@ -25,7 +25,18 @@ Black Base (Shared Config):
   # --- 3. Text, Icons & Typography ---
   primary-text-color: &base_text "#e1e1e1"
   secondary-text-color: &base_subtext "#9b9b9b"
-  # Icons default to accent color in individual themes
+  # Icons & Accents mapping to primary-color
+  accent-color: var(--primary-color)
+  paper-item-icon-color: var(--primary-color)
+  state-icon-color: var(--primary-color)
+  state-icon-active-color: var(--primary-color)
+  state-active-color: var(--primary-color)
+  sidebar-selected-icon-color: var(--primary-color)
+  sidebar-selected-text-color: var(--primary-color)
+  mdc-theme-primary: var(--primary-color)
+  paper-item-icon-active-color: var(--primary-color)
+  sl-color-primary-base: var(--primary-color)
+  mdc-ripple-color: var(--primary-color)
   ha-font-weight-heading: "500"
   ha-font-weight-medium: "500"
   title-font-weight: "500"
@@ -99,7 +110,81 @@ Black Base (Shared Config):
     dark: {}
     light: {}
 
-  # --- 10. Global Card-Mod ---
+  # --- 10. 2026.4 Semantic & Web Awesome Tokens ---
+  wa-color-surface-raised: *base_surface
+  ha-color-fill-neutral-quiet-resting: *base_black
+  ha-color-fill-neutral-quiet-hover: *base_surface
+  ha-color-fill-neutral-quiet-active: *base_black
+  ha-color-fill-neutral-normal-resting: *base_surface
+  ha-color-fill-neutral-normal-hover: "#151515"
+  ha-color-fill-neutral-normal-active: *base_surface
+
+  # --- 11. Global Color Scales (Neutral & Primary) ---
+  ha-color-neutral-05: hsl(from var(--secondary-text-color) h s calc(l * 0.15))
+  ha-color-neutral-10: hsl(from var(--secondary-text-color) h s calc(l * 0.25))
+  ha-color-neutral-20: hsl(from var(--secondary-text-color) h s calc(l * 0.40))
+  ha-color-neutral-30: hsl(from var(--secondary-text-color) h s calc(l * 0.70))
+  ha-color-neutral-40: var(--secondary-text-color)
+  ha-color-neutral-50: hsl(from var(--secondary-text-color) h s calc(l * 1.15))
+  ha-color-neutral-60: hsl(from var(--secondary-text-color) h s calc(l * 1.30))
+  ha-color-neutral-70: hsl(from var(--secondary-text-color) h s calc(l * 1.45))
+  ha-color-neutral-80: hsl(from var(--secondary-text-color) h s calc(l * 1.60))
+  ha-color-neutral-90: hsl(from var(--secondary-text-color) h s calc(l * 1.75))
+  ha-color-neutral-95: hsl(from var(--secondary-text-color) h s calc(l * 1.90))
+
+  ha-color-primary-05: hsl(from var(--primary-color) h s calc(l * 0.15))
+  ha-color-primary-10: hsl(from var(--primary-color) h s calc(l * 0.25))
+  ha-color-primary-20: hsl(from var(--primary-color) h s calc(l * 0.40))
+  ha-color-primary-30: hsl(from var(--primary-color) h s calc(l * 0.70))
+  ha-color-primary-40: var(--primary-color)
+  ha-color-primary-50: var(--primary-color)
+  ha-color-primary-60: hsl(from var(--primary-color) h s calc(l * 1.15))
+  ha-color-primary-70: hsl(from var(--primary-color) h s calc(l * 1.30))
+  ha-color-primary-80: hsl(from var(--primary-color) h s calc(l * 1.45))
+  ha-color-primary-90: hsl(from var(--primary-color) h s calc(l * 1.60))
+  ha-color-primary-95: hsl(from var(--primary-color) h s calc(l * 1.75))
+
+  # --- 12. Energy Dashboard Colors ---
+  energy-grid-consumption-color: "#2196f3" # Blue
+  energy-grid-return-color: "#9c27b0" # Purple
+  energy-solar-color: "#ff9800" # Orange
+  energy-non-fossil-color: "#4caf50" # Green
+  energy-battery-out-color: "#00bcd4" # Cyan
+  energy-battery-in-color: "#9c27b0" # Purple
+  energy-gas-color: "#f44336" # Red
+  energy-water-color: "#00bcd4" # Cyan
+
+  # --- 13. Graph Series Colors ---
+  graph-color-1: var(--primary-color)
+  graph-color-2: "#2196f3"
+  graph-color-3: "#4caf50"
+  graph-color-4: "#9c27b0"
+  graph-color-5: "#f44336"
+  graph-color-6: "#00bcd4"
+  graph-color-7: "#009688"
+  graph-color-8: "#e91e63"
+  graph-color-9: "#ff5722"
+  graph-color-10: "#3f51b5"
+
+  # --- 14. Named Colors (Standard HA Compatibility) ---
+  red-color: &acc_red "#f44336"
+  green-color: &acc_green "#4caf50"
+  blue-color: "#2196f3"
+  orange-color: &acc_orange "#ff9800"
+  pink-color: "#e91e63"
+  purple-color: &acc_purple "#9c27b0"
+  amber-color: "#ffc107"
+  cyan-color: &acc_cyan "#00bcd4"
+  teal-color: "#009688"
+  fuchsia-color: &acc_fuchsia "#ff00ff"
+  indigo-color: &acc_indigo "#5c6bc0"
+  silver-color: &acc_silver "#e0e0e0"
+
+  # --- 15. Disabled Fills ---
+  ha-color-fill-disabled-normal-resting: "rgba(155, 155, 155, 0.08)"
+  ha-color-on-disabled-normal: "rgba(155, 155, 155, 0.5)"
+
+  # --- 16. Global Card-Mod ---
   card-mod-card: |
     ha-card {
       background-color: #000000 !important;
@@ -140,145 +225,50 @@ Black Base (Shared Config):
 Black with Cyan:
   <<: *base_config
   card-mod-theme: "Black Main"
-  primary-color: &acc_cyan "#00bcd4"
-  accent-color: *acc_cyan
-  paper-item-icon-color: *acc_cyan
-  state-icon-color: *acc_cyan
-  state-icon-active-color: *acc_cyan
-  state-active-color: *acc_cyan
-  sidebar-selected-icon-color: *acc_cyan
-  sidebar-selected-text-color: *acc_cyan
-  mdc-theme-primary: *acc_cyan
-  paper-item-icon-active-color: *acc_cyan
-  ha-color-primary-50: *acc_cyan
-  sl-color-primary-base: *acc_cyan
-  mdc-ripple-color: *acc_cyan
+  primary-color: *acc_cyan
 
 # 2. MAIN GREEN
 Black with Green:
   <<: *base_config
   card-mod-theme: "Black Green"
-  primary-color: &acc_green "#4caf50"
-  accent-color: *acc_green
-  paper-item-icon-color: *acc_green
-  state-icon-color: *acc_green
-  state-icon-active-color: *acc_green
-  state-active-color: *acc_green
-  sidebar-selected-icon-color: *acc_green
-  sidebar-selected-text-color: *acc_green
-  mdc-theme-primary: *acc_green
-  paper-item-icon-active-color: *acc_green
-  ha-color-primary-50: *acc_green
-  sl-color-primary-base: *acc_green
-  mdc-ripple-color: *acc_green
+  primary-color: *acc_green
 
 # 3. MAIN RED
 Black with Red:
   <<: *base_config
   card-mod-theme: "Black Red"
-  primary-color: &acc_red "#f44336"
-  accent-color: *acc_red
-  paper-item-icon-color: *acc_red
-  state-icon-color: *acc_red
-  state-icon-active-color: *acc_red
-  state-active-color: *acc_red
-  sidebar-selected-icon-color: *acc_red
-  sidebar-selected-text-color: *acc_red
-  mdc-theme-primary: *acc_red
-  paper-item-icon-active-color: *acc_red
-  ha-color-primary-50: *acc_red
-  sl-color-primary-base: *acc_red
-  mdc-ripple-color: *acc_red
+  primary-color: *acc_red
 
 # 4. MAIN FUCHSIA
 Black with Fuchsia:
   <<: *base_config
   card-mod-theme: "Black Fuchsia"
-  primary-color: &acc_fuchsia "#ff00ff"
-  accent-color: *acc_fuchsia
-  paper-item-icon-color: *acc_fuchsia
-  state-icon-color: *acc_fuchsia
-  state-icon-active-color: *acc_fuchsia
-  state-active-color: *acc_fuchsia
-  sidebar-selected-icon-color: *acc_fuchsia
-  sidebar-selected-text-color: *acc_fuchsia
-  mdc-theme-primary: *acc_fuchsia
-  paper-item-icon-active-color: *acc_fuchsia
-  ha-color-primary-50: *acc_fuchsia
-  sl-color-primary-base: *acc_fuchsia
-  mdc-ripple-color: *acc_fuchsia
+  primary-color: *acc_fuchsia
 
 # 5. PURPLE
 Black with Purple:
   <<: *base_config
   card-mod-theme: "Black Purple"
-  primary-color: &acc_purple "#9c27b0"
-  accent-color: *acc_purple
-  paper-item-icon-color: *acc_purple
-  state-icon-color: *acc_purple
-  state-icon-active-color: *acc_purple
-  state-active-color: *acc_purple
-  sidebar-selected-icon-color: *acc_purple
-  sidebar-selected-text-color: *acc_purple
-  mdc-theme-primary: *acc_purple
-  paper-item-icon-active-color: *acc_purple
-  ha-color-primary-50: *acc_purple
-  sl-color-primary-base: *acc_purple
-  mdc-ripple-color: *acc_purple
+  primary-color: *acc_purple
 
 # 6. INDIGO
 Black with Indigo:
   <<: *base_config
   card-mod-theme: "Black Indigo"
-  primary-color: &acc_indigo "#5c6bc0"
-  accent-color: *acc_indigo
-  paper-item-icon-color: *acc_indigo
-  state-icon-color: *acc_indigo
-  state-icon-active-color: *acc_indigo
-  state-active-color: *acc_indigo
-  sidebar-selected-icon-color: *acc_indigo
-  sidebar-selected-text-color: *acc_indigo
-  mdc-theme-primary: *acc_indigo
-  paper-item-icon-active-color: *acc_indigo
-  ha-color-primary-50: *acc_indigo
-  sl-color-primary-base: *acc_indigo
-  mdc-ripple-color: *acc_indigo
+  primary-color: *acc_indigo
 
 # 7. SILVER (Monochrome)
 Black with Silver:
   <<: *base_config
   card-mod-theme: "Black Silver"
-  primary-color: &acc_silver "#e0e0e0"
-  accent-color: *acc_silver
-  paper-item-icon-color: *acc_silver
-  state-icon-color: *acc_silver
-  state-icon-active-color: *acc_silver
-  state-active-color: *acc_silver
-  sidebar-selected-icon-color: *acc_silver
-  sidebar-selected-text-color: *acc_silver
-  mdc-theme-primary: *acc_silver
-  paper-item-icon-active-color: *acc_silver
-  ha-color-primary-50: *acc_silver
-  sl-color-primary-base: *acc_silver
-  mdc-ripple-color: *acc_silver
+  primary-color: *acc_silver
 
-# 8. TEST SYSTEM
+# 8. ORANGE (with Red accents)
 Black with Orange:
   <<: *base_config
   card-mod-theme: "Black Orange"
-  primary-color: &acc_orange "#ff9800"
-  accent-color: *acc_orange
-  paper-item-icon-color: *acc_orange
-  state-icon-color: *acc_orange
-  state-icon-active-color: *acc_orange
+  primary-color: *acc_orange
   state-active-color: *acc_red
   state-switch-active-color: *acc_red
   state-plug-active-color: *acc_red
   state-binary_sensor-active-color: *acc_red
-  sidebar-selected-icon-color: *acc_orange
-  sidebar-selected-text-color: *acc_orange
-  mdc-theme-primary: *acc_orange
-  paper-item-icon-active-color: *acc_orange
-  ha-color-primary-50: *acc_orange
-  sl-color-primary-base: *acc_orange
-  mdc-ripple-color: *acc_orange

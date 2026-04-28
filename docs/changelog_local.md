@@ -7,11 +7,30 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - **HA 2026.4 Support**: More comprehensive support for HA 2026.4+, includes Charts, Energy Dashboard, Color Scales, and Web Awesome elements.
+- **HA 2026.4 Semantic Coverage**: Full support for Web Awesome (WA) semantic tokens, restoring dropdown backgrounds and hover states.
+- **Dynamic Color Scales**: Implemented HSL-based scales (`ha-color-primary-05` to `95` and `ha-color-neutral-05` to `95`) for both primary and neutral tones.
+- **Energy Dashboard Support**: Added explicit high-contrast mappings for all Energy dashboard elements (Solar, Grid, Battery, etc.).
+- **Graph Palette**: Implemented a 10-series graph color palette for consistent data visualization across multi-entity charts.
+- **Named Colors**: Added standard HA named color mappings (`red-color`, `blue-color`, etc.) for improved compatibility with third-party cards.
 
 ### Changed
 
+- **Theme Architecture Refactor**: Centralized over 15 repetitive property mappings into the `Black Base (Shared Config)` using `var(--primary-color)` inheritance, significantly reducing code duplication and improving maintainability.
+- **Infrastructure**: Updated the validation checks and added Codespell.
+- **Infrastructure**: Improved the DevContainer setup process.
 - **Readme**: Updated readme file.
-  - Clarify that card-mod is recommended but not absolutely required.
+  - Clarifiy that card-mod is recommended but not absolutely required.
+  - Moved features first, requirements second.
+  - Expanded install via HACS instructions including repo link.
+  - Heading badges - added HACS Custom and Licence badges.
+  - Standardized heading icons.
+  - Included Licence info.
+
+### Fixed
+
+- **YAML Anchor Duplication**: Resolved issue with duplicate YAML anchors that prevented theme reloading.
+- **File Integrity**: Cleaned up stray characters at end of theme file.
+- **Validate Badge**: Validate badge in Readme was pointing to a run, not latest. Now fixed.
 
 ## [1.3.2] - 2026-04-03
 
