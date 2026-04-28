@@ -1,4 +1,4 @@
-# Changes In 2026.4
+# Changes Made In Home Assistant ver 2026.4
 
 ## From the [HA Developers Blog](https://developers.home-assistant.io/blog/2026/03/25/frontend-component-updates-2026.4/)
 

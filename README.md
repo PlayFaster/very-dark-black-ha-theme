@@ -114,7 +114,9 @@ This is a **personal project**. Support and updates are provided on a **"best-ef
 
 ## 🤝 Acknowledgements & Thanks
 
-- Inspired by the excellent [`Frosted Glass`](https://github.com/wessamlauf/homeassistant-frosted-glass-themes) themes of @wessamlauf - thank you!
+- Inspired by these excellent themes - thank you!
+  - [`Frosted Glass`](https://github.com/wessamlauf/homeassistant-frosted-glass-themes) themes of @wessamlauf
+  - [`Graphite`](https://github.com/TilmanGriesel/graphite) themes of @TilmanGriesel
 - Made possible by @thomasloven and the [`card-mod`](https://github.com/thomasloven/lovelace-card-mod) contributors.
 - This project was developed with the assistance of AI to ensure code quality and adherence to best practices.
 
