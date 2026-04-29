@@ -16,6 +16,8 @@ All notable changes to this project will be documented in this file.
   - **Visibility & Contrast**: Brightened secondary text; improved radius and inset shadows on input fields; font smoothing for legibility on black backgrounds.
   - **Custom Card Compatibility**: Expanded global CSS exclusions to include Mushroom (Title/Chips), Bubble Card, Conditional cards, Custom Button cards, and native Heading/Glance cards.
 
+- **More Contrast Entry**: Introduced "Black More Contrast" (Indigo), a slightly higher-visibility theme that maintains a pure black background while enhancing UI boundaries and interaction states.
+
 ### Changed
 
 - **Readme**: Updated readme file.

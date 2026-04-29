@@ -2,10 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
-## [v1.3.3-dev8] - Now
+## [v1.3.3-dev9] - Now
 
 ### Added
 
+- **More Contrast Entry**: Introduced "Black More Contrast" (Indigo), a dedicated high-visibility theme that maintains a pure black background while significantly enhancing UI boundaries and interaction states.
+  - **Surface Elevation**: Implemented charcoal surfaces (`#1c1c1c`) for dialogs, menus, and dropdowns to provide better physical separation from the dashboard background.
+  - **Accent Framing**: Form outlines and selector borders are now framed with the primary accent color for instant field identification.
+  - **Structural Separators**: Increased divider and card border visibility to `0.2+` opacity.
+  - **Interactive Feedback**: Enhanced visibility for sliders, toggle bars, and hover "glow" intensities.
+  - **Depth & Focus**: Refined dialog scrim opacity and menu selection backgrounds for a more tactile, three-dimensional feel.
 - **Element Expansion**: Added a number of new elements to improve visibility and contrast as well as increase native element support for HA 2026.4 and beyond:
   - **M3 & WA Tokens**: Added Material 3 and Web Awesome semantic tokens.
   - **Dynamic Color Scales**: Implemented HSL-based scales.

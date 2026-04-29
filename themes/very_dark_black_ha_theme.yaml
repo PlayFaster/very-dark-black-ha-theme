@@ -340,3 +340,33 @@ Black with Orange:
   state-switch-active-color: *acc_red
   state-plug-active-color: *acc_red
   state-binary_sensor-active-color: *acc_red
+
+# 9. MORE CONTRAST (Indigo)
+Black More Contrast:
+  <<: *base_config
+  card-mod-theme: "Black Contrast"
+  primary-color: *acc_indigo
+  state-active-color: var(--primary-color)
+  # --- Option 1: Surface Elevation (Dialogs & Menus) ---
+  ha-dialog-surface-background: "#1c1c1c"
+  paper-dialog-background-color: "#1c1c1c"
+  mdc-theme-surface: "#1c1c1c"
+  wa-color-surface-raised: "#1c1c1c"
+  # --- Option 2: Semantic Accent Framing (Outlines) ---
+  ha-color-form-outline: var(--primary-color)
+  ha-color-form-outline-hover: var(--primary-color)
+  mdc-text-field-outline-color: var(--primary-color)
+  mdc-select-outline-color: var(--primary-color)
+  # --- Additional High Contrast Refinements ---
+  # 2. Structural Separators
+  divider-color: "rgba(255, 255, 255, 0.2)"
+  ha-card-border-color: "rgba(255, 255, 255, 0.25)"
+  input-dropdown-icon-color: var(--primary-color)
+  # 3. Interactive Feedback
+  paper-slider-knob-color: var(--primary-color)
+  paper-slider-pin-color: var(--primary-color)
+  paper-toggle-button-unchecked-bar-color: "#444444"
+  mdc-ripple-hover-opacity: "0.15"
+  # 4. Depth & Focus
+  mdc-dialog-scrim-color: "rgba(0, 0, 0, 0.7)"
+  mdc-list-item-selected-container-color: "rgba(255, 255, 255, 0.1)"
