@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [v1.3.3-dev6] - Now
+## [v1.3.3-dev7] - Now
 
 ### Added
 
@@ -12,6 +12,11 @@ All notable changes to this project will be documented in this file.
 - **Energy Dashboard Support**: Added explicit high-contrast mappings for all Energy dashboard elements (Solar, Grid, Battery, etc.).
 - **Graph Palette**: Implemented a 10-series graph color palette for consistent data visualization across multi-entity charts.
 - **Named Colors**: Added standard HA named color mappings (`red-color`, `blue-color`, etc.) for improved compatibility with third-party cards.
+- **UI Depth & Polish**: Introduced granular radius scale (8px, 12px, 16px) and subtle inset shadows for all input fields.
+- **Enhanced Typography**: Implemented antialiased font smoothing and refined font weights for actions to improve legibility on black backgrounds.
+- **Custom Card Compatibility**: Added global CSS exclusions for Mushroom (Title/Chips), Bubble Card, and native Heading/Glance cards to prevent background stacking issues.
+- **Professional Data Tables**: Refined Logbook and History table headers with specific backgrounds and improved row hover states.
+- **Immersive Dialogs**: Increased dialog scrim opacity to 0.9 and removed dialog shadows for a cleaner, focused aesthetic.
 
 ### Changed
 
@@ -29,6 +34,7 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 
 - **YAML Anchor Duplication**: Resolved issue with duplicate YAML anchors that prevented theme reloading.
+- **Duplicate YAML Keys**: Resolved "state-active-color" duplicate key warning by moving definitions from base config to individual variants.
 - **File Integrity**: Cleaned up stray characters at end of theme file.
 - **Validate Badge**: Validate badge in Readme was pointing to a run, not latest. Now fixed.
 

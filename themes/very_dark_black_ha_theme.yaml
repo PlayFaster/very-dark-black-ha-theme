@@ -21,6 +21,10 @@ Black Base (Shared Config):
   ha-card-border-width: "0.5px"
   ha-card-border-radius: "12px"
   ha-card-box-shadow: "none"
+  # Granular Radius Scale
+  token-size-radius-small: "8px"
+  token-size-radius-medium: "12px"
+  token-size-radius-large: "16px"
 
   # --- 3. Text, Icons & Typography ---
   primary-text-color: &base_text "#e1e1e1"
@@ -30,7 +34,7 @@ Black Base (Shared Config):
   paper-item-icon-color: var(--primary-color)
   state-icon-color: var(--primary-color)
   state-icon-active-color: var(--primary-color)
-  state-active-color: var(--primary-color)
+  # state-active-color is defined in individual themes to avoid YAML merge warnings
   sidebar-selected-icon-color: var(--primary-color)
   sidebar-selected-text-color: var(--primary-color)
   mdc-theme-primary: var(--primary-color)
@@ -39,7 +43,9 @@ Black Base (Shared Config):
   mdc-ripple-color: var(--primary-color)
   ha-font-weight-heading: "500"
   ha-font-weight-medium: "500"
+  ha-font-weight-action: "500"
   title-font-weight: "500"
+  ha-font-smoothing: "antialiased"
 
   # --- 4. Sidebar & Navigation ---
   sidebar-icon-color: *base_subtext
@@ -58,15 +64,19 @@ Black Base (Shared Config):
   # --- 6. System UI (Menus/Dialogs/Selections) ---
   divider-color: "#222222"
   outline-color: *acc_charcoal
-  mdc-dialog-scrim-color: "rgba(0,0,0,0.8)"
+  mdc-dialog-scrim-color: "rgba(0,0,0,0.9)"
+  dialog-box-shadow: "none"
   mdc-theme-surface: *base_black
   mdc-theme-on-surface: *base_text
   mdc-theme-background: *base_black
   ha-dialog-surface-background: *base_black
   paper-dialog-background-color: *base_black
-  mdc-ripple-hover-opacity: "0.1"
+  mdc-ripple-hover-opacity: "0.08"
   mdc-list-item-hover-leading-icon-color: "#ffffff"
   mdc-list-item-selected-container-color: *acc_charcoal
+  # Data Table Styling
+  data-table-background-color: *base_black
+  mdc-data-table-header-cell-font-weight: "600"
 
   # --- 7. Inputs & Text Fields ---
   mdc-text-field-fill-color: *base_black
@@ -97,6 +107,11 @@ Black Base (Shared Config):
   input-idle-line-color: "transparent"
   mdc-select-idle-line-color: "transparent"
   mdc-text-field-idle-line-color: "transparent"
+  # Inset depth for modern look
+  ha-textfield-border-radius: var(--token-size-radius-small)
+  ha-select-border-radius: var(--token-size-radius-small)
+  ha-color-form-outline: var(--ha-card-border-color)
+  ha-color-form-outline-hover: var(--primary-color)
 
   # --- 8. Lists & Notifications ---
   paper-listbox-background-color: *base_black
@@ -192,6 +207,16 @@ Black Base (Shared Config):
       border-style: solid !important;
       border-color: var(--ha-card-border-color) !important;
     }
+    /* Component Exclusions for Transparent Cards */
+    :host(hui-heading-card) ha-card,
+    :host(hui-glance-card) ha-card,
+    :host(mushroom-title-card) ha-card,
+    :host(.type-custom-bubble-card) ha-card,
+    :host(mushroom-chips-card) ha-card {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
     .card-header {
       background-color: #000000 !important;
       color: #ffffff !important;
@@ -200,11 +225,27 @@ Black Base (Shared Config):
     :host {
       --scrollbar-thumb-color: #333333 !important;
       color-scheme: dark !important;
+      -webkit-font-smoothing: antialiased !important;
+      -moz-osx-font-smoothing: grayscale !important;
     }
     *::-webkit-scrollbar { width: 4px !important; }
     *::-webkit-scrollbar-thumb {
       background-color: #333333 !important;
       border-radius: 8px !important;
+    }
+    /* Subtle Inset Shadow for Inputs */
+    ha-textfield, ha-select, input {
+      --ha-textfield-box-shadow: inset 0 1px 4px rgba(255, 255, 255, 0.05) !important;
+      --ha-select-box-shadow: inset 0 1px 4px rgba(255, 255, 255, 0.05) !important;
+      box-shadow: inset 0 1px 4px rgba(255, 255, 255, 0.05) !important;
+    }
+    /* Data Table & List Refinements */
+    .mdc-data-table__header-cell {
+      background-color: #050505 !important;
+      border-bottom: 1px solid var(--divider-color) !important;
+    }
+    .mdc-data-table__row:hover {
+      background-color: rgba(255, 255, 255, 0.02) !important;
     }
 
   card-mod-more-info: |
@@ -217,6 +258,7 @@ Black Base (Shared Config):
         --mdc-theme-on-surface: #ffffff;
     }
 
+
 # ----------------------------------------------------------------
 # THE INDIVIDUAL THEMES
 # ----------------------------------------------------------------
@@ -226,42 +268,49 @@ Black with Cyan:
   <<: *base_config
   card-mod-theme: "Black Main"
   primary-color: *acc_cyan
+  state-active-color: var(--primary-color)
 
 # 2. MAIN GREEN
 Black with Green:
   <<: *base_config
   card-mod-theme: "Black Green"
   primary-color: *acc_green
+  state-active-color: var(--primary-color)
 
 # 3. MAIN RED
 Black with Red:
   <<: *base_config
   card-mod-theme: "Black Red"
   primary-color: *acc_red
+  state-active-color: var(--primary-color)
 
 # 4. MAIN FUCHSIA
 Black with Fuchsia:
   <<: *base_config
   card-mod-theme: "Black Fuchsia"
   primary-color: *acc_fuchsia
+  state-active-color: var(--primary-color)
 
 # 5. PURPLE
 Black with Purple:
   <<: *base_config
   card-mod-theme: "Black Purple"
   primary-color: *acc_purple
+  state-active-color: var(--primary-color)
 
 # 6. INDIGO
 Black with Indigo:
   <<: *base_config
   card-mod-theme: "Black Indigo"
   primary-color: *acc_indigo
+  state-active-color: var(--primary-color)
 
 # 7. SILVER (Monochrome)
 Black with Silver:
   <<: *base_config
   card-mod-theme: "Black Silver"
   primary-color: *acc_silver
+  state-active-color: var(--primary-color)
 
 # 8. ORANGE (with Red accents)
 Black with Orange:

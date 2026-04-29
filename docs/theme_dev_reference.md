@@ -40,12 +40,20 @@ Dark themes often suffer from "White-on-White" text issues in system menus.
 
 Home Assistant is moving away from legacy `paper-` and `mdc-` variables toward **Web Awesome** (Shoelace/Lit) and **Material 3** tokens.
 
-- **Web Awesome (2026.4+ Shift)**: The 2026.4 release introduced a shift from component-specific "fill" variables (like `ha-textfield-fill-color`) to **semantic form variables**.
-  - `ha-color-form-background`: The primary background for inputs/selects.
-  - `ha-color-form-background-hover`: Controls the hover state for these containers.
-  - `input-dropdown-icon-color` & `input-label-ink-color`: Essential for ensuring text and icons remain visible against custom backgrounds.
-- **Shoelace Tokens**: Map your primary color to `sl-color-primary-base` for standard UI elements.
-- **Material 3 Tokens**: Map your color to `ha-color-primary-50` for interactive elements like ripples and sliders.
+- **Web Awesome (2026.4+ Shift)**: The 2026.4 release introduces a shift toward **Semantic Surface Tokens**.
+  - `wa-color-surface-raised`: Controls the background of elevated elements like dropdown menus.
+  - `ha-color-fill-neutral-[quiet|normal]-[resting|hover|active]`: These tokens handle the hover and interaction states for menus and list items. Mapping these is critical to prevent "white-on-white" invisibility in the new UI.
+- **Dynamic Color Scales (HSL Power)**: Instead of manually defining 10+ shades of every color variant, use CSS `hsl(from var(...) ...)` to dynamically generate 05-95 scales.
+  - **Example**: `ha-color-primary-20: hsl(from var(--primary-color) h s calc(l * 0.40))`
+  - This ensures that progress bars, sliders, and graph series automatically look correct for Cyan, Green, Red, etc., without extra code.
+
+## 6. Card-Mod & Component Exclusions
+
+Global background styling for `ha-card` can cause "background stacking" issues with modern custom cards.
+
+- **The Problem**: Applying a solid black background to all `ha-card` elements will break cards intended to be transparent (Mushroom Title, Bubble Card containers).
+- **The Fix**: Add explicit `:host(...) ha-card` exclusions in your global `card-mod-card` block to set `background: transparent !important` for structural components like `hui-heading-card`, `mushroom-chips-card`, and `.type-custom-bubble-card`.
+es and sliders.
 - **API Sunset**: Be aware that `ha-textfield` is scheduled for removal in **2026.5**. Transitioning to semantic `ha-color-form-background` variables is required for future-proofing.
 
 ## 6. Card-Mod & Shadow DOM Changes
