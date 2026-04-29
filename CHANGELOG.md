@@ -2,11 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
-## [v1.3.3-dev7] - Now
+## [v1.3.3-dev8] - Now
 
 ### Added
 
-- **HA 2026.4 Support**: More comprehensive support for HA 2026.4+, includes Charts, Energy Dashboard, Color Scales, and Web Awesome elements.
+- **Element Expansion**: Added a number of new elements to improve visibility and contrast as well as increase native element support for HA 2026.4 and beyond:
+  - **M3 & WA Tokens**: Added Material 3 and Web Awesome semantic tokens.
+  - **Dynamic Color Scales**: Implemented HSL-based scales.
+  - **Energy Dashboard**: High-contrast mappings for Energy dashboard elements.
+  - **Graph Palette**: Graph color palette for consistency across multi-entity charts.
+  - **Log & History**: Logbook and History table headers - specific backgrounds, improved row hover states.
+  - **Named Colors**: Standard HA named color mappings (`red-color`, `blue-color`, etc.) for improved compatibility with third-party cards.
+  - **Visibility & Contrast**: Brightened secondary text; improved radius and inset shadows on input fields; font smoothing for legibility on black backgrounds.
+  - **Custom Card Compatibility**: Expanded global CSS exclusions to include Mushroom (Title/Chips), Bubble Card, Conditional cards, Custom Button cards, and native Heading/Glance cards.
 
 ### Changed
 

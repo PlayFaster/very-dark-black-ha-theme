@@ -1,4 +1,9 @@
 ---
+# THEME METADATA
+# Name: Very Dark Black HA Theme
+# HA Support: 2025.1–2026.4+ (HSL scales require 2026+)
+# Dependencies: card-mod (optional, for scrollbars & borders)
+# Last Updated: 2026-04-29
 # ----------------------------------------------------------------
 # VERY DARK BLACK THEME
 # ----------------------------------------------------------------
@@ -14,10 +19,24 @@ Black Base (Shared Config):
   sidebar-background-color: *base_black
   app-theme-color: *base_black
 
+  # --- 14. Named Colors (Anchors defined early to prevent alias errors) ---
+  red-color: &acc_red "#f44336"
+  green-color: &acc_green "#4caf50"
+  blue-color: "#2196f3"
+  orange-color: &acc_orange "#ff9800"
+  pink-color: "#e91e63"
+  purple-color: &acc_purple "#9c27b0"
+  amber-color: "#ffc107"
+  cyan-color: &acc_cyan "#00bcd4"
+  teal-color: "#009688"
+  fuchsia-color: &acc_fuchsia "#ff00ff"
+  indigo-color: &acc_indigo "#5c6bc0"
+  silver-color: &acc_silver "#e0e0e0"
+
   # --- 2. Card Backgrounds & Borders ---
   ha-card-background: *base_black
   card-background-color: *base_black
-  ha-card-border-color: &base_glass_border "rgba(234, 235, 238, 0.15)"
+  ha-card-border-color: &base_glass_border "rgba(255, 255, 255, 0.12)"
   ha-card-border-width: "0.5px"
   ha-card-border-radius: "12px"
   ha-card-box-shadow: "none"
@@ -28,7 +47,7 @@ Black Base (Shared Config):
 
   # --- 3. Text, Icons & Typography ---
   primary-text-color: &base_text "#e1e1e1"
-  secondary-text-color: &base_subtext "#9b9b9b"
+  secondary-text-color: &base_subtext "#a8a8a8" # Brightened for WCAG AA safety
   # Icons & Accents mapping to primary-color
   accent-color: var(--primary-color)
   paper-item-icon-color: var(--primary-color)
@@ -41,6 +60,7 @@ Black Base (Shared Config):
   paper-item-icon-active-color: var(--primary-color)
   sl-color-primary-base: var(--primary-color)
   mdc-ripple-color: var(--primary-color)
+  mdc-icon-button-ripple-opacity: "0.08"
   ha-font-weight-heading: "500"
   ha-font-weight-medium: "500"
   ha-font-weight-action: "500"
@@ -107,6 +127,8 @@ Black Base (Shared Config):
   input-idle-line-color: "transparent"
   mdc-select-idle-line-color: "transparent"
   mdc-text-field-idle-line-color: "transparent"
+  wa-text-field-fill-background-color: *base_black
+  wa-select-fill-background-color: *base_black
   # Inset depth for modern look
   ha-textfield-border-radius: var(--token-size-radius-small)
   ha-select-border-radius: var(--token-size-radius-small)
@@ -133,8 +155,17 @@ Black Base (Shared Config):
   ha-color-fill-neutral-normal-resting: *base_surface
   ha-color-fill-neutral-normal-hover: "#151515"
   ha-color-fill-neutral-normal-active: *base_surface
+  # 2026+ Material 3 Semantic Tokens
+  md-sys-color-on-surface-variant: var(--secondary-text-color)
+  md-sys-color-outline-variant: *acc_graphite
+  md-sys-color-error: *acc_red
+  md-sys-color-on-error: "#ffffff"
+  md-sys-color-warning: *acc_orange
+  md-sys-color-success: *acc_green
+  md-sys-color-info: "#2196f3"
 
   # --- 11. Global Color Scales (Neutral & Primary) ---
+  # NOTE: hsl(from ...) syntax requires HA 2026.4+ / Modern Browser
   ha-color-neutral-05: hsl(from var(--secondary-text-color) h s calc(l * 0.15))
   ha-color-neutral-10: hsl(from var(--secondary-text-color) h s calc(l * 0.25))
   ha-color-neutral-20: hsl(from var(--secondary-text-color) h s calc(l * 0.40))
@@ -181,20 +212,6 @@ Black Base (Shared Config):
   graph-color-9: "#ff5722"
   graph-color-10: "#3f51b5"
 
-  # --- 14. Named Colors (Standard HA Compatibility) ---
-  red-color: &acc_red "#f44336"
-  green-color: &acc_green "#4caf50"
-  blue-color: "#2196f3"
-  orange-color: &acc_orange "#ff9800"
-  pink-color: "#e91e63"
-  purple-color: &acc_purple "#9c27b0"
-  amber-color: "#ffc107"
-  cyan-color: &acc_cyan "#00bcd4"
-  teal-color: "#009688"
-  fuchsia-color: &acc_fuchsia "#ff00ff"
-  indigo-color: &acc_indigo "#5c6bc0"
-  silver-color: &acc_silver "#e0e0e0"
-
   # --- 15. Disabled Fills ---
   ha-color-fill-disabled-normal-resting: "rgba(155, 155, 155, 0.08)"
   ha-color-on-disabled-normal: "rgba(155, 155, 155, 0.5)"
@@ -212,7 +229,9 @@ Black Base (Shared Config):
     :host(hui-glance-card) ha-card,
     :host(mushroom-title-card) ha-card,
     :host(.type-custom-bubble-card) ha-card,
-    :host(mushroom-chips-card) ha-card {
+    :host(mushroom-chips-card) ha-card,
+    :host(hui-conditional-card) ha-card,
+    :host(custom-button-card) ha-card {
       background: transparent !important;
       border: none !important;
       box-shadow: none !important;
@@ -249,6 +268,7 @@ Black Base (Shared Config):
     }
 
   card-mod-more-info: |
+    /* Note: Brittle selector, may require adjustment in future HA versions */
     ha-card-picker $ ha-sub-page ha-icon-button-prev-next + h1 + div {
         background-color: #000000 !important;
     }
@@ -257,7 +277,6 @@ Black Base (Shared Config):
         --mdc-dialog-heading-ink-color: #ffffff;
         --mdc-theme-on-surface: #ffffff;
     }
-
 
 # ----------------------------------------------------------------
 # THE INDIVIDUAL THEMES

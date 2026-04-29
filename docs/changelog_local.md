@@ -2,21 +2,42 @@
 
 All notable changes to this project will be documented in this file.
 
-## [v1.3.3-dev7] - Now
+## [v1.3.3-dev8] - Now
 
 ### Added
 
-- **HA 2026.4 Support**: More comprehensive support for HA 2026.4+, includes Charts, Energy Dashboard, Color Scales, and Web Awesome elements.
-- **HA 2026.4 Semantic Coverage**: Full support for Web Awesome (WA) semantic tokens, restoring dropdown backgrounds and hover states.
-- **Dynamic Color Scales**: Implemented HSL-based scales (`ha-color-primary-05` to `95` and `ha-color-neutral-05` to `95`) for both primary and neutral tones.
-- **Energy Dashboard Support**: Added explicit high-contrast mappings for all Energy dashboard elements (Solar, Grid, Battery, etc.).
-- **Graph Palette**: Implemented a 10-series graph color palette for consistent data visualization across multi-entity charts.
-- **Named Colors**: Added standard HA named color mappings (`red-color`, `blue-color`, etc.) for improved compatibility with third-party cards.
-- **UI Depth & Polish**: Introduced granular radius scale (8px, 12px, 16px) and subtle inset shadows for all input fields.
-- **Enhanced Typography**: Implemented antialiased font smoothing and refined font weights for actions to improve legibility on black backgrounds.
-- **Custom Card Compatibility**: Added global CSS exclusions for Mushroom (Title/Chips), Bubble Card, and native Heading/Glance cards to prevent background stacking issues.
-- **Professional Data Tables**: Refined Logbook and History table headers with specific backgrounds and improved row hover states.
-- **Immersive Dialogs**: Increased dialog scrim opacity to 0.9 and removed dialog shadows for a cleaner, focused aesthetic.
+- **Element Expansion**: Added a number of new elements to improve visibility and contrast as well as increase native element support for HA 2026.4 and beyond:
+  - **M3 & WA Tokens**: Added Material 3 and Web Awesome semantic tokens.
+  - **Dynamic Color Scales**: Implemented HSL-based scales.
+  - **Energy Dashboard**: High-contrast mappings for Energy dashboard elements.
+  - **Graph Palette**: Graph color palette for consistency across multi-entity charts.
+  - **Log & History**: Logbook and History table headers - specific backgrounds, improved row hover states.
+  - **Named Colors**: Standard HA named color mappings (`red-color`, `blue-color`, etc.) for improved compatibility with third-party cards.
+  - **Visibility & Contrast**: Brightened secondary text; improved radius and inset shadows on input fields; font smoothing for legibility on black backgrounds.
+  - **Custom Card Compatibility**: Expanded global CSS exclusions to include Mushroom (Title/Chips), Bubble Card, Conditional cards, Custom Button cards, and native Heading/Glance cards.
+- **IN DETAIL**:
+  - **HA 2026.4 Support**: More comprehensive support for HA 2026.4+, includes Charts, Energy Dashboard, Color Scales, and Web Awesome elements.
+  - **HA 2026.4 Semantic Coverage**: Full support for Web Awesome (WA) semantic tokens, restoring dropdown backgrounds and hover states.
+  - **Dynamic Color Scales**: Implemented HSL-based scales (`ha-color-primary-05` to `95` and `ha-color-neutral-05` to `95`) for both primary and neutral tones.
+  - **Energy Dashboard Support**: Added explicit high-contrast mappings for all Energy dashboard elements (Solar, Grid, Battery, etc.).
+  - **Graph Palette**: Implemented a 10-series graph color palette for consistent data visualization across multi-entity charts.
+  - **Named Colors**: Added standard HA named color mappings (`red-color`, `blue-color`, etc.) for improved compatibility with third-party cards.
+  - **UI Depth & Polish**: Introduced granular radius scale (8px, 12px, 16px) and subtle inset shadows for all input fields.
+  - **Enhanced Typography**: Implemented antialiased font smoothing and refined font weights for actions to improve legibility on black backgrounds.
+  - **Improved Contrast**: Brightened secondary text to `#a8a8a8` to ensure WCAG AA compliance on pure black backgrounds.
+  - **Custom Card Compatibility**: Expanded global CSS exclusions to include Mushroom (Title/Chips), Bubble Card, Conditional cards, Custom Button cards, and native Heading/Glance cards.
+  - **Professional Data Tables**: Refined Logbook and History table headers with specific backgrounds and improved row hover states.
+  - **Immersive Dialogs**: Increased dialog scrim opacity to 0.9 and removed dialog shadows for a cleaner, focused aesthetic.
+  - **M3 & WA Tokens**: Added comprehensive coverage for Material 3 (`md-sys-color-*`) and Web Awesome semantic form tokens.
+  - **Metadata**: Added theme metadata header for better project identification and support tracking.
+
+### Fixed
+
+- **Validate Badge**: Validate badge in Readme was pointing to a run, not latest. Now fixed.
+- **YAML Anchor Duplication**: Resolved issue with duplicate YAML anchors that prevented theme reloading.
+- **Duplicate YAML Keys**: Resolved "state-active-color" duplicate key warning by moving definitions from base config to individual variants.
+- **YAML Execution Order**: Reordered color anchors to the top of the file to resolve fatal "undefined alias" errors.
+- **File Integrity**: Cleaned up stray characters at end of theme file.
 
 ### Changed
 
@@ -30,13 +51,6 @@ All notable changes to this project will be documented in this file.
   - Heading badges - added HACS Custom and Licence badges.
   - Standardized heading icons.
   - Included Licence info.
-
-### Fixed
-
-- **YAML Anchor Duplication**: Resolved issue with duplicate YAML anchors that prevented theme reloading.
-- **Duplicate YAML Keys**: Resolved "state-active-color" duplicate key warning by moving definitions from base config to individual variants.
-- **File Integrity**: Cleaned up stray characters at end of theme file.
-- **Validate Badge**: Validate badge in Readme was pointing to a run, not latest. Now fixed.
 
 ## [1.3.2] - 2026-04-03
 
