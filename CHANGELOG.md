@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [v1.3.3-dev6] - Now
+## [v1.3.3-dev7] - Now
 
 ### Added
 
