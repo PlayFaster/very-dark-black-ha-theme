@@ -39,9 +39,13 @@ To ensure all "Pure Black" features (like custom scrollbars and border removals)
 
 ![Black with Green Preview](.github/images/vdbt_preview_theme_select_green.png)
 
-![Black with Cyan Preview](.github/images/vdbt_preview_sensors_cyan.png)
+| Cyan | Fuchsia | Silver |
+| :-: | :-: | :-: |
+| ![Cyan](.github/images/vdbt_preview_sensors_cyan.png) | ![Fuchsia](.github/images/vdbt_preview_sensors_fuchsia.png) | ![Silver](.github/images/vdbt_preview_sensors_silver.png) |
 
-![Black with Orange Preview](.github/images/vdbt_preview_home_orange.png)
+| Indigo | Orange | Red |
+| :-: | :-: | :-: |
+| ![Indigo](.github/images/vdbt_preview_sensors_indigo.png) | ![Orange](.github/images/vdbt_preview_sensors_orange.png) | ![Red](.github/images/vdbt_preview_sensors_red.png) |
 
 ## ✨ Installation
 
