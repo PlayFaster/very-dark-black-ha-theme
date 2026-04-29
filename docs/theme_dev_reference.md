@@ -18,7 +18,7 @@ Home Assistant's theme loader is unique and highly restrictive.
 - **The "Everything is a String" Rule**: Home Assistant expects every variable inside a theme to be a string (representing a CSS variable).
   - **CRITICAL FAILURE**: Do NOT nest dictionaries (like a palette block) inside a theme block. This will crash the Home Assistant configuration loader and prevent a restart.
 - **Execution Order (Anchors vs. Aliases)**: YAML is processed sequentially within a file.
-  - **CRITICAL FAILURE**: You MUST define an anchor (e.g., `&acc_red`) *before* you reference it with an alias (e.g., `*acc_red`). Defining anchors at the bottom of a large shared configuration while referencing them at the top will cause a fatal "undefined alias" error that prevents HA from starting.
+  - **CRITICAL FAILURE**: You MUST define an anchor (e.g., `&acc_red`) _before_ you reference it with an alias (e.g., `*acc_red`). Defining anchors at the bottom of a large shared configuration while referencing them at the top will cause a fatal "undefined alias" error that prevents HA from starting.
 - **Inheritance (Anchors/Aliases)**: To avoid "Duplicate Key" warnings, ensure that your base anchor contains _only_ shared settings. If the base anchor defines a property (e.g., `state-active-color: var(--primary-color)`) and a sub-theme overrides it (e.g., `*acc_red`), HA's restrictive loader will log a warning.
   - **The Fix**: Remove the key from the base config entirely and explicitly define it in every variant. Use a comment in the base config to document the intended default.
 
