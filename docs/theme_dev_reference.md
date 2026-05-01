@@ -14,13 +14,14 @@ Strict validation (like `yamllint`) requires adherence to official YAML specific
 
 Home Assistant's theme loader is unique and highly restrictive.
 
-- **The "Every Key is a Theme" Rule**: Every top-level key in a theme file is treated as a selectable theme name in the HA UI. Use internal helpers (like "Black Base") but be aware they will appear in the selection list unless filtered or hidden via advanced configuration.
+- **The "Every Key is a Theme" Rule**: Every top-level key in a theme file is treated as a selectable theme name in the HA UI. There is no mechanism to hide or exclude a theme from the picker — internal helpers (like `Black (Background Only)` and `Black (Standard)`) will always appear. The pragmatic solution is to give them a sensible name and accept their presence. Do NOT add `primary-color` to an anchor theme (Section A or B) — every colour variant also defines it, and HA will log a duplicate key warning for every theme in the file.
 - **The "Everything is a String" Rule**: Home Assistant expects every variable inside a theme to be a string (representing a CSS variable).
   - **CRITICAL FAILURE**: Do NOT nest dictionaries (like a palette block) inside a theme block. This will crash the Home Assistant configuration loader and prevent a restart.
 - **Execution Order (Anchors vs. Aliases)**: YAML is processed sequentially within a file.
   - **CRITICAL FAILURE**: You MUST define an anchor (e.g., `&acc_red`) _before_ you reference it with an alias (e.g., `*acc_red`). Defining anchors at the bottom of a large shared configuration while referencing them at the top will cause a fatal "undefined alias" error that prevents HA from starting.
 - **Inheritance (Anchors/Aliases)**: To avoid "Duplicate Key" warnings, ensure that your base anchor contains _only_ shared settings. If the base anchor defines a property (e.g., `state-active-color: var(--primary-color)`) and a sub-theme overrides it (e.g., `*acc_red`), HA's restrictive loader will log a warning.
   - **The Fix**: Remove the key from the base config entirely and explicitly define it in every variant. Use a comment in the base config to document the intended default.
+  - **Gotcha — Section B redeclaring Section A tokens**: `black_surfaces` (Section B) uses `<<: *base_logic`. Any token already defined in `base_logic` must NOT be redefined in `black_surfaces`, even with an identical value — HA will still warn. Before adding a token to Section B, grep for it in Section A first. Tokens like `mdc-text-field-fill-color`, `wa-text-field-fill-background-color`, and `wa-select-fill-background-color` are already set in Section A (lines 99, 124, 125) and must not be duplicated in Section B.
 
 ## 3. UI Accessibility & Polish
 

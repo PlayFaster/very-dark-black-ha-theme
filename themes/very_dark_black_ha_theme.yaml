@@ -3,7 +3,7 @@
 # Name: Very Dark Black HA Theme
 # HA Support: 2025.1–2026.4+ (HSL scales require 2026+)
 # Dependencies: card-mod (optional, for scrollbars & borders)
-# Last Updated: 2026-04-29
+# Last Updated: 2026-05-02
 # ----------------------------------------------------------------
 # VERY DARK BLACK THEME
 # ----------------------------------------------------------------
@@ -12,7 +12,12 @@
 # SECTION A: SHARED LOGIC (Anchors for all themes)
 # ----------------------------------------------------------------
 
-Black Base (Shared Logic):
+# NOTE: Do NOT add primary-color, state-active-color, card-mod-theme, or any key
+# that individual colour variants also define. This mapping IS the &base_logic anchor —
+# any key added here is inherited by Black (Standard) and all colour variants via
+# merge (<<:). If a sub-theme also defines the same key, HA logs a duplicate key
+# warning for every theme in the file. Keys that vary per variant belong in Section C.
+Black (Background Only):
   &base_logic # --- 14. Named Colors (Defined first for alias safety) ---
   red-color: &acc_red "#f44336"
   green-color: &acc_green "#4caf50"
@@ -37,8 +42,6 @@ Black Base (Shared Logic):
   app-theme-color: *base_black
 
   # --- 2. Card Layout ---
-  ha-card-background: *base_black
-  card-background-color: *base_black
   ha-card-border-width: "0.5px"
   ha-card-border-radius: "12px"
   ha-card-box-shadow: "none"
@@ -170,12 +173,12 @@ Black Base (Shared Logic):
   ha-color-primary-20: hsl(from var(--primary-color) h s calc(l * 0.40))
   ha-color-primary-30: hsl(from var(--primary-color) h s calc(l * 0.70))
   ha-color-primary-40: var(--primary-color)
-  ha-color-primary-50: var(--primary-color)
-  ha-color-primary-60: hsl(from var(--primary-color) h s calc(l * 1.15))
-  ha-color-primary-70: hsl(from var(--primary-color) h s calc(l * 1.30))
-  ha-color-primary-80: hsl(from var(--primary-color) h s calc(l * 1.45))
-  ha-color-primary-90: hsl(from var(--primary-color) h s calc(l * 1.60))
-  ha-color-primary-95: hsl(from var(--primary-color) h s calc(l * 1.75))
+  ha-color-primary-50: hsl(from var(--primary-color) h s calc(l * 1.15))
+  ha-color-primary-60: hsl(from var(--primary-color) h s calc(l * 1.30))
+  ha-color-primary-70: hsl(from var(--primary-color) h s calc(l * 1.45))
+  ha-color-primary-80: hsl(from var(--primary-color) h s calc(l * 1.60))
+  ha-color-primary-90: hsl(from var(--primary-color) h s calc(l * 1.75))
+  ha-color-primary-95: hsl(from var(--primary-color) h s calc(l * 1.90))
 
   # --- 12. Energy & Graphs ---
   energy-grid-consumption-color: *acc_blue
@@ -204,7 +207,7 @@ Black Base (Shared Logic):
   # --- 16. Global Card-Mod ---
   card-mod-card: |
     ha-card {
-      background-color: #000000 !important;
+      background-color: var(--ha-card-background, #000000) !important;
       border-width: var(--ha-card-border-width) !important;
       border-style: solid !important;
       border-color: var(--ha-card-border-color) !important;
@@ -222,7 +225,7 @@ Black Base (Shared Logic):
       box-shadow: none !important;
     }
     .card-header {
-      background-color: #000000 !important;
+      background-color: var(--ha-card-background, #000000) !important;
       color: #ffffff !important;
       font-weight: var(--ha-font-weight-heading) !important;
     }
@@ -252,10 +255,19 @@ Black Base (Shared Logic):
       background-color: rgba(255, 255, 255, 0.02) !important;
     }
   card-mod-more-info: |
-    /* Note: Brittle selector, may require adjustment in future HA versions */
-    ha-card-picker $ ha-sub-page ha-icon-button-prev-next + h1 + div {
-        background-color: #000000 !important;
-    }
+    /* ha-card-picker selector removed 2026-05-01. Was patching a black background
+       gap in the card picker sub-page via brittle adjacent-sibling selectors
+       (+h1+div). Neither Frosted Glass nor Graphite require this — native tokens
+       (mdc-theme-surface, ha-dialog-surface-background) should cover it. If a
+       light background reappears in the card picker, replace with:
+         ha-card-picker $ ha-sub-page { background-color: #000000; } */
+    /* Intentional override: sets heading and on-surface text to pure white
+       (#ffffff) inside more-info dialogs, overriding the global native token
+       mdc-theme-on-surface: #e1e1e1. Pure-black backgrounds need this extra
+       contrast that non-black reference themes (Frosted Glass, Graphite) do
+       not require. Not present in either reference theme — added to fix a
+       black-specific visibility issue. Remove and test if native token coverage
+       improves in future HA versions. */
     ha-more-info-dialog $ ha-dialog,
     ha-more-info-dialog $ wa-dialog {
         --mdc-dialog-heading-ink-color: #ffffff;
@@ -266,8 +278,16 @@ Black Base (Shared Logic):
 # SECTION B: STANDARD SURFACES (The 'Deep Black' defaults)
 # ----------------------------------------------------------------
 
-Black Base (Standard Surfaces): &black_surfaces
+# NOTE: Do NOT add primary-color, state-active-color, card-mod-theme, or any key
+# that individual colour variants also define. This mapping IS the &black_surfaces
+# anchor — any key added here is inherited by all colour variants via merge (<<:).
+# If a sub-theme also defines the same key, HA logs a duplicate key warning for
+# every theme in the file. Keys that vary per variant belong in Section C.
+# See also: Black (Background Only) for the base_logic anchor with the same constraint.
+Black (Standard): &black_surfaces
   <<: *base_logic
+  ha-card-background: *base_black
+  card-background-color: *base_black
   ha-card-border-color: "rgba(255, 255, 255, 0.12)"
   divider-color: "#222222"
   mdc-dialog-scrim-color: "rgba(0,0,0,0.9)"
@@ -275,11 +295,11 @@ Black Base (Standard Surfaces): &black_surfaces
   paper-dialog-background-color: *base_black
   mdc-theme-surface: *base_black
   wa-color-surface-raised: *base_surface
-  mdc-ripple-hover-opacity: "0.08"
-  mdc-list-item-selected-container-color: *acc_charcoal
-  mdc-text-field-outline-color: *acc_graphite
-  mdc-select-outline-color: *acc_graphite
-  ha-color-form-outline: "rgba(255, 255, 255, 0.12)"
+  mdc-ripple-hover-opacity: "0.12"
+  mdc-list-item-selected-container-color: "rgba(255, 255, 255, 0.1)"
+  mdc-text-field-outline-color: "#606060"
+  mdc-select-outline-color: "#606060"
+  ha-color-form-outline: "#606060"
   ha-color-form-outline-hover: var(--primary-color)
   input-dropdown-icon-color: "#ffffff"
 
@@ -290,84 +310,58 @@ Black Base (Standard Surfaces): &black_surfaces
 # 1. MAIN CYAN
 Black with Cyan:
   <<: *black_surfaces
-  card-mod-theme: "Black Main"
+  card-mod-theme: "Black with Cyan"
   primary-color: *acc_cyan
   state-active-color: var(--primary-color)
 
 # 2. MAIN GREEN
 Black with Green:
   <<: *black_surfaces
-  card-mod-theme: "Black Green"
+  card-mod-theme: "Black with Green"
   primary-color: *acc_green
   state-active-color: var(--primary-color)
 
 # 3. MAIN RED
 Black with Red:
   <<: *black_surfaces
-  card-mod-theme: "Black Red"
+  card-mod-theme: "Black with Red"
   primary-color: *acc_red
   state-active-color: var(--primary-color)
 
 # 4. MAIN FUCHSIA
 Black with Fuchsia:
   <<: *black_surfaces
-  card-mod-theme: "Black Fuchsia"
+  card-mod-theme: "Black with Fuchsia"
   primary-color: *acc_fuchsia
   state-active-color: var(--primary-color)
 
 # 5. PURPLE
 Black with Purple:
   <<: *black_surfaces
-  card-mod-theme: "Black Purple"
+  card-mod-theme: "Black with Purple"
   primary-color: *acc_purple
   state-active-color: var(--primary-color)
 
 # 6. INDIGO
 Black with Indigo:
   <<: *black_surfaces
-  card-mod-theme: "Black Indigo"
+  card-mod-theme: "Black with Indigo"
   primary-color: *acc_indigo
   state-active-color: var(--primary-color)
 
 # 7. SILVER (Monochrome)
 Black with Silver:
   <<: *black_surfaces
-  card-mod-theme: "Black Silver"
+  card-mod-theme: "Black with Silver"
   primary-color: *acc_silver
   state-active-color: var(--primary-color)
 
 # 8. ORANGE (with Red accents)
 Black with Orange:
   <<: *black_surfaces
-  card-mod-theme: "Black Orange"
+  card-mod-theme: "Black with Orange"
   primary-color: *acc_orange
   state-active-color: *acc_red
   state-switch-active-color: *acc_red
   state-plug-active-color: *acc_red
   state-binary_sensor-active-color: *acc_red
-
-# 9. MORE CONTRAST (Indigo)
-Black More Contrast:
-  <<: *base_logic
-  card-mod-theme: "Black Contrast"
-  primary-color: *acc_indigo
-  state-active-color: var(--primary-color)
-  # --- CUSTOM CONTRAST SURFACES ---
-  ha-dialog-surface-background: "#1c1c1c"
-  paper-dialog-background-color: "#1c1c1c"
-  mdc-theme-surface: "#1c1c1c"
-  wa-color-surface-raised: "#1c1c1c"
-  ha-color-form-outline: var(--primary-color)
-  ha-color-form-outline-hover: var(--primary-color)
-  mdc-text-field-outline-color: var(--primary-color)
-  mdc-select-outline-color: var(--primary-color)
-  divider-color: "rgba(255, 255, 255, 0.2)"
-  ha-card-border-color: "rgba(255, 255, 255, 0.25)"
-  input-dropdown-icon-color: var(--primary-color)
-  mdc-ripple-hover-opacity: "0.15"
-  mdc-dialog-scrim-color: "rgba(0, 0, 0, 0.7)"
-  mdc-list-item-selected-container-color: "rgba(255, 255, 255, 0.1)"
-  # Interactive Feedback
-  paper-slider-knob-color: var(--primary-color)
-  paper-slider-pin-color: var(--primary-color)
-  paper-toggle-button-unchecked-bar-color: "#444444"
