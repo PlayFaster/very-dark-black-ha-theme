@@ -1,6 +1,6 @@
 # Very Dark Black Theme for Home Assistant
 
-![HACS Theme](https://img.shields.io/badge/HACS-Theme-orange.svg) ![HACS Custom](https://img.shields.io/badge/HACS-Custom-41BDF5?logo=homeassistant&logoColor=white) ![Latest Release](https://img.shields.io/github/v/release/PlayFaster/very-dark-black-ha-theme?label=Release&logo=github) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Validate](https://github.com/PlayFaster/very-dark-black-ha-theme/actions/workflows/validate.yaml/badge.svg)](https://github.com/PlayFaster/very-dark-black-ha-theme/actions/workflows/validate.yaml) ![Last Commit](https://img.shields.io/github/last-commit/PlayFaster/very-dark-black-ha-theme?label=Last%20commit)
+[![HACS Theme](https://img.shields.io/badge/HACS-Theme-orange.svg)](https://hacs.xyz/) [![HACS Custom](https://img.shields.io/badge/HACS-Custom-41BDF5?logo=homeassistant&logoColor=white)](https://hacs.xyz/docs/faq/custom_repositories) [![Latest Release](https://img.shields.io/github/v/release/PlayFaster/very-dark-black-ha-theme?label=Release&logo=github)](https://github.com/PlayFaster/very-dark-black-ha-theme/releases) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Validate](https://github.com/PlayFaster/very-dark-black-ha-theme/actions/workflows/validate.yaml/badge.svg)](https://github.com/PlayFaster/very-dark-black-ha-theme/actions/workflows/validate.yaml) [![Last Commit](https://img.shields.io/github/last-commit/PlayFaster/very-dark-black-ha-theme?label=Last%20commit)](https://github.com/PlayFaster/very-dark-black-ha-theme/commits/main)
 
 A Home Assistant dark mode theme that provides black or very dark backgrounds wherever possible along with a choice of primary colours.
 
@@ -18,7 +18,8 @@ This is a simple theme focused on providing a very dark mode look. It's designed
   - Purple
   - Indigo
   - Silver (Monochrome)
-  - **Black Base (Shared Config)**: A utility theme used for shared logic.
+  - Black (Standard): A monochrome theme (this is the base the others are built on).
+  - Black (Background Only): This is the "sub-base", but has to remain in the list. Black backgrounds, everything else is HA default.
 
 ## 📋 Requirements
 
@@ -26,12 +27,18 @@ This is a simple theme focused on providing a very dark mode look. It's designed
 
 ## 📊 Compatibility
 
-To ensure all "Pure Black" features (like custom scrollbars and border removals) work correctly, verify you meet these minimum requirements:
+To ensure all features (like custom scrollbars and border removals) work correctly, verify you meet these minimum requirements:
 
 | Dependency         | Minimum Version | Reason                                   |
 | :----------------- | :-------------- | :--------------------------------------- |
 | **Home Assistant** | `2022.11.0`     | Required for `ha-card` border variables. |
 | **card-mod**       | `3.0.0`         | Required for theme-level CSS injection.  |
+
+The theme is fully usable from HA 2022.11 onwards. Newer versions have additional refinements:
+
+- **2022.11+** — Core dark backgrounds, cards, sidebar, and text
+- **2025.1+** — Inputs, dialogs, and modern card layouts
+- **2026.4+** — Dynamic HSL colour scales
 
 ## 📸 Screenshots
 
@@ -64,7 +71,7 @@ frontend:
 
 #### HACS (Recommended)
 
-1. Add this URL as a **Custom Repository** in HACS. `https://github.com/PlayFaster/very-dark-black-ha-theme`
+1. Add this URL as a **Custom Repository** in HACS. [https://github.com/PlayFaster/very-dark-black-ha-theme](https://github.com/PlayFaster/very-dark-black-ha-theme)
    - Open HACS in Home Assistant
    - Click **Custom repositories** (⋮ menu)
    - Add repository URL and Type: `Theme`
@@ -101,7 +108,6 @@ triggers:
 conditions: []
 actions:
   - action: frontend.set_theme
-    metadata: {}
     data:
       name: Black with Orange
       name_dark: Black with Orange

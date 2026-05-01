@@ -2,28 +2,28 @@
 
 All notable changes to this project will be documented in this file.
 
-## [v1.3.3-dev10] - Now
+## [v1.3.3] - 2026-05-02
 
 ### Added
 
-- **Element Expansion**: Added a number of new elements to improve visibility and contrast as well as increase native element support for HA 2026.4 and beyond:
+- **Element Expansion**: Added a number of new elements to improve visibility and increase native element support for HA 2026.4 and beyond:
   - **M3 & WA Tokens**: Added Material 3 and Web Awesome semantic tokens.
   - **Dynamic Color Scales**: Implemented HSL-based scales.
   - **Energy Dashboard**: High-contrast mappings for Energy dashboard elements.
   - **Graph Palette**: Graph color palette for consistency across multi-entity charts.
-  - **Log & History**: Logbook and History table headers - specific backgrounds, improved row hover states.
-  - **Named Colors**: Standard HA named color mappings (`red-color`, `blue-color`, etc.) for improved compatibility with third-party cards.
-  - **Visibility & Contrast**: Brightened secondary text; improved radius and inset shadows on input fields; font smoothing for legibility on black backgrounds.
-  - **Custom Card Compatibility**: Expanded global CSS exclusions to include Mushroom (Title/Chips), Bubble Card, Conditional cards, Custom Button cards, and native Heading/Glance cards.
-
-- **More Contrast Entry**: Introduced "Black More Contrast" (Indigo), a slightly higher-visibility theme that maintains a pure black background while enhancing UI boundaries and interaction states.
+  - **Log & History**: Logbook and History table headers with specific backgrounds and improved row hover states.
+  - **Named Colors**: Standard HA named colour mappings (`red-color`, `blue-color`, etc.) for improved compatibility with third-party cards.
+  - **Custom Card Compatibility**: Expanded CSS exclusions to include Mushroom (Title/Chips), Bubble Card, Conditional cards, Custom Button cards, and native Heading/Glance cards.
 
 ### Changed
 
-- **Readme**: Updated readme file.
-  - Clarify that card-mod is recommended but not absolutely required.
+- **Readme**: Clarified card-mod is recommended but not required. Added compatibility milestone breakdown (2022.11 / 2025.1+ / 2026.4+).
 
-## [1.3.2] - 2026-04-03
+### Fixed
+
+- **Brightened Secondary Text**: Secondary text raised to meet contrast guidelines on pure black backgrounds.
+
+## [v1.3.2] - 2026-04-03
 
 ### Fixed
 
@@ -38,7 +38,7 @@ All notable changes to this project will be documented in this file.
 - **Validation**: Additional GitHub and Local validation steps.
 - **Formatting**: Additional local formatting checks.
 
-## [1.3.1] - 2026-04-01
+## [v1.3.1] - 2026-04-01
 
 ### Added
 
@@ -62,19 +62,19 @@ All notable changes to this project will be documented in this file.
 
 - **"with Test" Option**: Removed the "Black with Orange plus Test" variant to simplify the theme list.
 
-## [1.2.2] - 2026-03-30
+## [v1.2.2] - 2026-03-30
 
 ### Changed
 
 - **GitHub**: Initial release to GitHub repository.
 
-## [1.2.1] - 2026-01-16
+## [v1.2.1] - 2026-01-16
 
 ### Added
 
 - **TEST Visibility**: Added option for TEST text near top left, for identifying a test or backup system.
 
-## [1.1.1] - 2025-12-04
+## [v1.1.1] - 2025-12-04
 
 ### Added
 
@@ -84,7 +84,7 @@ All notable changes to this project will be documented in this file.
 
 - **Invisible Menu Fix**: Fixed some of the black-on-black invisible menus.
 
-## [1.0.1] - 2025-11-18
+## [v1.0.1] - 2025-11-18
 
 ### Added
 
