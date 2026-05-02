@@ -3,7 +3,8 @@
   "dockerComposeFile": "docker-compose.yml",
   "service": "homeassistant",
   "workspaceFolder": "/workspaces/very-dark-black-ha-theme",
-  "postCreateCommand": "sh .devcontainer/setup.sh",
+  "_comment": "Added -U to ensure it upgrades if a cached version is old",
+  "postCreateCommand": "sed -i 's/\\r$//' .devcontainer/setup.sh && sh .devcontainer/setup.sh || (echo 'Setup failed! Check .reports/devcontainer/post_setup.log for details.' && sleep infinity)",
   "mounts": [
     {
       "source": "${localEnv:USERPROFILE}/.gemini",
@@ -17,13 +18,10 @@
         "redhat.vscode-yaml",
         "keesschollaart.vscode-home-assistant",
         "davidanson.vscode-markdownlint",
-        "yzhang.markdown-all-in-one"
+        "yzhang.markdown-all-in-one",
+        "streetsidesoftware.code-spell-checker"
       ],
       "settings": {
-        "_comment": "This helps VS Code find your imports correctly",
-        "python.analysis.extraPaths": [
-          "/workspaces/ha-wifi-ssid-monitor/custom_components"
-        ],
         "yaml.schemas": {
           "https://raw.githubusercontent.com/hacs/default/master/hacs.json": "hacs.json",
           "https://raw.githubusercontent.com/home-assistant/schemas/main/frontend/lovelace_config.json": "ui-lovelace.yaml"
@@ -33,7 +31,8 @@
         "markdownlint.config": {
           "MD013": false,
           "MD033": false
-        }
+        },
+        "cSpell.enabled": true
       }
     }
   },

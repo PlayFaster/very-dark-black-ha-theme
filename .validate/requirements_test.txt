@@ -1,2 +1,3 @@
 yamllint
 check-jsonschema
+codespell

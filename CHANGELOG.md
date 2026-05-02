@@ -2,37 +2,43 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased-dev] - Now
+## [v1.3.3] - 2026-05-02
+
+### Added
+
+- **Element Expansion**: Added a number of new elements to improve visibility and increase native element support for HA 2026.4 and beyond:
+  - **M3 & WA Tokens**: Added Material 3 and Web Awesome semantic tokens.
+  - **Dynamic Color Scales**: Implemented HSL-based scales.
+  - **Energy Dashboard**: High-contrast mappings for Energy dashboard elements.
+  - **Graph Palette**: Graph color palette for consistency across multi-entity charts.
+  - **Log & History**: Logbook and History table headers with specific backgrounds and improved row hover states.
+  - **Named Colors**: Standard HA named colour mappings (`red-color`, `blue-color`, etc.) for improved compatibility with third-party cards.
+  - **Custom Card Compatibility**: Expanded CSS exclusions to include Mushroom (Title/Chips), Bubble Card, Conditional cards, Custom Button cards, and native Heading/Glance cards.
+
+### Changed
+
+- **Readme**: Clarified card-mod is recommended but not required. Added compatibility milestone breakdown (2022.11 / 2025.1+ / 2026.4+).
+
+### Fixed
+
+- **Brightened Secondary Text**: Secondary text raised to meet contrast guidelines on pure black backgrounds.
+
+## [v1.3.2] - 2026-04-03
+
+### Fixed
+
+- **Grey Drop-down Placeholder**: Fixed an issue where some element changes introduced in HA 2026.4.x caused drop-down placeholders to be grey.
 
 ### Added
 
 - **Badges**: Added badges to README.
-- **Added**: Added.
 
 ### Changed
 
 - **Validation**: Additional GitHub and Local validation steps.
 - **Formatting**: Additional local formatting checks.
-- **Changed**: Changed.
 
-### Fixed
-
-- **Grey Drop-down Placeholder**: Fixed an issue where some element changes introduced in HA 2026.4.x caused drop-down placeholders to be grey.
-- **Fixed**: Fixed.
-
-### Removed
-
-- **Removed**: Removed.
-
-### Deprecated
-
-- **Deprecated**: Deprecated.
-
-### Security
-
-- **Security**: Security
-
-## [1.3.1] - 2026-04-01
+## [v1.3.1] - 2026-04-01
 
 ### Added
 
@@ -56,19 +62,19 @@ All notable changes to this project will be documented in this file.
 
 - **"with Test" Option**: Removed the "Black with Orange plus Test" variant to simplify the theme list.
 
-## [1.2.2] - 2026-03-30
+## [v1.2.2] - 2026-03-30
 
 ### Changed
 
 - **GitHub**: Initial release to GitHub repository.
 
-## [1.2.1] - 2026-01-16
+## [v1.2.1] - 2026-01-16
 
 ### Added
 
 - **TEST Visibility**: Added option for TEST text near top left, for identifying a test or backup system.
 
-## [1.1.1] - 2025-12-04
+## [v1.1.1] - 2025-12-04
 
 ### Added
 
@@ -78,7 +84,7 @@ All notable changes to this project will be documented in this file.
 
 - **Invisible Menu Fix**: Fixed some of the black-on-black invisible menus.
 
-## [1.0.1] - 2025-11-18
+## [v1.0.1] - 2025-11-18
 
 ### Added
 

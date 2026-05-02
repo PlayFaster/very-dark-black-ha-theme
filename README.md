@@ -1,23 +1,10 @@
 # Very Dark Black Theme for Home Assistant
 
-![HACS Theme](https://img.shields.io/badge/HACS-Theme-orange.svg) ![Latest Release](https://img.shields.io/github/v/release/PlayFaster/very-dark-black-ha-theme?label=Release&logo=github) [![Validate](https://github.com/PlayFaster/very-dark-black-ha-theme/actions/workflows/validate.yaml/badge.svg)](https://github.com/PlayFaster/very-dark-black-ha-theme/actions/runs/23833686730/) ![Last Commit](https://img.shields.io/github/last-commit/PlayFaster/very-dark-black-ha-theme?label=Last%20commit)
+[![HACS Theme](https://img.shields.io/badge/HACS-Theme-orange.svg)](https://hacs.xyz/) [![HACS Custom](https://img.shields.io/badge/HACS-Custom-41BDF5?logo=homeassistant&logoColor=white)](https://hacs.xyz/docs/faq/custom_repositories) [![Latest Release](https://img.shields.io/github/v/release/PlayFaster/very-dark-black-ha-theme?label=Release&logo=github)](https://github.com/PlayFaster/very-dark-black-ha-theme/releases) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Validate](https://github.com/PlayFaster/very-dark-black-ha-theme/actions/workflows/validate.yaml/badge.svg)](https://github.com/PlayFaster/very-dark-black-ha-theme/actions/workflows/validate.yaml) [![Last Commit](https://img.shields.io/github/last-commit/PlayFaster/very-dark-black-ha-theme?label=Last%20commit)](https://github.com/PlayFaster/very-dark-black-ha-theme/commits/main)
 
 A Home Assistant dark mode theme that provides black or very dark backgrounds wherever possible along with a choice of primary colours.
 
-## 📋 Requirements
-
-- **[`card-mod`](https://github.com/thomasloven/lovelace-card-mod)** – The Card Mod integration is required for this theme.
-
-## 📊 Compatibility
-
-To ensure all "Pure Black" features (like custom scrollbars and border removals) work correctly, verify you meet these minimum requirements:
-
-| Dependency         | Minimum Version | Reason                                   |
-| :----------------- | :-------------- | :--------------------------------------- |
-| **Home Assistant** | `2022.11.0`     | Required for `ha-card` border variables. |
-| **card-mod**       | `3.0.0`         | Required for theme-level CSS injection.  |
-
-## ✨ Features
+## ✅ Features
 
 This is a simple theme focused on providing a very dark mode look. It's designed to be clean and simple, with a choice of primary colours.
 
@@ -31,19 +18,43 @@ This is a simple theme focused on providing a very dark mode look. It's designed
   - Purple
   - Indigo
   - Silver (Monochrome)
-  - **Black Base (Shared Config)**: A utility theme used for shared logic.
+  - Black (Standard): A monochrome theme (this is the base the others are built on).
+  - Black (Background Only): This is the "sub-base", but has to remain in the list. Black backgrounds, everything else is HA default.
 
-## 🖼️ Screenshots
+## 📋 Requirements
+
+- **[`card-mod`](https://github.com/thomasloven/lovelace-card-mod)** – Highly recommended. The theme will still work without this integration, but `card-mod` is used to polish fine UI details and ensure a consistent experience across all elements.
+
+## 📊 Compatibility
+
+To ensure all features (like custom scrollbars and border removals) work correctly, verify you meet these minimum requirements:
+
+| Dependency         | Minimum Version | Reason                                   |
+| :----------------- | :-------------- | :--------------------------------------- |
+| **Home Assistant** | `2022.11.0`     | Required for `ha-card` border variables. |
+| **card-mod**       | `3.0.0`         | Required for theme-level CSS injection.  |
+
+The theme is fully usable from HA 2022.11 onwards. Newer versions have additional refinements:
+
+- **2022.11+** — Core dark backgrounds, cards, sidebar, and text
+- **2025.1+** — Inputs, dialogs, and modern card layouts
+- **2026.4+** — Dynamic HSL colour scales
+
+## 📸 Screenshots
 
 ![Black with Purple Preview](.github/images/vdbt_preview_home_purple.png)
 
 ![Black with Green Preview](.github/images/vdbt_preview_theme_select_green.png)
 
-![Black with Cyan Preview](.github/images/vdbt_preview_sensors_cyan.png)
+| Cyan | Fuchsia | Silver |
+| :-: | :-: | :-: |
+| ![Cyan](.github/images/vdbt_preview_sensors_cyan.png) | ![Fuchsia](.github/images/vdbt_preview_sensors_fuchsia.png) | ![Silver](.github/images/vdbt_preview_sensors_silver.png) |
 
-![Black with Orange Preview](.github/images/vdbt_preview_home_orange.png)
+| Indigo | Orange | Red |
+| :-: | :-: | :-: |
+| ![Indigo](.github/images/vdbt_preview_sensors_indigo.png) | ![Orange](.github/images/vdbt_preview_sensors_orange.png) | ![Red](.github/images/vdbt_preview_sensors_red.png) |
 
-## 🚀 Installation
+## ✨ Installation
 
 ### Prerequisites: Enable themes and install card-mod
 
@@ -58,16 +69,19 @@ frontend:
 
 ### Download Theme
 
-#### HACS
+#### HACS (Recommended)
 
-1. Add this URL as a **Custom Repository** in HACS.
+1. Add this URL as a **Custom Repository** in HACS. [https://github.com/PlayFaster/very-dark-black-ha-theme](https://github.com/PlayFaster/very-dark-black-ha-theme)
+   - Open HACS in Home Assistant
+   - Click **Custom repositories** (⋮ menu)
+   - Add repository URL and Type: `Theme`
+2. Search for "Very Dark Black Theme" and click **Download**
+3. Run the `frontend.reload_themes` action (Restart Home Assistant if `configuration.yaml` changes were made).
 
-2. Click Download.
-
-#### Manual
+#### Manual Installation
 
 1. Under the Home Assistant `config` folder, create a new folder named `themes`.
-2. Copy the theme yaml file into it.
+2. Copy the theme YAML file into it.
 3. Run the `frontend.reload_themes` action (Restart Home Assistant if `configuration.yaml` changes were made).
 
 ### Apply Theme
@@ -94,7 +108,6 @@ triggers:
 conditions: []
 actions:
   - action: frontend.set_theme
-    metadata: {}
     data:
       name: Black with Orange
       name_dark: Black with Orange
@@ -105,12 +118,22 @@ mode: single
 
 For technical details on the YAML standards, icon logic, and Shoelace tokens used in this theme, see the [Development Reference](docs/theme_dev_reference.md).
 
-## 🛠 Maintenance Status
+## 📝 Maintenance Status
 
 This is a **personal project**. Support and updates are provided on a **"best-effort"** basis only. While I use this theme daily and aim to keep it functional with the latest Home Assistant releases, I cannot guarantee immediate fixes for issues or compatibility with all releases.
 
-## 🙏 Acknowledgements & Thanks
+## 🤝 Acknowledgements & Thanks
 
-- Inspired by the excellent [`Frosted Glass`](https://github.com/wessamlauf/homeassistant-frosted-glass-themes) themes of @wessamlauf - thank you!
+- Inspired by these excellent themes - thank you!
+  - [`Frosted Glass`](https://github.com/wessamlauf/homeassistant-frosted-glass-themes) themes of @wessamlauf
+  - [`Graphite`](https://github.com/TilmanGriesel/graphite) themes of @TilmanGriesel
 - Made possible by @thomasloven and the [`card-mod`](https://github.com/thomasloven/lovelace-card-mod) contributors.
-- This project was developed with the assistance of Gemini AI to ensure code quality and best practices.
+- This project was developed with the assistance of AI to ensure code quality and adherence to best practices.
+
+## 📄 License [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+This project is licensed under the terms of the MIT License. For more details, see the [license](LICENSE) document.
+
+---
+
+**Questions or Issues?** Visit the [GitHub repository](https://github.com/PlayFaster/very-dark-black-ha-theme).
