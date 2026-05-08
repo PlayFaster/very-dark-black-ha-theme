@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [v1.3.3] - 2026-05-02
+## [1.3.3] - 2026-05-02
 
 ### Added
 
@@ -23,7 +23,7 @@ All notable changes to this project will be documented in this file.
 
 - **Brightened Secondary Text**: Secondary text raised to meet contrast guidelines on pure black backgrounds.
 
-## [v1.3.3-dev13] - 2026-05-01
+## [1.3.3-dev13] - 2026-05-01
 
 ### Changed
 
@@ -37,7 +37,7 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-## [v1.3.3-dev12] - 2026-05-01
+## [1.3.3-dev12] - 2026-05-01
 
 ### Added
 
@@ -75,7 +75,7 @@ Core ethos: pure black everywhere. The contrast themes exist to prevent confusio
 
 ---
 
-## [v1.3.3-dev11] - 2026-05-01
+## [1.3.3-dev11] - 2026-05-01
 
 ### Changed
 
@@ -121,7 +121,7 @@ Core ethos: pure black everywhere. The contrast themes exist to prevent confusio
 - Code review notes for this session: `.notes/code_review/code_review_20260501.md`
 - Project structure documented for future sessions: `.notes/proj_structure.md`
 
-## [v1.3.3-dev9] - 2026-05-01
+## [1.3.3-dev9] - 2026-05-01
 
 ### Added
 
@@ -177,7 +177,7 @@ Core ethos: pure black everywhere. The contrast themes exist to prevent confusio
   - Standardized heading icons.
   - Included Licence info.
 
-## [v1.3.2] - 2026-04-03
+## [1.3.2] - 2026-04-03
 
 ### Fixed
 
@@ -192,7 +192,7 @@ Core ethos: pure black everywhere. The contrast themes exist to prevent confusio
 - **Validation**: Additional GitHub and Local validation steps.
 - **Formatting**: Additional local formatting checks.
 
-## [v1.3.1] - 2026-04-01
+## [1.3.1] - 2026-04-01
 
 ### Added
 
@@ -216,19 +216,19 @@ Core ethos: pure black everywhere. The contrast themes exist to prevent confusio
 
 - **"with Test" Option**: Removed the "Black with Orange plus Test" variant to simplify the theme list.
 
-## [v1.2.2] - 2026-03-30
+## [1.2.2] - 2026-03-30
 
 ### Changed
 
 - **GitHub**: Initial release to GitHub repository.
 
-## [v1.2.1] - 2026-01-16
+## [1.2.1] - 2026-01-16
 
 ### Added
 
 - **TEST Visibility**: Added option for TEST text near top left, for identifying a test or backup system.
 
-## [v1.1.1] - 2025-12-04
+## [1.1.1] - 2025-12-04
 
 ### Added
 
@@ -238,7 +238,7 @@ Core ethos: pure black everywhere. The contrast themes exist to prevent confusio
 
 - **Invisible Menu Fix**: Fixed some of the black-on-black invisible menus.
 
-## [v1.0.1] - 2025-11-18
+## [1.0.1] - 2025-11-18
 
 ### Added
 

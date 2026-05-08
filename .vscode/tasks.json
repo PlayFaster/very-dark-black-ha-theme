@@ -133,6 +133,16 @@
       "problemMatcher": []
     },
     {
+      "label": "Prettier: Fix Shared",
+      "type": "shell",
+      "command": "prettier --config .validate/.prettierrc --ignore-path /dev/null --write \".shared/**/*.{md,json,yaml,yml}\" || true",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "problemMatcher": []
+    },
+    {
       "label": "Initialize Reports",
       "type": "shell",
       "command": "mkdir -p .reports",
@@ -174,7 +184,8 @@
         "Markdown: Lint (Auto-Fix)",
         "Codespell: Fix (Auto-Repair)",
         "Prettier: Format (Auto-Fix)",
-        "Prettier: Fix Notes"
+        "Prettier: Fix Notes",
+        "Prettier: Fix Shared"
       ],
       "dependsOrder": "sequence",
       "problemMatcher": [],
