@@ -19,7 +19,7 @@ A Home Assistant dark mode theme that provides black or very dark backgrounds wh
 This is a simple theme focused on providing a very dark mode look. It's designed to be clean and simple, with a choice of primary colors.
 
 - **Black Backgrounds**: Black background applied everywhere.
-- **Primary Color Choice**: Various sub-themes with different foreground colors.
+- **Accent Color Choice**: Various sub-themes with different accent colors.
   - 🔵 Cyan
   - 🟢 Green
   - 🔴 Red
@@ -73,9 +73,9 @@ The theme is fully usable from HA 2022.11 onwards. Newer versions have additiona
 
 ### Prerequisites: Enable themes and install card-mod
 
-1. Install `card-mod` via [HACS](https://hacs.xyz/) or per the instructions on its [GitHub page](https://github.com/thomasloven/lovelace-card-mod "card-mod").
+1. [_Optional_ but recommended] Install `card-mod` via [HACS](https://hacs.xyz/) or per the instructions on its [GitHub page](https://github.com/thomasloven/lovelace-card-mod "card-mod").
 
-2. Add the following to your `configuration.yaml` file if not present (HA restart required):
+2. [**Mandatory**] Add the following to your `configuration.yaml` file if not present (HA restart required):
 
 ```yaml
 frontend:
@@ -116,8 +116,8 @@ frontend:
 You can use a Home Assistant automation to change the system theme at startup, or based on any other time or condition you wish.
 
 - **Important:** In the [Profile General](https://my.home-assistant.io/redirect/profile) screen, you **must** keep **"Use default theme"** selected under _User preferences_ > _Theme settings_.
+- This works by having the System Theme set to **"Use default theme"** and then using an Automation `action:` to _change_ the default theme.
 - If you manually select a specific theme in your profile, the automation will not be able to override it.
-- This works by setting the System Theme to **"Use default theme"** and then using an Automation `action:` to change the default theme.
 
 Example automation to set the theme at startup:
 
@@ -156,7 +156,7 @@ If you installed via HACS:
 
 ## 🏗️ Under the Hood - Technical Architecture
 
-For technical details on the YAML standards, icon logic, and Shoelace tokens used in this theme, see the [Development Reference](docs/theme_dev_reference.md).
+For technical details on the YAML standards, logic, and various display element tokens used in this theme, see the [Development Reference](docs/theme_dev_reference.md).
 
 ## ❓ FAQ & Troubleshooting
 
