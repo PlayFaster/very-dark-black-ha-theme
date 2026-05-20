@@ -13,8 +13,8 @@
 # ----------------------------------------------------------------
 
 # NOTE: Do NOT add primary-color, state-active-color, card-mod-theme, or any key
-# that individual colour variants also define. This mapping IS the &base_logic anchor —
-# any key added here is inherited by Black (Standard) and all colour variants via
+# that individual color variants also define. This mapping IS the &base_logic anchor —
+# any key added here is inherited by Black (Standard) and all color variants via
 # merge (<<:). If a sub-theme also defines the same key, HA logs a duplicate key
 # warning for every theme in the file. Keys that vary per variant belong in Section C.
 Black (Background Only):
@@ -204,6 +204,116 @@ Black (Background Only):
   ha-color-fill-disabled-normal-resting: "rgba(155, 155, 155, 0.08)"
   ha-color-on-disabled-normal: "rgba(155, 155, 155, 0.5)"
 
+  # --- 17. 2026.5 Web Awesome Components & Global Updates ---
+  # Box Shadows
+  ha-box-shadow-s: "none"
+  ha-box-shadow-m: "none"
+  ha-box-shadow-l: "none"
+
+  # Surface Colors (Tooltips & Popovers)
+  ha-color-surface-default: "#0a0a0a"
+  ha-color-surface-low: "#050505"
+  ha-color-surface-lower: "#000000"
+  ha-color-surface-default-inverted: "#ffffff"
+  ha-color-surface-low-inverted: "#f5f5f5"
+  ha-color-surface-lower-inverted: "#e0e0e0"
+
+  # Progress Bar Customization
+  ha-progress-bar-indicator-color: "var(--primary-color)"
+  ha-progress-bar-indicator-background: "var(--primary-color)"
+  ha-progress-bar-track-color: "#1a1a1a"
+  ha-progress-bar-track-height: "4px"
+  ha-progress-bar-border-radius: "4px"
+
+  # Web Awesome Switch - Unchecked
+  ha-switch-background-color: "#1e1e1e"
+  ha-switch-thumb-background-color: "#666666"
+  ha-switch-background-color-hover: "#2a2a2a"
+  ha-switch-thumb-background-color-hover: "#888888"
+  ha-switch-border-color: "#333333"
+  ha-switch-thumb-border-color: "#666666"
+
+  # Web Awesome Switch - Checked
+  ha-switch-checked-background-color: "var(--ha-color-primary-10)"
+  ha-switch-checked-thumb-background-color: "var(--primary-color)"
+  ha-switch-checked-background-color-hover: "var(--ha-color-primary-20)"
+  ha-switch-checked-thumb-background-color-hover: "var(--primary-color)"
+  ha-switch-checked-border-color: "var(--primary-color)"
+  ha-switch-checked-thumb-border-color: "var(--primary-color)"
+  ha-switch-checked-thumb-border-color-hover: "var(--primary-color)"
+
+  # Entity Toggle Size Overrides (PR #51984)
+  ha-entity-toggle-switch-width: "38px"
+  ha-entity-toggle-switch-size: "20px"
+  ha-entity-toggle-switch-thumb-size: "14px"
+
+  # Web Awesome Checkbox
+  ha-checkbox-size: "18px"
+  ha-checkbox-border-width: "1.5px"
+  ha-checkbox-border-radius: "4px"
+  ha-checkbox-border-color: "#444444"
+  ha-checkbox-border-color-hover: "#666666"
+  ha-checkbox-background-color: "transparent"
+  ha-checkbox-background-color-hover: "#151515"
+  ha-checkbox-checked-background-color: "var(--primary-color)"
+  ha-checkbox-checked-background-color-hover: "var(--primary-color)"
+  ha-checkbox-checked-icon-color: "#ffffff"
+
+  # --- 18. Forum Discovered Elements & Compatibility Patches ---
+  # Dropdown Inputs & Outlined Inputs
+  mdc-select-label-ink-color: "var(--secondary-text-color)"
+  input-outlined-idle-border-color: "#444444"
+  input-outlined-hover-border-color: "var(--primary-color)"
+  input-outlined-disabled-border-color: "transparent"
+
+  # Markdown Inline Code Styling
+  markdown-code-background-color: "var(--secondary-background-color)"
+
+  # Web Awesome Input Shims
+  ha-color-ink-color: "#ffffff"
+  ha-color-fill-color: *base_black
+  ha-color-disabled-fill-color: "transparent"
+  ha-color-label-ink-color: "var(--secondary-text-color)"
+  ha-color-disabled-ink-color: "rgba(155, 155, 155, 0.5)"
+  ha-color-dropdown-icon-color: "#ffffff"
+  ha-color-idle-line-color: "transparent"
+  ha-color-hover-line-color: "transparent"
+
+  # Primary-scale Dynamic Tokens (Quiet & Normal States)
+  ha-color-fill-primary-quiet-resting: "var(--ha-color-primary-05)"
+  ha-color-fill-primary-quiet-hover: "var(--ha-color-primary-10)"
+  ha-color-fill-primary-quiet-active: "var(--ha-color-primary-20)"
+  ha-color-fill-primary-normal-resting: "var(--ha-color-primary-10)"
+  ha-color-fill-primary-normal-hover: "var(--ha-color-primary-20)"
+  ha-color-fill-primary-normal-active: "var(--ha-color-primary-30)"
+
+  # Badges Customization
+  label-badge-background-color: *base_black
+  label-badge-text-color: "#ffffff"
+  label-badge-red: *acc_red
+  label-badge-green: *acc_green
+  label-badge-blue: *acc_blue
+  label-badge-yellow: *acc_orange
+  label-badge-grey: *acc_graphite
+
+  # Legacy & Paper Components Fallback
+  paper-card-background-color: *base_black
+  paper-card-header-color: "#ffffff"
+  paper-toggle-button-checked-bar-color: "var(--primary-color)"
+  paper-toggle-button-checked-button-color: "var(--primary-color)"
+  paper-toggle-button-checked-ink-color: "var(--primary-color)"
+  paper-progress-secondary-color: "var(--primary-color)"
+  paper-slider-active-color: "var(--primary-color)"
+  paper-slider-container-color: "var(--secondary-background-color)"
+  paper-slider-knob-color: "var(--primary-color)"
+  paper-slider-knob-start-color: "var(--primary-color)"
+  paper-slider-pin-color: "var(--primary-color)"
+  paper-slider-secondary-color: "var(--primary-color)"
+
+  # Data Tables
+  table-row-background-color: *base_black
+  table-row-alternative-background-color: *base_surface
+
   # --- 16. Global Card-Mod ---
   card-mod-card: |
     ha-card {
@@ -279,8 +389,8 @@ Black (Background Only):
 # ----------------------------------------------------------------
 
 # NOTE: Do NOT add primary-color, state-active-color, card-mod-theme, or any key
-# that individual colour variants also define. This mapping IS the &black_surfaces
-# anchor — any key added here is inherited by all colour variants via merge (<<:).
+# that individual color variants also define. This mapping IS the &black_surfaces
+# anchor — any key added here is inherited by all color variants via merge (<<:).
 # If a sub-theme also defines the same key, HA logs a duplicate key warning for
 # every theme in the file. Keys that vary per variant belong in Section C.
 # See also: Black (Background Only) for the base_logic anchor with the same constraint.

@@ -12,6 +12,8 @@ build/
 htmlcov/
 .pytest_cache/
 .ruff_cache/
+.mypy_cache/
+*cache/
 coverage.xml
 .coverage
 .reports/
@@ -19,7 +21,6 @@ coverage.xml
 # Home Assistant
 .storage/
 testing_config/
-*.log
 *.db
 *.db-shm
 *.db-wal
@@ -44,10 +45,14 @@ uv.lock
 
 # Note Scratch Compare Area
 .comp/
+.notes
+.shared
 .notes/
+.shared/
 loc_only/
 
 # AI
 *.gptcache
 .geminignore
 .aiexclude
+.aider*

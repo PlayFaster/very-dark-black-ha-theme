@@ -2,7 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
-## [v1.3.3] - 2026-05-02
+## [1.3.4] - 2026-05-20
+
+### Added
+
+- **HA 2026.5 New Elements**: Added support for the new HA 2026.5 elements documented in this [blog post](https://developers.home-assistant.io/blog/2026/05/04/frontend-component-updates-2026.5). This includes:
+  - **New Web Awesome Tokens**: Added CSS styling variables for Web Awesome `ha-switch` (unchecked/checked states, borders, hover, and sizing overrides from PR #51984), `ha-checkbox`, and custom `ha-progress-bar`.
+  - **Global Shadow & Surface Styling**: Added shadow tokens (`ha-box-shadow-s`, `ha-box-shadow-m`, `ha-box-shadow-l`) set to `"none"`, and new elevated surface variables (`ha-color-surface-default`, etc.) for tooltips and adaptive popovers.
+
+### Changed
+
+- **Documentation**: Updated the README file with additional details including on applying themes to dashboard views and sections, as well as at the system level.
+
+## [1.3.3] - 2026-05-02
 
 ### Added
 
@@ -12,7 +24,7 @@ All notable changes to this project will be documented in this file.
   - **Energy Dashboard**: High-contrast mappings for Energy dashboard elements.
   - **Graph Palette**: Graph color palette for consistency across multi-entity charts.
   - **Log & History**: Logbook and History table headers with specific backgrounds and improved row hover states.
-  - **Named Colors**: Standard HA named colour mappings (`red-color`, `blue-color`, etc.) for improved compatibility with third-party cards.
+  - **Named Colors**: Standard HA named color mappings (`red-color`, `blue-color`, etc.) for improved compatibility with third-party cards.
   - **Custom Card Compatibility**: Expanded CSS exclusions to include Mushroom (Title/Chips), Bubble Card, Conditional cards, Custom Button cards, and native Heading/Glance cards.
 
 ### Changed
@@ -23,7 +35,7 @@ All notable changes to this project will be documented in this file.
 
 - **Brightened Secondary Text**: Secondary text raised to meet contrast guidelines on pure black backgrounds.
 
-## [v1.3.2] - 2026-04-03
+## [1.3.2] - 2026-04-03
 
 ### Fixed
 
@@ -38,11 +50,11 @@ All notable changes to this project will be documented in this file.
 - **Validation**: Additional GitHub and Local validation steps.
 - **Formatting**: Additional local formatting checks.
 
-## [v1.3.1] - 2026-04-01
+## [1.3.1] - 2026-04-01
 
 ### Added
 
-- **More Colours**: Added Purple, Indigo, and Silver (monochrome) variants.
+- **More Colors**: Added Purple, Indigo, and Silver (monochrome) variants.
 - **Black Base**: Added a "Black Base (Shared Config)" utility theme for consistent inheritance.
 - **Light Fallback**: Added explicit light mode block to ensure the UI stays dark on systems set to light mode.
 - **Modern Tokens**: Added compatibility for `--ha-` and `--sl-` (Shoelace) variables used in Home Assistant 2025+.
@@ -62,29 +74,29 @@ All notable changes to this project will be documented in this file.
 
 - **"with Test" Option**: Removed the "Black with Orange plus Test" variant to simplify the theme list.
 
-## [v1.2.2] - 2026-03-30
+## [1.2.2] - 2026-03-30
 
 ### Changed
 
 - **GitHub**: Initial release to GitHub repository.
 
-## [v1.2.1] - 2026-01-16
+## [1.2.1] - 2026-01-16
 
 ### Added
 
 - **TEST Visibility**: Added option for TEST text near top left, for identifying a test or backup system.
 
-## [v1.1.1] - 2025-12-04
+## [1.1.1] - 2025-12-04
 
 ### Added
 
-- **Multi-Theme**: Added additional highlight colour options to existing cyan - green, red, fuchsia, orange.
+- **Multi-Theme**: Added additional highlight color options to existing cyan - green, red, fuchsia, orange.
 
 ### Fixed
 
 - **Invisible Menu Fix**: Fixed some of the black-on-black invisible menus.
 
-## [v1.0.1] - 2025-11-18
+## [1.0.1] - 2025-11-18
 
 ### Added
 

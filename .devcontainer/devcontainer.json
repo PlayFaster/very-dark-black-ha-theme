@@ -10,6 +10,21 @@
       "source": "${localEnv:USERPROFILE}/.gemini",
       "target": "/root/.gemini",
       "type": "bind"
+    },
+    {
+      "source": "${localEnv:USERPROFILE}/.gitconfig",
+      "target": "/root/.gitconfig",
+      "type": "bind"
+    },
+    {
+      "source": "C:/Local/Code/github/PlayFaster/home-assistant/shared/ProjNotes/Notes-very-dark-black-ha-theme",
+      "target": "${containerWorkspaceFolder}/.notes",
+      "type": "bind"
+    },
+    {
+      "source": "C:/Local/Code/github/PlayFaster/home-assistant/shared/SharedNotes",
+      "target": "${containerWorkspaceFolder}/.shared",
+      "type": "bind"
     }
   ],
   "customizations": {
