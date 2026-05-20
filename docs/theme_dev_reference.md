@@ -14,7 +14,7 @@ Strict validation (like `yamllint`) requires adherence to official YAML specific
 
 Home Assistant's theme loader is unique and highly restrictive.
 
-- **The "Every Key is a Theme" Rule**: Every top-level key in a theme file is treated as a selectable theme name in the HA UI. There is no mechanism to hide or exclude a theme from the picker — internal helpers (like `Black (Background Only)` and `Black (Standard)`) will always appear. The pragmatic solution is to give them a sensible name and accept their presence. Do NOT add `primary-color` to an anchor theme (Section A or B) — every colour variant also defines it, and HA will log a duplicate key warning for every theme in the file.
+- **The "Every Key is a Theme" Rule**: Every top-level key in a theme file is treated as a selectable theme name in the HA UI. There is no mechanism to hide or exclude a theme from the picker — internal helpers (like `Black (Background Only)` and `Black (Standard)`) will always appear. The pragmatic solution is to give them a sensible name and accept their presence. Do NOT add `primary-color` to an anchor theme (Section A or B) — every color variant also defines it, and HA will log a duplicate key warning for every theme in the file.
 - **The "Everything is a String" Rule**: Home Assistant expects every variable inside a theme to be a string (representing a CSS variable).
   - **CRITICAL FAILURE**: Do NOT nest dictionaries (like a palette block) inside a theme block. This will crash the Home Assistant configuration loader and prevent a restart.
 - **Execution Order (Anchors vs. Aliases)**: YAML is processed sequentially within a file.

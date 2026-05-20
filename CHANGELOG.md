@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.4] - 2026-05-20
+
+### Added
+
+- **HA 2026.5 New Elements**: Added support for the new HA 2026.5 elements documented in this [blog post](https://developers.home-assistant.io/blog/2026/05/04/frontend-component-updates-2026.5). This includes:
+  - **New Web Awesome Tokens**: Added CSS styling variables for Web Awesome `ha-switch` (unchecked/checked states, borders, hover, and sizing overrides from PR #51984), `ha-checkbox`, and custom `ha-progress-bar`.
+  - **Global Shadow & Surface Styling**: Added shadow tokens (`ha-box-shadow-s`, `ha-box-shadow-m`, `ha-box-shadow-l`) set to `"none"`, and new elevated surface variables (`ha-color-surface-default`, etc.) for tooltips and adaptive popovers.
+- **Documentation**: Updated the README file with additional details including on applying themes to dashboard views and sections, as well as at the system level.
+
 ## [1.3.3] - 2026-05-02
 
 ### Added
@@ -12,7 +21,7 @@ All notable changes to this project will be documented in this file.
   - **Energy Dashboard**: High-contrast mappings for Energy dashboard elements.
   - **Graph Palette**: Graph color palette for consistency across multi-entity charts.
   - **Log & History**: Logbook and History table headers with specific backgrounds and improved row hover states.
-  - **Named Colors**: Standard HA named colour mappings (`red-color`, `blue-color`, etc.) for improved compatibility with third-party cards.
+  - **Named Colors**: Standard HA named color mappings (`red-color`, `blue-color`, etc.) for improved compatibility with third-party cards.
   - **Custom Card Compatibility**: Expanded CSS exclusions to include Mushroom (Title/Chips), Bubble Card, Conditional cards, Custom Button cards, and native Heading/Glance cards.
 
 ### Changed
@@ -42,7 +51,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- **More Colours**: Added Purple, Indigo, and Silver (monochrome) variants.
+- **More Colors**: Added Purple, Indigo, and Silver (monochrome) variants.
 - **Black Base**: Added a "Black Base (Shared Config)" utility theme for consistent inheritance.
 - **Light Fallback**: Added explicit light mode block to ensure the UI stays dark on systems set to light mode.
 - **Modern Tokens**: Added compatibility for `--ha-` and `--sl-` (Shoelace) variables used in Home Assistant 2025+.
@@ -78,7 +87,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- **Multi-Theme**: Added additional highlight colour options to existing cyan - green, red, fuchsia, orange.
+- **Multi-Theme**: Added additional highlight color options to existing cyan - green, red, fuchsia, orange.
 
 ### Fixed
 
