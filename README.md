@@ -40,7 +40,7 @@ To ensure all features (like custom scrollbars and border removals) work correct
 | Dependency         | Minimum Version | Reason                                   |
 | :----------------- | :-------------- | :--------------------------------------- |
 | **Home Assistant** | `2022.11.0`     | Required for `ha-card` border variables. |
-| **card-mod**       | `3.0.0`         | Required for theme-level CSS injection.  |
+| **card-mod**       | `3.0.0`         | Optional for theme-level CSS injection.  |
 
 The theme is fully usable from HA 2022.11 onwards. Newer versions have additional refinements:
 
@@ -68,6 +68,16 @@ The theme is fully usable from HA 2022.11 onwards. Newer versions have additiona
 ### Theme Selection
 
 ![Black with Green Theme Selection](.github/images/vdbt_preview_theme_select_green.png)
+
+## 💡 Use Cases
+
+**Visual Appeal** — The primary use case is that you like the appearance as your overall/main theme, but there are other ways to use it as well:
+
+- **Color-coded views** — Apply different accent colors to individual dashboard views (e.g., Cyan for climate, Orange for lighting) to visually separate areas of your home at a glance.
+- **Automated theme switching** — Use the startup automation pattern in the [Automate Theme Changes](#automate-theme-changes) section to switch accent colors based on time of day or presence.
+- **Minimal monochrome setup** — Choose **Silver** or **Black (Standard)** for a clean, color-neutral control panel that stays out of the way.
+- **OLED and power-saving displays** — Pure black backgrounds draw no power on OLED panels, making this ideal for wall-mounted tablets or phones used as HA dashboards.
+- **Pairing with popular custom cards** — The theme explicitly sets transparent backgrounds for Mushroom, Bubble, and other widely-used custom card types, giving a seamless look on black dashboards.
 
 ## 📥 Installation
 
@@ -105,7 +115,7 @@ frontend:
 
 > [!TIP]
 >
-> **Remember that you can apply a theme at the _system level_ OR to individual custom dashboard **views** OR **sections**.
+> Remember that you can apply a theme at the _system level_ OR to individual custom dashboard **views** OR **sections**.
 >
 > - From any custom dashboard view, click the pencil icon (top right) _then_:
 >   - **View**: Use the pencil icon for the specific view (**_second_** row) and you will find a Theme selector down in the options.
@@ -146,6 +156,7 @@ First, set a different theme:
 If you installed manually:
 
 - Under the Home Assistant `config/themes` folder, delete the `very_dark_black_ha_theme.yaml` file.
+- Run the `frontend.reload_themes` action (or restart Home Assistant) to clear the theme from the picker
 
 If you installed via HACS:
 
@@ -156,14 +167,14 @@ If you installed via HACS:
 
 ## 🏗️ Under the Hood - Technical Architecture
 
-For technical details on the YAML standards, logic, and various display element tokens used in this theme, see the [Development Reference](docs/theme_dev_reference.md).
+For technical details on the YAML standards, logic, and various display element tokens used in this theme, see the [Development Reference](docs/DEVELOPMENT.md). It covers the 3-section YAML anchor structure used to share tokens across accent variants without duplication, the full list of HA display element tokens targeted, card-mod CSS injection details, and guidance for adding new accent color variants.
 
 ## ❓ FAQ & Troubleshooting
 
 ### **Theme fails to apply**
 
 - Ensure that you have followed the [Installation](#-installation) instructions above.
-- If you have not used themes before and have had to add `themes: !include_dir_merge_named themes` to your `configuration.yaml` file, you MUST restart Home Assistant.
+- If you had to add the `themes:` block to `configuration.yaml`, a full Home Assistant restart is required; `frontend.reload_themes` alone is not enough in that case.
 
 ### **Theme fails to apply in specific dashboard view or cards**
 
@@ -171,6 +182,22 @@ For technical details on the YAML standards, logic, and various display element 
 - To check or modify this for views or sections, see [Apply Theme](#apply-theme) above.
 - If one element has a different (unexpected) theme, it may be a theme or color setting inside the individual card:
   - To check use the pencil icon (top right), then click into the specific card and look for theme and/or color options in the settings.
+
+### **Theme does not appear in the picker after installation**
+
+- Confirm that the `frontend.reload_themes` action has been run (or Home Assistant restarted) after installation.
+- If using manual installation, check that the YAML file is directly inside the `config/themes/` folder — not in a sub-folder.
+- If you had to add the `themes:` block to `configuration.yaml`, a full Home Assistant restart is required; `frontend.reload_themes` alone is not enough in that case.
+
+### **card-mod CSS features are not working (scrollbars, custom borders)**
+
+- Confirm that `card-mod` is installed and at least version 3.0.0. Without it, the theme still applies but custom scrollbars, transparent card overrides, and some border details will not be active.
+- After installing or updating `card-mod`, clear your browser cache and reload the page.
+
+### **Specific elements look un-styled after a Home Assistant update**
+
+- Home Assistant occasionally renames or adds CSS tokens when it updates its frontend components. If a UI element loses its styling after an HA update, it is likely a new or renamed token that the theme has not yet been updated to cover.
+- Check the [GitHub repository](https://github.com/PlayFaster/very-dark-black-ha-theme) for a recent release addressing the update, or open an issue there.
 
 ## ⚠️ Known Limitations /❔ What's Missing?
 

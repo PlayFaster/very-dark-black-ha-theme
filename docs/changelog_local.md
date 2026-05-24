@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.5-dev1] - 2026-05-24 - Unreleased
+
+### Changed
+
+- **README**: Added `## 💡 Use Cases` section with 5 practical scenarios (OLED displays, monochrome setup, color-coded views, automated switching, custom card pairing); expanded FAQ & Troubleshooting from 2 to 5 entries — added "Theme does not appear in picker", "card-mod CSS features not working", and "Specific elements un-styled after HA update"; expanded Under the Hood section description to summarise the dev reference contents.
+- **CI Validation** (`.github/workflows/validate.yaml`): Added `concurrency` block to cancel in-progress duplicate runs; added `permissions: contents: read` at workflow level; added `persist-credentials: false` to all checkout steps; pinned all action refs from floating tags to full SHA hashes; added Codespell job (Job 4); added Zizmor workflow security audit job (Job 5, `continue-on-error: true`); added Prettier Format Check step to `lint_val` job.
+- **Local Validation** (`.vscode/tasks.json`): Removed inapplicable `HA: Verify Manifest` task (theme has no `manifest.json`); added `Zizmor: GitHub Actions Audit` and `Zizmor: Fix (Safe Auto-Fix)` tasks; updated `Validate All` sequence to include Zizmor and remove the manifest task. **DevCon**: Updates to the DevCon setup, to standardize with other projects, esp. on mapping shared folders.
+
 ## [1.3.4] - 2026-05-20
 
 ### Added
@@ -142,7 +150,7 @@ Core ethos: pure black everywhere. The contrast themes exist to prevent confusio
 
 - **README Features List**: Updated utility theme entry from `Black Base (Shared Config)` (which also mismatched the actual YAML name `Black Base (Shared Logic)`) to correctly list both `Black (Base)` and `Black (Standard)` with a note that both appear in the picker and default to cyan.
 
-- **`docs/theme_dev_reference.md`**: Updated the "Every Key is a Theme" note to use the new utility theme names and to explicitly state that no mechanism exists to hide themes from the picker — the pragmatic solution is correct naming and a default primary color.
+- **`docs/DEVELOPMENT.md`**: Updated the "Every Key is a Theme" note to use the new utility theme names and to explicitly state that no mechanism exists to hide themes from the picker — the pragmatic solution is correct naming and a default primary color.
 
 ### Notes
 

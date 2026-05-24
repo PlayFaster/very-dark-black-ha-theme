@@ -23,16 +23,6 @@
       "problemMatcher": []
     },
     {
-      "label": "HA: Verify Manifest",
-      "type": "shell",
-      "command": "mkdir -p .reports && git ls-files -z --cached --others --exclude-standard 'manifest.json' '**/manifest.json' | xargs -0 -r check-jsonschema --schemafile .validate/ha_manifest_schema.json | tee .reports/ha_manifest_validation.txt",
-      "presentation": {
-        "reveal": "always",
-        "panel": "dedicated"
-      },
-      "problemMatcher": []
-    },
-    {
       "label": "HACS: Verify Manifest",
       "type": "shell",
       "command": "mkdir -p .reports && check-jsonschema --schemafile .validate/hacs_schema.json hacs.json | tee .reports/hacs_validation.txt",
@@ -143,6 +133,26 @@
       "problemMatcher": []
     },
     {
+      "label": "Zizmor: GitHub Actions Audit",
+      "type": "shell",
+      "command": "mkdir -p .reports && zizmor --pedantic .github/ | tee .reports/zizmor_audit.txt",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Zizmor: Fix (Safe Auto-Fix)",
+      "type": "shell",
+      "command": "zizmor --fix .github/ || true",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "problemMatcher": []
+    },
+    {
       "label": "Initialize Reports",
       "type": "shell",
       "command": "mkdir -p .reports",
@@ -159,12 +169,12 @@
         "Initialize Reports",
         "YAML: Lint Project",
         "JSON: Verify All Files",
-        "HA: Verify Manifest",
         "HACS: Verify Manifest",
         "HA: Check Config",
         "Markdown: Check Links",
         "Markdown: Lint (View Only)",
         "Codespell: Check (View Only)",
+        "Zizmor: GitHub Actions Audit",
         "Prettier: Check (View Only)"
       ],
       "dependsOrder": "sequence",
