@@ -3,7 +3,7 @@
 # Name: Very Dark Black HA Theme
 # HA Support: 2025.1–2026.4+ (HSL scales require 2026+)
 # Dependencies: card-mod (optional, for scrollbars & borders)
-# Last Updated: 2026-05-02
+# Last Updated: 2026-06-05
 # ----------------------------------------------------------------
 # VERY DARK BLACK THEME
 # ----------------------------------------------------------------
@@ -258,6 +258,16 @@ Black (Background Only):
   ha-checkbox-checked-background-color: "var(--primary-color)"
   ha-checkbox-checked-background-color-hover: "var(--primary-color)"
   ha-checkbox-checked-icon-color: "#ffffff"
+
+  # --- 19. 2026.6 Web Awesome Radio ---
+  ha-radio-option-active-color: "var(--primary-color)"
+  ha-radio-option-border-color: "#444444"
+  ha-radio-option-border-color-hover: "#666666"
+  ha-radio-option-border-width: "1.5px"
+  ha-radio-option-background-color: "transparent"
+  ha-radio-option-background-color-hover: "#151515"
+  ha-radio-option-checked-background-color: "var(--primary-color)"
+  ha-radio-option-checked-icon-color: "#ffffff"
 
   # --- 18. Forum Discovered Elements & Compatibility Patches ---
   # Dropdown Inputs & Outlined Inputs
