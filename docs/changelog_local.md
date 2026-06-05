@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.5] - 2026-06-05
+
+### Added
+
+- **HA 2026.6 Web Awesome Radio Tokens**: Added CSS styling support for `ha-radio-group` and `ha-radio-option`, the Web Awesome radio button components introduced in HA 2026.6. Tokens cover active color, unchecked/checked states, borders, and hover — styled consistently with the existing `ha-switch` and `ha-checkbox` token patterns.
+
+### Changed
+
+- **README**: Added Table of Contents; expanded Use Cases with new **Startup Indicator** (set a distinct accent at boot, auto-restore after 2 minutes) and **Visual Alert Highlight** (trigger Red on an alert condition, restore on clear) scenarios, each with a ready-to-use YAML automation example; promoted per-view and per-section theming from a tip callout to a dedicated subsection with scope-level descriptions; improved FAQ with grouped, emoji-labelled headings.
+
 ## [1.3.5-dev4] - 2026-06-05 - Unreleased
 
 ### Changed
