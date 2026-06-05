@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [1.3.5] - 2026-06-05
 
+Home Assistant 2026.6 Compatibility
+
 ### Added
 
 - **HA 2026.6 Web Awesome Radio Tokens**: Added CSS styling support for `ha-radio-group` and `ha-radio-option`, the Web Awesome radio button components introduced in HA 2026.6. Tokens cover active color, unchecked/checked states, borders, and hover — styled consistently with the existing `ha-switch` and `ha-checkbox` token patterns.
