@@ -2,6 +2,48 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.5] - 2026-06-05
+
+### Added
+
+- **HA 2026.6 Web Awesome Radio Tokens**: Added CSS styling support for `ha-radio-group` and `ha-radio-option`, the Web Awesome radio button components introduced in HA 2026.6. Tokens cover active color, unchecked/checked states, borders, and hover — styled consistently with the existing `ha-switch` and `ha-checkbox` token patterns.
+
+### Changed
+
+- **README**: Added Table of Contents; expanded Use Cases with new **Startup Indicator** (set a distinct accent at boot, auto-restore after 2 minutes) and **Visual Alert Highlight** (trigger Red on an alert condition, restore on clear) scenarios, each with a ready-to-use YAML automation example; promoted per-view and per-section theming from a tip callout to a dedicated subsection with scope-level descriptions; improved FAQ with grouped, emoji-labelled headings.
+
+## [1.3.5-dev4] - 2026-06-05 - Unreleased
+
+### Changed
+
+- **README — Use Cases**: Expanded "Color-coded views" bullet to explicitly cover both views (full screen) and sections (partial screen), with a link to the new Apply subsection. Added two new use cases: **Startup Indicator** (set Orange at boot, auto-restore after 2 minutes) and **Visual Alert Highlight** (trigger Red on an alert condition, restore on clear).
+- **README — Apply Theme**: Promoted the per-view/section theming TIP callout to a dedicated `#### Apply to Individual Views or Sections` subsection, introducing the three scope levels (System / View / Section) with plain-English descriptions before the step-by-step instructions.
+- **README — Automate Theme Changes**: Added three structured sub-sections with emojis (`⚙️ Setup Requirements`, `🟠 Set Theme at Startup`, `🟠 Startup Indicator with Delayed Restore`, `🚨 Visual Alert Theme`), each with a concrete YAML example.
+- **README — Structure & Navigation**: Added `## 📋 Table of Contents`; changed Requirements & Compatibility emoji from 📋 to ⚙️; moved `## 🗑️ Removal` to after Known Limitations (aligned with ZTE project README structure).
+- **README — FAQ**: Grouped five FAQ items under two emoji sub-headings (`### 🔧 Installation & Setup`, `### 🎨 Display & Styling`); added per-item emoji headings (⚠️ 🖼️ 🔍 🖱️ 🔄).
+- **README — Contributors**: Added 🙏 prefix to contributor acknowledgement lines.
+
+## [1.3.5-dev3] - 2026-06-05 - Unreleased
+
+### Added
+
+- **HA 2026.6 Web Awesome Radio Tokens**: Added `ha-radio-option-active-color`, `ha-radio-option-border-color`, `ha-radio-option-border-color-hover`, `ha-radio-option-border-width`, `ha-radio-option-background-color`, `ha-radio-option-background-color-hover`, `ha-radio-option-checked-background-color`, and `ha-radio-option-checked-icon-color` to Section A (`base_logic`). Styled consistently with the existing `ha-checkbox-*` pattern (matching border colours, hover fills, and checked accent). Covers the new Web Awesome `ha-radio-group` / `ha-radio-option` component that replaces `ha-radio` in HA 2026.6. Sizing tokens (`ha-radio-option-height`, `toggle-size`, `checked-icon-scale`, `control-margin`, required-marker tokens) are intentionally omitted — the theme does not override equivalent checkbox sizing.
+- **Reference Doc**: Created `docs/change_ref_ha_v2026_6.md` documenting HA 2026.6 frontend changes: radio component migration, omitted sizing tokens, layout-width token renames (`ha-sidebar-width`, `ha-top-app-bar-width` — no action needed for this theme), removed/migrated components, and backward compatibility rationale.
+
+## [1.3.5-dev2] - 2026-06-04 - Unreleased
+
+### Changed
+
+- **DevCon**: Aligned the Devcontainer environment with other projects.
+
+## [1.3.5-dev1] - 2026-05-24 - Unreleased
+
+### Changed
+
+- **README**: Added `## 💡 Use Cases` section with 5 practical scenarios (OLED displays, monochrome setup, color-coded views, automated switching, custom card pairing); expanded FAQ & Troubleshooting from 2 to 5 entries — added "Theme does not appear in picker", "card-mod CSS features not working", and "Specific elements un-styled after HA update"; expanded Under the Hood section description to summarise the dev reference contents.
+- **CI Validation** (`.github/workflows/validate.yaml`): Added `concurrency` block to cancel in-progress duplicate runs; added `permissions: contents: read` at workflow level; added `persist-credentials: false` to all checkout steps; pinned all action refs from floating tags to full SHA hashes; added Codespell job (Job 4); added Zizmor workflow security audit job (Job 5, `continue-on-error: true`); added Prettier Format Check step to `lint_val` job.
+- **Local Validation** (`.vscode/tasks.json`): Removed inapplicable `HA: Verify Manifest` task (theme has no `manifest.json`); added `Zizmor: GitHub Actions Audit` and `Zizmor: Fix (Safe Auto-Fix)` tasks; updated `Validate All` sequence to include Zizmor and remove the manifest task. **DevCon**: Updates to the DevCon setup, to standardize with other projects, esp. on mapping shared folders.
+
 ## [1.3.4] - 2026-05-20
 
 ### Added
@@ -142,7 +184,7 @@ Core ethos: pure black everywhere. The contrast themes exist to prevent confusio
 
 - **README Features List**: Updated utility theme entry from `Black Base (Shared Config)` (which also mismatched the actual YAML name `Black Base (Shared Logic)`) to correctly list both `Black (Base)` and `Black (Standard)` with a note that both appear in the picker and default to cyan.
 
-- **`docs/theme_dev_reference.md`**: Updated the "Every Key is a Theme" note to use the new utility theme names and to explicitly state that no mechanism exists to hide themes from the picker — the pragmatic solution is correct naming and a default primary color.
+- **`docs/DEVELOPMENT.md`**: Updated the "Every Key is a Theme" note to use the new utility theme names and to explicitly state that no mechanism exists to hide themes from the picker — the pragmatic solution is correct naming and a default primary color.
 
 ### Notes
 

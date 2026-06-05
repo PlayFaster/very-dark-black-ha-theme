@@ -1,32 +1,5 @@
 {
-  "name": "HA Theme Dev",
-  "dockerComposeFile": "docker-compose.yml",
-  "service": "homeassistant",
-  "workspaceFolder": "/workspaces/very-dark-black-ha-theme",
   "_comment": "Added -U to ensure it upgrades if a cached version is old",
-  "postCreateCommand": "sed -i 's/\\r$//' .devcontainer/setup.sh && sh .devcontainer/setup.sh || (echo 'Setup failed! Check .reports/devcontainer/post_setup.log for details.' && sleep infinity)",
-  "mounts": [
-    {
-      "source": "${localEnv:USERPROFILE}/.gemini",
-      "target": "/root/.gemini",
-      "type": "bind"
-    },
-    {
-      "source": "${localEnv:USERPROFILE}/.gitconfig",
-      "target": "/root/.gitconfig",
-      "type": "bind"
-    },
-    {
-      "source": "C:/Local/Code/github/PlayFaster/home-assistant/shared/ProjNotes/Notes-very-dark-black-ha-theme",
-      "target": "${containerWorkspaceFolder}/.notes",
-      "type": "bind"
-    },
-    {
-      "source": "C:/Local/Code/github/PlayFaster/home-assistant/shared/SharedNotes",
-      "target": "${containerWorkspaceFolder}/.shared",
-      "type": "bind"
-    }
-  ],
   "customizations": {
     "vscode": {
       "extensions": [
@@ -34,7 +7,8 @@
         "keesschollaart.vscode-home-assistant",
         "davidanson.vscode-markdownlint",
         "yzhang.markdown-all-in-one",
-        "streetsidesoftware.code-spell-checker"
+        "ms-python.python",
+        "charliermarsh.ruff"
       ],
       "settings": {
         "yaml.schemas": {
@@ -46,11 +20,27 @@
         "markdownlint.config": {
           "MD013": false,
           "MD033": false
-        },
-        "cSpell.enabled": true
+        }
       }
     }
   },
+  "dockerComposeFile": "docker-compose.yml",
+  "mounts": [
+    {
+      "source": "${localEnv:USERPROFILE}/.gemini",
+      "target": "/root/.gemini",
+      "type": "bind"
+    },
+    {
+      "source": "${localEnv:USERPROFILE}/.gitconfig",
+      "target": "/root/.gitconfig",
+      "type": "bind"
+    }
+  ],
+  "name": "HA Theme Dev",
+  "overrideCommand": false,
+  "postCreateCommand": "sed -i 's/\\r$//' .devcontainer/setup.sh && sh .devcontainer/setup.sh || (echo 'Setup failed! Check .reports/devcontainer/post_setup.log for details.' && sleep infinity)",
   "remoteUser": "root",
-  "overrideCommand": false
+  "service": "homeassistant",
+  "workspaceFolder": "/workspaces/very-dark-black-ha-theme"
 }
