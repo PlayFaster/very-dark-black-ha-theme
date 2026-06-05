@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.5-dev4] - 2026-06-05 - Unreleased
+
+### Changed
+
+- **README — Use Cases**: Expanded "Color-coded views" bullet to explicitly cover both views (full screen) and sections (partial screen), with a link to the new Apply subsection. Added two new use cases: **Startup Indicator** (set Orange at boot, auto-restore after 2 minutes) and **Visual Alert Highlight** (trigger Red on an alert condition, restore on clear).
+- **README — Apply Theme**: Promoted the per-view/section theming TIP callout to a dedicated `#### Apply to Individual Views or Sections` subsection, introducing the three scope levels (System / View / Section) with plain-English descriptions before the step-by-step instructions.
+- **README — Automate Theme Changes**: Added three structured sub-sections with emojis (`⚙️ Setup Requirements`, `🟠 Set Theme at Startup`, `🟠 Startup Indicator with Delayed Restore`, `🚨 Visual Alert Theme`), each with a concrete YAML example.
+- **README — Structure & Navigation**: Added `## 📋 Table of Contents`; changed Requirements & Compatibility emoji from 📋 to ⚙️; moved `## 🗑️ Removal` to after Known Limitations (aligned with ZTE project README structure).
+- **README — FAQ**: Grouped five FAQ items under two emoji sub-headings (`### 🔧 Installation & Setup`, `### 🎨 Display & Styling`); added per-item emoji headings (⚠️ 🖼️ 🔍 🖱️ 🔄).
+- **README — Contributors**: Added 🙏 prefix to contributor acknowledgement lines.
+
+## [1.3.5-dev3] - 2026-06-05 - Unreleased
+
+### Added
+
+- **HA 2026.6 Web Awesome Radio Tokens**: Added `ha-radio-option-active-color`, `ha-radio-option-border-color`, `ha-radio-option-border-color-hover`, `ha-radio-option-border-width`, `ha-radio-option-background-color`, `ha-radio-option-background-color-hover`, `ha-radio-option-checked-background-color`, and `ha-radio-option-checked-icon-color` to Section A (`base_logic`). Styled consistently with the existing `ha-checkbox-*` pattern (matching border colours, hover fills, and checked accent). Covers the new Web Awesome `ha-radio-group` / `ha-radio-option` component that replaces `ha-radio` in HA 2026.6. Sizing tokens (`ha-radio-option-height`, `toggle-size`, `checked-icon-scale`, `control-margin`, required-marker tokens) are intentionally omitted — the theme does not override equivalent checkbox sizing.
+- **Reference Doc**: Created `docs/change_ref_ha_v2026_6.md` documenting HA 2026.6 frontend changes: radio component migration, omitted sizing tokens, layout-width token renames (`ha-sidebar-width`, `ha-top-app-bar-width` — no action needed for this theme), removed/migrated components, and backward compatibility rationale.
+
+## [1.3.5-dev2] - 2026-06-04 - Unreleased
+
+### Changed
+
+- **DevCon**: Aligned the Devcontainer environment with other projects.
+
 ## [1.3.5-dev1] - 2026-05-24 - Unreleased
 
 ### Changed

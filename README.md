@@ -4,7 +4,7 @@
 
 A Home Assistant dark mode theme that provides black or very dark backgrounds wherever possible along with a choice of primary colors.
 
-> [!NOTE]
+> [!NOTE]- [Very Dark Black Theme for Home Assistant](#very-dark-black-theme-for-home-assistant)
 >
 > **Is this the right theme for you?**
 >
@@ -13,6 +13,23 @@ A Home Assistant dark mode theme that provides black or very dark backgrounds wh
 >   - **Black Backgrounds Everywhere** — Pure black background applied everywhere possible.
 >   - **A Clean Plain Look** — Black, white and an accent color are what you get on most views.
 >   - **Accent Colors** — A choice of bold accent colors, so it's not just monochrome.
+
+## 📋 Table of Contents
+
+- [Very Dark Black Theme for Home Assistant](#very-dark-black-theme-for-home-assistant)
+  - [📋 Table of Contents](#-table-of-contents)
+  - [✅ Features](#-features)
+  - [⚙️ Requirements \& Compatibility](#️-requirements--compatibility)
+  - [📸 Screenshots](#-screenshots)
+  - [💡 Use Cases](#-use-cases)
+  - [📥 Installation](#-installation)
+  - [🏗️ Under the Hood - Technical Architecture](#️-under-the-hood---technical-architecture)
+  - [❓ FAQ \& Troubleshooting](#-faq--troubleshooting)
+  - [⚠️ Known Limitations /❔ What's Missing?](#️-known-limitations--whats-missing)
+  - [🗑️ Removal](#️-removal)
+  - [📝 Maintenance Status](#-maintenance-status)
+  - [🤝 Contributors \& Acknowledgements](#-contributors--acknowledgements)
+  - [📄 License](#-license-)
 
 ## ✅ Features
 
@@ -31,7 +48,7 @@ This is a simple theme focused on providing a very dark mode look. It's designed
   - Black (Standard): A monochrome theme (this is the base the others are built on).
   - Black (Background Only): This is the "sub-base" theme. It must show in the picker due to Home Assistant's theme structure.
 
-## 📋 Requirements & Compatibility
+## ⚙️ Requirements & Compatibility
 
 - **[`card-mod`](https://github.com/thomasloven/lovelace-card-mod)** – Highly recommended. The theme will still work without this integration, but `card-mod` is used to polish fine UI details and ensure a consistent experience across all elements.
 
@@ -48,6 +65,7 @@ The theme is fully usable from HA 2022.11 onwards. Newer versions have additiona
 - **2025.1+** — Inputs, dialogs, and modern card layouts
 - **2026.4+** — Dynamic HSL color scales
 - **2026.5+** — More Web Awesome tokens for `ha-switch`, `ha-checkbox` and `ha-progress-bar`.
+- **2026.6+** — Web Awesome radio button tokens for `ha-radio-group` and `ha-radio-option`.
 
 ## 📸 Screenshots
 
@@ -73,8 +91,10 @@ The theme is fully usable from HA 2022.11 onwards. Newer versions have additiona
 
 **Visual Appeal** — The primary use case is that you like the appearance as your overall/main theme, but there are other ways to use it as well:
 
-- **Color-coded views** — Apply different accent colors to individual dashboard views (e.g., Cyan for climate, Orange for lighting) to visually separate areas of your home at a glance.
+- **Color-coded views and sections** — Apply different accent colors to individual dashboard **views** (full screen) or **sections** (part of the screen) to visually separate areas of your home at a glance — for example, Cyan for climate, Orange for lighting, Red for security. See [Apply to Individual Views or Sections](#apply-to-individual-views-or-sections).
 - **Automated theme switching** — Use the startup automation pattern in the [Automate Theme Changes](#automate-theme-changes) section to switch accent colors based on time of day or presence.
+- **Startup indicator** — Set **Orange** (or any accent) at boot so every glance at the dashboard confirms Home Assistant is still initialising. An automation switches back to your normal theme after two minutes once startup is complete. See [Automate Theme Changes](#automate-theme-changes).
+- **Visual alert highlight** — Trigger **Red** automatically when an alert condition fires (motion, smoke, door contact, etc.) so the entire UI signals the alert state at a glance. Restore your normal theme when the condition clears. See [Automate Theme Changes](#automate-theme-changes).
 - **Minimal monochrome setup** — Choose **Silver** or **Black (Standard)** for a clean, color-neutral control panel that stays out of the way.
 - **OLED and power-saving displays** — Pure black backgrounds draw no power on OLED panels, making this ideal for wall-mounted tablets or phones used as HA dashboards.
 - **Pairing with popular custom cards** — The theme explicitly sets transparent backgrounds for Mushroom, Bubble, and other widely-used custom card types, giving a seamless look on black dashboards.
@@ -113,21 +133,30 @@ frontend:
 
 - **Change System Theme**: Go to your [Profile General](https://my.home-assistant.io/redirect/profile) tab (bottom left of screen) and change Theme under **_User preferences_**.
 
-> [!TIP]
->
-> Remember that you can apply a theme at the _system level_ OR to individual custom dashboard **views** OR **sections**.
->
-> - From any custom dashboard view, click the pencil icon (top right) _then_:
->   - **View**: Use the pencil icon for the specific view (**_second_** row) and you will find a Theme selector down in the options.
->   - **Section**: Use the **three dots** (⋮) at the top right of the specific Section, then **_Edit_** and you will find a Theme selector at the end of the options.
+#### Apply to Individual Views or Sections
+
+Themes can be applied at three levels of scope, making it easy to mix accent colors for visual differentiation and highlighting across your dashboard — for example, Red for a security view, Orange for a lighting panel, or Cyan for climate controls:
+
+- **System** — Applies to the entire UI (set via your profile, as above).
+- **View** — Applies to one entire dashboard view (full screen). The main way to give different rooms or functional areas their own accent color.
+- **Section** — Applies to one section within a view (partial screen). Use this to highlight a specific area or card group without changing the whole view.
+
+To apply a theme to a view or section, from any custom dashboard view click the pencil icon (top right) _then_:
+
+- **View**: Use the pencil icon for the specific view (**_second_** row) and you will find a Theme selector in the options.
+- **Section**: Use the **three dots** (⋮) at the top right of the specific Section, then **_Edit_** and you will find a Theme selector at the end of the options.
 
 ### Automate Theme Changes
 
 You can use a Home Assistant automation to change the system theme at startup, or based on any other time or condition you wish.
 
+#### ⚙️ Setup Requirements
+
 - **Important:** In the [Profile General](https://my.home-assistant.io/redirect/profile) screen, you **must** keep **"Use default theme"** selected under _User preferences_ > _Theme settings_.
 - This works by having the System Theme set to **"Use default theme"** and then using an Automation `action:` to _change_ the default theme.
 - If you manually select a specific theme in your profile, the automation will not be able to override it.
+
+#### 🟠 Set Theme at Startup
 
 Example automation to set the theme at startup:
 
@@ -147,6 +176,118 @@ actions:
 mode: single
 ```
 
+#### 🟠 Startup Indicator with Delayed Restore
+
+Example automation for a **startup indicator** that signals Home Assistant is initialising, then switches back to your normal theme after 2 minutes:
+
+```yaml
+alias: Startup Indicator - Theme
+description: |-
+  Sets Orange at startup to signal Home Assistant is initialising.
+  Switches back to your preferred theme after 2 minutes.
+triggers:
+  - trigger: homeassistant
+    event: start
+conditions: []
+actions:
+  - action: frontend.set_theme
+    data:
+      name: Black with Orange
+      name_dark: Black with Orange
+  - delay: "00:02:00"
+  - action: frontend.set_theme
+    data:
+      name: Black with Cyan
+      name_dark: Black with Cyan
+mode: single
+```
+
+#### 🚨 Visual Alert Theme
+
+Example automation for a **visual alert** that switches to Red when a condition fires and restores your normal theme when it clears:
+
+```yaml
+alias: Visual Alert - Theme
+description: |-
+  Switches to Red when an alert condition fires.
+  Restores your normal theme when the condition clears.
+triggers:
+  - trigger: state
+    entity_id: binary_sensor.your_alert_sensor
+    to: "on"
+    id: alert_on
+  - trigger: state
+    entity_id: binary_sensor.your_alert_sensor
+    to: "off"
+    id: alert_off
+conditions: []
+actions:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: alert_on
+        sequence:
+          - action: frontend.set_theme
+            data:
+              name: Black with Red
+              name_dark: Black with Red
+      - conditions:
+          - condition: trigger
+            id: alert_off
+        sequence:
+          - action: frontend.set_theme
+            data:
+              name: Black with Cyan
+              name_dark: Black with Cyan
+mode: single
+```
+
+Replace `binary_sensor.your_alert_sensor` with any entity that signals your alert condition (motion sensor, smoke detector, door contact, etc.) and replace `Black with Cyan` in both automations with your preferred default theme.
+
+## 🏗️ Under the Hood - Technical Architecture
+
+For technical details on the YAML standards, logic, and various display element tokens used in this theme, see the [Development Reference](docs/DEVELOPMENT.md). It covers the 3-section YAML anchor structure used to share tokens across accent variants without duplication, the full list of HA display element tokens targeted, card-mod CSS injection details, and guidance for adding new accent color variants.
+
+## ❓ FAQ & Troubleshooting
+
+### 🔧 Installation & Setup
+
+#### ⚠️ Theme fails to apply
+
+- Ensure that you have followed the [Installation](#-installation) instructions above.
+- If you had to add the `themes:` block to `configuration.yaml`, a full Home Assistant restart is required; `frontend.reload_themes` alone is not enough in that case.
+
+#### 🖼️ Theme fails to apply in specific view or cards
+
+- Items like custom dashboards (dashboard views), cards and card elements can have specific themes applied, separate to the system theme.
+- To check or modify this for views or sections, see [Apply Theme](#apply-theme) above.
+- If one element has a different (unexpected) theme, it may be a theme or color setting inside the individual card:
+  - To check use the pencil icon (top right), then click into the specific card and look for theme and/or color options in the settings.
+
+#### 🔍 Theme does not appear in the picker after installation
+
+- Confirm that the `frontend.reload_themes` action has been run (or Home Assistant restarted) after installation.
+- If using manual installation, check that the YAML file is directly inside the `config/themes/` folder — not in a sub-folder.
+- If you had to add the `themes:` block to `configuration.yaml`, a full Home Assistant restart is required; `frontend.reload_themes` alone is not enough in that case.
+
+#### 🖱️ card-mod CSS features are not working
+
+- Confirm that `card-mod` is installed and at least version 3.0.0. Without it, the theme still applies but custom scrollbars, transparent card overrides, and some border details will not be active.
+- After installing or updating `card-mod`, clear your browser cache and reload the page.
+
+### 🎨 Display & Styling
+
+#### 🔄 Specific elements look un-styled after a Home Assistant update
+
+- Home Assistant occasionally renames or adds CSS tokens when it updates its frontend components. If a UI element loses its styling after an HA update, it is likely a new or renamed token that the theme has not yet been updated to cover.
+- Check the [GitHub repository](https://github.com/PlayFaster/very-dark-black-ha-theme) for a recent release addressing the update, or open an issue there.
+
+## ⚠️ Known Limitations /❔ What's Missing?
+
+- **Color Picker**: The theme has eight pre-defined accent colors available, but there is no option to select your own accent color to work with the theme. To my knowledge, this functionality is not available within the Home Assistant basic theme file, it would require an additional script or custom component, so it is not in scope for this project.
+- **Light Theme**: The theme works in "Light" mode, but still applies the Very Dark Black theme, a dark mode theme. This is deliberate, this is not a light mode theme.
+- **Base Themes in Picker**: Two "base" themes are in the picker lists for this theme, "Black (Background Only)" and "Black (Standard)". This is a known limitation of the Home Assistant theme file structure. Building accent variant themes from a base requires the base to remain in the list. "Fixing" this either results in log warnings/errors or a huge theme file that becomes difficult to maintain. There are no plans to change this behavior.
+
 ## 🗑️ Removal
 
 First, set a different theme:
@@ -165,56 +306,16 @@ If you installed via HACS:
 3. Click the **three dots** (⋮) at the top right and select **Remove**.
 4. Restart Home Assistant.
 
-## 🏗️ Under the Hood - Technical Architecture
-
-For technical details on the YAML standards, logic, and various display element tokens used in this theme, see the [Development Reference](docs/DEVELOPMENT.md). It covers the 3-section YAML anchor structure used to share tokens across accent variants without duplication, the full list of HA display element tokens targeted, card-mod CSS injection details, and guidance for adding new accent color variants.
-
-## ❓ FAQ & Troubleshooting
-
-### **Theme fails to apply**
-
-- Ensure that you have followed the [Installation](#-installation) instructions above.
-- If you had to add the `themes:` block to `configuration.yaml`, a full Home Assistant restart is required; `frontend.reload_themes` alone is not enough in that case.
-
-### **Theme fails to apply in specific dashboard view or cards**
-
-- Items like custom dashboards (dashboard views), cards and card elements can have specific themes applied, separate to the system theme.
-- To check or modify this for views or sections, see [Apply Theme](#apply-theme) above.
-- If one element has a different (unexpected) theme, it may be a theme or color setting inside the individual card:
-  - To check use the pencil icon (top right), then click into the specific card and look for theme and/or color options in the settings.
-
-### **Theme does not appear in the picker after installation**
-
-- Confirm that the `frontend.reload_themes` action has been run (or Home Assistant restarted) after installation.
-- If using manual installation, check that the YAML file is directly inside the `config/themes/` folder — not in a sub-folder.
-- If you had to add the `themes:` block to `configuration.yaml`, a full Home Assistant restart is required; `frontend.reload_themes` alone is not enough in that case.
-
-### **card-mod CSS features are not working (scrollbars, custom borders)**
-
-- Confirm that `card-mod` is installed and at least version 3.0.0. Without it, the theme still applies but custom scrollbars, transparent card overrides, and some border details will not be active.
-- After installing or updating `card-mod`, clear your browser cache and reload the page.
-
-### **Specific elements look un-styled after a Home Assistant update**
-
-- Home Assistant occasionally renames or adds CSS tokens when it updates its frontend components. If a UI element loses its styling after an HA update, it is likely a new or renamed token that the theme has not yet been updated to cover.
-- Check the [GitHub repository](https://github.com/PlayFaster/very-dark-black-ha-theme) for a recent release addressing the update, or open an issue there.
-
-## ⚠️ Known Limitations /❔ What's Missing?
-
-- **Color Picker**: The theme has eight pre-defined accent colors available, but there is no option to select your own accent color to work with the theme. To my knowledge, this functionality is not available within the Home Assistant basic theme file, it would require an additional script or custom component, so it is not in scope for this project.
-- **Light Theme**: The theme works in "Light" mode, but still applies the Very Dark Black theme, a dark mode theme. This is deliberate, this is not a light mode theme.
-- **Base Themes in Picker**: Two "base" themes are in the picker lists for this theme, "Black (Background Only)" and "Black (Standard)". This is a known limitation of the Home Assistant theme file structure. Building accent variant themes from a base requires the base to remain in the list. "Fixing" this either results in log warnings/errors or a huge theme file that becomes difficult to maintain. There are no plans to change this behavior.
-
 ## 📝 Maintenance Status
 
 This is a **personal project**. Support and updates are provided on a **"best-effort"** basis only. While I use this theme daily and aim to keep it functional with the latest Home Assistant releases, I cannot guarantee immediate fixes for issues or compatibility with all releases.
 
 ## 🤝 Contributors & Acknowledgements
 
-- Inspired by these excellent themes - thank you!
+- 🙏 Inspired by these excellent themes - thank you!
   - [`Frosted Glass`](https://github.com/wessamlauf/homeassistant-frosted-glass-themes) themes of @wessamlauf
   - [`Graphite`](https://github.com/TilmanGriesel/graphite) themes of @TilmanGriesel
-- Made possible by @thomasloven and the [`card-mod`](https://github.com/thomasloven/lovelace-card-mod) contributors.
+- 🙏 Made possible by @thomasloven and the [`card-mod`](https://github.com/thomasloven/lovelace-card-mod) contributors.
 - This project was developed with the assistance of AI to ensure code quality and adherence to best practices.
 
 ## 📄 License [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
