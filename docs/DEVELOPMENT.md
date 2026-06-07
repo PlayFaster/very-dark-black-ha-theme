@@ -70,3 +70,13 @@ Global background styling for `ha-card` can cause "background stacking" issues w
   - `hui-conditional-card`
   - `custom-button-card`
 - **Brittle Selectors**: Deep DOM traversal (e.g., `ha-card-picker $ ha-sub-page ...`) is extremely brittle and will break when HA updates its internal component structure. Use native CSS tokens whenever possible, and clearly document these selectors as high-maintenance items.
+
+## 7. Documentation & README Conventions
+
+### Emoji in Headings — Always-Colour Single-Codepoint Only
+
+When writing or editing the README, always use **always-colour single-codepoint emoji** in headings and Table of Contents links. Never use VS16 compound emoji (e.g., `⚙️`, `🏗️`, `⚠️`, `🗑️`).
+
+**Why**: VS16 (U+FE0F, Variation Selector-16) is an invisible byte that forces emoji rendering. GitHub's anchor generator strips it when computing heading anchors, but Markdown tooling includes it in `href` values — causing Table of Contents links to 404. The problem is completely invisible in source editors.
+
+See root `CLAUDE.md` → "Shared Markdown Notes" for the full replacement table and a detection script.
