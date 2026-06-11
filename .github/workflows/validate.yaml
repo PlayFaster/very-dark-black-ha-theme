@@ -64,7 +64,7 @@ jobs:
       - name: JSON Schema Check
         # Validates hacs.json against the provided schema using standard pip.
         run: |
-          pip install check-jsonschema
+          pip install check-jsonschema==0.37.2
           check-jsonschema --schemafile .validate/hacs_schema.json hacs.json
 
       - name: YAML Check
@@ -73,7 +73,7 @@ jobs:
         uses: ibiqlik/action-yamllint@2576378a8e339169678f9939646ee3ee325e845c
         with:
           file_or_dir: .
-          config_data: "{extends: relaxed, rules: {line-length: {max: 120}}}"
+          config_file: .validate/.yamllint
 
       - name: Prettier Format Check
         # No sort-json plugin needed — theme config uses plain .prettierrc.
