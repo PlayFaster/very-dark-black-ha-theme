@@ -13,6 +13,10 @@ All notable changes to this project will be documented in this file.
   - As part of the sync, docker-compose.yml and devcontainer.json are now generic, with a .env file holding project specific info and a docker-compose.override.yml holding additional, project specific steps.
   - HA Manifest and HACS schema files updated.
 
+### Added
+
+- **Dependabot**: Added Dependabot to the github.com CI. Is used for other PlayFaster projects but had not been in place for Very Dark Black Theme before.
+
 ## [1.3.5] - 2026-06-05
 
 ### Added

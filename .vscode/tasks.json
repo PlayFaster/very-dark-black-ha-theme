@@ -153,6 +153,26 @@
       "problemMatcher": []
     },
     {
+      "label": "Env: Sync Shared Files",
+      "type": "shell",
+      "command": "mkdir -p .reports && sh .shared/validate-configs/sync_shared_files.sh | tee .reports/sync_shared_files.txt",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Env: Audit Version Drift",
+      "type": "shell",
+      "command": "mkdir -p .reports && python3 .shared/validate-configs/check_tool_drift.py | tee .reports/tool_drift_raw.txt && sed -e 's/.*\\r//g' -e 's/\\x1b\\[[0-9;]*[a-zA-Z]//g' .reports/tool_drift_raw.txt > .reports/tool_drift.txt && rm .reports/tool_drift_raw.txt",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "problemMatcher": []
+    },
+    {
       "label": "Initialize Reports",
       "type": "shell",
       "command": "mkdir -p .reports",
