@@ -12,7 +12,6 @@ All notable changes to this project will be documented in this file.
   - .validate/requirements_test.txt pulled as generic, with all tools pinned to versions, and requirements_custom.txt used to add project specific items.
   - As part of the sync, docker-compose.yml and devcontainer.json are now generic, with a .env file holding project specific info and a docker-compose.override.yml holding additional, project specific steps.
   - HA Manifest and HACS schema files updated.
-  - Ruff updated from 0.15.12 to 0.15.15
 
 ## [1.3.5] - 2026-06-05
 
