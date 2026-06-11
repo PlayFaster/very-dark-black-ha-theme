@@ -1,26 +1,25 @@
 ---
 services:
   homeassistant:
-    container_name: very-dark-black-ha-dev
-    # Use the local master image
+    container_name: ${CONTAINER_NAME}
+    environment:
+      - TZ=Europe/London
     image: ha-dev-base:latest
+    ports:
+      - "8123:8123"
+    restart: unless-stopped
     volumes:
       # Mount the whole project so the DevContainer workspace works
-      - ..:/workspaces/very-dark-black-ha-theme
+      - ..:/workspaces/${PROJECT_NAME}
       # Mount your local dev config
       - ./.devconfig:/config
-      # Maps your theme file into the HA themes folder
-      - ../themes:/config/themes:ro
       # Project notes and shared files
-      - C:/Local/Code/github/PlayFaster/home-assistant/shared/ProjNotes/Notes-very-dark-black-ha-theme:/workspaces/very-dark-black-ha-theme/.notes
-      - C:/Local/Code/github/PlayFaster/home-assistant/shared/SharedNotes:/workspaces/very-dark-black-ha-theme/.shared
+      - C:/Local/Code/github/PlayFaster/home-assistant/shared/ProjNotes/Notes-${PROJECT_NAME}:/workspaces/${PROJECT_NAME}/.notes
+      - C:/Local/Code/github/PlayFaster/home-assistant/shared/SharedNotes:/workspaces/${PROJECT_NAME}/.shared
       # HA core source — read-only, used by mypy for type resolution
       - C:/Local/Code/ha_core/core:/ha_core:ro
       # Docker Outside Docker (DooD) — allows running docker commands from inside
       # the container by delegating to the host Docker daemon.
       - /var/run/docker.sock:/var/run/docker.sock
-    ports:
-      - "8123:8123"
-    restart: unless-stopped
-    environment:
-      - TZ=Europe/London
+      # Mount the root Dockerfile so the container can inspect it for version drift
+      - ../../../dev-environment/Dockerfile:/dev-environment/Dockerfile:ro
