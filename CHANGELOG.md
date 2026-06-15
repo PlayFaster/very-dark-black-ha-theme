@@ -2,16 +2,6 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.3.7] - 2026-06-15
-
-### Changed
-
-- **CI — Permissions**: Removed job-level `permissions` block from `test_val` in the shared `validate-specific.yaml`. Permissions now flow through from the calling stub, fixing a GitHub Actions parse-time rejection caused by the theme stub's `contents: read` grant being exceeded.
-- **CI — Secrets**: Removed `secrets: inherit` from the theme stub. The theme passes no secrets to the shared workflow — `GIST_SECRET` is integration-only and optional.
-- **Dev — Shared tasks.json**: Theme project now uses the shared `tasks.json` (synced from monorepo). All Python-specific tasks (`Ruff`, `Mypy`, `Pytest`, `Pre-commit`) skip automatically via `project.category = theme` in `.vscode/settings.json`. Active validation tasks: YAML lint, JSON verify, HACS manifest, HA Check Config, markdown link check, markdown lint, codespell, Zizmor, Prettier.
-- **Dev — `pyproject.toml`**: Added root `pyproject.toml` with `[tool.codespell]` section (synced from `pyproject_theme.toml`). Enables codespell auto-discovery for both local tasks and CI — aligns with the integration project pattern.
-- **Dev — `.vscode/settings.json`**: Created with `project.category: theme` and `project.componentName: ""` to support shared task guards and VS Code variable resolution.
-
 ## [1.3.6] - 2026-06-15
 
 ### Summary
