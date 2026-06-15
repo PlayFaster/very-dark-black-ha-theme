@@ -38,15 +38,15 @@ jobs:
 
       - name: HACS Validation
         # Branch @main
-        uses: hacs/action@dcb30e72781db3f207d5236b861172774ab0b485
+        uses: hacs/action@1ebf01c408f29afcb6406bd431bc98fd8cbb15aa
         with:
           # category is set to 'theme' specifically for this workflow
           category: theme
 
   # Job 2: File-level integrity (JSON, YAML, Markdown, and Prettier).
   # Ensures the HACS manifest is valid and the README is high quality.
-  lint_val:
-    name: "File Contents Check"
+  file_val:
+    name: "File Integrity"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -87,6 +87,7 @@ jobs:
         with:
           base-branch: main
           file-path: README.md
+          config-file: .validate/.mlc_config.json
 
   # Job 3: Theme-specific structural validation.
   # Ensures the repository layout matches HACS expectations for themes.
@@ -120,8 +121,8 @@ jobs:
           persist-credentials: false
 
       - name: Run Codespell
-        # Tag @v2
-        uses: codespell-project/actions-codespell@406322ec52dd7b488e48c1c4b82e2a8b3a1bf630
+        # Tag @v2.2
+        uses: codespell-project/actions-codespell@8f01853be192eb0f849a5c7d721450e7a467c579
         with:
           # Config lives in .validate/ rather than repo root.
           path_to_config_file: .validate/.codespellrc
@@ -142,5 +143,5 @@ jobs:
         run: pip install zizmor==1.25.2
 
       - name: Run Zizmor
-        continue-on-error: true
+        continue-on-error: false
         run: zizmor --pedantic .github/
