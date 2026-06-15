@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.6] - 2026-06-15
+
+### Summary
+
+- **CI Validation Only**: Changes to the CI Validation set-up require a release to test properly, but there are no user changes in this release, background/infrastructure only.
+
 ## [1.3.5] - 2026-06-05
 
 Home Assistant 2026.6 Compatibility
