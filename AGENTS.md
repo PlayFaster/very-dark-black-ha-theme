@@ -29,19 +29,19 @@ There are no Python tests for this project. Validation is handled by VS Code tas
 
 Run via **Terminal → Run Task** inside the devcontainer:
 
-| Task | What it does |
-| :-- | :-- |
-| **Validate All** | Runs all validation tasks in sequence |
-| `YAML: Lint Project` | yamllint against tracked YAML files |
-| `JSON: Verify All Files` | check-jsonschema on all tracked JSON |
-| `HACS: Verify Manifest` | Schema-validates `hacs.json` |
-| `HA: Check Config` | Live HA config check against the running instance |
-| `Markdown: Check Links` | markdown-link-check on README |
-| `Markdown: Lint (View Only)` | markdownlint on all tracked `.md` files |
-| `Codespell: Check (View Only)` | Spell check (config from root `pyproject.toml`) |
-| `Zizmor: GitHub Actions Audit` | Security audit of `.github/` workflows |
-| `Prettier: Check (View Only)` | Prettier format check on md, json, yaml |
-| **Fix All** | Runs all auto-fix tasks in sequence |
+| Task                           | What it does                                      |
+| :----------------------------- | :------------------------------------------------ |
+| **Validate All**               | Runs all validation tasks in sequence             |
+| `YAML: Lint Project`           | yamllint against tracked YAML files               |
+| `JSON: Verify All Files`       | check-jsonschema on all tracked JSON              |
+| `HACS: Verify Manifest`        | Schema-validates `hacs.json`                      |
+| `HA: Check Config`             | Live HA config check against the running instance |
+| `Markdown: Check Links`        | markdown-link-check on README                     |
+| `Markdown: Lint (View Only)`   | markdownlint on all tracked `.md` files           |
+| `Codespell: Check (View Only)` | Spell check (config from root `pyproject.toml`)   |
+| `Zizmor: GitHub Actions Audit` | Security audit of `.github/` workflows            |
+| `Prettier: Check (View Only)`  | Prettier format check on md, json, yaml           |
+| **Fix All**                    | Runs all auto-fix tasks in sequence               |
 
 Python-specific tasks (`Ruff`, `Mypy`, `Pytest`, `Pre-commit`) are present in the shared task list but skip automatically for this project via `project.category = theme` in `.vscode/settings.json`.
 
