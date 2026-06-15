@@ -53,7 +53,7 @@
       "type": "shell"
     },
     {
-      "command": "[ \"${config:project.category}\" = \"theme\" ] && echo \"[Skipped: integration only]\" || { mkdir -p .reports && hass --script check_config --config /config | tee .reports/ha_check_config.txt; }",
+      "command": "mkdir -p .reports && hass --script check_config --config /config | tee .reports/ha_check_config.txt",
       "label": "HA: Check Config",
       "presentation": {
         "panel": "dedicated",
