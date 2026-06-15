@@ -1,5 +1,4 @@
 {
-  "version": "2.0.0",
   "tasks": [
     {
       "label": "YAML: Lint Project",
@@ -193,10 +192,7 @@
       "type": "shell"
     },
     {
-      "dependsOn": [
-        "Env: Sync Shared Files",
-        "Env: Audit Version Drift"
-      ],
+      "dependsOn": ["Env: Sync Shared Files", "Env: Audit Version Drift"],
       "dependsOrder": "sequence",
       "label": "Env: [Workflow] Sync & Audit",
       "presentation": {
@@ -286,5 +282,6 @@
         "close": false
       }
     }
-  ]
+  ],
+  "version": "2.0.0"
 }
