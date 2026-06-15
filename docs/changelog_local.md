@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.6-dev5] - 2026-06-15 - Unreleased
+
+### Changed
+
+- **CI Validation Sync**: Moved to a shared CI validation, similar to the integration/python projects.
+- **Local Validation Sync**: Moved to a shared tasks,json for local validation and fixes, now shared and in sync with the integration/python projects.
+
+### Added
+
+-- **pyproject.toml**: Local validation sync (see above) means that the project (which is not a python project) has a pyproject.toml file. This is to allow the codespell config to be the same across all in sync projects.
+
 ## [1.3.6-dev4] - 2026-06-15 - Unreleased
 
 ### Changed
