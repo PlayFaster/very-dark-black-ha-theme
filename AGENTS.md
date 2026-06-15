@@ -23,22 +23,40 @@ No build system, no scripts, no dependencies to install. Changes are made direct
 
 ## Commands
 
-There are no automated tests or lint checks for this project. The devcontainer provides a live HA instance for manual theme testing.
+There are no Python tests for this project. Validation is handled by VS Code tasks (shared from the monorepo) and CI (shared GitHub Actions workflow).
 
-### Running tools from a Windows host
+### VS Code Tasks
 
-These commands only work **inside** the devcontainer — HA imports `fcntl`, so `pytest` (and the other tools) cannot run on a Windows host directly. From Windows, run everything through `docker exec` against the running container. See [`.shared/prompts/devcon_run_gen.md`](.shared/prompts/devcon_run_gen.md) for the full mini-skill. Quick reference:
+Run via **Terminal → Run Task** inside the devcontainer:
+
+| Task | What it does |
+| :-- | :-- |
+| **Validate All** | Runs all validation tasks in sequence |
+| `YAML: Lint Project` | yamllint against tracked YAML files |
+| `JSON: Verify All Files` | check-jsonschema on all tracked JSON |
+| `HACS: Verify Manifest` | Schema-validates `hacs.json` |
+| `HA: Check Config` | Live HA config check against the running instance |
+| `Markdown: Check Links` | markdown-link-check on README |
+| `Markdown: Lint (View Only)` | markdownlint on all tracked `.md` files |
+| `Codespell: Check (View Only)` | Spell check (config from root `pyproject.toml`) |
+| `Zizmor: GitHub Actions Audit` | Security audit of `.github/` workflows |
+| `Prettier: Check (View Only)` | Prettier format check on md, json, yaml |
+| **Fix All** | Runs all auto-fix tasks in sequence |
+
+Python-specific tasks (`Ruff`, `Mypy`, `Pytest`, `Pre-commit`) are present in the shared task list but skip automatically for this project via `project.category = theme` in `.vscode/settings.json`.
+
+### Running tools directly inside the devcontainer
+
+For one-off commands, use `docker exec` from the Windows host:
 
 ```bash
 # Confirm the container is up first
 docker ps --filter "name=<CONTAINER_NAME>" --format "{{.Names}}"
 
 # Run a tool inside the container (-w sets the in-container working dir)
-docker exec -w /workspaces/<PROJECT_DIR> <CONTAINER_NAME> bash -c "PYTHONPATH=. pytest tests/"
-docker exec -w /workspaces/<PROJECT_DIR> <CONTAINER_NAME> bash -c "ruff check ."
+docker exec -w /workspaces/<PROJECT_DIR> <CONTAINER_NAME> bash -c "codespell ."
+docker exec -w /workspaces/<PROJECT_DIR> <CONTAINER_NAME> bash -c "yamllint -c .validate/.yamllint themes/"
 ```
-
-Do not install or run these tools on the host as a workaround.
 
 ## Theme File Architecture (3-Section YAML)
 
@@ -119,14 +137,14 @@ The project uses a VS Code devcontainer running a live Home Assistant instance f
 
 When the devcontainer is running, the `ha-mcp-dev` MCP server automatically connects to the HA instance inside it (`http://localhost:8123`). Use it to verify theme changes without leaving the editor.
 
-**After any modification, follow the post-modification process** — see [`.shared/prompts/post_mod_process.md`](.shared/prompts/post_mod_process.md). Specify a `SCOPE` when invoking it. Note: this project has no Python code — mypy and pytest steps are skipped automatically at `Full` and `Complete` scope.
+**After any modification, follow the post-modification process** — see [`.shared/prompts/post_mod_process.md`](.shared/prompts/post_mod_process.md). Specify a `SCOPE` when invoking it. Python-specific steps (mypy, pytest, pre-commit, ruff) skip automatically — `project.category = theme` guards them in the shared task definitions.
 
-| SCOPE      | What runs                                    |
-| :--------- | :------------------------------------------- |
-| `None`     | Changes only — no validation                 |
-| `Basic`    | HA restart + error check + lint/format fixes |
-| `Full`     | Same as Basic (mypy/pytest not applicable)   |
-| `Complete` | Basic + pre-commit --all-files               |
+| SCOPE      | What runs                                                              |
+| :--------- | :--------------------------------------------------------------------- |
+| `None`     | Changes only — no validation                                           |
+| `Basic`    | HA restart + error check + lint/format fixes                           |
+| `Full`     | Basic + YAML lint, Prettier, codespell, HACS manifest, markdown checks |
+| `Complete` | Full + Zizmor audit                                                    |
 
 For rapid visual iteration between restarts, trigger a theme reload without restarting:
 
