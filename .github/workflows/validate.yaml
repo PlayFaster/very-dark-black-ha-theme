@@ -76,10 +76,9 @@ jobs:
           config_file: .validate/.yamllint
 
       - name: Prettier Format Check
-        # No sort-json plugin needed — theme config uses plain .prettierrc.
         run: |
-          npm install -g prettier@3.6.2
-          prettier --config .validate/.prettierrc --check "**/*.{md,json,yaml,yml}"
+          npm install prettier@3.6.2 prettier-plugin-sort-json@4.2.0
+          npx prettier --config .validate/.prettierrc.json --check "**/*.{md,json,yaml,yml}"
 
       - name: Check README Links
         # Validates that all external links in the README are still alive.

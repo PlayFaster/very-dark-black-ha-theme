@@ -95,7 +95,7 @@
     {
       "label": "Prettier: Check (View Only)",
       "type": "shell",
-      "command": "mkdir -p .reports && git ls-files -z --cached --others --exclude-standard '*.md' '*.json' '*.yaml' '*.yml' | xargs -0 -r prettier --config .validate/.prettierrc --check | tee .reports/prettier_check.txt",
+      "command": "mkdir -p .reports && git ls-files -z --cached --others --exclude-standard '*.md' '*.json' '*.yaml' '*.yml' | xargs -0 -r prettier --config .validate/.prettierrc.json --check | tee .reports/prettier_check.txt",
       "presentation": {
         "reveal": "always",
         "panel": "dedicated"
@@ -105,7 +105,7 @@
     {
       "label": "Prettier: Format (Auto-Fix)",
       "type": "shell",
-      "command": "git ls-files -z --cached --others --exclude-standard '*.md' '*.json' '*.yaml' '*.yml' | xargs -0 -r prettier --config .validate/.prettierrc --write || true",
+      "command": "git ls-files -z --cached --others --exclude-standard '*.md' '*.json' '*.yaml' '*.yml' | xargs -0 -r prettier --config .validate/.prettierrc.json --write || true",
       "presentation": {
         "reveal": "always",
         "panel": "dedicated"
@@ -115,7 +115,7 @@
     {
       "label": "Prettier: Fix Notes",
       "type": "shell",
-      "command": "prettier --config .validate/.prettierrc --ignore-path /dev/null --write \".notes/**/*.{md,json,yaml,yml}\" || true",
+      "command": "prettier --config .validate/.prettierrc.json --ignore-path /dev/null --write \".notes/**/*.{md,json,yaml,yml}\" || true",
       "presentation": {
         "reveal": "always",
         "panel": "dedicated"
@@ -125,7 +125,7 @@
     {
       "label": "Prettier: Fix Shared",
       "type": "shell",
-      "command": "prettier --config .validate/.prettierrc --ignore-path /dev/null --write \".shared/**/*.{md,json,yaml,yml}\" || true",
+      "command": "prettier --config .validate/.prettierrc.json --ignore-path /dev/null --write \".shared/**/*.{md,json,yaml,yml}\" || true",
       "presentation": {
         "reveal": "always",
         "panel": "dedicated"
@@ -171,6 +171,67 @@
         "panel": "dedicated"
       },
       "problemMatcher": []
+    },
+    {
+      "command": "python3 .shared/validate-configs/check_tool_drift.py --apply",
+      "label": "Env: Apply Version Matrix Targets",
+      "presentation": {
+        "panel": "dedicated",
+        "reveal": "always"
+      },
+      "problemMatcher": [],
+      "type": "shell"
+    },
+    {
+      "command": "python3 .shared/validate-configs/check_tool_drift.py --absorb",
+      "label": "Env: Absorb Pre-commit Bumps",
+      "presentation": {
+        "panel": "dedicated",
+        "reveal": "always"
+      },
+      "problemMatcher": [],
+      "type": "shell"
+    },
+    {
+      "dependsOn": [
+        "Env: Sync Shared Files",
+        "Env: Audit Version Drift"
+      ],
+      "dependsOrder": "sequence",
+      "label": "Env: [Workflow] Sync & Audit",
+      "presentation": {
+        "clear": true,
+        "panel": "dedicated",
+        "reveal": "always"
+      }
+    },
+    {
+      "dependsOn": [
+        "Env: Apply Version Matrix Targets",
+        "Env: Sync Shared Files",
+        "Env: Audit Version Drift"
+      ],
+      "dependsOrder": "sequence",
+      "label": "Env: [Workflow] Apply & Propagate Changes",
+      "presentation": {
+        "clear": true,
+        "panel": "dedicated",
+        "reveal": "always"
+      }
+    },
+    {
+      "dependsOn": [
+        "Env: Absorb Pre-commit Bumps",
+        "Env: Sync Shared Files",
+        "Env: Audit Version Drift"
+      ],
+      "dependsOrder": "sequence",
+      "label": "Env: [Workflow] Absorb & Propagate Bumps",
+      "presentation": {
+        "clear": true,
+        "panel": "dedicated",
+        "reveal": "always"
+      }
     },
     {
       "label": "Initialize Reports",
