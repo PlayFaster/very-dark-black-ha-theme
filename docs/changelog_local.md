@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.6-dev4] - 2026-06-15 - Unreleased
+
+### Changed
+
+- **Validation Config**: Changed from .prettierrc.js to .prettierrc.json to allow GitHub.com CodeQL to run without errors
+- **.gitignore**: Multiple updates to .gitignore
+
+### Added
+
+- **AGENTS.md**: Added AGENTS.md to repo root
+
 ## [1.3.6-dev3] - 2026-06-11 - Unreleased
 
 ### Changed
@@ -12,10 +23,13 @@ All notable changes to this project will be documented in this file.
   - .validate/requirements_test.txt pulled as generic, with all tools pinned to versions, and requirements_custom.txt used to add project specific items.
   - As part of the sync, docker-compose.yml and devcontainer.json are now generic, with a .env file holding project specific info and a docker-compose.override.yml holding additional, project specific steps.
   - HA Manifest and HACS schema files updated.
+- **Validation Config**: Changed from .prettierrc.js to .prettierrc.json to allow GitHub.com CodeQL to run without errors
+- **.gitignore**: Multiple updates to .gitignore
 
 ### Added
 
 - **Dependabot**: Added Dependabot to the github.com CI. Is used for other PlayFaster projects but had not been in place for Very Dark Black Theme before.
+- **AGENTS.md**: Added AGENTS.md to repo root
 
 ## [1.3.5] - 2026-06-05
 
