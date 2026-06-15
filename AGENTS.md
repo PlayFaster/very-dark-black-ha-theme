@@ -10,7 +10,7 @@ Available accent color variants: Cyan, Green, Red, Fuchsia, Orange, Purple, Indi
 
 ## Project Structure
 
-```
+```text
 themes/very_dark_black_ha_theme.yaml   ← The entire theme (single file, ~480 lines)
 docs/DEVELOPMENT.md                    ← Critical dev reference: pitfalls & architecture
 docs/change_ref_ha_v2026_4.md          ← HA 2026.4 frontend migration notes
@@ -66,13 +66,13 @@ These rules are enforced by Home Assistant's theme loader and will cause failure
 
 ## HA Version Compatibility
 
-| HA Version | Feature Added |
-| :--------- | :------------ |
-| 2022.11+   | Core dark backgrounds, cards, sidebar |
-| 2025.1+    | Inputs, dialogs, modern card layouts |
-| 2026.4+    | Dynamic HSL color scales (`hsl(from var(...) ...)`) |
+| HA Version | Feature Added                                                     |
+| :--------- | :---------------------------------------------------------------- |
+| 2022.11+   | Core dark backgrounds, cards, sidebar                             |
+| 2025.1+    | Inputs, dialogs, modern card layouts                              |
+| 2026.4+    | Dynamic HSL color scales (`hsl(from var(...) ...)`)               |
 | 2026.5+    | Web Awesome tokens: `ha-switch`, `ha-checkbox`, `ha-progress-bar` |
-| 2026.6+    | Web Awesome tokens: `ha-radio-group`, `ha-radio-option` |
+| 2026.6+    | Web Awesome tokens: `ha-radio-group`, `ha-radio-option`           |
 
 The `hsl(from ...)` relative color syntax used for the `ha-color-neutral-*` and `ha-color-primary-*` scales requires HA 2026.4+ and a modern browser.
 
@@ -81,6 +81,7 @@ The `hsl(from ...)` relative color syntax used for the `ha-color-neutral-*` and 
 1. Define an anchor for the new color hex in Section A (follow the existing `&acc_*` naming pattern, alongside the other named color anchors at the top of `base_logic`).
 2. Add a corresponding `*-color` named color token in that same block (e.g., `lime-color: &acc_lime "#..."`).
 3. Add the new theme entry at the end of Section C:
+
    ```yaml
    Black with Lime:
      <<: *black_surfaces
@@ -92,6 +93,7 @@ The `hsl(from ...)` relative color syntax used for the `ha-color-neutral-*` and 
 ## card-mod Integration
 
 `card-mod` (optional dependency) is used in the `card-mod-card` block (Section A) to inject global CSS. Key behaviors:
+
 - Forces all `ha-card` elements to a black background with the theme border.
 - Explicitly sets `background: transparent; border: none` for cards intended to be transparent: `hui-heading-card`, `mushroom-title-card`, `mushroom-chips-card`, `.type-custom-bubble-card`, `hui-conditional-card`, `custom-button-card`.
 - Applies custom scrollbar styling and `-webkit-font-smoothing: antialiased`.
@@ -104,6 +106,7 @@ Avoid deep shadow-DOM selectors (e.g., `ha-card-picker $ ha-sub-page`) — they 
 HA is migrating from `paper-` / `mdc-` variables to **Web Awesome** (Shoelace/Lit) and **Material 3** tokens. When a UI element appears unstyled after an HA update, the likely cause is a renamed or new token. Reference themes used for comparison: [`Frosted Glass`](https://github.com/wessamlauf/homeassistant-frosted-glass-themes) and [`Graphite`](https://github.com/TilmanGriesel/graphite).
 
 Token hierarchy for icons (define in each Section C variant for per-accent matching):
+
 - `paper-item-icon-color` — legacy/standard icon color
 - `state-icon-color` — neutral/inactive icon state
 - `state-icon-active-color` — "On"/active icon state
@@ -118,12 +121,13 @@ When the devcontainer is running, the `ha-mcp-dev` MCP server automatically conn
 
 **After any modification, follow the post-modification process** — see [`.shared/prompts/post_mod_process.md`](.shared/prompts/post_mod_process.md). Specify a `SCOPE` when invoking it. Note: this project has no Python code — mypy and pytest steps are skipped automatically at `Full` and `Complete` scope.
 
-| SCOPE | What runs |
-| :------- | :-------- |
-| `None` | Changes only — no validation |
-| `Basic` | HA restart + error check + lint/format fixes |
-| `Full` | Same as Basic (mypy/pytest not applicable) |
-| `Complete` | Basic + pre-commit --all-files |
+| SCOPE      | What runs                                    |
+| :--------- | :------------------------------------------- |
+| `None`     | Changes only — no validation                 |
+| `Basic`    | HA restart + error check + lint/format fixes |
+| `Full`     | Same as Basic (mypy/pytest not applicable)   |
+| `Complete` | Basic + pre-commit --all-files               |
 
 For rapid visual iteration between restarts, trigger a theme reload without restarting:
+
 - Call `ha_call_service` with domain `frontend`, service `reload_themes`
