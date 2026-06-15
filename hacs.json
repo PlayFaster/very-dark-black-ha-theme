@@ -1,7 +1,7 @@
 {
-  "name": "Very Dark Black HA Theme",
   "content_in_root": false,
-  "render_readme": true,
   "filename": "very_dark_black_ha_theme.yaml",
-  "homeassistant": "2022.11.0"
+  "homeassistant": "2022.11.0",
+  "name": "Very Dark Black HA Theme",
+  "render_readme": true
 }

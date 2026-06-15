@@ -2,6 +2,57 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.6] - 2026-06-15
+
+### Summary
+
+- **CI Validation Only**: Changes to the CI Validation set-up require a release to test properly, but there are no user changes in this release, background/infrastructure only.
+
+## [1.3.6-dev5] - 2026-06-15 - Unreleased
+
+### Changed
+
+- **CI Validation Sync**: Moved to a shared CI validation, similar to the integration/python projects.
+- **Local Validation Sync**: Moved to a shared tasks,json for local validation and fixes, now shared and in sync with the integration/python projects.
+- **CI — Permissions**: Removed job-level `permissions` block from `test_val` in the shared `validate-specific.yaml`. Permissions now flow through from the calling stub, fixing a GitHub Actions parse-time rejection caused by the theme stub's `contents: read` grant being exceeded.
+- **CI — Secrets**: Removed `secrets: inherit` from the theme stub. The theme passes no secrets to the shared workflow — `GIST_SECRET` is integration-only and optional.
+- **Dev — Shared tasks.json**: Theme project now uses the shared `tasks.json` (synced from monorepo). All Python-specific tasks (`Ruff`, `Mypy`, `Pytest`, `Pre-commit`) skip automatically via `project.category = theme` in `.vscode/settings.json`. Active validation tasks: YAML lint, JSON verify, HACS manifest, HA Check Config, markdown link check, markdown lint, codespell, Zizmor, Prettier.
+- **Dev — `pyproject.toml`**: Added root `pyproject.toml` with `[tool.codespell]` section (synced from `pyproject_theme.toml`). Enables codespell auto-discovery for both local tasks and CI — aligns with the integration project pattern.
+- **Dev — `.vscode/settings.json`**: Created with `project.category: theme` and `project.componentName: ""` to support shared task guards and VS Code variable resolution.
+
+### Added
+
+-- **pyproject.toml**: Local validation sync (see above) means that the project (which is not a python project) has a pyproject.toml file. This is to allow the codespell config to be the same across all in sync projects.
+
+## [1.3.6-dev4] - 2026-06-15 - Unreleased
+
+### Changed
+
+- **Validation Config**: Changed from .prettierrc.js to .prettierrc.json to allow GitHub.com CodeQL to run without errors
+- **.gitignore**: Multiple updates to .gitignore
+
+### Added
+
+- **AGENTS.md**: Added AGENTS.md to repo root
+
+## [1.3.6-dev3] - 2026-06-11 - Unreleased
+
+### Changed
+
+- **Validation Sync**: Moved to a better system and process to keep validation (lint/format/test) tools in sync, across PlayFaster projects and between the projects and what Home Assistant uses.
+  - .validate/version_matrix.json added as the definitive source of tool version use.
+  - Several Env: entries added to .vscode/tasks.json for tool sync and checking.
+  - .validate/requirements_test.txt pulled as generic, with all tools pinned to versions, and requirements_custom.txt used to add project specific items.
+  - As part of the sync, docker-compose.yml and devcontainer.json are now generic, with a .env file holding project specific info and a docker-compose.override.yml holding additional, project specific steps.
+  - HA Manifest and HACS schema files updated.
+- **Validation Config**: Changed from .prettierrc.js to .prettierrc.json to allow GitHub.com CodeQL to run without errors
+- **.gitignore**: Multiple updates to .gitignore
+
+### Added
+
+- **Dependabot**: Added Dependabot to the github.com CI. Is used for other PlayFaster projects but had not been in place for Very Dark Black Theme before.
+- **AGENTS.md**: Added AGENTS.md to repo root
+
 ## [1.3.5] - 2026-06-05
 
 ### Added
