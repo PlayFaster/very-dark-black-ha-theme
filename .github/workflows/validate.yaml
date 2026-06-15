@@ -1,7 +1,6 @@
 ---
-# Workflow runs validations specifically for Home Assistant Themes.
-# It contains multiple independent jobs (HACS, Linting, Structure,
-# Codespell, Zizmor), and generates a SINGLE workflow badge for the README.
+# Validation stub for the Very Dark Black HA Theme project.
+# Delegates all validation to the shared workflow in PlayFaster/.github.
 
 name: Validate
 
@@ -24,124 +23,9 @@ permissions:
   contents: read
 
 jobs:
-  # Job 1: Official HACS metadata validation.
-  # Checks hacs.json ensures repository meets HACS Themes requirements.
-  hacs_val:
-    name: "HACS Check"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        # Tag @v4
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
-        with:
-          persist-credentials: false
-
-      - name: HACS Validation
-        # Branch @main
-        uses: hacs/action@1ebf01c408f29afcb6406bd431bc98fd8cbb15aa
-        with:
-          # category is set to 'theme' specifically for this workflow
-          category: theme
-
-  # Job 2: File-level integrity (JSON, YAML, Markdown, and Prettier).
-  # Ensures the HACS manifest is valid and the README is high quality.
-  file_val:
-    name: "File Integrity"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        # Tag @v4
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
-        with:
-          persist-credentials: false
-
-      - name: Set up Python
-        # Tag @v5
-        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
-        with:
-          python-version: "3.14"
-
-      - name: JSON Schema Check
-        # Validates hacs.json against the provided schema using standard pip.
-        run: |
-          pip install check-jsonschema==0.37.2
-          check-jsonschema --schemafile .validate/hacs_schema.json hacs.json
-
-      - name: YAML Check
-        # Ensures theme YAML and GitHub Action files are syntactically correct.
-        # Tag @v3
-        uses: ibiqlik/action-yamllint@2576378a8e339169678f9939646ee3ee325e845c
-        with:
-          file_or_dir: .
-          config_file: .validate/.yamllint
-
-      - name: Prettier Format Check
-        run: |
-          npm install prettier@3.6.2 prettier-plugin-sort-json@4.2.0
-          npx prettier --config .validate/.prettierrc.json --check "**/*.{md,json,yaml,yml}"
-
-      - name: Check README Links
-        # Validates that all external links in the README are still alive.
-        # Tag @v1
-        uses: gaurav-nelson/github-action-markdown-link-check@5c5dfc0ac2e225883c0e5f03a85311ec2830d368
-        with:
-          base-branch: main
-          file-path: README.md
-          config-file: .validate/.mlc_config.json
-
-  # Job 3: Theme-specific structural validation.
-  # Ensures the repository layout matches HACS expectations for themes.
-  structure_val:
-    name: "Structure Check"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        # Tag @v4
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
-        with:
-          persist-credentials: false
-
-      - name: Verify Theme Location
-        # HACS requires theme YAML files to be inside the /themes/ directory.
-        run: |
-          if [ ! -f themes/*.yaml ]; then
-            echo "Error: Theme file must be inside the /themes folder for HACS!"
-            exit 1
-          fi
-
-  # Job 4: Spell checking.
-  codespell:
-    name: "Codespell"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        # Tag @v4
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
-        with:
-          persist-credentials: false
-
-      - name: Run Codespell
-        # Tag @v2.2
-        uses: codespell-project/actions-codespell@8f01853be192eb0f849a5c7d721450e7a467c579
-        with:
-          # Config lives in .validate/ rather than repo root.
-          path_to_config_file: .validate/.codespellrc
-
-  # Job 5: GitHub Actions workflow security audit.
-  # Known findings exist — step is non-blocking until resolved.
-  zizmor:
-    name: "Zizmor (Workflow Security)"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        # Tag @v4
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
-        with:
-          persist-credentials: false
-
-      - name: Install Zizmor
-        run: pip install zizmor==1.25.2
-
-      - name: Run Zizmor
-        continue-on-error: false
-        run: zizmor --pedantic .github/
+  validate:
+    # Branch @main v2.0.0 — update SHA after pushing .github changes
+    uses: PlayFaster/.github/.github/workflows/validate.yaml@a271f4e4b2b04130624282e6f43bb31e2f2dc55a
+    with:
+      category: theme
+    secrets: inherit
