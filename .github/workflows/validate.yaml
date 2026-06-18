@@ -24,7 +24,7 @@ permissions:
 
 jobs:
   validate:
-    # Branch @main v2.0.1 — update SHA after pushing .github changes
-    uses: PlayFaster/.github/.github/workflows/validate.yaml@a555a92e3210bbc20f97c861594bc4f743333f24
+    # Branch @main v2.0.3 — update SHA after pushing .github changes
+    uses: PlayFaster/.github/.github/workflows/validate.yaml@450a90fd9ecb56485b90754f061ce4a4e4c0e7dc
     with:
       category: theme
