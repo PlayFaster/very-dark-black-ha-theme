@@ -149,3 +149,7 @@ When the devcontainer is running, the `ha-mcp-dev` MCP server automatically conn
 For rapid visual iteration between restarts, trigger a theme reload without restarting:
 
 - Call `ha_call_service` with domain `frontend`, service `reload_themes`
+
+### Skill Prompts
+
+See `.shared/prompts/devcon_run_gen.md` for the mini-skill for running arbitrary commands inside this devcontainer from the Windows host. Container identity values (`CONTAINER_NAME`, `PROJECT_DIR`) are in `.devcontainer/.env`.

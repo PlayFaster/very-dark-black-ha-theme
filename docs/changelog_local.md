@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.7-dev4] - 2026-06-18 - Unreleased
+
+### Summary
+
+- **CI Validation Overhaul**: Major overhaul of the local (tasks.json) and online (github.com CI) Validation system
+
+### Changed
+
+- **dev-workbench**: Moved CI Validation and Sync to dev-workbench system, with major restructure of files and folders.
+- **CI Local Tasks**: Reordered local tasks.json, added color for pass/fail.
+- **CI Validation Bump**: Shared CI validation bumped to v2.0.3. No user changes in this release, background/infrastructure only.
+- **CodeQL**: CodeQL shared config and local caller modified to detail permissions to that Zizmor will pass
+- **CodeQL**: Added a shared CodeQL validation config to the shared validation repo, pulled into each project, incl this one.
+- **Link Check**: Updated markdown-link-check to ignore .notes/ and .shared/ links in projects as these are excluded.
+
 ## [1.3.6] - 2026-06-15
 
 ### Summary
