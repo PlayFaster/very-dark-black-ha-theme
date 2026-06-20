@@ -1,6 +1,6 @@
 # Very Dark Black Theme for Home Assistant
 
-[![HACS Theme](https://img.shields.io/badge/HACS-Theme-orange.svg)](https://hacs.xyz/) [![HACS Custom](https://img.shields.io/badge/HACS-Custom-41BDF5?logo=homeassistant&logoColor=white)](https://hacs.xyz/docs/faq/custom_repositories) [![Latest Release](https://img.shields.io/github/v/release/PlayFaster/very-dark-black-ha-theme?label=Release&logo=github)](https://github.com/PlayFaster/very-dark-black-ha-theme/releases) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Validate](https://github.com/PlayFaster/very-dark-black-ha-theme/actions/workflows/validate.yaml/badge.svg)](https://github.com/PlayFaster/very-dark-black-ha-theme/actions/workflows/validate.yaml) [![Last Commit](https://img.shields.io/github/last-commit/PlayFaster/very-dark-black-ha-theme?label=Last%20commit)](https://github.com/PlayFaster/very-dark-black-ha-theme/commits/main)
+[![HACS Theme](https://img.shields.io/badge/HACS-Theme-orange.svg)](https://hacs.xyz/) [![HACS Badge](https://img.shields.io/badge/Available%20in-HACS-41BDF5?logo=home-assistant&logoColor=white)](https://my.home-assistant.io/redirect/hacs_repository/?owner=PlayFaster&repository=very-dark-black-ha-theme&category=theme) [![Latest Release](https://img.shields.io/github/v/release/PlayFaster/very-dark-black-ha-theme?label=Release&logo=github)](https://github.com/PlayFaster/very-dark-black-ha-theme/releases) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Validate](https://github.com/PlayFaster/very-dark-black-ha-theme/actions/workflows/validate.yaml/badge.svg)](https://github.com/PlayFaster/very-dark-black-ha-theme/actions/workflows/validate.yaml) [![Last Commit](https://img.shields.io/github/last-commit/PlayFaster/very-dark-black-ha-theme?label=Last%20commit)](https://github.com/PlayFaster/very-dark-black-ha-theme/commits/main)
 
 A Home Assistant dark mode theme that provides black or very dark backgrounds wherever possible along with a choice of primary colors.
 
@@ -116,11 +116,10 @@ frontend:
 
 #### ✨ HACS (Recommended)
 
-1. Add this URL as a **Custom Repository** in HACS. [https://github.com/PlayFaster/very-dark-black-ha-theme](https://github.com/PlayFaster/very-dark-black-ha-theme)
-   - Open HACS in Home Assistant
-   - Click **Custom repositories** (⋮ menu)
-   - Add repository URL and Type: `Theme`
-2. Search for "Very Dark Black Theme" and click **Download**
+[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=PlayFaster&repository=very-dark-black-ha-theme&category=theme)
+
+1. Open HACS in Home Assistant and search for **Very Dark Black HA Theme**
+2. Click into _Very Dark Black HA Theme_ and then Click **Download** (bottom right)
 3. Run the `frontend.reload_themes` action (Restart Home Assistant if `configuration.yaml` changes were made).
 
 #### 💾 Manual Installation
