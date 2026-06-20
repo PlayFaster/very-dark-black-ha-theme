@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.7-dev6] - 2026-06-20 - Unreleased
+
+### Changed
+
+- **Documentation**: Updated README file based on release of theme on HACS. HACS install instructions updated to remove need to install custom repository. Also update HACS badges in README header.
+
 ## [1.3.7-dev4] - 2026-06-18 - Unreleased
 
 ### Summary
