@@ -2,11 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.7-dev9] - 2026-06-24 - Unreleased
+
+### Summary
+
+- Added RGB tokens to enable rgba() opacity variants in the theme without duplicating the numbers
+
+### Changed
+
+- **RGB Primitive Tokens**: Added a set of raw RGB tuple tokens for Danger/Warning Fill Indirection (`token-rgb-red`, `token-rgb-orange`, `token-rgb-green`, etc.) alongside the existing hex color anchors in Section A. These expose each accent color's channel values as a standalone CSS custom property, enabling `rgba()` opacity variants anywhere in the theme without duplicating the numbers. Applied immediately to the danger and warning fill tokens, which previously hardcoded the RGB values at each opacity step. Further color changes now requires editing the hex anchor and its RGB primitive once; all opacity variants follow without further edits. This is inspired by the **Graphite** theme
+
 ## [1.3.7-dev8] - 2026-06-24 - Unreleased
 
 ### Summary
 
-- Made changes based on WCAG AA minimum contrast ratio checks and themes best practise.
+- Made changes based on WCAG AA minimum contrast ratio checks and themes best practice.
 
 ### Added
 

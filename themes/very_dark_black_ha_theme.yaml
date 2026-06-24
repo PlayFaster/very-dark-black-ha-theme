@@ -32,6 +32,17 @@ Black (Background Only):
   indigo-color: &acc_indigo "#5c6bc0"
   silver-color: &acc_silver "#e0e0e0"
 
+  # --- 14b. RGB Primitives (raw tuples for rgba() opacity variants) ---
+  token-rgb-red: "244, 67, 54"
+  token-rgb-green: "76, 175, 80"
+  token-rgb-blue: "33, 150, 243"
+  token-rgb-orange: "255, 152, 0"
+  token-rgb-purple: "156, 39, 176"
+  token-rgb-cyan: "0, 188, 212"
+  token-rgb-fuchsia: "255, 0, 255"
+  token-rgb-indigo: "92, 107, 192"
+  token-rgb-silver: "224, 224, 224"
+
   # --- 1. Dashboard Base & Branding ---
   lovelace-background: &base_black "#000000"
   primary-background-color: *base_black
@@ -205,13 +216,13 @@ Black (Background Only):
   ha-color-on-disabled-normal: "rgba(155, 155, 155, 0.5)"
 
   # Danger/Warning Tag Fills (Fixes illegible light-on-white defaults)
-  ha-color-fill-danger-normal-resting: "rgba(244, 67, 54, 0.15)"
-  ha-color-fill-danger-normal-hover: "rgba(244, 67, 54, 0.22)"
-  ha-color-fill-danger-normal-active: "rgba(244, 67, 54, 0.28)"
+  ha-color-fill-danger-normal-resting: "rgba(var(--token-rgb-red), 0.15)"
+  ha-color-fill-danger-normal-hover: "rgba(var(--token-rgb-red), 0.22)"
+  ha-color-fill-danger-normal-active: "rgba(var(--token-rgb-red), 0.28)"
   ha-color-on-danger-normal: "var(--primary-text-color)"
-  ha-color-fill-warning-normal-resting: "rgba(255, 152, 0, 0.15)"
-  ha-color-fill-warning-normal-hover: "rgba(255, 152, 0, 0.22)"
-  ha-color-fill-warning-normal-active: "rgba(255, 152, 0, 0.28)"
+  ha-color-fill-warning-normal-resting: "rgba(var(--token-rgb-orange), 0.15)"
+  ha-color-fill-warning-normal-hover: "rgba(var(--token-rgb-orange), 0.22)"
+  ha-color-fill-warning-normal-active: "rgba(var(--token-rgb-orange), 0.28)"
   ha-color-on-warning-normal: "var(--primary-text-color)"
 
   # --- 17. 2026.5 Web Awesome Components & Global Updates ---
