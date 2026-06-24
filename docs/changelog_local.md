@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.7-dev8] - 2026-06-24 - Unreleased
+
+### Summary
+
+- Made changes based on WCAG AA minimum contrast ratio checks and themes best practise.
+
+### Added
+
+- Tooltips: Added ha-tooltip-background-color and ha-tooltip-text-color overrides to resolve the dark-mode issue where tooltips rendered with white text on a white background.
+- Danger/Warning Tag Fills: Added soft translucent background fills (rgba) and vivid foreground text for resting, hover, and active states of danger and warning tags, resolving illegible low-contrast element rendering on black backgrounds.
+
+### Changed
+
+- Label Badges: Darkened standard badge background colors (label-badge-red, label-badge-green, label-badge-blue, label-badge-yellow, label-badge-grey) to meet WCAG AA accessibility requirements and ensure high contrast against white text overlays.
+
 ## [1.3.7-dev7] - 2026-06-24 - Unreleased
 
 ### Changed
