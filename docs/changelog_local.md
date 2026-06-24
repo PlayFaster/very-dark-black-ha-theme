@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.7-dev10] - 2026-06-24 - Unreleased
+
+### Fixed
+
+- **Danger / Warning**: Fixed ha-color-on-danger-normal and ha-color-on-warning-normal so that they display an alert (Red) color, same as HA default,  not the text default (white)
+
 ## [1.3.7-dev9] - 2026-06-24 - Unreleased
 
 ### Summary
