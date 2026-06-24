@@ -2,11 +2,28 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.7] - 2026-06-24 - Release
+
+### Summary
+
+- The theme is now officially on HACS! No custom repository adding required.
+- Made changes based on WCAG AA minimum contrast ratio checks and themes best practice.
+
+### Added
+
+- **Tooltips**: Added ha-tooltip-background-color and ha-tooltip-text-color overrides to resolve the dark-mode issue where tooltips could render with white text on a white background. This is inspired by the **Graphite** theme
+- **Danger/Warning Tag Fills**: Added translucent background fills (rgba) and vivid foreground text for resting, hover, and active states of danger and warning tags, resolving illegible low-contrast element rendering on black backgrounds.
+
+### Changed
+
+- **Label Badges**: Darkened standard badge background colors (label-badge-red, label-badge-green, label-badge-blue, label-badge-yellow, label-badge-grey) to meet WCAG AA accessibility requirements and ensure high contrast against white text overlays.
+- **Documentation**: Updated README file based on release of theme on HACS. HACS install instructions updated to remove requirement to add as custom repository. Also update HACS badges in README header.
+
 ## [1.3.7-dev10] - 2026-06-24 - Unreleased
 
 ### Fixed
 
-- **Danger / Warning**: Fixed ha-color-on-danger-normal and ha-color-on-warning-normal so that they display an alert (Red) color, same as HA default,  not the text default (white)
+- **Danger / Warning**: Fixed ha-color-on-danger-normal and ha-color-on-warning-normal so that they display an alert (Red) color, same as HA default, not the text default (white)
 
 ## [1.3.7-dev9] - 2026-06-24 - Unreleased
 
