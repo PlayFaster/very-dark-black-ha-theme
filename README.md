@@ -4,7 +4,7 @@
 
 A Home Assistant dark mode theme that provides black or very dark backgrounds wherever possible along with a choice of primary colors.
 
-> [!NOTE]- [Very Dark Black Theme for Home Assistant](#very-dark-black-theme-for-home-assistant)
+> [!NOTE]
 >
 > **Is this the right theme for you?**
 >

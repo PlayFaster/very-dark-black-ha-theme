@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.8-dev1] - 2026-06-25 - Unreleased
+
+### Summary
+
+- **Code Review**: Several code review driven changes. See /code_review/code_review_20260624.md
+
+### Changed
+
+- **Form Backgrounds**: Changed form (text-field) hoover to very dark grey and form disabled to a different very dark grey. Subtle but helpful.
+- **Section Numbers**: Previous re-orgs and updates of the theme file structure meant that the sections numbers were out of order. Re-numbers, sections 1 to 19 now.
+- **Comments**: Added several comments to confirm some decisions to that they would not be flagged again. Also ensured all comments are under 80 chars
+
 ## [1.3.7] - 2026-06-24 - Release
 
 ### Summary
