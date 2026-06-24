@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.7-dev7] - 2026-06-24 - Unreleased
+
+### Changed
+
+- **CI Validation Bump**: Shared CI validation bumped from v2.0.3 to v2.0.4. v2.0.4 added internal self-validation, and so does not affect theme CI Validation, bumped to keep up-to-date only.
+- **Bump**: Bumped Ruff from 0.15.16 to 0.15.17 (Note used for theme , part of overall CI Validation)
+- **gitignore**: Updated .gitignore file (scratch folder)
+
 ## [1.3.7-dev6] - 2026-06-20 - Unreleased
 
 ### Changed

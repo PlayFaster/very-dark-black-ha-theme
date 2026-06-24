@@ -204,6 +204,16 @@ Black (Background Only):
   ha-color-fill-disabled-normal-resting: "rgba(155, 155, 155, 0.08)"
   ha-color-on-disabled-normal: "rgba(155, 155, 155, 0.5)"
 
+  # Danger/Warning Tag Fills (Fixes illegible light-on-white defaults)
+  ha-color-fill-danger-normal-resting: "rgba(244, 67, 54, 0.15)"
+  ha-color-fill-danger-normal-hover: "rgba(244, 67, 54, 0.22)"
+  ha-color-fill-danger-normal-active: "rgba(244, 67, 54, 0.28)"
+  ha-color-on-danger-normal: "var(--primary-text-color)"
+  ha-color-fill-warning-normal-resting: "rgba(255, 152, 0, 0.15)"
+  ha-color-fill-warning-normal-hover: "rgba(255, 152, 0, 0.22)"
+  ha-color-fill-warning-normal-active: "rgba(255, 152, 0, 0.28)"
+  ha-color-on-warning-normal: "var(--primary-text-color)"
+
   # --- 17. 2026.5 Web Awesome Components & Global Updates ---
   # Box Shadows
   ha-box-shadow-s: "none"
@@ -217,6 +227,8 @@ Black (Background Only):
   ha-color-surface-default-inverted: "#ffffff"
   ha-color-surface-low-inverted: "#f5f5f5"
   ha-color-surface-lower-inverted: "#e0e0e0"
+  ha-tooltip-background-color: "var(--secondary-background-color)"
+  ha-tooltip-text-color: "var(--primary-text-color)"
 
   # Progress Bar Customization
   ha-progress-bar-indicator-color: "var(--primary-color)"
@@ -297,14 +309,19 @@ Black (Background Only):
   ha-color-fill-primary-normal-hover: "var(--ha-color-primary-20)"
   ha-color-fill-primary-normal-active: "var(--ha-color-primary-30)"
 
-  # Badges Customization
+  # Badges Customization (Contrast-safe overrides for white text)
   label-badge-background-color: *base_black
   label-badge-text-color: "#ffffff"
-  label-badge-red: *acc_red
-  label-badge-green: *acc_green
-  label-badge-blue: *acc_blue
-  label-badge-yellow: *acc_orange
-  label-badge-grey: *acc_graphite
+  label-badge-red: "#ae1332"
+  label-badge-green: "#1a703e"
+  label-badge-blue: "#0a687f"
+  label-badge-yellow: "#796206"
+  label-badge-grey: "#535a67"
+  token-color-background-label-badge-red: "rgb(174, 19, 50)"
+  token-color-background-label-badge-green: "rgb(26, 112, 62)"
+  token-color-background-label-badge-blue: "rgb(10, 104, 127)"
+  token-color-background-label-badge-yellow: "rgb(121, 98, 6)"
+  token-color-background-label-badge-grey: "rgb(83, 90, 103)"
 
   # Legacy & Paper Components Fallback
   paper-card-background-color: *base_black
