@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.8-dev6] - 2026-06-25 - Unreleased
+
+### Summary
+
+- **Better Base Themes & Better Theme Test**: The two base (anchor) themes, have been significantly improved to ensure that if selected, they are fully usable, just minus an accent color. A significant Theme Test dashboard has been created, and is set-up as git tracked.
+
+### Changed
+
+- **Mock Values**: A full suite of dummy / mock sensor entities have been created via the home assistant "packages:" functionality to populate the Theme Test dashboard so that changes to the theme or to Home Assistant can be checked and addressed as needed.
+- **Theme Test Dashboard**: A YAML mode theme test dashboard is now in place on the Home Assistant instance in the devcon of the project. This allows for visually checking many card and sensor types and combinations. It also has a compare view where the applied (default) theme can be compared to one of the VDB (Cyan) themes.
+- **Docs**: Updated relevant documents AGENTS, DEVELOPMENT, proj_Structure, README to account for the updated functionality.
+
 ## [1.3.8-dev3] - 2026-06-25 - Unreleased
 
 ### Summary
@@ -19,13 +31,9 @@ All notable changes to this project will be documented in this file.
 
 - **control-switch-on-color** added to Section A (`var(--primary-color, #aaaaaa)`). This is the actual token `<ha-control-switch>` binds its active color to. Currently has no effect because the component redeclares it via a `:host` CSS rule (overriding inheritance), but is kept for potential future component changes.
 
-### Known Limitation — switch ON state on base themes
-
-`<ha-control-switch>` (the tile card toggle in HA 2026.6+) redeclares `--control-switch-on-color: var(--primary-color)` in a `:host` CSS rule, overriding any externally inherited value. Since `--primary-color` is unset on base themes and adding it to Section A causes duplicate key warnings (an absolute constraint), the switch ON state remains transparent on base themes. No fix is available within the current architecture. This is a permanent known limitation.
-
 ### Investigation Notes
 
-Full investigation documented in `.notes/issues/base_theme_issues/`. The original symptom (switch ON and slider invisible) was initially investigated against HA 2026.5b0 (beta), which produced misleading results. Re-investigation on HA 2026.6.4 (release) produced definitive findings. The key discovery: `ha-switch-checked-*` and `paper-slider-*` tokens, added to the theme in 1.3.4, are not consumed by the actual components in HA 2026.6.4. Those tokens are retained for backward compatibility (they fail silently).
+Full investigation documented in `.notes/issues/base_theme_issues/`. The original symptom (switch ON and slider invisible) was initially investigated against HA 2026.5b0 (beta), which produced misleading results. Re-investigation on HA 2026.6.4 (release) produced definitive findings. The key discovery: `ha-switch-checked-*` and `paper-slider-*` tokens, added to the theme in 1.3.4, are not consumed by the actual components in HA 2026.6.4. Those tokens are retained for backward compatibility (as with all prev version tokens, they fail silently).
 
 ## [1.3.8-dev2] - 2026-06-25 - Unreleased
 
@@ -46,7 +54,7 @@ Full investigation documented in `.notes/issues/base_theme_issues/`. The origina
 
 ### Changed
 
-- **Form Backgrounds**: Changed form (text-field) hoover to very dark grey and form disabled to a different very dark grey. Subtle but helpful.
+- **Form Backgrounds**: Changed form (text-field) hoover [ ha-color-form-background-hover ] to very dark grey and form disabled to a different very dark grey. Subtle but helpful.
 - **Section Numbers**: Previous re-orgs and updates of the theme file structure meant that the sections numbers were out of order. Re-numbers, sections 1 to 19 now.
 - **Comments**: Added several comments to confirm some decisions to that they would not be flagged again. Also ensured all comments are under 80 chars
 

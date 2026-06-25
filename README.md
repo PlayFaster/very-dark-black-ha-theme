@@ -48,10 +48,10 @@ This is a simple theme focused on providing a very dark mode look. It's designed
 
 > [!NOTE]
 >
-> **Base themes also appear in picker**: These are not real variants. They can be selected but should not be - the visuals are inconsistent. These are the base themes or scaffolding that the accent variants are built on. They must show in the picker due to Home Assistant's theme structure.
+> **Base themes also appear in picker**: Due to Home Assistant's theme file structure, two internal base themes appear alongside the accent variants. They are fully functional dark themes — just without an accent color. The plain, basic baseline rather than a finished variant.
 >
-> - ❌ Black (Standard): Sets black dashboard and card backgrounds. No accent color. Missing some indicators.
-> - ❌ Black (Background Only): Sets a black dashboard background, no change to card backgrounds. Missing some indicators.
+> - ⚫ Black (Standard): Pure black backgrounds on dashboards and cards. No accent color, simple and plain.
+> - ⚪ Black (Background Only): Black background for dashboard (behind cards) only. Card backgrounds follow HA defaults. You must be in Auto or Dark theme mode, otherwise it becomes hard to view.
 
 ## 🔧 Requirements & Compatibility
 
@@ -314,7 +314,7 @@ If you installed via HACS:
 
 - **Color Picker**: The theme has eight pre-defined accent colors available, but there is no option to select your own accent color to work with the theme. To my knowledge, this functionality is not available within the Home Assistant basic theme file, it would require an additional script or custom component, so it is not in scope for this project.
 - **Light Theme**: The theme works in "Light" mode, but still applies the Very Dark Black theme, a dark mode theme. This is deliberate, this is not a light mode theme.
-- **Base Themes in Picker**: Two "base" themes are in the picker lists for this theme, "Black (Background Only)" and "Black (Standard)". This is a known limitation of the Home Assistant theme file structure. Building accent variant themes from a base requires the base to remain in the list. "Fixing" this either results in log warnings/errors or a huge theme file that becomes difficult to maintain. There are no plans to change this behavior.
+- **Base Themes in Picker**: Two internal base themes — `Black (Background Only)` and `Black (Standard)` — appear in the picker alongside the accent variants. This is a known limitation of the Home Assistant theme file structure: building accent variants from a shared base requires that base to be a named theme entry, which makes it selectable. They are usable as minimalist dark themes but lack an accent color and differ in appearance from the accent variants. There are no plans to change this behavior — "Fixing" this either results in log warnings/errors or a huge theme file that becomes difficult to maintain.
 
 ## 📝 Maintenance Status
 

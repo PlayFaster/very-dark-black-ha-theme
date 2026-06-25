@@ -17,14 +17,16 @@ docs/change_ref_ha_v2026_4.md                 ← HA 2026.4 frontend migration n
 docs/change_ref_ha_v2026_5.md                 ← HA 2026.5 Web Awesome component notes
 docs/change_ref_ha_v2026_6.md                 ← HA 2026.6 Web Awesome radio component notes
 hacs.json                                     ← HACS metadata
-.devcontainer/.devconfig/                     ← GITIGNORED — local devcontainer files only
-  configuration.yaml                          ←   Live HA config: mock entities for testing
-  ui-theme-test.yaml                          ←   3-view Lovelace dashboard (comprehensive)
+.ha/                                          ← GIT-TRACKED devcontainer config files
+  mock_package.yaml                           ←   Mock entities (multi-domain HA package)
+  ui-theme-test.yaml                          ←   Theme test Lovelace dashboard (4 views)
+.devcontainer/.devconfig/                     ← GITIGNORED — runtime HA config dir
+  configuration.yaml                          ←   Entry point; loads .ha/ files via packages
 ```
 
 No build system, no scripts, no dependencies to install. Changes are made directly to the YAML file and reloaded in Home Assistant via `frontend.reload_themes`.
 
-> **Note:** `.devcontainer/.devconfig/` is gitignored and never committed. The files there are local-only. `ui-theme-test.yaml` is a comprehensive 3-view Lovelace dashboard (sections × 2, masonry × 1) that exercises every major card type, state, and theme token. `configuration.yaml` contains all mock entities that back the test dashboard.
+> **Note:** `.devcontainer/.devconfig/` is gitignored and never committed — it contains the HA database, `.storage/`, cache, and the `configuration.yaml` entry point. The two files that matter for development are git-tracked in `.ha/` and referenced from `configuration.yaml` at their absolute container paths (`/workspaces/${PROJECT_NAME}/.ha/`). `mock_package.yaml` is loaded via `homeassistant.packages:` (multi-domain entities, not just `template:`). `ui-theme-test.yaml` is a 4-view Lovelace dashboard (sections × 3, masonry × 1) referenced via its absolute container path in the dashboard config. See `docs/DEVELOPMENT.md` Section 7 for the full devcontainer tracked-config approach.
 
 ## Commands
 

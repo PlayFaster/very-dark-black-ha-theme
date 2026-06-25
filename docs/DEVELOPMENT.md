@@ -93,7 +93,39 @@ Global background styling for `ha-card` can cause "background stacking" issues w
   - `custom-button-card`
 - **Brittle Selectors**: Deep DOM traversal (e.g., `ha-card-picker $ ha-sub-page ...`) is extremely brittle and will break when HA updates its internal component structure. Use native CSS tokens whenever possible, and clearly document these selectors as high-maintenance items.
 
-## 7. Devcontainer Configuration — Template Entity Pitfalls
+## 7. Devcontainer — Tracked Config Files (`.ha/`)
+
+The devcontainer mounts the entire project workspace at `/workspaces/${PROJECT_NAME}` inside the container, alongside the HA config dir at `/config` (mapped from `.devcontainer/.devconfig/`). This means HA can reference files anywhere in the project tree using absolute container paths.
+
+Two files that are important for development are git-tracked in `.ha/` rather than buried in the gitignored `.devconfig/`:
+
+| File | Tracked path | Container path | How HA loads it |
+| :--- | :--- | :--- | :--- |
+| Mock entities | `.ha/mock_package.yaml` | `/workspaces/${PROJECT_NAME}/.ha/mock_package.yaml` | `homeassistant.packages:` in `configuration.yaml` |
+| Test dashboard | `.ha/ui-theme-test.yaml` | `/workspaces/${PROJECT_NAME}/.ha/ui-theme-test.yaml` | Absolute `filename:` in the dashboard config |
+
+### Why `packages:` and not `template:`
+
+`mock_package.yaml` uses HA's `homeassistant.packages:` mechanism because it defines entities across multiple domains (`template:`, `input_boolean:`, `input_number:`, `input_select:`, `media_player:`, etc.). A `!include` under `template:` would only load template-domain entities — `packages:` loads a full mini-config with any combination of domains.
+
+In `configuration.yaml`:
+```yaml
+homeassistant:
+  packages:
+    theme_test_mocks: !include /workspaces/very-dark-black-ha-theme/.ha/mock_package.yaml
+```
+
+### Why absolute paths work
+
+HA's YAML `!include` tag resolves paths using Python's `os.path.join(current_dir, path)`. When the path argument starts with `/`, it overrides the base directory — so absolute paths work regardless of where `configuration.yaml` lives. The same principle applies to the Lovelace dashboard `filename:`.
+
+### `.devconfig/` remains gitignored
+
+`configuration.yaml` (the HA entry point) stays in `.devconfig/` — it cannot be relocated. Everything else that changes rapidly (database, `.storage/`, cache, generated files) also stays there and stays gitignored. Only the two authored files in `.ha/` are tracked.
+
+---
+
+## 8. Devcontainer Configuration — Template Entity Pitfalls
 
 The `.devcontainer/.devconfig/` directory (gitignored) contains the live HA configuration for the devcontainer, including mock entities used by the theme test dashboard. The following pitfalls were found while building that configuration — they are non-obvious and not clearly documented in the HA integration reference pages.
 
@@ -139,7 +171,7 @@ Unlike every other template integration type (`sensor`, `binary_sensor`, `select
 
 ---
 
-## 8. Documentation & README Conventions
+## 9. Documentation & README Conventions
 
 ### Emoji in Headings — Always-Colour Single-Codepoint Only
 
