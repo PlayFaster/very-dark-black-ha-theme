@@ -6,20 +6,27 @@ This file provides guidance to AI coding agents when working with code in this r
 
 **Very Dark Black HA Theme** is a Home Assistant theme pack that provides pure black backgrounds with a choice of accent colors. The entire project ships as a single YAML file (`themes/very_dark_black_ha_theme.yaml`) that Home Assistant loads directly.
 
-Available accent color variants: Cyan, Green, Red, Fuchsia, Orange, Purple, Indigo, Silver (monochrome). Two internal base themes ("Black (Background Only)" and "Black (Standard)") are also exposed in the picker — this is a known, intentional limitation of HA's theme architecture.
+Available accent color variants: Cyan, Green, Red, Fuchsia, Orange, Purple, Indigo, Silver (monochrome), White (no accent). `Black with White` doubles as the base anchor all variants inherit from — it appears in the picker as a structural side-effect of HA's theme architecture and is a usable no-accent variant in its own right.
 
 ## Project Structure
 
 ```text
-themes/very_dark_black_ha_theme.yaml   ← The entire theme (single file, ~480 lines)
-docs/DEVELOPMENT.md                    ← Critical dev reference: pitfalls & architecture
-docs/change_ref_ha_v2026_4.md          ← HA 2026.4 frontend migration notes
-docs/change_ref_ha_v2026_5.md          ← HA 2026.5 Web Awesome component notes
-docs/change_ref_ha_v2026_6.md          ← HA 2026.6 Web Awesome radio component notes
-hacs.json                              ← HACS metadata
+themes/very_dark_black_ha_theme.yaml          ← The entire theme (single file, ~480 lines)
+docs/DEVELOPMENT.md                           ← Critical dev reference: pitfalls & architecture
+docs/change_ref_ha_v2026_4.md                 ← HA 2026.4 frontend migration notes
+docs/change_ref_ha_v2026_5.md                 ← HA 2026.5 Web Awesome component notes
+docs/change_ref_ha_v2026_6.md                 ← HA 2026.6 Web Awesome radio component notes
+hacs.json                                     ← HACS metadata
+.ha/                                          ← GIT-TRACKED devcontainer config files
+  mock_package.yaml                           ←   Mock entities (multi-domain HA package)
+  ui-theme-test.yaml                          ←   Theme test Lovelace dashboard (4 views)
+.devcontainer/.devconfig/                     ← GITIGNORED — runtime HA config dir
+  configuration.yaml                          ←   Entry point; loads .ha/ files via packages
 ```
 
 No build system, no scripts, no dependencies to install. Changes are made directly to the YAML file and reloaded in Home Assistant via `frontend.reload_themes`.
+
+> **Note:** `.devcontainer/.devconfig/` is gitignored and never committed — it contains the HA database, `.storage/`, cache, and the `configuration.yaml` entry point. The two files that matter for development are git-tracked in `.ha/` and referenced from `configuration.yaml` at their absolute container paths (`/workspaces/${PROJECT_NAME}/.ha/`). `mock_package.yaml` is loaded via `homeassistant.packages:` (multi-domain entities, not just `template:`). `ui-theme-test.yaml` is a 4-view Lovelace dashboard (sections × 3, masonry × 1) referenced via its absolute container path in the dashboard config. See `docs/DEVELOPMENT.md` Section 7 for the full devcontainer tracked-config approach.
 
 ## Commands
 
@@ -62,9 +69,8 @@ docker exec -w /workspaces/<PROJECT_DIR> <CONTAINER_NAME> bash -c "yamllint -c .
 
 The single theme file uses YAML anchors/aliases to avoid duplication. The structure is strictly ordered — anchors must be defined before they are referenced:
 
-- **Section A — `Black (Background Only)` (`&base_logic`)**: All shared tokens: backgrounds, typography, icons, inputs, color scales, energy/graph colors, named colors (`red-color`, `cyan-color`, etc.), and the global `card-mod-card` CSS block. This is the base anchor.
-- **Section B — `Black (Standard)` (`&black_surfaces`)**: Extends Section A via `<<: *base_logic`. Adds card backgrounds, dialog surfaces, borders, and dividers — anything that requires a "deep black" surface rather than just a background.
-- **Section C — Individual variants**: Each accent theme (e.g., `Black with Cyan`) extends Section B via `<<: *black_surfaces` and only adds `primary-color`, `state-active-color`, and `card-mod-theme`.
+- **Base theme — `Black with White` (`&base_logic`)**: All shared tokens: backgrounds, card surfaces, dialogs, borders, dividers, typography, icons, inputs, color scales, energy/graph colors, named colors (`red-color`, `cyan-color`, etc.), and the global `card-mod-card` CSS block. This mapping IS the `&base_logic` anchor. It is also a usable no-accent variant (white text and icons, HA semantic state colors, no `primary-color`).
+- **Section B — Individual variants**: Each accent theme (e.g., `Black with Cyan`) extends the base via `<<: *base_logic` and only adds `primary-color`, `state-active-color`, and `card-mod-theme`.
 
 ## Critical Rules When Modifying the Theme
 
@@ -73,8 +79,8 @@ These rules are enforced by Home Assistant's theme loader and will cause failure
 1. **Every top-level key is a theme name** — there is no way to hide a theme from the UI picker.
 2. **All values must be strings** — never nest a dict inside a theme block; HA's config loader will crash on restart.
 3. **Anchors before aliases** — YAML is processed sequentially. An alias (`*acc_red`) must appear after its anchor (`&acc_red`) in the file.
-4. **No duplicate keys across anchor merges** — if a token is defined in Section A (`base_logic`), do NOT redefine it in Section B (`black_surfaces`), even with the same value. HA logs a warning per theme for every duplicate. Before adding a token to Section B, grep for it in Section A first.
-5. **Do not add `primary-color`, `state-active-color`, or `card-mod-theme` to Section A or B** — these vary per accent variant and belong only in Section C.
+4. **No duplicate keys across anchor merges** — if a token is defined in the base anchor (`base_logic`), do NOT redefine it in any Section B variant, even with the same value. HA logs a warning per theme for every duplicate. Before adding a token to a variant, grep for it in the base anchor first.
+5. **Do not add `primary-color`, `state-active-color`, or `card-mod-theme` to the base anchor** — these vary per accent variant and belong only in Section B.
 
 ## YAML Standards (for linting)
 
@@ -96,13 +102,13 @@ The `hsl(from ...)` relative color syntax used for the `ha-color-neutral-*` and 
 
 ## Adding a New Accent Color Variant
 
-1. Define an anchor for the new color hex in Section A (follow the existing `&acc_*` naming pattern, alongside the other named color anchors at the top of `base_logic`).
+1. Define an anchor for the new color hex in the base theme (follow the existing `&acc_*` naming pattern, alongside the other named color anchors at the top of `base_logic`).
 2. Add a corresponding `*-color` named color token in that same block (e.g., `lime-color: &acc_lime "#..."`).
-3. Add the new theme entry at the end of Section C:
+3. Add the new theme entry at the end of Section B:
 
    ```yaml
    Black with Lime:
-     <<: *black_surfaces
+     <<: *base_logic
      card-mod-theme: "Black with Lime"
      primary-color: *acc_lime
      state-active-color: var(--primary-color)
@@ -110,7 +116,7 @@ The `hsl(from ...)` relative color syntax used for the `ha-color-neutral-*` and 
 
 ## card-mod Integration
 
-`card-mod` (optional dependency) is used in the `card-mod-card` block (Section A) to inject global CSS. Key behaviors:
+`card-mod` (optional dependency) is used in the `card-mod-card` block in the base theme to inject global CSS. Key behaviors:
 
 - Forces all `ha-card` elements to a black background with the theme border.
 - Explicitly sets `background: transparent; border: none` for cards intended to be transparent: `hui-heading-card`, `mushroom-title-card`, `mushroom-chips-card`, `.type-custom-bubble-card`, `hui-conditional-card`, `custom-button-card`.
@@ -128,6 +134,16 @@ Token hierarchy for icons (define in each Section C variant for per-accent match
 - `paper-item-icon-color` — legacy/standard icon color
 - `state-icon-color` — neutral/inactive icon state
 - `state-icon-active-color` — "On"/active icon state
+
+**Backward compatibility:** Keep old/superseded tokens (`paper-*`, `mdc-*`). They fail silently on newer HA — no warnings, no visual impact. Removing them breaks older HA versions. Only remove if a token actively causes a conflict or warning.
+
+**New token classification — always check before adding:**
+
+- **Category A** (hardcoded component default): add only if the default looks wrong on black.
+- **Category B** (component defaults to `var(--primary-color)`): add immediately to the base anchor using `var(--primary-color, #aaaaaa)`. On `Black with White`, `--primary-color` is unset → transparent → invisible. Do not wait for a visible failure — on the base theme it is invisible by definition.
+- **`:host` trap**: some components redeclare tokens internally via `:host { --token: var(--primary-color) }`, overriding any inherited value. These cannot be fixed without setting `primary-color` directly (which causes warnings — an absolute constraint). Document as permanent `Black with White` limitations.
+
+See `docs/DEVELOPMENT.md` Section 5 for full detail and examples.
 
 ## Development Environment
 
@@ -153,3 +169,14 @@ For rapid visual iteration between restarts, trigger a theme reload without rest
 ### Skill Prompts
 
 See `.shared/prompts/devcon_run_gen.md` for the mini-skill for running arbitrary commands inside this devcontainer from the Windows host. Container identity values (`CONTAINER_NAME`, `PROJECT_DIR`) are in `.devcontainer/.env`.
+
+See `.shared/prompts/theme_review.md` for the theme token drift review guide. Use it when an HA update is suspected to have renamed or removed tokens. It provides a Playwright-based workflow for inspecting component shadow DOMs, reading `adoptedStyleSheets`, and cross-referencing against the theme YAML to detect invalid `var()` chains, dead tokens, and missing Category B overrides.
+
+## README Known Decisions
+
+These are deliberate choices in `README.md`. Do not raise findings against them in any review (including readme_review), in any section.
+
+- **"Sections" terminology** — "Sections" in the README means the HA Sections view type (introduced HA 2024.3). It is the standard term. Do not flag it as ambiguous.
+- **`Black with White` in picker** — `Black with White` appearing in the picker alongside the accent variants is a structural consequence of HA's theme architecture (the base anchor must be a named theme entry). It is intentionally treated as a usable no-accent variant, not flagged as an error or infrastructure artifact. Do not flag its presence or description as a limitation finding.
+- **Automate Theme Changes navigation table** — the scenario/trigger/jump-to table in the Automate Theme Changes section is intentional structure. Do not flag it as redundant or suggest removing it.
+- **card-mod documentation — deliberately omitted** — the theme lists card-mod as optional but includes no limitations section, no visual comparison, and no "without card-mod" caveats. This is intentional: the visual difference on modern HA is not perceptible. Do not flag the absence of card-mod limitation content as a missing information finding (2a), and do not flag any card-mod-adjacent wording as suggesting features are "inactive" or broken without it.

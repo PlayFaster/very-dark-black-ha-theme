@@ -2,6 +2,90 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.8] - 2026-06-25 - Release
+
+### Changed
+
+- **Black with White Theme**: A new monochrome theme has been implemented as the base anchor, replacing the previous _Standard_ and _Background Only_ themes.
+- **Form field hover state**: Changed Input field hover background from black to dark gray for better visual separation from surrounding surfaces.
+
+## [1.3.8-dev9] - 2026-06-25 - Unreleased
+
+### Summary
+
+- **Base Theme Consolidation & Rename**: Eliminated "Black (Background Only)" as a separate picker entry by merging its surface tokens into the base anchor. Renamed "Black (Standard)" to "Black with White" for clarity and better sort order - its now a theme variant in its own right. Fixed the sparkline graph on "Black with White" which was invisible due to an unset `primary-color` chain. Reviewed HA 2026.7 frontend blog — no token changes, no theme action needed.
+
+### Changed
+
+- **Base theme consolidation**: Merged "Black (Background Only)" (`&black_surfaces`, Section B) into the base anchor (`&base_logic` / "Black with White"). The two-level inheritance chain A→B→C is now a single base anchor + Section B accent variants. All 8 accent themes now use `<<: *base_logic` directly. "Black (Background Only)" is gone from the picker — picker now shows 9 themes (Black with White + 8 accents).
+- **"Black (Standard)" renamed to "Black with White"**: More descriptive name — accurately reflects the pure-black-surface / white-text-and-icons character of the no-accent theme. New name sorts after "Black with Silver" in the picker (W > S); previously "Black (Standard)" sorted before all "Black with..." variants due to `(` vs `w` ASCII order.
+- **Docs**: Updated AGENTS.md, docs/DEVELOPMENT.md, and .notes/proj_structure.md to reflect the single-base architecture, rename, and new .ha/ directory. proj_structure.md bumped to v1.0.4 → v1.0.5.
+- View 4 of `ui-theme-test.yaml` (Compare view) received a `footer:` view-level key during this session — a dev-only dashboard annotation.
+
+### Fixed
+
+- **Sensor card graph invisible on "Black with White"**: Sensor card mini graphs were not rendering on the no-accent theme. Root cause: `accent-color: var(--primary-color)` with no fallback; `--primary-color` is intentionally unset on "Black with White" → `--accent-color` resolved to guaranteed-invalid → the graph component used it for line color → transparent/invisible line. Fixed by adding a grey fallback: `accent-color: "var(--primary-color, #e0e0e0)"`. Accent themes are unaffected (their `primary-color` is set).
+
+### Added
+
+- **HA 2026.7 Reference Doc**: Created `docs/change_ref_ha_v2026_7.md`. The 2026.7 frontend blog covers component size attribute renames (`small`/`medium`/`large` → `xs`/`s`/`m`/`l`/`xl` on `ha-button`, `ha-button-toggle-group`, `ha-slider`) and new infrastructure (virtualized lists, dirty state context). No CSS custom property changes — no theme YAML action required.
+
+## [1.3.8-dev6] - 2026-06-25 - Unreleased
+
+### Summary
+
+- **Better Base Themes & Better Theme Test**: The two base (anchor) themes, have been significantly improved to ensure that if selected, they are fully usable, just minus an accent color. A significant Theme Test dashboard has been created, and is set-up as git tracked.
+
+### Changed
+
+- **Mock Values**: A full suite of dummy / mock sensor entities have been created via the home assistant "packages:" functionality to populate the Theme Test dashboard so that changes to the theme or to Home Assistant can be checked and addressed as needed.
+- **Theme Test Dashboard**: A YAML mode theme test dashboard is now in place on the Home Assistant instance in the devcon of the project. This allows for visually checking many card and sensor types and combinations. It also has a compare view where the applied (default) theme can be compared to one of the VDB (Cyan) themes.
+- **Docs**: Updated relevant documents AGENTS, DEVELOPMENT, proj_Structure, README to account for the updated functionality.
+
+## [1.3.8-dev3] - 2026-06-25 - Unreleased
+
+### Summary
+
+- **Base Theme Fixes**: Investigated and resolved invisible UI elements (`ha-slider`, `ha-checkbox`, `ha-radio-option`, `ha-progress-bar`) on `Black (Background Only)` and `Black (Standard)`. Root cause: those components chain their active/checked color to `var(--primary-color)`, which is intentionally unset on the base themes. Fixed by adding CSS fallback values in Section A.
+
+### Fixed
+
+- **ha-slider invisible on base themes**: Added `ha-slider-thumb-color` and `ha-slider-indicator-color` to Section A using `var(--primary-color, #aaaaaa)`. The `<ha-slider>` component reads these via CSS inheritance; the fallback activates when `--primary-color` is unset.
+- **ha-checkbox checked state invisible on base themes**: Changed `ha-checkbox-checked-background-color` and `ha-checkbox-checked-background-color-hover` from `var(--primary-color)` to `var(--primary-color, #aaaaaa)`.
+- **ha-radio-option checked state invisible on base themes**: Same fallback applied to `ha-radio-option-active-color` and `ha-radio-option-checked-background-color`.
+- **ha-progress-bar invisible on base themes**: Same fallback applied to `ha-progress-bar-indicator-color` and `ha-progress-bar-indicator-background`.
+
+### Added
+
+- **control-switch-on-color** added to Section A (`var(--primary-color, #aaaaaa)`). This is the actual token `<ha-control-switch>` binds its active color to. Currently has no effect because the component redeclares it via a `:host` CSS rule (overriding inheritance), but is kept for potential future component changes.
+
+### Investigation Notes
+
+Full investigation documented in `.notes/issues/base_theme_issues/`. The original symptom (switch ON and slider invisible) was initially investigated against HA 2026.5b0 (beta), which produced misleading results. Re-investigation on HA 2026.6.4 (release) produced definitive findings. The key discovery: `ha-switch-checked-*` and `paper-slider-*` tokens, added to the theme in 1.3.4, are not consumed by the actual components in HA 2026.6.4. Those tokens are retained for backward compatibility (as with all prev version tokens, they fail silently).
+
+## [1.3.8-dev2] - 2026-06-25 - Unreleased
+
+### Summary
+
+- **Theme Test Dashboard**: Created a Theme Test dashboard in the devcontainer to have the various theme elements present in one place for testing purposes
+
+### Added
+
+- **"ui-theme-test.yaml**: Added file /.devcontainer/.devconfig/ui-theme-test.yaml as the Theme Test dashboard.
+- **Dummy Sensors**: Added a large number of dummy sensors based on the setup used by the **Graphite** theme
+
+## [1.3.8-dev1] - 2026-06-25 - Unreleased
+
+### Summary
+
+- **Code Review**: Several code review driven changes. See /code_review/code_review_20260624.md
+
+### Changed
+
+- **Form Backgrounds**: Changed form (text-field) hoover [ ha-color-form-background-hover ] to very dark grey and form disabled to a different very dark grey. Subtle but helpful.
+- **Section Numbers**: Previous re-orgs and updates of the theme file structure meant that the sections numbers were out of order. Re-numbers, sections 1 to 19 now.
+- **Comments**: Added several comments to confirm some decisions to that they would not be flagged again. Also ensured all comments are under 80 chars
+
 ## [1.3.7] - 2026-06-24 - Release
 
 ### Summary

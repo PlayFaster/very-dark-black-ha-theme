@@ -1,0 +1,4316 @@
+---
+# VDB Theme Test Dashboard
+# Exercises all major HA UI element types, states, and surfaces.
+# Reload: Developer Tools → YAML → Reload Lovelace Resources
+
+# ══════════════════════════════════════════════════════════════════════════
+#
+# This is a YAML mode Home Assistant dashboard for Theme Testing
+#
+# it is called from Home Assistant configuration.yaml using
+#
+# lovelace:
+#   mode: storage
+#   dashboards:
+#     theme-test:
+#       mode: yaml
+#       title: Theme Test
+#       icon: mdi:palette
+#       show_in_sidebar: true
+#       filename: /workspaces/very-dark-black-ha-theme/.ha/ui-theme-test.yaml
+#
+# ══════════════════════════════════════════════════════════════════════════
+
+title: Theme Test
+views:
+  # ══════════════════════════════════════════════════════════════════════════
+  # VIEW 1 — Controls & States (sections layout — default view)
+  # Exercises: sections grid, section headers, all interactive controls,
+  # entity state colours, form controls, tile cards, glance, buttons, gauges.
+  # ══════════════════════════════════════════════════════════════════════════
+  - title: Controls & States
+    icon: mdi:toggle-switch
+    type: sections
+    max_columns: 4
+
+    badges:
+      - type: entity
+        entity: binary_sensor.internet_connectivity
+        show_name: true
+        name: Internet
+      - type: entity
+        entity: alarm_control_panel.home_alarm
+        show_name: true
+        name: Alarm
+      - type: entity
+        entity: sensor.kitchen_temperature
+        show_name: true
+        name: Kitchen
+      - type: entity
+        entity: binary_sensor.mock_problem_alert
+        show_name: true
+        name: Problem
+      - type: entity
+        entity: switch.smart_plug_tv
+        show_name: true
+        name: TV
+
+    sections:
+      # ──────────────────────────────────────────────────────────────────────
+      - title: Overview
+        cards:
+          - type: markdown
+            content: >
+              ## Very Dark Black — Theme Test Dashboard
+
+              All major HA UI element types and states in one place. Use **Developer
+              Tools → YAML → Reload Lovelace** to refresh after theme changes. Each
+              section is labelled with what it exercises.
+
+          - type: markdown
+            title: "More Info Dialog — card-mod-more-info"
+            content: >
+              **Tap any entity** to open its More Info dialog and test: heading ink
+              color (`#ffffff` override), dialog surface background (pure black),
+              scrim/backdrop (`rgba(0,0,0,0.9)`), on-surface text contrast, form
+              controls inside dialogs (input backgrounds, selects, sliders), and the
+              number / cover / climate / alarm detail views.
+
+          - type: heading
+            heading: Heading Card — title style with entity badges
+            heading_style: title
+            icon: mdi:card-text-outline
+            badges:
+              - type: entity
+                entity: binary_sensor.internet_connectivity
+                name: Connectivity
+              - type: entity
+                entity: sensor.kitchen_temperature
+                name: Kitchen
+              - type: entity
+                entity: sensor.e_ink_display_battery_level
+                name: Battery
+
+          - type: heading
+            heading: Subtitle style heading (no badges)
+            heading_style: subtitle
+
+      # ──────────────────────────────────────────────────────────────────────
+      - title: Tile Cards
+        cards:
+          - type: heading
+            heading: Active / togglable states
+            heading_style: subtitle
+
+          - type: horizontal-stack
+            cards:
+              - type: tile
+                entity: switch.smart_plug_tv
+                name: Switch
+              - type: tile
+                entity: light.led_strip
+                name: Light
+              - type: tile
+                entity: fan.ceiling_fan
+                name: Fan
+
+          - type: horizontal-stack
+            cards:
+              - type: tile
+                entity: lock.front_door_lock
+                name: Lock
+              - type: tile
+                entity: cover.garage_door
+                name: Cover
+              - type: tile
+                entity: binary_sensor.internet_connectivity
+                name: Binary On
+
+          - type: heading
+            heading: Sensor / read-only states
+            heading_style: subtitle
+
+          - type: horizontal-stack
+            cards:
+              - type: tile
+                entity: sensor.kitchen_temperature
+                name: Temperature
+              - type: tile
+                entity: sensor.kitchen_humidity
+                name: Humidity
+              - type: tile
+                entity: sensor.e_ink_display_battery_level
+                name: Battery %
+
+          - type: horizontal-stack
+            cards:
+              - type: tile
+                entity: binary_sensor.office_window_contact
+                name: Binary Off
+              - type: tile
+                entity: binary_sensor.fireplace_too_hot
+                name: Binary Alert
+              - type: tile
+                entity: sensor.unavailable_sensor
+                name: Unavailable
+
+          - type: heading
+            heading: Switch on vs off — primary-color vs unchecked-color
+            heading_style: subtitle
+
+          - type: horizontal-stack
+            cards:
+              - type: tile
+                entity: switch.smart_plug_tv
+                name: SW — on state
+              - type: tile
+                entity: switch.smart_plug_office_ac
+                name: SW — off state
+              - type: tile
+                entity: light.led_strip
+                name: Light — on
+              - type: tile
+                entity: light.star_projector
+                name: Light — off
+
+      # ──────────────────────────────────────────────────────────────────────
+      - title: Danger & Warning Fills
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: tile
+                entity: binary_sensor.mock_problem_alert
+                name: Problem — danger
+              - type: tile
+                entity: binary_sensor.mock_heat_alert
+                name: Heat Alert — warning
+              - type: tile
+                entity: binary_sensor.fireplace_too_hot
+                name: Heat — inactive
+
+          - type: entities
+            title: Alert Entity Rows (hover to see fill states)
+            entities:
+              - entity: binary_sensor.mock_problem_alert
+                name: Problem alert — danger fill
+              - entity: binary_sensor.mock_heat_alert
+                name: Heat alert — warning fill
+              - entity: binary_sensor.fireplace_too_hot
+                name: Heat sensor — inactive (no fill)
+
+      # ──────────────────────────────────────────────────────────────────────
+      - title: Switches & Lights
+        cards:
+          - type: entities
+            title: Switches
+            show_header_toggle: true
+            entities:
+              - switch.smart_plug_tv
+              - switch.smart_plug_office_ac
+              - switch.smart_plug_coffee_machine
+              - switch.smart_plug_lava_lamp
+              - switch.smart_plug_kitchen_heater
+              - switch.smart_plug_office_heater
+
+          - type: entities
+            title: Lights
+            show_header_toggle: true
+            entities:
+              - light.led_strip
+              - light.star_projector
+
+      # ──────────────────────────────────────────────────────────────────────
+      - title: Input Controls
+        cards:
+          - type: entities
+            title: Number Sliders
+            entities:
+              - entity: input_number.mock_brightness_level
+                name: Brightness Level
+              - entity: input_number.mock_volume_level
+                name: Volume Level
+              - entity: input_number.mock_fan_speed
+                name: Fan Speed
+              - entity: input_number.mock_target_humidity
+                name: Target Humidity
+              - entity: input_number.mock_mp_volume
+                name: Media Volume
+
+          - type: entities
+            title: Select Dropdowns
+            entities:
+              - entity: input_select.mock_hvac_mode
+                name: HVAC Mode (input)
+              - entity: input_select.mock_mp_source
+                name: Media Source (input)
+              - entity: select.hvac_mode
+                name: HVAC Mode (template)
+
+          - type: entities
+            title: Booleans (checkbox rows)
+            entities:
+              - entity: input_boolean.auto_light_kitchen
+                name: Auto Light Kitchen
+              - entity: input_boolean.manual_fire_place
+                name: Manual Fireplace
+
+          - type: todo-list
+            entity: todo.theme_test_to_do
+            title: Checkbox — ha-checkbox (todo list)
+
+          - type: markdown
+            title: "Radio & Progress Bar — where to find"
+            content: >
+              **ha-radio-option** — not embeddable in Lovelace cards. Test via: Settings
+              → System → General (language/region selectors) or by opening any card
+              editor that has a type/mode radio group.
+
+
+              **ha-progress-bar** — not directly triggerable from dashboard. Test via:
+              Developer Tools → Updates (trigger an install), or open the more-info
+              dialog for a `backup_manager` or `update` entity.
+
+          - type: entities
+            title: Date & Time Inputs
+            entities:
+              - entity: input_datetime.morning_alarm
+                name: Morning Alarm
+              - entity: input_datetime.vacation_start
+                name: Vacation Start
+
+      # ──────────────────────────────────────────────────────────────────────
+      - title: Text & Form Controls
+        cards:
+          - type: entities
+            title: input_text — normal state (form-background)
+            entities:
+              - entity: input_text.mock_text_note
+                name: Short Note (max 50)
+              - entity: input_text.mock_text_message
+                name: Long Message (max 255)
+              - entity: input_text.mock_text_password
+                name: Password Field (masked)
+
+          - type: entities
+            title: Normal vs disabled — grey-wash comparison
+            entities:
+              - type: section
+                label: Normal (for comparison)
+              - entity: number.ceiling_fan_speed
+                name: Number — normal
+              - entity: select.hvac_mode
+                name: Select — normal
+              - type: section
+                label: Unavailable / disabled
+              - entity: number.unavailable_number
+                name: Number — unavailable
+              - entity: select.unavailable_select
+                name: Select — unavailable
+
+      # ──────────────────────────────────────────────────────────────────────
+      - title: Covers & Locks
+        cards:
+          - type: entities
+            title: Covers
+            entities:
+              - cover.garage_door
+              - cover.living_room_blinds
+              - cover.bedroom_curtains
+
+          - type: entities
+            title: Locks
+            entities:
+              - lock.front_door_lock
+              - lock.back_door_lock
+
+      # ──────────────────────────────────────────────────────────────────────
+      - title: Sensors
+        cards:
+          - type: entities
+            title: Environment
+            entities:
+              - type: section
+                label: Temperature
+              - sensor.kitchen_temperature
+              - sensor.bedroom_temperature
+              - sensor.bathroom_temperature
+              - sensor.office_temperature
+              - sensor.outdoor_temperature
+              - type: section
+                label: Air Quality
+              - sensor.kitchen_humidity
+              - sensor.kitchen_air_quality_pm25
+              - sensor.office_carbon_dioxide
+              - sensor.office_humidity
+              - type: section
+                label: Power
+              - sensor.office_workbench_power
+              - sensor.living_room_outlet_power
+              - sensor.grid_frequency
+
+          - type: entities
+            title: Binary Sensors
+            entities:
+              - binary_sensor.internet_connectivity
+              - binary_sensor.router_connectivity
+              - binary_sensor.office_weather_station_connectivity
+              - type: divider
+              - entity: binary_sensor.office_window_contact
+                name: Office Window
+              - entity: binary_sensor.kitchen_window_contact
+                name: Kitchen Window
+              - entity: binary_sensor.bathroom_door_contact
+                name: Bathroom Door
+              - binary_sensor.fireplace_too_hot
+              - binary_sensor.night
+
+      # ──────────────────────────────────────────────────────────────────────
+      - title: Glance & Buttons
+        cards:
+          - type: glance
+            title: Glance — Room Temperatures
+            show_state: true
+            columns: 6
+            entities:
+              - entity: sensor.kitchen_temperature
+                name: Kitchen
+              - entity: sensor.bedroom_temperature
+                name: Bedroom
+              - entity: sensor.bathroom_temperature
+                name: Bathroom
+              - entity: sensor.office_temperature
+                name: Office
+              - entity: sensor.living_room_temperature
+                name: Living Rm
+              - entity: sensor.outdoor_temperature
+                name: Outdoor
+
+          - type: glance
+            title: Glance — Device States (icons + on/off colour)
+            show_state: true
+            columns: 6
+            entities:
+              - switch.smart_plug_tv
+              - light.led_strip
+              - fan.ceiling_fan
+              - binary_sensor.internet_connectivity
+              - lock.front_door_lock
+              - cover.garage_door
+
+          - type: horizontal-stack
+            cards:
+              - type: button
+                entity: button.restart_router
+                name: Template Button
+                icon: mdi:router-wireless
+                tap_action:
+                  action: toggle
+              - type: button
+                entity: input_button.wood_added
+                name: Input Button
+                icon: mdi:fire
+                tap_action:
+                  action: toggle
+              - type: button
+                entity: switch.smart_plug_tv
+                name: Switch Toggle
+                icon: mdi:television
+                tap_action:
+                  action: toggle
+              - type: button
+                entity: light.led_strip
+                name: Light Toggle
+                icon: mdi:led-strip
+                show_state: true
+                tap_action:
+                  action: toggle
+
+          - type: entities
+            title: Button Rows
+            entities:
+              - entity: button.restart_router
+                name: Template Button Row
+              - entity: input_button.wood_added
+                name: Input Button Row
+              - type: button
+                name: Service Call Row
+                action_name: Trigger
+                icon: mdi:bell
+                tap_action:
+                  action: call-service
+                  service: system_log.write
+                  data:
+                    message: Theme test button pressed
+                    level: info
+
+      # ──────────────────────────────────────────────────────────────────────
+      - title: Gauges
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: gauge
+                entity: sensor.kitchen_humidity
+                name: Humidity %
+                unit: "%"
+                min: 0
+                max: 100
+                needle: false
+                severity:
+                  green: 40
+                  yellow: 70
+                  red: 85
+              - type: gauge
+                entity: sensor.e_ink_display_battery_level
+                name: Battery %
+                unit: "%"
+                min: 0
+                max: 100
+                needle: true
+                severity:
+                  red: 0
+                  yellow: 40
+                  green: 60
+              - type: gauge
+                entity: sensor.office_carbon_dioxide
+                name: CO₂ ppm
+                min: 400
+                max: 2000
+                needle: true
+                severity:
+                  green: 400
+                  yellow: 1000
+                  red: 1500
+
+      # ──────────────────────────────────────────────────────────────────────
+      - title: Alarm & Security
+        cards:
+          - type: alarm-panel
+            entity: alarm_control_panel.home_alarm
+            name: Home Alarm
+            states:
+              - arm_home
+              - arm_away
+              - arm_night
+
+      # ──────────────────────────────────────────────────────────────────────
+      - title: Fans, Timers & Counters
+        cards:
+          - type: entities
+            title: Fans
+            entities:
+              - entity: fan.ceiling_fan
+                name: Ceiling Fan
+              - entity: number.ceiling_fan_speed
+                name: Fan Speed (number)
+
+          - type: horizontal-stack
+            cards:
+              - type: entities
+                title: Timers
+                entities:
+                  - timer.laundry
+                  - timer.oven
+              - type: entities
+                title: Counters
+                entities:
+                  - counter.daily_visitors
+                  - counter.package_deliveries
+
+      # ──────────────────────────────────────────────────────────────────────
+      - title: Unavailable & Conditional
+        cards:
+          - type: entities
+            title: Unavailable — Entity Rows
+            entities:
+              - entity: sensor.unavailable_sensor
+                name: Sensor — unavailable
+              - entity: binary_sensor.unavailable_contact
+                name: Binary — unavailable
+              - entity: switch.unavailable_switch
+                name: Switch — unavailable
+              - entity: light.unavailable_light
+                name: Light — unavailable
+              - entity: fan.unavailable_fan
+                name: Fan — unavailable
+              - type: section
+                label: Entity not found (intentional)
+              - entity: sensor.entity_does_not_exist
+                name: Entity not found (intentional)
+
+          - type: horizontal-stack
+            cards:
+              - type: tile
+                entity: sensor.unavailable_sensor
+                name: Tile Unavailable
+              - type: tile
+                entity: switch.unavailable_switch
+                name: Switch Unavailable
+              - type: tile
+                entity: light.unavailable_light
+                name: Light Unavailable
+
+          - type: markdown
+            content: >
+              The card below is a `type: conditional` — it is wrapped in
+              `hui-conditional-card`, which is in the card-mod transparent exclusion
+              list. The wrapper itself must have no border or background; the **inner**
+              card should still have the normal card surface.
+
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: binary_sensor.internet_connectivity
+                state: "on"
+            card:
+              type: entities
+              title: Conditional — visible when Internet is on
+              entities:
+                - binary_sensor.internet_connectivity
+                - binary_sensor.router_connectivity
+                - binary_sensor.office_weather_station_connectivity
+
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: switch.smart_plug_tv
+                state: "on"
+            card:
+              type: tile
+              entity: switch.smart_plug_tv
+              name: Conditional Tile — visible when TV plug is on
+
+  # ══════════════════════════════════════════════════════════════════════════
+  # VIEW 2 — Data & Themes (sections layout)
+  # Exercises: charts, history, statistics, weather, thermostat, media,
+  # logbook, entity filter, theme colour variants, markdown typography.
+  # ══════════════════════════════════════════════════════════════════════════
+  - title: Data & Themes
+    icon: mdi:chart-line
+    type: sections
+    max_columns: 2
+
+    sections:
+      # ──────────────────────────────────────────────────────────────────────
+      - title: Sensor Sparklines
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: sensor
+                entity: sensor.kitchen_temperature
+                name: Kitchen Temp
+                graph: line
+                hours_to_show: 24
+              - type: sensor
+                entity: sensor.office_carbon_dioxide
+                name: Office CO₂
+                graph: line
+                hours_to_show: 24
+              - type: sensor
+                entity: sensor.e_ink_display_battery_level
+                name: Battery
+                graph: line
+                hours_to_show: 24
+
+          - type: horizontal-stack
+            cards:
+              - type: sensor
+                entity: sensor.office_workbench_power
+                name: Workbench Power
+                graph: line
+                hours_to_show: 24
+              - type: sensor
+                entity: sensor.kitchen_humidity
+                name: Humidity
+                graph: line
+                hours_to_show: 24
+              - type: sensor
+                entity: sensor.outdoor_temperature
+                name: Outdoor Temp
+                graph: line
+                hours_to_show: 24
+
+      # ──────────────────────────────────────────────────────────────────────
+      - title: History Graphs
+        cards:
+          - type: history-graph
+            title: Temperature — 24 h
+            hours_to_show: 24
+            entities:
+              - entity: sensor.kitchen_temperature
+                name: Kitchen
+              - entity: sensor.bedroom_temperature
+                name: Bedroom
+              - entity: sensor.office_temperature
+                name: Office
+              - entity: sensor.outdoor_temperature
+                name: Outdoor
+
+          - type: history-graph
+            title: graph-color-1 (primary) → graph-color-10 (indigo)
+            hours_to_show: 24
+            entities:
+              - entity: sensor.kitchen_temperature
+                name: "1 — primary"
+              - entity: sensor.bedroom_temperature
+                name: "2 — blue"
+              - entity: sensor.bathroom_temperature
+                name: "3 — green"
+              - entity: sensor.office_temperature
+                name: "4 — purple"
+              - entity: sensor.outdoor_temperature
+                name: "5 — red"
+              - entity: sensor.fireplace_temperature
+                name: "6 — cyan"
+              - entity: sensor.storage_room_temperature
+                name: "7 — teal"
+              - entity: sensor.living_room_temperature
+                name: "8 — pink"
+              - entity: sensor.outdoor_station_temperature
+                name: "9 — deep-orange"
+              - entity: sensor.outdoor_station_humidity
+                name: "10 — indigo"
+
+      # ──────────────────────────────────────────────────────────────────────
+      - title: Statistics Graph
+        cards:
+          - type: statistics-graph
+            title: Temperature Stats — 7 days
+            period: day
+            days_to_show: 7
+            chart_type: line
+            entities:
+              - entity: sensor.kitchen_temperature
+                name: Kitchen
+              - entity: sensor.office_temperature
+                name: Office
+              - entity: sensor.outdoor_temperature
+                name: Outdoor
+
+          - type: statistics-graph
+            title: Power Consumption — 7 days (bar)
+            period: day
+            days_to_show: 7
+            chart_type: bar
+            stat_types:
+              - mean
+            entities:
+              - entity: sensor.office_workbench_power
+                name: Workbench
+              - entity: sensor.living_room_outlet_power
+                name: Living Room
+
+      # ──────────────────────────────────────────────────────────────────────
+      - title: Weather
+        cards:
+          - type: entities
+            title: Condition Selector
+            entities:
+              - entity: input_select.mock_weather_condition
+                name: Weather Condition (changes icon + card)
+
+          - type: weather-forecast
+            show_current: true
+            show_forecast: false
+            entity: weather.mock_weather
+            round_temperature: false
+
+          - type: horizontal-stack
+            cards:
+              - type: tile
+                entity: weather.mock_weather
+                name: Weather Tile
+              - type: glance
+                show_state: true
+                entities:
+                  - entity: weather.mock_weather
+                    name: Glance
+
+      # ──────────────────────────────────────────────────────────────────────
+      - title: Thermostat & Climate
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: thermostat
+                entity: climate.kitchen_climate_control
+                name: Kitchen
+              - type: thermostat
+                entity: climate.office_climate_control
+                name: Office
+
+          - type: entities
+            title: Climate Entity Rows
+            entities:
+              - climate.kitchen_climate_control
+              - climate.fireplace
+              - climate.office_climate_control
+
+      # ──────────────────────────────────────────────────────────────────────
+      - title: Media Player
+        cards:
+          - type: media-control
+            entity: media_player.living_room_speaker
+
+          - type: entities
+            title: Media Entity Rows
+            entities:
+              - media_player.living_room_speaker
+              - type: divider
+              - entity: input_select.mock_mp_source
+                name: Source (input_select)
+              - entity: input_number.mock_mp_volume_normalized
+                name: Volume 0–1 (media player)
+              - entity: input_number.mock_mp_volume
+                name: Volume 0–100 (display)
+
+      # ──────────────────────────────────────────────────────────────────────
+      - title: Logbook
+        cards:
+          - type: logbook
+            title: Recent State Changes (scroll to test 4px scrollbar)
+            hours_to_show: 24
+            entities:
+              - switch.smart_plug_tv
+              - light.led_strip
+              - fan.ceiling_fan
+              - lock.front_door_lock
+              - binary_sensor.internet_connectivity
+              - alarm_control_panel.home_alarm
+              - timer.laundry
+              - timer.oven
+              - cover.garage_door
+              - binary_sensor.mock_problem_alert
+
+      # ──────────────────────────────────────────────────────────────────────
+      - title: Entity Filter
+        cards:
+          - type: entity-filter
+            entities:
+              - switch.smart_plug_tv
+              - switch.smart_plug_office_ac
+              - switch.smart_plug_coffee_machine
+              - switch.smart_plug_lava_lamp
+              - switch.smart_plug_kitchen_heater
+              - switch.smart_plug_office_heater
+              - light.led_strip
+              - light.star_projector
+              - fan.ceiling_fan
+              - binary_sensor.internet_connectivity
+              - binary_sensor.router_connectivity
+              - binary_sensor.night
+            conditions:
+              - condition: state
+                state: "on"
+            card:
+              type: entities
+              title: Active right now (on = true)
+
+          - type: entity-filter
+            entities:
+              - switch.smart_plug_tv
+              - switch.smart_plug_office_ac
+              - switch.smart_plug_coffee_machine
+              - switch.smart_plug_lava_lamp
+              - light.led_strip
+              - light.star_projector
+              - fan.ceiling_fan
+              - lock.front_door_lock
+              - lock.back_door_lock
+            conditions:
+              - condition: state
+                state: "off"
+            card:
+              type: glance
+              title: Glance — Inactive (off)
+              show_state: true
+
+      # ──────────────────────────────────────────────────────────────────────
+      - title: Theme Colour Variants
+        cards:
+          - type: vertical-stack
+            cards:
+              - type: entities
+                title: Cyan
+                show_header_toggle: true
+                state_color: true
+                theme: Black with Cyan
+                entities:
+                  - entity: switch.smart_plug_tv
+                    name: TV Switch
+                  - entity: input_number.mock_volume_level
+                    name: Volume
+                  - entity: sensor.kitchen_temperature
+                    name: Temp
+                  - entity: binary_sensor.mock_problem_alert
+                    name: Problem Alert
+                  - entity: input_button.wood_added
+                    name: Button
+              - type: entities
+                title: Green
+                show_header_toggle: true
+                state_color: true
+                theme: Black with Green
+                entities:
+                  - entity: switch.smart_plug_tv
+                    name: TV Switch
+                  - entity: input_number.mock_volume_level
+                    name: Volume
+                  - entity: sensor.kitchen_temperature
+                    name: Temp
+                  - entity: binary_sensor.mock_problem_alert
+                    name: Problem Alert
+                  - entity: input_button.wood_added
+                    name: Button
+              - type: entities
+                title: Red
+                show_header_toggle: true
+                state_color: true
+                theme: Black with Red
+                entities:
+                  - entity: switch.smart_plug_tv
+                    name: TV Switch
+                  - entity: input_number.mock_volume_level
+                    name: Volume
+                  - entity: sensor.kitchen_temperature
+                    name: Temp
+                  - entity: binary_sensor.mock_problem_alert
+                    name: Problem Alert
+                  - entity: input_button.wood_added
+                    name: Button
+              - type: entities
+                title: Fuchsia
+                show_header_toggle: true
+                state_color: true
+                theme: Black with Fuchsia
+                entities:
+                  - entity: switch.smart_plug_tv
+                    name: TV Switch
+                  - entity: input_number.mock_volume_level
+                    name: Volume
+                  - entity: sensor.kitchen_temperature
+                    name: Temp
+                  - entity: binary_sensor.mock_problem_alert
+                    name: Problem Alert
+                  - entity: input_button.wood_added
+                    name: Button
+              - type: entities
+                title: Standard
+                show_header_toggle: true
+                state_color: true
+                theme: Black (Standard)
+                entities:
+                  - entity: switch.smart_plug_tv
+                    name: TV Switch
+                  - entity: input_number.mock_volume_level
+                    name: Volume
+                  - entity: sensor.kitchen_temperature
+                    name: Temp
+                  - entity: binary_sensor.mock_problem_alert
+                    name: Problem Alert
+                  - entity: input_button.wood_added
+                    name: Button
+
+      - title: Theme Colour Variants
+        cards:
+          - type: vertical-stack
+            cards:
+              - type: entities
+                title: Indigo
+                show_header_toggle: true
+                state_color: true
+                theme: Black with Indigo
+                entities:
+                  - entity: switch.smart_plug_tv
+                    name: TV Switch
+                  - entity: input_number.mock_volume_level
+                    name: Volume
+                  - entity: sensor.kitchen_temperature
+                    name: Temp
+                  - entity: binary_sensor.mock_problem_alert
+                    name: Problem Alert
+                  - entity: input_button.wood_added
+                    name: Button
+              - type: entities
+                title: Silver
+                show_header_toggle: true
+                state_color: true
+                theme: Black with Silver
+                entities:
+                  - entity: switch.smart_plug_tv
+                    name: TV Switch
+                  - entity: input_number.mock_volume_level
+                    name: Volume
+                  - entity: sensor.kitchen_temperature
+                    name: Temp
+                  - entity: binary_sensor.mock_problem_alert
+                    name: Problem Alert
+                  - entity: input_button.wood_added
+                    name: Button
+              - type: entities
+                title: Orange
+                show_header_toggle: true
+                state_color: true
+                theme: Black with Orange
+                entities:
+                  - entity: switch.smart_plug_tv
+                    name: TV Switch
+                  - entity: input_number.mock_volume_level
+                    name: Volume
+                  - entity: sensor.kitchen_temperature
+                    name: Temp
+                  - entity: binary_sensor.mock_problem_alert
+                    name: Problem Alert
+                  - entity: input_button.wood_added
+                    name: Button
+              - type: entities
+                title: Purple
+                show_header_toggle: true
+                state_color: true
+                theme: Black with Purple
+                entities:
+                  - entity: switch.smart_plug_tv
+                    name: TV Switch
+                  - entity: input_number.mock_volume_level
+                    name: Volume
+                  - entity: sensor.kitchen_temperature
+                    name: Temp
+                  - entity: binary_sensor.mock_problem_alert
+                    name: Problem Alert
+                  - entity: input_button.wood_added
+                    name: Button
+              - type: entities
+                title: BG Only
+                show_header_toggle: true
+                state_color: true
+                theme: Black (Background Only)
+                entities:
+                  - entity: switch.smart_plug_tv
+                    name: TV Switch
+                  - entity: input_number.mock_volume_level
+                    name: Volume
+                  - entity: sensor.kitchen_temperature
+                    name: Temp
+                  - entity: binary_sensor.mock_problem_alert
+                    name: Problem Alert
+                  - entity: input_button.wood_added
+                    name: Button
+
+      # ──────────────────────────────────────────────────────────────────────
+      - title: Typography
+        cards:
+          - type: markdown
+            title: Heading & Text Styles
+            content: |
+              ## Heading 2
+              ### Heading 3
+              #### Heading 4
+
+              Normal paragraph text. **Bold text.** *Italic text.* `inline code`.
+
+              > Blockquote text — should look distinct from body copy.
+
+              ---
+
+              Unordered list:
+              - Item one
+              - Item two
+              - Item three
+
+              Ordered list:
+              1. First item
+              2. Second item
+              3. Third item
+
+              | Column A | Column B | Column C |
+              |----------|----------|----------|
+              | Value 1  | Value 2  | Value 3  |
+              | Value 4  | Value 5  | Value 6  |
+
+              ```yaml
+              # Fenced code block — markdown-code-background-color token
+              sensor:
+                - name: Example
+                  state: "{{ states('input_number.mock_volume_level') }}"
+              ```
+
+              Link: [Home Assistant](https://www.home-assistant.io)
+
+  # ══════════════════════════════════════════════════════════════════════════
+  # VIEW 3 — Theme Test (original masonry view — full comprehensive layout)
+  # Kept as-is: exercises masonry column reflow, all card types in sequence.
+  # ══════════════════════════════════════════════════════════════════════════
+  - title: Theme Test
+    icon: mdi:palette
+    type: masonry
+
+    # ── View-level badges ────────────────────────────────────────────────
+    # Tests label-badge-* tokens and chip/badge component styling.
+    # Badge colour is driven by entity domain + state.
+    badges:
+      - type: entity
+        entity: binary_sensor.internet_connectivity
+        show_name: true
+        name: Internet
+      - type: entity
+        entity: alarm_control_panel.home_alarm
+        show_name: true
+        name: Alarm
+      - type: entity
+        entity: sensor.kitchen_temperature
+        show_name: true
+        name: Kitchen
+      - type: entity
+        entity: sensor.e_ink_display_battery_level
+        show_name: true
+        name: Battery
+      - type: entity
+        entity: binary_sensor.night
+        show_name: true
+        name: Night
+      - type: entity
+        entity: binary_sensor.mock_problem_alert
+        show_name: true
+        name: Problem
+      - type: entity
+        entity: switch.smart_plug_tv
+        show_name: true
+        name: TV
+
+    cards:
+      # ─────────────────────────────────────────────────────────────────────
+      - type: markdown
+        content: >
+          ## Very Dark Black — Theme Test Dashboard
+
+          All major HA UI element types and states in one place. Use **Developer Tools →
+          YAML → Reload Lovelace** to refresh after theme changes. Each section is
+          labelled with what it exercises.
+
+      # ════════════════════════════════════════════════════════════════════
+      # MORE INFO DIALOG NOTE
+      # ════════════════════════════════════════════════════════════════════
+      - type: markdown
+        title: "More Info Dialog — card-mod-more-info"
+        content: >
+          **Tap any entity** to open its More Info dialog and test: heading ink color
+          (`#ffffff` override), dialog surface background (pure black), scrim/backdrop
+          (`rgba(0,0,0,0.9)`), on-surface text contrast, form controls inside dialogs
+          (input backgrounds, selects, sliders), and the number / cover / climate /
+          alarm detail views.
+
+      # ════════════════════════════════════════════════════════════════════
+      # HEADING CARD — title / subtitle / badges
+      # ════════════════════════════════════════════════════════════════════
+      - type: heading
+        heading: Heading Card — title style with entity badges
+        heading_style: title
+        icon: mdi:card-text-outline
+        badges:
+          - type: entity
+            entity: binary_sensor.internet_connectivity
+            name: Connectivity
+          - type: entity
+            entity: sensor.kitchen_temperature
+            name: Kitchen
+          - type: entity
+            entity: sensor.e_ink_display_battery_level
+            name: Battery
+
+      - type: heading
+        heading: Subtitle style heading (no badges)
+        heading_style: subtitle
+
+      # ════════════════════════════════════════════════════════════════════
+      # TILE CARDS
+      # ════════════════════════════════════════════════════════════════════
+      - type: heading
+        heading: Tile Cards
+        heading_style: title
+        icon: mdi:view-grid
+
+      - type: heading
+        heading: Active / togglable states
+        heading_style: subtitle
+
+      - type: horizontal-stack
+        cards:
+          - type: tile
+            entity: switch.smart_plug_tv
+            name: Switch
+          - type: tile
+            entity: light.led_strip
+            name: Light
+          - type: tile
+            entity: fan.ceiling_fan
+            name: Fan
+
+      - type: horizontal-stack
+        cards:
+          - type: tile
+            entity: lock.front_door_lock
+            name: Lock
+          - type: tile
+            entity: cover.garage_door
+            name: Cover
+          - type: tile
+            entity: binary_sensor.internet_connectivity
+            name: Binary On
+
+      - type: heading
+        heading: Sensor / read-only states
+        heading_style: subtitle
+
+      - type: horizontal-stack
+        cards:
+          - type: tile
+            entity: sensor.kitchen_temperature
+            name: Temperature
+          - type: tile
+            entity: sensor.kitchen_humidity
+            name: Humidity
+          - type: tile
+            entity: sensor.e_ink_display_battery_level
+            name: Battery %
+
+      - type: horizontal-stack
+        cards:
+          - type: tile
+            entity: binary_sensor.office_window_contact
+            name: Binary Off
+          - type: tile
+            entity: binary_sensor.fireplace_too_hot
+            name: Binary Alert
+          - type: tile
+            entity: sensor.unavailable_sensor
+            name: Unavailable
+
+      - type: heading
+        heading: Switch on vs off — primary-color vs unchecked-color
+        heading_style: subtitle
+
+      - type: horizontal-stack
+        cards:
+          - type: tile
+            entity: switch.smart_plug_tv
+            name: SW — on state
+          - type: tile
+            entity: switch.smart_plug_office_ac
+            name: SW — off state
+          - type: tile
+            entity: light.led_strip
+            name: Light — on
+          - type: tile
+            entity: light.star_projector
+            name: Light — off
+
+      # ════════════════════════════════════════════════════════════════════
+      # DANGER / WARNING STATE FILLS (Section 15)
+      # ha-color-fill-danger-* and ha-color-fill-warning-*
+      # ════════════════════════════════════════════════════════════════════
+      - type: heading
+        heading: Danger / Warning State Fills
+        heading_style: title
+        icon: mdi:alert
+
+      - type: horizontal-stack
+        cards:
+          - type: tile
+            entity: binary_sensor.mock_problem_alert
+            name: Problem — danger
+          - type: tile
+            entity: binary_sensor.mock_heat_alert
+            name: Heat Alert — warning
+          - type: tile
+            entity: binary_sensor.fireplace_too_hot
+            name: Heat — inactive
+
+      - type: entities
+        title: Alert Entity Rows (hover to see fill states)
+        entities:
+          - entity: binary_sensor.mock_problem_alert
+            name: Problem alert — danger fill
+          - entity: binary_sensor.mock_heat_alert
+            name: Heat alert — warning fill
+          - entity: binary_sensor.fireplace_too_hot
+            name: Heat sensor — inactive (no fill)
+
+      # ════════════════════════════════════════════════════════════════════
+      # ENTITY ROWS — Switches & Lights
+      # ════════════════════════════════════════════════════════════════════
+      - type: heading
+        heading: Entity Card — Switches & Lights
+        heading_style: title
+        icon: mdi:toggle-switch
+
+      - type: entities
+        title: Switches
+        show_header_toggle: true
+        entities:
+          - switch.smart_plug_tv
+          - switch.smart_plug_office_ac
+          - switch.smart_plug_coffee_machine
+          - switch.smart_plug_lava_lamp
+          - switch.smart_plug_kitchen_heater
+          - switch.smart_plug_office_heater
+
+      - type: entities
+        title: Lights
+        show_header_toggle: true
+        entities:
+          - light.led_strip
+          - light.star_projector
+
+      # ════════════════════════════════════════════════════════════════════
+      # ENTITY ROWS — Input Controls (sliders, selects, booleans, datetime)
+      # ════════════════════════════════════════════════════════════════════
+      - type: heading
+        heading: Entity Card — Input Controls
+        heading_style: title
+        icon: mdi:tune
+
+      - type: entities
+        title: Number Sliders
+        entities:
+          - entity: input_number.mock_brightness_level
+            name: Brightness Level
+          - entity: input_number.mock_volume_level
+            name: Volume Level
+          - entity: input_number.mock_fan_speed
+            name: Fan Speed
+          - entity: input_number.mock_target_humidity
+            name: Target Humidity
+          - entity: input_number.mock_mp_volume
+            name: Media Volume
+
+      - type: entities
+        title: Select Dropdowns
+        entities:
+          - entity: input_select.mock_hvac_mode
+            name: HVAC Mode (input)
+          - entity: input_select.mock_mp_source
+            name: Media Source (input)
+          - entity: select.hvac_mode
+            name: HVAC Mode (template)
+
+      - type: entities
+        title: Booleans (checkbox rows)
+        entities:
+          - entity: input_boolean.auto_light_kitchen
+            name: Auto Light Kitchen
+          - entity: input_boolean.manual_fire_place
+            name: Manual Fireplace
+
+      - type: entities
+        title: Date & Time Inputs
+        entities:
+          - entity: input_datetime.morning_alarm
+            name: Morning Alarm
+          - entity: input_datetime.vacation_start
+            name: Vacation Start
+
+      # ════════════════════════════════════════════════════════════════════
+      # TEXT INPUT FIELDS
+      # ════════════════════════════════════════════════════════════════════
+      - type: heading
+        heading: Text Input Fields
+        heading_style: title
+        icon: mdi:form-textbox
+
+      - type: entities
+        title: input_text — normal state (form-background)
+        entities:
+          - entity: input_text.mock_text_note
+            name: Short Note (max 50)
+          - entity: input_text.mock_text_message
+            name: Long Message (max 255)
+          - entity: input_text.mock_text_password
+            name: Password Field (masked)
+
+      # ════════════════════════════════════════════════════════════════════
+      # DISABLED FORM CONTROLS
+      # ════════════════════════════════════════════════════════════════════
+      - type: heading
+        heading: Disabled Form Controls (form-background-disabled)
+        heading_style: title
+        icon: mdi:form-textbox-lock
+
+      - type: entities
+        title: Normal vs disabled — grey-wash comparison
+        entities:
+          - type: section
+            label: Normal (for comparison)
+          - entity: number.ceiling_fan_speed
+            name: Number — normal
+          - entity: select.hvac_mode
+            name: Select — normal
+          - type: section
+            label: Unavailable / disabled
+          - entity: number.unavailable_number
+            name: Number — unavailable
+          - entity: select.unavailable_select
+            name: Select — unavailable
+
+      # ════════════════════════════════════════════════════════════════════
+      # ENTITY ROWS — Covers & Locks
+      # ════════════════════════════════════════════════════════════════════
+      - type: heading
+        heading: Entity Card — Covers & Locks
+        heading_style: title
+        icon: mdi:door-closed
+
+      - type: entities
+        title: Covers
+        entities:
+          - cover.garage_door
+          - cover.living_room_blinds
+          - cover.bedroom_curtains
+
+      - type: entities
+        title: Locks
+        entities:
+          - lock.front_door_lock
+          - lock.back_door_lock
+
+      # ════════════════════════════════════════════════════════════════════
+      # ENTITY ROWS — Sensors & Binary Sensors
+      # ════════════════════════════════════════════════════════════════════
+      - type: heading
+        heading: Entity Card — Sensors
+        heading_style: title
+        icon: mdi:thermometer
+
+      - type: entities
+        title: Environment
+        entities:
+          - type: section
+            label: Temperature
+          - sensor.kitchen_temperature
+          - sensor.bedroom_temperature
+          - sensor.bathroom_temperature
+          - sensor.office_temperature
+          - sensor.outdoor_temperature
+          - type: section
+            label: Air Quality
+          - sensor.kitchen_humidity
+          - sensor.kitchen_air_quality_pm25
+          - sensor.office_carbon_dioxide
+          - sensor.office_humidity
+          - type: section
+            label: Power
+          - sensor.office_workbench_power
+          - sensor.living_room_outlet_power
+          - sensor.grid_frequency
+
+      - type: entities
+        title: Binary Sensors
+        entities:
+          - binary_sensor.internet_connectivity
+          - binary_sensor.router_connectivity
+          - binary_sensor.office_weather_station_connectivity
+          - type: divider
+          - entity: binary_sensor.office_window_contact
+            name: Office Window
+          - entity: binary_sensor.kitchen_window_contact
+            name: Kitchen Window
+          - entity: binary_sensor.bathroom_door_contact
+            name: Bathroom Door
+          - binary_sensor.fireplace_too_hot
+          - binary_sensor.night
+
+      # ════════════════════════════════════════════════════════════════════
+      # GLANCE CARD
+      # ════════════════════════════════════════════════════════════════════
+      - type: heading
+        heading: Glance Card
+        heading_style: title
+        icon: mdi:view-compact
+
+      - type: glance
+        title: Room Temperatures
+        show_state: true
+        columns: 6
+        entities:
+          - entity: sensor.kitchen_temperature
+            name: Kitchen
+          - entity: sensor.bedroom_temperature
+            name: Bedroom
+          - entity: sensor.bathroom_temperature
+            name: Bathroom
+          - entity: sensor.office_temperature
+            name: Office
+          - entity: sensor.living_room_temperature
+            name: Living Rm
+          - entity: sensor.outdoor_temperature
+            name: Outdoor
+
+      - type: glance
+        title: Device States (icons + on/off colour)
+        show_state: true
+        columns: 6
+        entities:
+          - switch.smart_plug_tv
+          - light.led_strip
+          - fan.ceiling_fan
+          - binary_sensor.internet_connectivity
+          - lock.front_door_lock
+          - cover.garage_door
+
+      # ════════════════════════════════════════════════════════════════════
+      # BUTTON CARDS
+      # ════════════════════════════════════════════════════════════════════
+      - type: heading
+        heading: Button Cards
+        heading_style: title
+        icon: mdi:gesture-tap-button
+
+      - type: horizontal-stack
+        cards:
+          - type: button
+            entity: button.restart_router
+            name: Template Button
+            icon: mdi:router-wireless
+            tap_action:
+              action: toggle
+          - type: button
+            entity: input_button.wood_added
+            name: Input Button
+            icon: mdi:fire
+            tap_action:
+              action: toggle
+          - type: button
+            entity: switch.smart_plug_tv
+            name: Switch Toggle
+            icon: mdi:television
+            tap_action:
+              action: toggle
+          - type: button
+            entity: light.led_strip
+            name: Light Toggle
+            icon: mdi:led-strip
+            show_state: true
+            tap_action:
+              action: toggle
+
+      - type: entities
+        title: Button Rows
+        entities:
+          - entity: button.restart_router
+            name: Template Button Row
+          - entity: input_button.wood_added
+            name: Input Button Row
+          - type: button
+            name: Service Call Row
+            action_name: Trigger
+            icon: mdi:bell
+            tap_action:
+              action: call-service
+              service: system_log.write
+              data:
+                message: Theme test button pressed
+                level: info
+
+      # ════════════════════════════════════════════════════════════════════
+      # GAUGE CARDS
+      # ════════════════════════════════════════════════════════════════════
+      - type: heading
+        heading: Gauge Cards (severity colours)
+        heading_style: title
+        icon: mdi:gauge
+
+      - type: horizontal-stack
+        cards:
+          - type: gauge
+            entity: sensor.kitchen_humidity
+            name: Humidity %
+            unit: "%"
+            min: 0
+            max: 100
+            needle: false
+            severity:
+              green: 40
+              yellow: 70
+              red: 85
+          - type: gauge
+            entity: sensor.e_ink_display_battery_level
+            name: Battery %
+            unit: "%"
+            min: 0
+            max: 100
+            needle: true
+            severity:
+              red: 0
+              yellow: 40
+              green: 60
+          - type: gauge
+            entity: sensor.office_carbon_dioxide
+            name: CO₂ ppm
+            min: 400
+            max: 2000
+            needle: true
+            severity:
+              green: 400
+              yellow: 1000
+              red: 1500
+
+      # ════════════════════════════════════════════════════════════════════
+      # SENSOR CARD — single entity with inline sparkline
+      # ════════════════════════════════════════════════════════════════════
+      - type: heading
+        heading: Sensor Card (single entity + sparkline)
+        heading_style: title
+        icon: mdi:chart-areaspline
+
+      - type: horizontal-stack
+        cards:
+          - type: sensor
+            entity: sensor.kitchen_temperature
+            name: Kitchen Temp
+            graph: line
+            hours_to_show: 24
+          - type: sensor
+            entity: sensor.office_carbon_dioxide
+            name: Office CO₂
+            graph: line
+            hours_to_show: 24
+          - type: sensor
+            entity: sensor.e_ink_display_battery_level
+            name: Battery
+            graph: line
+            hours_to_show: 24
+
+      - type: horizontal-stack
+        cards:
+          - type: sensor
+            entity: sensor.office_workbench_power
+            name: Workbench Power
+            graph: line
+            hours_to_show: 24
+          - type: sensor
+            entity: sensor.kitchen_humidity
+            name: Humidity
+            graph: line
+            hours_to_show: 24
+          - type: sensor
+            entity: sensor.outdoor_temperature
+            name: Outdoor Temp
+            graph: line
+            hours_to_show: 24
+
+      # ════════════════════════════════════════════════════════════════════
+      # HISTORY GRAPH — 4 entities
+      # ════════════════════════════════════════════════════════════════════
+      - type: heading
+        heading: History Graph (line colours, legend)
+        heading_style: title
+        icon: mdi:chart-line
+
+      - type: history-graph
+        title: Temperature — 24 h
+        hours_to_show: 24
+        entities:
+          - entity: sensor.kitchen_temperature
+            name: Kitchen
+          - entity: sensor.bedroom_temperature
+            name: Bedroom
+          - entity: sensor.office_temperature
+            name: Office
+          - entity: sensor.outdoor_temperature
+            name: Outdoor
+
+      # ════════════════════════════════════════════════════════════════════
+      # HISTORY GRAPH — all 10 graph-color-* tokens
+      # ════════════════════════════════════════════════════════════════════
+      - type: heading
+        heading: Graph Colours — all 10 tokens (graph-color-1 → 10)
+        heading_style: title
+        icon: mdi:palette
+
+      - type: history-graph
+        title: graph-color-1 (primary) → graph-color-10 (indigo)
+        hours_to_show: 24
+        entities:
+          - entity: sensor.kitchen_temperature
+            name: "1 — primary"
+          - entity: sensor.bedroom_temperature
+            name: "2 — blue"
+          - entity: sensor.bathroom_temperature
+            name: "3 — green"
+          - entity: sensor.office_temperature
+            name: "4 — purple"
+          - entity: sensor.outdoor_temperature
+            name: "5 — red"
+          - entity: sensor.fireplace_temperature
+            name: "6 — cyan"
+          - entity: sensor.storage_room_temperature
+            name: "7 — teal"
+          - entity: sensor.living_room_temperature
+            name: "8 — pink"
+          - entity: sensor.outdoor_station_temperature
+            name: "9 — deep-orange"
+          - entity: sensor.outdoor_station_humidity
+            name: "10 — indigo"
+
+      # ════════════════════════════════════════════════════════════════════
+      # STATISTICS GRAPH
+      # ════════════════════════════════════════════════════════════════════
+      - type: heading
+        heading: Statistics Graph (bar/area chart variant)
+        heading_style: title
+        icon: mdi:chart-bar
+
+      - type: statistics-graph
+        title: Temperature Stats — 7 days
+        period: day
+        days_to_show: 7
+        chart_type: line
+        entities:
+          - entity: sensor.kitchen_temperature
+            name: Kitchen
+          - entity: sensor.office_temperature
+            name: Office
+          - entity: sensor.outdoor_temperature
+            name: Outdoor
+
+      - type: statistics-graph
+        title: Power Consumption — 7 days (bar)
+        period: day
+        days_to_show: 7
+        chart_type: bar
+        stat_types:
+          - mean
+        entities:
+          - entity: sensor.office_workbench_power
+            name: Workbench
+          - entity: sensor.living_room_outlet_power
+            name: Living Room
+
+      # ════════════════════════════════════════════════════════════════════
+      # WEATHER — all 15 condition icons selectable live
+      # ════════════════════════════════════════════════════════════════════
+      - type: heading
+        heading: Weather Card (15 conditions — use selector to cycle)
+        heading_style: title
+        icon: mdi:weather-partly-cloudy
+
+      - type: entities
+        title: Condition Selector
+        entities:
+          - entity: input_select.mock_weather_condition
+            name: Weather Condition (changes icon + card)
+
+      - type: weather-forecast
+        show_current: true
+        show_forecast: false
+        entity: weather.mock_weather
+        round_temperature: false
+
+      - type: horizontal-stack
+        cards:
+          - type: tile
+            entity: weather.mock_weather
+            name: Weather Tile
+          - type: glance
+            show_state: true
+            entities:
+              - entity: weather.mock_weather
+                name: Glance
+
+      # ════════════════════════════════════════════════════════════════════
+      # THERMOSTAT / CLIMATE
+      # ════════════════════════════════════════════════════════════════════
+      - type: heading
+        heading: Thermostat Card (climate controls)
+        heading_style: title
+        icon: mdi:thermostat
+
+      - type: horizontal-stack
+        cards:
+          - type: thermostat
+            entity: climate.kitchen_climate_control
+            name: Kitchen
+          - type: thermostat
+            entity: climate.office_climate_control
+            name: Office
+
+      - type: entities
+        title: Climate Entity Rows
+        entities:
+          - climate.kitchen_climate_control
+          - climate.fireplace
+          - climate.office_climate_control
+
+      # ════════════════════════════════════════════════════════════════════
+      # ALARM PANEL
+      # ════════════════════════════════════════════════════════════════════
+      - type: heading
+        heading: Alarm Panel (keypad, state colours)
+        heading_style: title
+        icon: mdi:shield-home
+
+      - type: alarm-panel
+        entity: alarm_control_panel.home_alarm
+        name: Home Alarm
+        states:
+          - arm_home
+          - arm_away
+          - arm_night
+
+      # ════════════════════════════════════════════════════════════════════
+      # MEDIA PLAYER
+      # ════════════════════════════════════════════════════════════════════
+      - type: heading
+        heading: Media Player (controls, volume, source, progress bar)
+        heading_style: title
+        icon: mdi:speaker
+
+      - type: media-control
+        entity: media_player.living_room_speaker
+
+      - type: entities
+        title: Media Entity Rows
+        entities:
+          - media_player.living_room_speaker
+          - type: divider
+          - entity: input_select.mock_mp_source
+            name: Source (input_select)
+          - entity: input_number.mock_mp_volume_normalized
+            name: Volume 0–1 (media player)
+          - entity: input_number.mock_mp_volume
+            name: Volume 0–100 (display)
+
+      # ════════════════════════════════════════════════════════════════════
+      # FANS
+      # ════════════════════════════════════════════════════════════════════
+      - type: heading
+        heading: Fan Controls
+        heading_style: title
+        icon: mdi:fan
+
+      - type: entities
+        title: Fans
+        entities:
+          - entity: fan.ceiling_fan
+            name: Ceiling Fan
+          - entity: number.ceiling_fan_speed
+            name: Fan Speed (number)
+
+      # ════════════════════════════════════════════════════════════════════
+      # TIMERS & COUNTERS
+      # ════════════════════════════════════════════════════════════════════
+      - type: heading
+        heading: Timers & Counters
+        heading_style: title
+        icon: mdi:timer
+
+      - type: horizontal-stack
+        cards:
+          - type: entities
+            title: Timers
+            entities:
+              - timer.laundry
+              - timer.oven
+          - type: entities
+            title: Counters
+            entities:
+              - counter.daily_visitors
+              - counter.package_deliveries
+
+      # ════════════════════════════════════════════════════════════════════
+      # LOGBOOK — also tests the in-card scrollbar (4px, #333333 thumb)
+      # ════════════════════════════════════════════════════════════════════
+      - type: heading
+        heading: Logbook (event list — scroll to test 4px scrollbar)
+        heading_style: title
+        icon: mdi:history
+
+      - type: logbook
+        title: Recent State Changes
+        hours_to_show: 24
+        entities:
+          - switch.smart_plug_tv
+          - light.led_strip
+          - fan.ceiling_fan
+          - lock.front_door_lock
+          - binary_sensor.internet_connectivity
+          - alarm_control_panel.home_alarm
+          - timer.laundry
+          - timer.oven
+          - cover.garage_door
+          - binary_sensor.mock_problem_alert
+
+      # ════════════════════════════════════════════════════════════════════
+      # ENTITY FILTER — auto-filtered list, tests data table row hover
+      # ════════════════════════════════════════════════════════════════════
+      - type: heading
+        heading: Entity Filter Card (auto-filtered by state)
+        heading_style: title
+        icon: mdi:filter
+
+      - type: entity-filter
+        entities:
+          - switch.smart_plug_tv
+          - switch.smart_plug_office_ac
+          - switch.smart_plug_coffee_machine
+          - switch.smart_plug_lava_lamp
+          - switch.smart_plug_kitchen_heater
+          - switch.smart_plug_office_heater
+          - light.led_strip
+          - light.star_projector
+          - fan.ceiling_fan
+          - binary_sensor.internet_connectivity
+          - binary_sensor.router_connectivity
+          - binary_sensor.night
+        conditions:
+          - condition: state
+            state: "on"
+        card:
+          type: entities
+          title: Active right now (on = true)
+
+      - type: entity-filter
+        entities:
+          - switch.smart_plug_tv
+          - switch.smart_plug_office_ac
+          - switch.smart_plug_coffee_machine
+          - switch.smart_plug_lava_lamp
+          - light.led_strip
+          - light.star_projector
+          - fan.ceiling_fan
+          - lock.front_door_lock
+          - lock.back_door_lock
+        conditions:
+          - condition: state
+            state: "off"
+        card:
+          type: glance
+          title: Inactive right now (off)
+          show_state: true
+
+      # ════════════════════════════════════════════════════════════════════
+      # CONDITIONAL CARD — tests hui-conditional-card transparent exclusion
+      # ════════════════════════════════════════════════════════════════════
+      - type: heading
+        heading: Conditional Card (transparent wrapper exclusion)
+        heading_style: title
+        icon: mdi:list-status
+
+      - type: markdown
+        content: >
+          The card below is a `type: conditional` — it is wrapped in
+          `hui-conditional-card`, which is in the card-mod transparent exclusion list.
+          The wrapper itself must have no border or background; the **inner** card
+          should still have the normal card surface.
+
+      - type: conditional
+        conditions:
+          - condition: state
+            entity: binary_sensor.internet_connectivity
+            state: "on"
+        card:
+          type: entities
+          title: Conditional — visible when Internet is on
+          entities:
+            - binary_sensor.internet_connectivity
+            - binary_sensor.router_connectivity
+            - binary_sensor.office_weather_station_connectivity
+
+      - type: conditional
+        conditions:
+          - condition: state
+            entity: switch.smart_plug_tv
+            state: "on"
+        card:
+          type: tile
+          entity: switch.smart_plug_tv
+          name: Conditional Tile — visible when TV plug is on
+
+      # ════════════════════════════════════════════════════════════════════
+      # UNAVAILABLE STATES
+      # ════════════════════════════════════════════════════════════════════
+      - type: heading
+        heading: Unavailable States
+        heading_style: title
+        icon: mdi:alert-circle-outline
+
+      - type: entities
+        title: Unavailable — Entity Rows
+        entities:
+          - entity: sensor.unavailable_sensor
+            name: Sensor — unavailable
+          - entity: binary_sensor.unavailable_contact
+            name: Binary — unavailable
+          - entity: switch.unavailable_switch
+            name: Switch — unavailable
+          - entity: light.unavailable_light
+            name: Light — unavailable
+          - entity: fan.unavailable_fan
+            name: Fan — unavailable
+          - type: section
+            label: Entity not found (intentional)
+          - entity: sensor.entity_does_not_exist
+            name: Entity not found (intentional)
+
+      - type: horizontal-stack
+        cards:
+          - type: tile
+            entity: sensor.unavailable_sensor
+            name: Tile Unavailable
+          - type: tile
+            entity: switch.unavailable_switch
+            name: Switch Unavailable
+          - type: tile
+            entity: light.unavailable_light
+            name: Light Unavailable
+
+      # ════════════════════════════════════════════════════════════════════
+      # THEME COLOUR VARIANTS
+      # Each card uses `theme:` to show the primary colour in isolation.
+      # The icon tint, toggle colour, and accent all follow primary-color.
+      # ════════════════════════════════════════════════════════════════════
+      - type: heading
+        heading: Theme Colour Variants
+        heading_style: title
+        icon: mdi:palette-swatch
+
+      - type: vertical-stack
+        cards:
+          - type: entities
+            title: Cyan
+            show_header_toggle: true
+            state_color: true
+            theme: Black with Cyan
+            entities:
+              - entity: switch.smart_plug_tv
+                name: TV Switch
+              - entity: input_number.mock_volume_level
+                name: Volume
+              - entity: sensor.kitchen_temperature
+                name: Temp
+              - entity: binary_sensor.mock_problem_alert
+                name: Problem Alert
+              - entity: input_button.wood_added
+                name: Button
+          - type: entities
+            title: Green
+            show_header_toggle: true
+            state_color: true
+            theme: Black with Green
+            entities:
+              - entity: switch.smart_plug_tv
+                name: TV Switch
+              - entity: input_number.mock_volume_level
+                name: Volume
+              - entity: sensor.kitchen_temperature
+                name: Temp
+              - entity: binary_sensor.mock_problem_alert
+                name: Problem Alert
+              - entity: input_button.wood_added
+                name: Button
+          - type: entities
+            title: Red
+            show_header_toggle: true
+            state_color: true
+            theme: Black with Red
+            entities:
+              - entity: switch.smart_plug_tv
+                name: TV Switch
+              - entity: input_number.mock_volume_level
+                name: Volume
+              - entity: sensor.kitchen_temperature
+                name: Temp
+              - entity: binary_sensor.mock_problem_alert
+                name: Problem Alert
+              - entity: input_button.wood_added
+                name: Button
+          - type: entities
+            title: Fuchsia
+            show_header_toggle: true
+            state_color: true
+            theme: Black with Fuchsia
+            entities:
+              - entity: switch.smart_plug_tv
+                name: TV Switch
+              - entity: input_number.mock_volume_level
+                name: Volume
+              - entity: sensor.kitchen_temperature
+                name: Temp
+              - entity: binary_sensor.mock_problem_alert
+                name: Problem Alert
+              - entity: input_button.wood_added
+                name: Button
+
+      - type: vertical-stack
+        cards:
+          - type: entities
+            title: Purple
+            show_header_toggle: true
+            state_color: true
+            theme: Black with Purple
+            entities:
+              - entity: switch.smart_plug_tv
+                name: TV Switch
+              - entity: input_number.mock_volume_level
+                name: Volume
+              - entity: sensor.kitchen_temperature
+                name: Temp
+              - entity: binary_sensor.mock_problem_alert
+                name: Problem Alert
+              - entity: input_button.wood_added
+                name: Button
+          - type: entities
+            title: Indigo
+            show_header_toggle: true
+            state_color: true
+            theme: Black with Indigo
+            entities:
+              - entity: switch.smart_plug_tv
+                name: TV Switch
+              - entity: input_number.mock_volume_level
+                name: Volume
+              - entity: sensor.kitchen_temperature
+                name: Temp
+              - entity: binary_sensor.mock_problem_alert
+                name: Problem Alert
+              - entity: input_button.wood_added
+                name: Button
+          - type: entities
+            title: Silver
+            show_header_toggle: true
+            state_color: true
+            theme: Black with Silver
+            entities:
+              - entity: switch.smart_plug_tv
+                name: TV Switch
+              - entity: input_number.mock_volume_level
+                name: Volume
+              - entity: sensor.kitchen_temperature
+                name: Temp
+              - entity: binary_sensor.mock_problem_alert
+                name: Problem Alert
+              - entity: input_button.wood_added
+                name: Button
+          - type: entities
+            title: Orange
+            show_header_toggle: true
+            state_color: true
+            theme: Black with Orange
+            entities:
+              - entity: switch.smart_plug_tv
+                name: TV Switch
+              - entity: input_number.mock_volume_level
+                name: Volume
+              - entity: sensor.kitchen_temperature
+                name: Temp
+              - entity: binary_sensor.mock_problem_alert
+                name: Problem Alert
+              - entity: input_button.wood_added
+                name: Button
+
+      - type: vertical-stack
+        cards:
+          - type: entities
+            title: Standard
+            show_header_toggle: true
+            state_color: true
+            theme: Black (Standard)
+            entities:
+              - entity: switch.smart_plug_tv
+                name: TV Switch
+              - entity: input_number.mock_volume_level
+                name: Volume
+              - entity: sensor.kitchen_temperature
+                name: Temp
+              - entity: binary_sensor.mock_problem_alert
+                name: Problem Alert
+              - entity: input_button.wood_added
+                name: Button
+          - type: entities
+            title: BG Only
+            show_header_toggle: true
+            state_color: true
+            theme: Black (Background Only)
+            entities:
+              - entity: switch.smart_plug_tv
+                name: TV Switch
+              - entity: input_number.mock_volume_level
+                name: Volume
+              - entity: sensor.kitchen_temperature
+                name: Temp
+              - entity: binary_sensor.mock_problem_alert
+                name: Problem Alert
+              - entity: input_button.wood_added
+                name: Button
+
+      # ════════════════════════════════════════════════════════════════════
+      # MARKDOWN CARD — Typography
+      # ════════════════════════════════════════════════════════════════════
+      - type: heading
+        heading: Markdown Card (typography)
+        heading_style: title
+        icon: mdi:format-text
+
+      - type: markdown
+        title: Heading & Text Styles
+        content: |
+          ## Heading 2
+          ### Heading 3
+          #### Heading 4
+
+          Normal paragraph text. **Bold text.** *Italic text.* `inline code`.
+
+          > Blockquote text — should look distinct from body copy.
+
+          ---
+
+          Unordered list:
+          - Item one
+          - Item two
+          - Item three
+
+          Ordered list:
+          1. First item
+          2. Second item
+          3. Third item
+
+          | Column A | Column B | Column C |
+          |----------|----------|----------|
+          | Value 1  | Value 2  | Value 3  |
+          | Value 4  | Value 5  | Value 6  |
+
+          ```yaml
+          # Fenced code block — markdown-code-background-color token
+          sensor:
+            - name: Example
+              state: "{{ states('input_number.mock_volume_level') }}"
+          ```
+
+          Link: [Home Assistant](https://www.home-assistant.io)
+
+  # ══════════════════════════════════════════════════════════════════════════
+  # VIEW 4 — Theme Comparison (sections — two columns, side by side)
+  # Left: no theme (inherits system default)   Right: Black with Cyan
+  # Set system theme to Home Assistant Default to compare unstyled vs Cyan.
+  # ══════════════════════════════════════════════════════════════════════════
+  - title: Compare
+    icon: mdi:compare
+    type: sections
+    max_columns: 2
+
+    header:
+      card:
+        type: markdown
+        content: |-
+          ## Compare — Default Theme vs Black with Cyan
+
+          **Left column** — system default theme (no override).
+          **Right column** — `Black with Cyan` applied at section level.
+          Set the system theme to **Home Assistant Default** to see
+          the unstyled vs themed comparison side by side.
+        title: Compare — Default Theme vs Black with Cyan
+        text_only: true
+
+    badges:
+      - type: entity
+        entity: binary_sensor.internet_connectivity
+        show_name: true
+        name: Internet
+      - type: entity
+        entity: alarm_control_panel.home_alarm
+        show_name: true
+        name: Alarm
+      - type: entity
+        entity: sensor.kitchen_temperature
+        show_name: true
+        name: Kitchen
+      - type: entity
+        entity: binary_sensor.mock_problem_alert
+        show_name: true
+        name: Problem
+      - type: entity
+        entity: switch.smart_plug_tv
+        show_name: true
+        name: TV
+
+    footer:
+      card:
+        type: tile
+        entity: binary_sensor.internet_connectivity
+
+    sections:
+      # ── Title — full width ───────────────────────────────────────────────
+
+      # ── Left — default (no theme) ─────────────────────────────────────────
+      - type: grid
+        column_span: 1
+        cards:
+          - type: markdown
+            content: >
+              ## Very Dark Black — Theme Test Dashboard
+
+              All major HA UI element types and states in one place. Use **Developer
+              Tools → YAML → Reload Lovelace** to refresh after theme changes. Each
+              section is labelled with what it exercises.
+
+          - type: markdown
+            title: "More Info Dialog — card-mod-more-info"
+            content: >
+              **Tap any entity** to open its More Info dialog and test: heading ink
+              color (`#ffffff` override), dialog surface background (pure black),
+              scrim/backdrop (`rgba(0,0,0,0.9)`), on-surface text contrast, form
+              controls inside dialogs (input backgrounds, selects, sliders), and the
+              number / cover / climate / alarm detail views.
+
+          - type: heading
+            heading: Heading Card — title style with entity badges
+            heading_style: title
+            icon: mdi:card-text-outline
+            badges:
+              - type: entity
+                entity: binary_sensor.internet_connectivity
+                name: Connectivity
+              - type: entity
+                entity: sensor.kitchen_temperature
+                name: Kitchen
+              - type: entity
+                entity: sensor.e_ink_display_battery_level
+                name: Battery
+
+          - type: heading
+            heading: Subtitle style heading (no badges)
+            heading_style: subtitle
+
+          - type: heading
+            heading: Tile Cards
+            heading_style: title
+            icon: mdi:view-grid
+
+          - type: heading
+            heading: Active / togglable states
+            heading_style: subtitle
+
+          - type: horizontal-stack
+            cards:
+              - type: tile
+                entity: switch.smart_plug_tv
+                name: Switch
+              - type: tile
+                entity: light.led_strip
+                name: Light
+              - type: tile
+                entity: fan.ceiling_fan
+                name: Fan
+
+          - type: horizontal-stack
+            cards:
+              - type: tile
+                entity: lock.front_door_lock
+                name: Lock
+              - type: tile
+                entity: cover.garage_door
+                name: Cover
+              - type: tile
+                entity: binary_sensor.internet_connectivity
+                name: Binary On
+
+          - type: heading
+            heading: Sensor / read-only states
+            heading_style: subtitle
+
+          - type: horizontal-stack
+            cards:
+              - type: tile
+                entity: sensor.kitchen_temperature
+                name: Temperature
+              - type: tile
+                entity: sensor.kitchen_humidity
+                name: Humidity
+              - type: tile
+                entity: sensor.e_ink_display_battery_level
+                name: Battery %
+
+          - type: horizontal-stack
+            cards:
+              - type: tile
+                entity: binary_sensor.office_window_contact
+                name: Binary Off
+              - type: tile
+                entity: binary_sensor.fireplace_too_hot
+                name: Binary Alert
+              - type: tile
+                entity: sensor.unavailable_sensor
+                name: Unavailable
+
+          - type: heading
+            heading: Switch on vs off — primary-color vs unchecked-color
+            heading_style: subtitle
+
+          - type: horizontal-stack
+            cards:
+              - type: tile
+                entity: switch.smart_plug_tv
+                name: SW — on state
+              - type: tile
+                entity: switch.smart_plug_office_ac
+                name: SW — off state
+              - type: tile
+                entity: light.led_strip
+                name: Light — on
+              - type: tile
+                entity: light.star_projector
+                name: Light — off
+
+          - type: heading
+            heading: Danger / Warning State Fills
+            heading_style: title
+            icon: mdi:alert
+
+          - type: horizontal-stack
+            cards:
+              - type: tile
+                entity: binary_sensor.mock_problem_alert
+                name: Problem — danger
+              - type: tile
+                entity: binary_sensor.mock_heat_alert
+                name: Heat Alert — warning
+              - type: tile
+                entity: binary_sensor.fireplace_too_hot
+                name: Heat — inactive
+
+          - type: entities
+            title: Alert Entity Rows (hover to see fill states)
+            entities:
+              - entity: binary_sensor.mock_problem_alert
+                name: Problem alert — danger fill
+              - entity: binary_sensor.mock_heat_alert
+                name: Heat alert — warning fill
+              - entity: binary_sensor.fireplace_too_hot
+                name: Heat sensor — inactive (no fill)
+
+          - type: heading
+            heading: Entity Card — Switches & Lights
+            heading_style: title
+            icon: mdi:toggle-switch
+
+          - type: entities
+            title: Switches
+            show_header_toggle: true
+            entities:
+              - switch.smart_plug_tv
+              - switch.smart_plug_office_ac
+              - switch.smart_plug_coffee_machine
+              - switch.smart_plug_lava_lamp
+              - switch.smart_plug_kitchen_heater
+              - switch.smart_plug_office_heater
+
+          - type: entities
+            title: Lights
+            show_header_toggle: true
+            entities:
+              - light.led_strip
+              - light.star_projector
+
+          - type: heading
+            heading: Entity Card — Input Controls
+            heading_style: title
+            icon: mdi:tune
+
+          - type: entities
+            title: Number Sliders
+            entities:
+              - entity: input_number.mock_brightness_level
+                name: Brightness Level
+              - entity: input_number.mock_volume_level
+                name: Volume Level
+              - entity: input_number.mock_fan_speed
+                name: Fan Speed
+              - entity: input_number.mock_target_humidity
+                name: Target Humidity
+              - entity: input_number.mock_mp_volume
+                name: Media Volume
+
+          - type: entities
+            title: Select Dropdowns
+            entities:
+              - entity: input_select.mock_hvac_mode
+                name: HVAC Mode (input)
+              - entity: input_select.mock_mp_source
+                name: Media Source (input)
+              - entity: select.hvac_mode
+                name: HVAC Mode (template)
+
+          - type: entities
+            title: Booleans (checkbox rows)
+            entities:
+              - entity: input_boolean.auto_light_kitchen
+                name: Auto Light Kitchen
+              - entity: input_boolean.manual_fire_place
+                name: Manual Fireplace
+
+          - type: todo-list
+            entity: todo.theme_test_to_do
+            title: Checkbox — ha-checkbox (todo list)
+
+          - type: markdown
+            title: "Radio & Progress Bar — where to find"
+            content: >
+              **ha-radio-option** — not embeddable in Lovelace cards. Test via: Settings
+              → System → General (language/region selectors) or by opening any card
+              editor that has a type/mode radio group.
+
+
+              **ha-progress-bar** — not directly triggerable from dashboard. Test via:
+              Developer Tools → Updates (trigger an install), or open the more-info
+              dialog for a `backup_manager` or `update` entity.
+
+          - type: entities
+            title: Date & Time Inputs
+            entities:
+              - entity: input_datetime.morning_alarm
+                name: Morning Alarm
+              - entity: input_datetime.vacation_start
+                name: Vacation Start
+
+          - type: heading
+            heading: Text Input Fields
+            heading_style: title
+            icon: mdi:form-textbox
+
+          - type: entities
+            title: input_text — normal state (form-background)
+            entities:
+              - entity: input_text.mock_text_note
+                name: Short Note (max 50)
+              - entity: input_text.mock_text_message
+                name: Long Message (max 255)
+              - entity: input_text.mock_text_password
+                name: Password Field (masked)
+
+          - type: heading
+            heading: Disabled Form Controls (form-background-disabled)
+            heading_style: title
+            icon: mdi:form-textbox-lock
+
+          - type: entities
+            title: Normal vs disabled — grey-wash comparison
+            entities:
+              - type: section
+                label: Normal (for comparison)
+              - entity: number.ceiling_fan_speed
+                name: Number — normal
+              - entity: select.hvac_mode
+                name: Select — normal
+              - type: section
+                label: Unavailable / disabled
+              - entity: number.unavailable_number
+                name: Number — unavailable
+              - entity: select.unavailable_select
+                name: Select — unavailable
+
+          - type: heading
+            heading: Entity Card — Covers & Locks
+            heading_style: title
+            icon: mdi:door-closed
+
+          - type: entities
+            title: Covers
+            entities:
+              - cover.garage_door
+              - cover.living_room_blinds
+              - cover.bedroom_curtains
+
+          - type: entities
+            title: Locks
+            entities:
+              - lock.front_door_lock
+              - lock.back_door_lock
+
+          - type: heading
+            heading: Entity Card — Sensors
+            heading_style: title
+            icon: mdi:thermometer
+
+          - type: entities
+            title: Environment
+            entities:
+              - type: section
+                label: Temperature
+              - sensor.kitchen_temperature
+              - sensor.bedroom_temperature
+              - sensor.bathroom_temperature
+              - sensor.office_temperature
+              - sensor.outdoor_temperature
+              - type: section
+                label: Air Quality
+              - sensor.kitchen_humidity
+              - sensor.kitchen_air_quality_pm25
+              - sensor.office_carbon_dioxide
+              - sensor.office_humidity
+              - type: section
+                label: Power
+              - sensor.office_workbench_power
+              - sensor.living_room_outlet_power
+              - sensor.grid_frequency
+
+          - type: entities
+            title: Binary Sensors
+            entities:
+              - binary_sensor.internet_connectivity
+              - binary_sensor.router_connectivity
+              - binary_sensor.office_weather_station_connectivity
+              - type: divider
+              - entity: binary_sensor.office_window_contact
+                name: Office Window
+              - entity: binary_sensor.kitchen_window_contact
+                name: Kitchen Window
+              - entity: binary_sensor.bathroom_door_contact
+                name: Bathroom Door
+              - binary_sensor.fireplace_too_hot
+              - binary_sensor.night
+
+          - type: heading
+            heading: Glance Card
+            heading_style: title
+            icon: mdi:view-compact
+
+          - type: glance
+            title: Room Temperatures
+            show_state: true
+            columns: 6
+            entities:
+              - entity: sensor.kitchen_temperature
+                name: Kitchen
+              - entity: sensor.bedroom_temperature
+                name: Bedroom
+              - entity: sensor.bathroom_temperature
+                name: Bathroom
+              - entity: sensor.office_temperature
+                name: Office
+              - entity: sensor.living_room_temperature
+                name: Living Rm
+              - entity: sensor.outdoor_temperature
+                name: Outdoor
+
+          - type: glance
+            title: Device States (icons + on/off colour)
+            show_state: true
+            columns: 6
+            entities:
+              - switch.smart_plug_tv
+              - light.led_strip
+              - fan.ceiling_fan
+              - binary_sensor.internet_connectivity
+              - lock.front_door_lock
+              - cover.garage_door
+
+          - type: heading
+            heading: Button Cards
+            heading_style: title
+            icon: mdi:gesture-tap-button
+
+          - type: horizontal-stack
+            cards:
+              - type: button
+                entity: button.restart_router
+                name: Template Button
+                icon: mdi:router-wireless
+                tap_action:
+                  action: toggle
+              - type: button
+                entity: input_button.wood_added
+                name: Input Button
+                icon: mdi:fire
+                tap_action:
+                  action: toggle
+              - type: button
+                entity: switch.smart_plug_tv
+                name: Switch Toggle
+                icon: mdi:television
+                tap_action:
+                  action: toggle
+              - type: button
+                entity: light.led_strip
+                name: Light Toggle
+                icon: mdi:led-strip
+                show_state: true
+                tap_action:
+                  action: toggle
+
+          - type: entities
+            title: Button Rows
+            entities:
+              - entity: button.restart_router
+                name: Template Button Row
+              - entity: input_button.wood_added
+                name: Input Button Row
+              - type: button
+                name: Service Call Row
+                action_name: Trigger
+                icon: mdi:bell
+                tap_action:
+                  action: call-service
+                  service: system_log.write
+                  data:
+                    message: Theme test button pressed
+                    level: info
+
+          - type: heading
+            heading: Gauge Cards (severity colours)
+            heading_style: title
+            icon: mdi:gauge
+
+          - type: horizontal-stack
+            cards:
+              - type: gauge
+                entity: sensor.kitchen_humidity
+                name: Humidity %
+                unit: "%"
+                min: 0
+                max: 100
+                needle: false
+                severity:
+                  green: 40
+                  yellow: 70
+                  red: 85
+              - type: gauge
+                entity: sensor.e_ink_display_battery_level
+                name: Battery %
+                unit: "%"
+                min: 0
+                max: 100
+                needle: true
+                severity:
+                  red: 0
+                  yellow: 40
+                  green: 60
+              - type: gauge
+                entity: sensor.office_carbon_dioxide
+                name: CO₂ ppm
+                min: 400
+                max: 2000
+                needle: true
+                severity:
+                  green: 400
+                  yellow: 1000
+                  red: 1500
+
+          - type: heading
+            heading: Sensor Card (single entity + sparkline)
+            heading_style: title
+            icon: mdi:chart-areaspline
+
+          - type: horizontal-stack
+            cards:
+              - type: sensor
+                entity: sensor.kitchen_temperature
+                name: Kitchen Temp
+                graph: line
+                hours_to_show: 24
+              - type: sensor
+                entity: sensor.office_carbon_dioxide
+                name: Office CO₂
+                graph: line
+                hours_to_show: 24
+              - type: sensor
+                entity: sensor.e_ink_display_battery_level
+                name: Battery
+                graph: line
+                hours_to_show: 24
+
+          - type: horizontal-stack
+            cards:
+              - type: sensor
+                entity: sensor.office_workbench_power
+                name: Workbench Power
+                graph: line
+                hours_to_show: 24
+              - type: sensor
+                entity: sensor.kitchen_humidity
+                name: Humidity
+                graph: line
+                hours_to_show: 24
+              - type: sensor
+                entity: sensor.outdoor_temperature
+                name: Outdoor Temp
+                graph: line
+                hours_to_show: 24
+
+          - type: heading
+            heading: History Graph (line colours, legend)
+            heading_style: title
+            icon: mdi:chart-line
+
+          - type: history-graph
+            title: Temperature — 24 h
+            hours_to_show: 24
+            entities:
+              - entity: sensor.kitchen_temperature
+                name: Kitchen
+              - entity: sensor.bedroom_temperature
+                name: Bedroom
+              - entity: sensor.office_temperature
+                name: Office
+              - entity: sensor.outdoor_temperature
+                name: Outdoor
+
+          - type: heading
+            heading: Graph Colours — all 10 tokens (graph-color-1 → 10)
+            heading_style: title
+            icon: mdi:palette
+
+          - type: history-graph
+            title: graph-color-1 (primary) → graph-color-10 (indigo)
+            hours_to_show: 24
+            entities:
+              - entity: sensor.kitchen_temperature
+                name: "1 — primary"
+              - entity: sensor.bedroom_temperature
+                name: "2 — blue"
+              - entity: sensor.bathroom_temperature
+                name: "3 — green"
+              - entity: sensor.office_temperature
+                name: "4 — purple"
+              - entity: sensor.outdoor_temperature
+                name: "5 — red"
+              - entity: sensor.fireplace_temperature
+                name: "6 — cyan"
+              - entity: sensor.storage_room_temperature
+                name: "7 — teal"
+              - entity: sensor.living_room_temperature
+                name: "8 — pink"
+              - entity: sensor.outdoor_station_temperature
+                name: "9 — deep-orange"
+              - entity: sensor.outdoor_station_humidity
+                name: "10 — indigo"
+
+          - type: heading
+            heading: Statistics Graph (bar/area chart variant)
+            heading_style: title
+            icon: mdi:chart-bar
+
+          - type: statistics-graph
+            title: Temperature Stats — 7 days
+            period: day
+            days_to_show: 7
+            chart_type: line
+            entities:
+              - entity: sensor.kitchen_temperature
+                name: Kitchen
+              - entity: sensor.office_temperature
+                name: Office
+              - entity: sensor.outdoor_temperature
+                name: Outdoor
+
+          - type: statistics-graph
+            title: Power Consumption — 7 days (bar)
+            period: day
+            days_to_show: 7
+            chart_type: bar
+            stat_types:
+              - mean
+            entities:
+              - entity: sensor.office_workbench_power
+                name: Workbench
+              - entity: sensor.living_room_outlet_power
+                name: Living Room
+
+          - type: heading
+            heading: Weather Card (15 conditions — use selector to cycle)
+            heading_style: title
+            icon: mdi:weather-partly-cloudy
+
+          - type: entities
+            title: Condition Selector
+            entities:
+              - entity: input_select.mock_weather_condition
+                name: Weather Condition (changes icon + card)
+
+          - type: weather-forecast
+            show_current: true
+            show_forecast: false
+            entity: weather.mock_weather
+            round_temperature: false
+
+          - type: horizontal-stack
+            cards:
+              - type: tile
+                entity: weather.mock_weather
+                name: Weather Tile
+              - type: glance
+                show_state: true
+                entities:
+                  - entity: weather.mock_weather
+                    name: Glance
+
+          - type: heading
+            heading: Thermostat Card (climate controls)
+            heading_style: title
+            icon: mdi:thermostat
+
+          - type: horizontal-stack
+            cards:
+              - type: thermostat
+                entity: climate.kitchen_climate_control
+                name: Kitchen
+              - type: thermostat
+                entity: climate.office_climate_control
+                name: Office
+
+          - type: entities
+            title: Climate Entity Rows
+            entities:
+              - climate.kitchen_climate_control
+              - climate.fireplace
+              - climate.office_climate_control
+
+          - type: heading
+            heading: Alarm Panel (keypad, state colours)
+            heading_style: title
+            icon: mdi:shield-home
+
+          - type: alarm-panel
+            entity: alarm_control_panel.home_alarm
+            name: Home Alarm
+            states:
+              - arm_home
+              - arm_away
+              - arm_night
+
+          - type: heading
+            heading: Media Player (controls, volume, source, progress bar)
+            heading_style: title
+            icon: mdi:speaker
+
+          - type: media-control
+            entity: media_player.living_room_speaker
+
+          - type: entities
+            title: Media Entity Rows
+            entities:
+              - media_player.living_room_speaker
+              - type: divider
+              - entity: input_select.mock_mp_source
+                name: Source (input_select)
+              - entity: input_number.mock_mp_volume_normalized
+                name: Volume 0–1 (media player)
+              - entity: input_number.mock_mp_volume
+                name: Volume 0–100 (display)
+
+          - type: heading
+            heading: Fan Controls
+            heading_style: title
+            icon: mdi:fan
+
+          - type: entities
+            title: Fans
+            entities:
+              - entity: fan.ceiling_fan
+                name: Ceiling Fan
+              - entity: number.ceiling_fan_speed
+                name: Fan Speed (number)
+
+          - type: heading
+            heading: Timers & Counters
+            heading_style: title
+            icon: mdi:timer
+
+          - type: horizontal-stack
+            cards:
+              - type: entities
+                title: Timers
+                entities:
+                  - timer.laundry
+                  - timer.oven
+              - type: entities
+                title: Counters
+                entities:
+                  - counter.daily_visitors
+                  - counter.package_deliveries
+
+          - type: heading
+            heading: Logbook (event list — scroll to test 4px scrollbar)
+            heading_style: title
+            icon: mdi:history
+
+          - type: logbook
+            title: Recent State Changes
+            hours_to_show: 24
+            entities:
+              - switch.smart_plug_tv
+              - light.led_strip
+              - fan.ceiling_fan
+              - lock.front_door_lock
+              - binary_sensor.internet_connectivity
+              - alarm_control_panel.home_alarm
+              - timer.laundry
+              - timer.oven
+              - cover.garage_door
+              - binary_sensor.mock_problem_alert
+
+          - type: heading
+            heading: Entity Filter Card (auto-filtered by state)
+            heading_style: title
+            icon: mdi:filter
+
+          - type: entity-filter
+            entities:
+              - switch.smart_plug_tv
+              - switch.smart_plug_office_ac
+              - switch.smart_plug_coffee_machine
+              - switch.smart_plug_lava_lamp
+              - switch.smart_plug_kitchen_heater
+              - switch.smart_plug_office_heater
+              - light.led_strip
+              - light.star_projector
+              - fan.ceiling_fan
+              - binary_sensor.internet_connectivity
+              - binary_sensor.router_connectivity
+              - binary_sensor.night
+            conditions:
+              - condition: state
+                state: "on"
+            card:
+              type: entities
+              title: Active right now (on = true)
+
+          - type: entity-filter
+            entities:
+              - switch.smart_plug_tv
+              - switch.smart_plug_office_ac
+              - switch.smart_plug_coffee_machine
+              - switch.smart_plug_lava_lamp
+              - light.led_strip
+              - light.star_projector
+              - fan.ceiling_fan
+              - lock.front_door_lock
+              - lock.back_door_lock
+            conditions:
+              - condition: state
+                state: "off"
+            card:
+              type: glance
+              title: Inactive right now (off)
+              show_state: true
+
+          - type: heading
+            heading: Conditional Card (transparent wrapper exclusion)
+            heading_style: title
+            icon: mdi:list-status
+
+          - type: markdown
+            content: >
+              The card below is a `type: conditional` — it is wrapped in
+              `hui-conditional-card`, which is in the card-mod transparent exclusion
+              list. The wrapper itself must have no border or background; the **inner**
+              card should still have the normal card surface.
+
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: binary_sensor.internet_connectivity
+                state: "on"
+            card:
+              type: entities
+              title: Conditional — visible when Internet is on
+              entities:
+                - binary_sensor.internet_connectivity
+                - binary_sensor.router_connectivity
+                - binary_sensor.office_weather_station_connectivity
+
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: switch.smart_plug_tv
+                state: "on"
+            card:
+              type: tile
+              entity: switch.smart_plug_tv
+              name: Conditional Tile — visible when TV plug is on
+
+          - type: heading
+            heading: Unavailable States
+            heading_style: title
+            icon: mdi:alert-circle-outline
+
+          - type: entities
+            title: Unavailable — Entity Rows
+            entities:
+              - entity: sensor.unavailable_sensor
+                name: Sensor — unavailable
+              - entity: binary_sensor.unavailable_contact
+                name: Binary — unavailable
+              - entity: switch.unavailable_switch
+                name: Switch — unavailable
+              - entity: light.unavailable_light
+                name: Light — unavailable
+              - entity: fan.unavailable_fan
+                name: Fan — unavailable
+              - type: section
+                label: Entity not found (intentional)
+              - entity: sensor.entity_does_not_exist
+                name: Entity not found (intentional)
+
+          - type: horizontal-stack
+            cards:
+              - type: tile
+                entity: sensor.unavailable_sensor
+                name: Tile Unavailable
+              - type: tile
+                entity: switch.unavailable_switch
+                name: Switch Unavailable
+              - type: tile
+                entity: light.unavailable_light
+                name: Light Unavailable
+
+          - type: heading
+            heading: Theme Colour Variants
+            heading_style: title
+            icon: mdi:palette-swatch
+
+          - type: vertical-stack
+            cards:
+              - type: entities
+                title: Cyan
+                show_header_toggle: true
+                state_color: true
+                theme: Black with Cyan
+                entities:
+                  - entity: switch.smart_plug_tv
+                    name: TV Switch
+                  - entity: input_number.mock_volume_level
+                    name: Volume
+                  - entity: sensor.kitchen_temperature
+                    name: Temp
+                  - entity: binary_sensor.mock_problem_alert
+                    name: Problem Alert
+                  - entity: input_button.wood_added
+                    name: Button
+              - type: entities
+                title: Green
+                show_header_toggle: true
+                state_color: true
+                theme: Black with Green
+                entities:
+                  - entity: switch.smart_plug_tv
+                    name: TV Switch
+                  - entity: input_number.mock_volume_level
+                    name: Volume
+                  - entity: sensor.kitchen_temperature
+                    name: Temp
+                  - entity: binary_sensor.mock_problem_alert
+                    name: Problem Alert
+                  - entity: input_button.wood_added
+                    name: Button
+              - type: entities
+                title: Red
+                show_header_toggle: true
+                state_color: true
+                theme: Black with Red
+                entities:
+                  - entity: switch.smart_plug_tv
+                    name: TV Switch
+                  - entity: input_number.mock_volume_level
+                    name: Volume
+                  - entity: sensor.kitchen_temperature
+                    name: Temp
+                  - entity: binary_sensor.mock_problem_alert
+                    name: Problem Alert
+                  - entity: input_button.wood_added
+                    name: Button
+              - type: entities
+                title: Fuchsia
+                show_header_toggle: true
+                state_color: true
+                theme: Black with Fuchsia
+                entities:
+                  - entity: switch.smart_plug_tv
+                    name: TV Switch
+                  - entity: input_number.mock_volume_level
+                    name: Volume
+                  - entity: sensor.kitchen_temperature
+                    name: Temp
+                  - entity: binary_sensor.mock_problem_alert
+                    name: Problem Alert
+                  - entity: input_button.wood_added
+                    name: Button
+
+          - type: vertical-stack
+            cards:
+              - type: entities
+                title: Purple
+                show_header_toggle: true
+                state_color: true
+                theme: Black with Purple
+                entities:
+                  - entity: switch.smart_plug_tv
+                    name: TV Switch
+                  - entity: input_number.mock_volume_level
+                    name: Volume
+                  - entity: sensor.kitchen_temperature
+                    name: Temp
+                  - entity: binary_sensor.mock_problem_alert
+                    name: Problem Alert
+                  - entity: input_button.wood_added
+                    name: Button
+              - type: entities
+                title: Indigo
+                show_header_toggle: true
+                state_color: true
+                theme: Black with Indigo
+                entities:
+                  - entity: switch.smart_plug_tv
+                    name: TV Switch
+                  - entity: input_number.mock_volume_level
+                    name: Volume
+                  - entity: sensor.kitchen_temperature
+                    name: Temp
+                  - entity: binary_sensor.mock_problem_alert
+                    name: Problem Alert
+                  - entity: input_button.wood_added
+                    name: Button
+              - type: entities
+                title: Silver
+                show_header_toggle: true
+                state_color: true
+                theme: Black with Silver
+                entities:
+                  - entity: switch.smart_plug_tv
+                    name: TV Switch
+                  - entity: input_number.mock_volume_level
+                    name: Volume
+                  - entity: sensor.kitchen_temperature
+                    name: Temp
+                  - entity: binary_sensor.mock_problem_alert
+                    name: Problem Alert
+                  - entity: input_button.wood_added
+                    name: Button
+              - type: entities
+                title: Orange
+                show_header_toggle: true
+                state_color: true
+                theme: Black with Orange
+                entities:
+                  - entity: switch.smart_plug_tv
+                    name: TV Switch
+                  - entity: input_number.mock_volume_level
+                    name: Volume
+                  - entity: sensor.kitchen_temperature
+                    name: Temp
+                  - entity: binary_sensor.mock_problem_alert
+                    name: Problem Alert
+                  - entity: input_button.wood_added
+                    name: Button
+
+          - type: vertical-stack
+            cards:
+              - type: entities
+                title: Standard
+                show_header_toggle: true
+                state_color: true
+                theme: Black (Standard)
+                entities:
+                  - entity: switch.smart_plug_tv
+                    name: TV Switch
+                  - entity: input_number.mock_volume_level
+                    name: Volume
+                  - entity: sensor.kitchen_temperature
+                    name: Temp
+                  - entity: binary_sensor.mock_problem_alert
+                    name: Problem Alert
+                  - entity: input_button.wood_added
+                    name: Button
+              - type: entities
+                title: BG Only
+                show_header_toggle: true
+                state_color: true
+                theme: Black (Background Only)
+                entities:
+                  - entity: switch.smart_plug_tv
+                    name: TV Switch
+                  - entity: input_number.mock_volume_level
+                    name: Volume
+                  - entity: sensor.kitchen_temperature
+                    name: Temp
+                  - entity: binary_sensor.mock_problem_alert
+                    name: Problem Alert
+                  - entity: input_button.wood_added
+                    name: Button
+
+          - type: heading
+            heading: Markdown Card (typography)
+            heading_style: title
+            icon: mdi:format-text
+
+          - type: markdown
+            title: Heading & Text Styles
+            content: |
+              ## Heading 2
+              ### Heading 3
+              #### Heading 4
+
+              Normal paragraph text. **Bold text.** *Italic text.* `inline code`.
+
+              > Blockquote text — should look distinct from body copy.
+
+              ---
+
+              Unordered list:
+              - Item one
+              - Item two
+              - Item three
+
+              Ordered list:
+              1. First item
+              2. Second item
+              3. Third item
+
+              | Column A | Column B | Column C |
+              |----------|----------|----------|
+              | Value 1  | Value 2  | Value 3  |
+              | Value 4  | Value 5  | Value 6  |
+
+              ```yaml
+              # Fenced code block — markdown-code-background-color token
+              sensor:
+                - name: Example
+                  state: "{{ states('input_number.mock_volume_level') }}"
+              ```
+
+              Link: [Home Assistant](https://www.home-assistant.io)
+
+      # ── Right — Black with Cyan ───────────────────────────────────────────
+      - type: grid
+        column_span: 1
+        theme: Black with Cyan
+        cards:
+          - type: markdown
+            content: >
+              ## Very Dark Black — Theme Test Dashboard
+
+              All major HA UI element types and states in one place. Use **Developer
+              Tools → YAML → Reload Lovelace** to refresh after theme changes. Each
+              section is labelled with what it exercises.
+
+          - type: markdown
+            title: "More Info Dialog — card-mod-more-info"
+            content: >
+              **Tap any entity** to open its More Info dialog and test: heading ink
+              color (`#ffffff` override), dialog surface background (pure black),
+              scrim/backdrop (`rgba(0,0,0,0.9)`), on-surface text contrast, form
+              controls inside dialogs (input backgrounds, selects, sliders), and the
+              number / cover / climate / alarm detail views.
+
+          - type: heading
+            heading: Heading Card — title style with entity badges
+            heading_style: title
+            icon: mdi:card-text-outline
+            badges:
+              - type: entity
+                entity: binary_sensor.internet_connectivity
+                name: Connectivity
+              - type: entity
+                entity: sensor.kitchen_temperature
+                name: Kitchen
+              - type: entity
+                entity: sensor.e_ink_display_battery_level
+                name: Battery
+
+          - type: heading
+            heading: Subtitle style heading (no badges)
+            heading_style: subtitle
+
+          - type: heading
+            heading: Tile Cards
+            heading_style: title
+            icon: mdi:view-grid
+
+          - type: heading
+            heading: Active / togglable states
+            heading_style: subtitle
+
+          - type: horizontal-stack
+            cards:
+              - type: tile
+                entity: switch.smart_plug_tv
+                name: Switch
+              - type: tile
+                entity: light.led_strip
+                name: Light
+              - type: tile
+                entity: fan.ceiling_fan
+                name: Fan
+
+          - type: horizontal-stack
+            cards:
+              - type: tile
+                entity: lock.front_door_lock
+                name: Lock
+              - type: tile
+                entity: cover.garage_door
+                name: Cover
+              - type: tile
+                entity: binary_sensor.internet_connectivity
+                name: Binary On
+
+          - type: heading
+            heading: Sensor / read-only states
+            heading_style: subtitle
+
+          - type: horizontal-stack
+            cards:
+              - type: tile
+                entity: sensor.kitchen_temperature
+                name: Temperature
+              - type: tile
+                entity: sensor.kitchen_humidity
+                name: Humidity
+              - type: tile
+                entity: sensor.e_ink_display_battery_level
+                name: Battery %
+
+          - type: horizontal-stack
+            cards:
+              - type: tile
+                entity: binary_sensor.office_window_contact
+                name: Binary Off
+              - type: tile
+                entity: binary_sensor.fireplace_too_hot
+                name: Binary Alert
+              - type: tile
+                entity: sensor.unavailable_sensor
+                name: Unavailable
+
+          - type: heading
+            heading: Switch on vs off — primary-color vs unchecked-color
+            heading_style: subtitle
+
+          - type: horizontal-stack
+            cards:
+              - type: tile
+                entity: switch.smart_plug_tv
+                name: SW — on state
+              - type: tile
+                entity: switch.smart_plug_office_ac
+                name: SW — off state
+              - type: tile
+                entity: light.led_strip
+                name: Light — on
+              - type: tile
+                entity: light.star_projector
+                name: Light — off
+
+          - type: heading
+            heading: Danger / Warning State Fills
+            heading_style: title
+            icon: mdi:alert
+
+          - type: horizontal-stack
+            cards:
+              - type: tile
+                entity: binary_sensor.mock_problem_alert
+                name: Problem — danger
+              - type: tile
+                entity: binary_sensor.mock_heat_alert
+                name: Heat Alert — warning
+              - type: tile
+                entity: binary_sensor.fireplace_too_hot
+                name: Heat — inactive
+
+          - type: entities
+            title: Alert Entity Rows (hover to see fill states)
+            entities:
+              - entity: binary_sensor.mock_problem_alert
+                name: Problem alert — danger fill
+              - entity: binary_sensor.mock_heat_alert
+                name: Heat alert — warning fill
+              - entity: binary_sensor.fireplace_too_hot
+                name: Heat sensor — inactive (no fill)
+
+          - type: heading
+            heading: Entity Card — Switches & Lights
+            heading_style: title
+            icon: mdi:toggle-switch
+
+          - type: entities
+            title: Switches
+            show_header_toggle: true
+            entities:
+              - switch.smart_plug_tv
+              - switch.smart_plug_office_ac
+              - switch.smart_plug_coffee_machine
+              - switch.smart_plug_lava_lamp
+              - switch.smart_plug_kitchen_heater
+              - switch.smart_plug_office_heater
+
+          - type: entities
+            title: Lights
+            show_header_toggle: true
+            entities:
+              - light.led_strip
+              - light.star_projector
+
+          - type: heading
+            heading: Entity Card — Input Controls
+            heading_style: title
+            icon: mdi:tune
+
+          - type: entities
+            title: Number Sliders
+            entities:
+              - entity: input_number.mock_brightness_level
+                name: Brightness Level
+              - entity: input_number.mock_volume_level
+                name: Volume Level
+              - entity: input_number.mock_fan_speed
+                name: Fan Speed
+              - entity: input_number.mock_target_humidity
+                name: Target Humidity
+              - entity: input_number.mock_mp_volume
+                name: Media Volume
+
+          - type: entities
+            title: Select Dropdowns
+            entities:
+              - entity: input_select.mock_hvac_mode
+                name: HVAC Mode (input)
+              - entity: input_select.mock_mp_source
+                name: Media Source (input)
+              - entity: select.hvac_mode
+                name: HVAC Mode (template)
+
+          - type: entities
+            title: Booleans (checkbox rows)
+            entities:
+              - entity: input_boolean.auto_light_kitchen
+                name: Auto Light Kitchen
+              - entity: input_boolean.manual_fire_place
+                name: Manual Fireplace
+
+          - type: todo-list
+            entity: todo.theme_test_to_do
+            title: Checkbox — ha-checkbox (todo list)
+
+          - type: markdown
+            title: "Radio & Progress Bar — where to find"
+            content: >
+              **ha-radio-option** — not embeddable in Lovelace cards. Test via: Settings
+              → System → General (language/region selectors) or by opening any card
+              editor that has a type/mode radio group.
+
+
+              **ha-progress-bar** — not directly triggerable from dashboard. Test via:
+              Developer Tools → Updates (trigger an install), or open the more-info
+              dialog for a `backup_manager` or `update` entity.
+
+          - type: entities
+            title: Date & Time Inputs
+            entities:
+              - entity: input_datetime.morning_alarm
+                name: Morning Alarm
+              - entity: input_datetime.vacation_start
+                name: Vacation Start
+
+          - type: heading
+            heading: Text Input Fields
+            heading_style: title
+            icon: mdi:form-textbox
+
+          - type: entities
+            title: input_text — normal state (form-background)
+            entities:
+              - entity: input_text.mock_text_note
+                name: Short Note (max 50)
+              - entity: input_text.mock_text_message
+                name: Long Message (max 255)
+              - entity: input_text.mock_text_password
+                name: Password Field (masked)
+
+          - type: heading
+            heading: Disabled Form Controls (form-background-disabled)
+            heading_style: title
+            icon: mdi:form-textbox-lock
+
+          - type: entities
+            title: Normal vs disabled — grey-wash comparison
+            entities:
+              - type: section
+                label: Normal (for comparison)
+              - entity: number.ceiling_fan_speed
+                name: Number — normal
+              - entity: select.hvac_mode
+                name: Select — normal
+              - type: section
+                label: Unavailable / disabled
+              - entity: number.unavailable_number
+                name: Number — unavailable
+              - entity: select.unavailable_select
+                name: Select — unavailable
+
+          - type: heading
+            heading: Entity Card — Covers & Locks
+            heading_style: title
+            icon: mdi:door-closed
+
+          - type: entities
+            title: Covers
+            entities:
+              - cover.garage_door
+              - cover.living_room_blinds
+              - cover.bedroom_curtains
+
+          - type: entities
+            title: Locks
+            entities:
+              - lock.front_door_lock
+              - lock.back_door_lock
+
+          - type: heading
+            heading: Entity Card — Sensors
+            heading_style: title
+            icon: mdi:thermometer
+
+          - type: entities
+            title: Environment
+            entities:
+              - type: section
+                label: Temperature
+              - sensor.kitchen_temperature
+              - sensor.bedroom_temperature
+              - sensor.bathroom_temperature
+              - sensor.office_temperature
+              - sensor.outdoor_temperature
+              - type: section
+                label: Air Quality
+              - sensor.kitchen_humidity
+              - sensor.kitchen_air_quality_pm25
+              - sensor.office_carbon_dioxide
+              - sensor.office_humidity
+              - type: section
+                label: Power
+              - sensor.office_workbench_power
+              - sensor.living_room_outlet_power
+              - sensor.grid_frequency
+
+          - type: entities
+            title: Binary Sensors
+            entities:
+              - binary_sensor.internet_connectivity
+              - binary_sensor.router_connectivity
+              - binary_sensor.office_weather_station_connectivity
+              - type: divider
+              - entity: binary_sensor.office_window_contact
+                name: Office Window
+              - entity: binary_sensor.kitchen_window_contact
+                name: Kitchen Window
+              - entity: binary_sensor.bathroom_door_contact
+                name: Bathroom Door
+              - binary_sensor.fireplace_too_hot
+              - binary_sensor.night
+
+          - type: heading
+            heading: Glance Card
+            heading_style: title
+            icon: mdi:view-compact
+
+          - type: glance
+            title: Room Temperatures
+            show_state: true
+            columns: 6
+            entities:
+              - entity: sensor.kitchen_temperature
+                name: Kitchen
+              - entity: sensor.bedroom_temperature
+                name: Bedroom
+              - entity: sensor.bathroom_temperature
+                name: Bathroom
+              - entity: sensor.office_temperature
+                name: Office
+              - entity: sensor.living_room_temperature
+                name: Living Rm
+              - entity: sensor.outdoor_temperature
+                name: Outdoor
+
+          - type: glance
+            title: Device States (icons + on/off colour)
+            show_state: true
+            columns: 6
+            entities:
+              - switch.smart_plug_tv
+              - light.led_strip
+              - fan.ceiling_fan
+              - binary_sensor.internet_connectivity
+              - lock.front_door_lock
+              - cover.garage_door
+
+          - type: heading
+            heading: Button Cards
+            heading_style: title
+            icon: mdi:gesture-tap-button
+
+          - type: horizontal-stack
+            cards:
+              - type: button
+                entity: button.restart_router
+                name: Template Button
+                icon: mdi:router-wireless
+                tap_action:
+                  action: toggle
+              - type: button
+                entity: input_button.wood_added
+                name: Input Button
+                icon: mdi:fire
+                tap_action:
+                  action: toggle
+              - type: button
+                entity: switch.smart_plug_tv
+                name: Switch Toggle
+                icon: mdi:television
+                tap_action:
+                  action: toggle
+              - type: button
+                entity: light.led_strip
+                name: Light Toggle
+                icon: mdi:led-strip
+                show_state: true
+                tap_action:
+                  action: toggle
+
+          - type: entities
+            title: Button Rows
+            entities:
+              - entity: button.restart_router
+                name: Template Button Row
+              - entity: input_button.wood_added
+                name: Input Button Row
+              - type: button
+                name: Service Call Row
+                action_name: Trigger
+                icon: mdi:bell
+                tap_action:
+                  action: call-service
+                  service: system_log.write
+                  data:
+                    message: Theme test button pressed
+                    level: info
+
+          - type: heading
+            heading: Gauge Cards (severity colours)
+            heading_style: title
+            icon: mdi:gauge
+
+          - type: horizontal-stack
+            cards:
+              - type: gauge
+                entity: sensor.kitchen_humidity
+                name: Humidity %
+                unit: "%"
+                min: 0
+                max: 100
+                needle: false
+                severity:
+                  green: 40
+                  yellow: 70
+                  red: 85
+              - type: gauge
+                entity: sensor.e_ink_display_battery_level
+                name: Battery %
+                unit: "%"
+                min: 0
+                max: 100
+                needle: true
+                severity:
+                  red: 0
+                  yellow: 40
+                  green: 60
+              - type: gauge
+                entity: sensor.office_carbon_dioxide
+                name: CO₂ ppm
+                min: 400
+                max: 2000
+                needle: true
+                severity:
+                  green: 400
+                  yellow: 1000
+                  red: 1500
+
+          - type: heading
+            heading: Sensor Card (single entity + sparkline)
+            heading_style: title
+            icon: mdi:chart-areaspline
+
+          - type: horizontal-stack
+            cards:
+              - type: sensor
+                entity: sensor.kitchen_temperature
+                name: Kitchen Temp
+                graph: line
+                hours_to_show: 24
+              - type: sensor
+                entity: sensor.office_carbon_dioxide
+                name: Office CO₂
+                graph: line
+                hours_to_show: 24
+              - type: sensor
+                entity: sensor.e_ink_display_battery_level
+                name: Battery
+                graph: line
+                hours_to_show: 24
+
+          - type: horizontal-stack
+            cards:
+              - type: sensor
+                entity: sensor.office_workbench_power
+                name: Workbench Power
+                graph: line
+                hours_to_show: 24
+              - type: sensor
+                entity: sensor.kitchen_humidity
+                name: Humidity
+                graph: line
+                hours_to_show: 24
+              - type: sensor
+                entity: sensor.outdoor_temperature
+                name: Outdoor Temp
+                graph: line
+                hours_to_show: 24
+
+          - type: heading
+            heading: History Graph (line colours, legend)
+            heading_style: title
+            icon: mdi:chart-line
+
+          - type: history-graph
+            title: Temperature — 24 h
+            hours_to_show: 24
+            entities:
+              - entity: sensor.kitchen_temperature
+                name: Kitchen
+              - entity: sensor.bedroom_temperature
+                name: Bedroom
+              - entity: sensor.office_temperature
+                name: Office
+              - entity: sensor.outdoor_temperature
+                name: Outdoor
+
+          - type: heading
+            heading: Graph Colours — all 10 tokens (graph-color-1 → 10)
+            heading_style: title
+            icon: mdi:palette
+
+          - type: history-graph
+            title: graph-color-1 (primary) → graph-color-10 (indigo)
+            hours_to_show: 24
+            entities:
+              - entity: sensor.kitchen_temperature
+                name: "1 — primary"
+              - entity: sensor.bedroom_temperature
+                name: "2 — blue"
+              - entity: sensor.bathroom_temperature
+                name: "3 — green"
+              - entity: sensor.office_temperature
+                name: "4 — purple"
+              - entity: sensor.outdoor_temperature
+                name: "5 — red"
+              - entity: sensor.fireplace_temperature
+                name: "6 — cyan"
+              - entity: sensor.storage_room_temperature
+                name: "7 — teal"
+              - entity: sensor.living_room_temperature
+                name: "8 — pink"
+              - entity: sensor.outdoor_station_temperature
+                name: "9 — deep-orange"
+              - entity: sensor.outdoor_station_humidity
+                name: "10 — indigo"
+
+          - type: heading
+            heading: Statistics Graph (bar/area chart variant)
+            heading_style: title
+            icon: mdi:chart-bar
+
+          - type: statistics-graph
+            title: Temperature Stats — 7 days
+            period: day
+            days_to_show: 7
+            chart_type: line
+            entities:
+              - entity: sensor.kitchen_temperature
+                name: Kitchen
+              - entity: sensor.office_temperature
+                name: Office
+              - entity: sensor.outdoor_temperature
+                name: Outdoor
+
+          - type: statistics-graph
+            title: Power Consumption — 7 days (bar)
+            period: day
+            days_to_show: 7
+            chart_type: bar
+            stat_types:
+              - mean
+            entities:
+              - entity: sensor.office_workbench_power
+                name: Workbench
+              - entity: sensor.living_room_outlet_power
+                name: Living Room
+
+          - type: heading
+            heading: Weather Card (15 conditions — use selector to cycle)
+            heading_style: title
+            icon: mdi:weather-partly-cloudy
+
+          - type: entities
+            title: Condition Selector
+            entities:
+              - entity: input_select.mock_weather_condition
+                name: Weather Condition (changes icon + card)
+
+          - type: weather-forecast
+            show_current: true
+            show_forecast: false
+            entity: weather.mock_weather
+            round_temperature: false
+
+          - type: horizontal-stack
+            cards:
+              - type: tile
+                entity: weather.mock_weather
+                name: Weather Tile
+              - type: glance
+                show_state: true
+                entities:
+                  - entity: weather.mock_weather
+                    name: Glance
+
+          - type: heading
+            heading: Thermostat Card (climate controls)
+            heading_style: title
+            icon: mdi:thermostat
+
+          - type: horizontal-stack
+            cards:
+              - type: thermostat
+                entity: climate.kitchen_climate_control
+                name: Kitchen
+              - type: thermostat
+                entity: climate.office_climate_control
+                name: Office
+
+          - type: entities
+            title: Climate Entity Rows
+            entities:
+              - climate.kitchen_climate_control
+              - climate.fireplace
+              - climate.office_climate_control
+
+          - type: heading
+            heading: Alarm Panel (keypad, state colours)
+            heading_style: title
+            icon: mdi:shield-home
+
+          - type: alarm-panel
+            entity: alarm_control_panel.home_alarm
+            name: Home Alarm
+            states:
+              - arm_home
+              - arm_away
+              - arm_night
+
+          - type: heading
+            heading: Media Player (controls, volume, source, progress bar)
+            heading_style: title
+            icon: mdi:speaker
+
+          - type: media-control
+            entity: media_player.living_room_speaker
+
+          - type: entities
+            title: Media Entity Rows
+            entities:
+              - media_player.living_room_speaker
+              - type: divider
+              - entity: input_select.mock_mp_source
+                name: Source (input_select)
+              - entity: input_number.mock_mp_volume_normalized
+                name: Volume 0–1 (media player)
+              - entity: input_number.mock_mp_volume
+                name: Volume 0–100 (display)
+
+          - type: heading
+            heading: Fan Controls
+            heading_style: title
+            icon: mdi:fan
+
+          - type: entities
+            title: Fans
+            entities:
+              - entity: fan.ceiling_fan
+                name: Ceiling Fan
+              - entity: number.ceiling_fan_speed
+                name: Fan Speed (number)
+
+          - type: heading
+            heading: Timers & Counters
+            heading_style: title
+            icon: mdi:timer
+
+          - type: horizontal-stack
+            cards:
+              - type: entities
+                title: Timers
+                entities:
+                  - timer.laundry
+                  - timer.oven
+              - type: entities
+                title: Counters
+                entities:
+                  - counter.daily_visitors
+                  - counter.package_deliveries
+
+          - type: heading
+            heading: Logbook (event list — scroll to test 4px scrollbar)
+            heading_style: title
+            icon: mdi:history
+
+          - type: logbook
+            title: Recent State Changes
+            hours_to_show: 24
+            entities:
+              - switch.smart_plug_tv
+              - light.led_strip
+              - fan.ceiling_fan
+              - lock.front_door_lock
+              - binary_sensor.internet_connectivity
+              - alarm_control_panel.home_alarm
+              - timer.laundry
+              - timer.oven
+              - cover.garage_door
+              - binary_sensor.mock_problem_alert
+
+          - type: heading
+            heading: Entity Filter Card (auto-filtered by state)
+            heading_style: title
+            icon: mdi:filter
+
+          - type: entity-filter
+            entities:
+              - switch.smart_plug_tv
+              - switch.smart_plug_office_ac
+              - switch.smart_plug_coffee_machine
+              - switch.smart_plug_lava_lamp
+              - switch.smart_plug_kitchen_heater
+              - switch.smart_plug_office_heater
+              - light.led_strip
+              - light.star_projector
+              - fan.ceiling_fan
+              - binary_sensor.internet_connectivity
+              - binary_sensor.router_connectivity
+              - binary_sensor.night
+            conditions:
+              - condition: state
+                state: "on"
+            card:
+              type: entities
+              title: Active right now (on = true)
+
+          - type: entity-filter
+            entities:
+              - switch.smart_plug_tv
+              - switch.smart_plug_office_ac
+              - switch.smart_plug_coffee_machine
+              - switch.smart_plug_lava_lamp
+              - light.led_strip
+              - light.star_projector
+              - fan.ceiling_fan
+              - lock.front_door_lock
+              - lock.back_door_lock
+            conditions:
+              - condition: state
+                state: "off"
+            card:
+              type: glance
+              title: Inactive right now (off)
+              show_state: true
+
+          - type: heading
+            heading: Conditional Card (transparent wrapper exclusion)
+            heading_style: title
+            icon: mdi:list-status
+
+          - type: markdown
+            content: >
+              The card below is a `type: conditional` — it is wrapped in
+              `hui-conditional-card`, which is in the card-mod transparent exclusion
+              list. The wrapper itself must have no border or background; the **inner**
+              card should still have the normal card surface.
+
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: binary_sensor.internet_connectivity
+                state: "on"
+            card:
+              type: entities
+              title: Conditional — visible when Internet is on
+              entities:
+                - binary_sensor.internet_connectivity
+                - binary_sensor.router_connectivity
+                - binary_sensor.office_weather_station_connectivity
+
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: switch.smart_plug_tv
+                state: "on"
+            card:
+              type: tile
+              entity: switch.smart_plug_tv
+              name: Conditional Tile — visible when TV plug is on
+
+          - type: heading
+            heading: Unavailable States
+            heading_style: title
+            icon: mdi:alert-circle-outline
+
+          - type: entities
+            title: Unavailable — Entity Rows
+            entities:
+              - entity: sensor.unavailable_sensor
+                name: Sensor — unavailable
+              - entity: binary_sensor.unavailable_contact
+                name: Binary — unavailable
+              - entity: switch.unavailable_switch
+                name: Switch — unavailable
+              - entity: light.unavailable_light
+                name: Light — unavailable
+              - entity: fan.unavailable_fan
+                name: Fan — unavailable
+              - type: section
+                label: Entity not found (intentional)
+              - entity: sensor.entity_does_not_exist
+                name: Entity not found (intentional)
+
+          - type: horizontal-stack
+            cards:
+              - type: tile
+                entity: sensor.unavailable_sensor
+                name: Tile Unavailable
+              - type: tile
+                entity: switch.unavailable_switch
+                name: Switch Unavailable
+              - type: tile
+                entity: light.unavailable_light
+                name: Light Unavailable
+
+          - type: heading
+            heading: Theme Colour Variants
+            heading_style: title
+            icon: mdi:palette-swatch
+
+          - type: vertical-stack
+            cards:
+              - type: entities
+                title: Cyan
+                show_header_toggle: true
+                state_color: true
+                theme: Black with Cyan
+                entities:
+                  - entity: switch.smart_plug_tv
+                    name: TV Switch
+                  - entity: input_number.mock_volume_level
+                    name: Volume
+                  - entity: sensor.kitchen_temperature
+                    name: Temp
+                  - entity: binary_sensor.mock_problem_alert
+                    name: Problem Alert
+                  - entity: input_button.wood_added
+                    name: Button
+              - type: entities
+                title: Green
+                show_header_toggle: true
+                state_color: true
+                theme: Black with Green
+                entities:
+                  - entity: switch.smart_plug_tv
+                    name: TV Switch
+                  - entity: input_number.mock_volume_level
+                    name: Volume
+                  - entity: sensor.kitchen_temperature
+                    name: Temp
+                  - entity: binary_sensor.mock_problem_alert
+                    name: Problem Alert
+                  - entity: input_button.wood_added
+                    name: Button
+              - type: entities
+                title: Red
+                show_header_toggle: true
+                state_color: true
+                theme: Black with Red
+                entities:
+                  - entity: switch.smart_plug_tv
+                    name: TV Switch
+                  - entity: input_number.mock_volume_level
+                    name: Volume
+                  - entity: sensor.kitchen_temperature
+                    name: Temp
+                  - entity: binary_sensor.mock_problem_alert
+                    name: Problem Alert
+                  - entity: input_button.wood_added
+                    name: Button
+              - type: entities
+                title: Fuchsia
+                show_header_toggle: true
+                state_color: true
+                theme: Black with Fuchsia
+                entities:
+                  - entity: switch.smart_plug_tv
+                    name: TV Switch
+                  - entity: input_number.mock_volume_level
+                    name: Volume
+                  - entity: sensor.kitchen_temperature
+                    name: Temp
+                  - entity: binary_sensor.mock_problem_alert
+                    name: Problem Alert
+                  - entity: input_button.wood_added
+                    name: Button
+
+          - type: vertical-stack
+            cards:
+              - type: entities
+                title: Purple
+                show_header_toggle: true
+                state_color: true
+                theme: Black with Purple
+                entities:
+                  - entity: switch.smart_plug_tv
+                    name: TV Switch
+                  - entity: input_number.mock_volume_level
+                    name: Volume
+                  - entity: sensor.kitchen_temperature
+                    name: Temp
+                  - entity: binary_sensor.mock_problem_alert
+                    name: Problem Alert
+                  - entity: input_button.wood_added
+                    name: Button
+              - type: entities
+                title: Indigo
+                show_header_toggle: true
+                state_color: true
+                theme: Black with Indigo
+                entities:
+                  - entity: switch.smart_plug_tv
+                    name: TV Switch
+                  - entity: input_number.mock_volume_level
+                    name: Volume
+                  - entity: sensor.kitchen_temperature
+                    name: Temp
+                  - entity: binary_sensor.mock_problem_alert
+                    name: Problem Alert
+                  - entity: input_button.wood_added
+                    name: Button
+              - type: entities
+                title: Silver
+                show_header_toggle: true
+                state_color: true
+                theme: Black with Silver
+                entities:
+                  - entity: switch.smart_plug_tv
+                    name: TV Switch
+                  - entity: input_number.mock_volume_level
+                    name: Volume
+                  - entity: sensor.kitchen_temperature
+                    name: Temp
+                  - entity: binary_sensor.mock_problem_alert
+                    name: Problem Alert
+                  - entity: input_button.wood_added
+                    name: Button
+              - type: entities
+                title: Orange
+                show_header_toggle: true
+                state_color: true
+                theme: Black with Orange
+                entities:
+                  - entity: switch.smart_plug_tv
+                    name: TV Switch
+                  - entity: input_number.mock_volume_level
+                    name: Volume
+                  - entity: sensor.kitchen_temperature
+                    name: Temp
+                  - entity: binary_sensor.mock_problem_alert
+                    name: Problem Alert
+                  - entity: input_button.wood_added
+                    name: Button
+
+          - type: vertical-stack
+            cards:
+              - type: entities
+                title: Standard
+                show_header_toggle: true
+                state_color: true
+                theme: Black (Standard)
+                entities:
+                  - entity: switch.smart_plug_tv
+                    name: TV Switch
+                  - entity: input_number.mock_volume_level
+                    name: Volume
+                  - entity: sensor.kitchen_temperature
+                    name: Temp
+                  - entity: binary_sensor.mock_problem_alert
+                    name: Problem Alert
+                  - entity: input_button.wood_added
+                    name: Button
+              - type: entities
+                title: BG Only
+                show_header_toggle: true
+                state_color: true
+                theme: Black (Background Only)
+                entities:
+                  - entity: switch.smart_plug_tv
+                    name: TV Switch
+                  - entity: input_number.mock_volume_level
+                    name: Volume
+                  - entity: sensor.kitchen_temperature
+                    name: Temp
+                  - entity: binary_sensor.mock_problem_alert
+                    name: Problem Alert
+                  - entity: input_button.wood_added
+                    name: Button
+
+          - type: heading
+            heading: Markdown Card (typography)
+            heading_style: title
+            icon: mdi:format-text
+
+          - type: markdown
+            title: Heading & Text Styles
+            content: |
+              ## Heading 2
+              ### Heading 3
+              #### Heading 4
+
+              Normal paragraph text. **Bold text.** *Italic text.* `inline code`.
+
+              > Blockquote text — should look distinct from body copy.
+
+              ---
+
+              Unordered list:
+              - Item one
+              - Item two
+              - Item three
+
+              Ordered list:
+              1. First item
+              2. Second item
+              3. Third item
+
+              | Column A | Column B | Column C |
+              |----------|----------|----------|
+              | Value 1  | Value 2  | Value 3  |
+              | Value 4  | Value 5  | Value 6  |
+
+              ```yaml
+              # Fenced code block — markdown-code-background-color token
+              sensor:
+                - name: Example
+                  state: "{{ states('input_number.mock_volume_level') }}"
+              ```
+
+              Link: [Home Assistant](https://www.home-assistant.io)

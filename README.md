@@ -4,7 +4,7 @@
 
 A Home Assistant dark mode theme that provides black or very dark backgrounds wherever possible along with a choice of primary colors.
 
-> [!NOTE]- [Very Dark Black Theme for Home Assistant](#very-dark-black-theme-for-home-assistant)
+> [!NOTE]
 >
 > **Is this the right theme for you?**
 >
@@ -45,8 +45,7 @@ This is a simple theme focused on providing a very dark mode look. It's designed
   - 🟣 Purple
   - 💙 Indigo
   - 🔘 Silver (Monochrome)
-  - Black (Standard): A monochrome theme (this is the base the others are built on).
-  - Black (Background Only): This is the "sub-base" theme. It must show in the picker due to Home Assistant's theme structure.
+  - ⚪ White (Very Monochrome)
 
 ## 🔧 Requirements & Compatibility
 
@@ -54,10 +53,10 @@ This is a simple theme focused on providing a very dark mode look. It's designed
 
 To ensure all features (like custom scrollbars and border removals) work correctly, verify you meet these minimum requirements:
 
-| Dependency         | Minimum Version | Reason                                   |
-| :----------------- | :-------------- | :--------------------------------------- |
-| **Home Assistant** | `2022.11.0`     | Required for `ha-card` border variables. |
-| **card-mod**       | `3.0.0`         | Optional for theme-level CSS injection.  |
+| Dependency | Minimum Version | Reason |
+| :-- | :-- | :-- |
+| **Home Assistant** | `2022.11.0` | Required for `ha-card` border variables. |
+| **card-mod** | `3.0.0` | Optional but recommended for theme-level CSS injection |
 
 The theme is fully usable from HA 2022.11 onwards. Newer versions have additional refinements:
 
@@ -91,11 +90,11 @@ The theme is fully usable from HA 2022.11 onwards. Newer versions have additiona
 
 **Visual Appeal** — The primary use case is that you like the appearance as your overall/main theme, but there are other ways to use it as well:
 
-- **Color-coded views and sections** — Apply different accent colors to individual dashboard **views** (full screen) or **sections** (part of the screen) to visually separate areas of your home at a glance — for example, Cyan for climate, Orange for lighting, Red for security. See [Apply to Individual Views or Sections](#apply-to-individual-views-or-sections).
+- **Color-coded views and sections** — Apply different accent colors to individual dashboard **views** (full screen) or **sections** (part of the screen) to visually separate areas of your home at a glance — for example, Cyan for climate, Orange for lighting, Red for security. See [Apply to Individual Dashboard Views or Sections](#apply-to-individual-dashboard-views-or-sections).
 - **Automated theme switching** — Use the startup automation pattern in the [Automate Theme Changes](#automate-theme-changes) section to switch accent colors based on time of day or presence.
 - **Startup indicator** — Set **Orange** (or any accent) at boot so every glance at the dashboard confirms Home Assistant is still initialising. An automation switches back to your normal theme after two minutes once startup is complete. See [Automate Theme Changes](#automate-theme-changes).
 - **Visual alert highlight** — Trigger **Red** automatically when an alert condition fires (motion, smoke, door contact, etc.) so the entire UI signals the alert state at a glance. Restore your normal theme when the condition clears. See [Automate Theme Changes](#automate-theme-changes).
-- **Minimal monochrome setup** — Choose **Silver** or **Black (Standard)** for a clean, color-neutral control panel that stays out of the way.
+- **Minimal monochrome setup** — Choose **Silver** or **White** for a clean, color-neutral control panel that stays out of the way.
 - **OLED and power-saving displays** — Pure black backgrounds draw no power on OLED panels, making this ideal for wall-mounted tablets or phones used as HA dashboards.
 - **Pairing with popular custom cards** — The theme explicitly sets transparent backgrounds for Mushroom, Bubble, and other widely-used custom card types, giving a seamless look on black dashboards.
 
@@ -132,7 +131,7 @@ frontend:
 
 - **Change System Theme**: Go to your [Profile General](https://my.home-assistant.io/redirect/profile) tab (bottom left of screen) and change Theme under **_User preferences_**.
 
-#### Apply to Individual Views or Sections
+#### Apply to Individual Dashboard Views or Sections
 
 Themes can be applied at three levels of scope, making it easy to mix accent colors for visual differentiation and highlighting across your dashboard — for example, Red for a security view, Orange for a lighting panel, or Cyan for climate controls:
 
@@ -148,6 +147,12 @@ To apply a theme to a view or section, from any custom dashboard view click the 
 ### Automate Theme Changes
 
 You can use a Home Assistant automation to change the system theme at startup, or based on any other time or condition you wish.
+
+| Scenario | Trigger | Jump to |
+| :-- | :-- | :-- |
+| Set a theme every time HA starts | HA startup | [Set Theme at Startup](#-set-theme-at-startup) |
+| Signal initialising, then restore your normal theme | HA startup + 2 min delay | [Startup Indicator](#-startup-indicator-with-delayed-restore) |
+| Switch to Red on an alert, restore when it clears | Entity state on / off | [Visual Alert](#-visual-alert-theme) |
 
 #### 🔧 Setup Requirements
 
@@ -303,7 +308,7 @@ If you installed via HACS:
 
 - **Color Picker**: The theme has eight pre-defined accent colors available, but there is no option to select your own accent color to work with the theme. To my knowledge, this functionality is not available within the Home Assistant basic theme file, it would require an additional script or custom component, so it is not in scope for this project.
 - **Light Theme**: The theme works in "Light" mode, but still applies the Very Dark Black theme, a dark mode theme. This is deliberate, this is not a light mode theme.
-- **Base Themes in Picker**: Two "base" themes are in the picker lists for this theme, "Black (Background Only)" and "Black (Standard)". This is a known limitation of the Home Assistant theme file structure. Building accent variant themes from a base requires the base to remain in the list. "Fixing" this either results in log warnings/errors or a huge theme file that becomes difficult to maintain. There are no plans to change this behavior.
+- **Base Themes in Picker**: The base (anchor) theme `Black with White` appears in the picker alongside the accent variants. This is a known limitation of the Home Assistant theme file structure: building accent variants from a shared base requires that base to be a named theme entry, which makes it selectable. There are no plans to change this behavior — "Fixing" this either results in log warnings/errors or a huge theme file that becomes difficult to maintain. `Black with White` is a fully functional minimalist dark theme and intentionally treated as a variant in its own right.
 
 ## 📝 Maintenance Status
 
