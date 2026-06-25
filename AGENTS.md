@@ -134,6 +134,23 @@ Token hierarchy for icons (define in each Section C variant for per-accent match
 - `state-icon-color` — neutral/inactive icon state
 - `state-icon-active-color` — "On"/active icon state
 
+**Backward compatibility:** Keep old/superseded tokens (`paper-*`, `mdc-*`). They fail silently
+on newer HA — no warnings, no visual impact. Removing them breaks older HA versions. Only remove
+if a token actively causes a conflict or warning.
+
+**New token classification — always check before adding:**
+
+- **Category A** (hardcoded component default): add only if the default looks wrong on black.
+- **Category B** (component defaults to `var(--primary-color)`): add immediately to Section A
+  using `var(--primary-color, #aaaaaa)`. On base themes `--primary-color` is unset → transparent
+  → invisible. Do not wait for a visible failure — on base themes it is invisible by definition.
+- **`:host` trap**: some components re-declare tokens internally via
+  `:host { --token: var(--primary-color) }`, overriding any inherited value. These cannot be fixed
+  without setting `primary-color` directly (which causes warnings — an absolute constraint).
+  Document as permanent base-theme limitations.
+
+See `docs/DEVELOPMENT.md` Section 5 for full detail and examples.
+
 ## Development Environment
 
 The project uses a VS Code devcontainer running a live Home Assistant instance for manual theme testing. The container image is `ha-dev-base:latest`. Theme changes take effect immediately without restarting HA — reload via `Developer Tools → YAML → Reload Themes` or the `frontend.reload_themes` service call.
@@ -157,7 +174,14 @@ For rapid visual iteration between restarts, trigger a theme reload without rest
 
 ### Skill Prompts
 
-See `.shared/prompts/devcon_run_gen.md` for the mini-skill for running arbitrary commands inside this devcontainer from the Windows host. Container identity values (`CONTAINER_NAME`, `PROJECT_DIR`) are in `.devcontainer/.env`.
+See `.shared/prompts/devcon_run_gen.md` for the mini-skill for running arbitrary commands inside
+this devcontainer from the Windows host. Container identity values (`CONTAINER_NAME`,
+`PROJECT_DIR`) are in `.devcontainer/.env`.
+
+See `.shared/prompts/theme_review.md` for the theme token drift review guide. Use it when an HA
+update is suspected to have renamed or removed tokens. It provides a Playwright-based workflow for
+inspecting component shadow DOMs, reading `adoptedStyleSheets`, and cross-referencing against the
+theme YAML to detect invalid `var()` chains, dead tokens, and missing Category B overrides.
 
 ## README Known Decisions
 

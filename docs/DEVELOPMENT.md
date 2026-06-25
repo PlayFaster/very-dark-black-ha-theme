@@ -58,6 +58,48 @@ Home Assistant is moving away from legacy `paper-` and `mdc-` variables toward *
   - **NOTE**: The `hsl(from ...)` syntax requires HA 2026.4+ and a modern browser.
   - **Example**: `ha-color-primary-20: hsl(from var(--primary-color) h s calc(l * 0.40))`
 
+### Backward Compatibility — Keep Old Tokens
+
+Old and superseded tokens (e.g. `paper-*`, `mdc-*` from legacy components) must be **kept** in
+the theme even after the components that used them are removed from HA. These tokens fail silently
+on newer HA versions — they set a CSS custom property that nothing reads, causing no warnings, no
+visual glitches, and no YAML errors. Removing them breaks backward compatibility for users still
+on older HA versions.
+
+Only remove a token if it actively causes a problem (e.g. a naming collision with a new token, or
+a verified YAML warning). Deprecation alone is not sufficient justification for removal.
+
+### New Token Decisions — Category A vs Category B
+
+When a new component or token is identified (e.g. through an HA release note, a `change_ref_*`
+doc, or a theme drift investigation), classify it before deciding whether to add it:
+
+**Category A — Token has a hardcoded component default**
+
+The component's internal CSS provides a concrete fallback value independent of the theme, e.g.
+`background: var(--new-token, #1a73e8)`. If the theme does not set `new-token`, the component
+uses its own default. Approach: **reactive** — add only if the default looks wrong on this theme.
+
+**Category B — Token chains to a theme-owned variable (especially `--primary-color`)**
+
+The component's internal CSS defaults to `var(--primary-color)` or another theme token, e.g.
+`background: var(--new-token, var(--primary-color))`. For accent themes this works correctly.
+For the base themes (`Black (Background Only)`, `Black (Standard)`), `--primary-color` is unset
+→ `transparent` → the element becomes invisible. Approach: **mandatory and proactive** — add to
+Section A immediately using `var(--primary-color, #aaaaaa)` as the value. Do not wait for a
+visible problem; on base themes the failure is invisible by definition.
+
+To determine which category: inspect the component's shadow DOM `adoptedStyleSheets` in DevTools
+(or run the `theme_review.md` Playwright script). Look at what the internal CSS fallback resolves
+to — a hardcoded colour (Category A) or a `var(--primary-color)` chain (Category B).
+
+**Important:** the `:host` re-declaration trap. Some components set their own token internally via
+a `:host` CSS rule, e.g. `:host { --control-switch-on-color: var(--primary-color) }`. This
+overrides any inherited value — an external `control-switch-on-color` set by the theme is ignored.
+For these components, the only path is through `--primary-color` itself. Since adding
+`primary-color` to Section A or B causes duplicate key warnings (an absolute constraint), such
+components cannot be fixed for base themes. Document them as permanent known limitations.
+
 ## 6. Card-Mod & Component Exclusions
 
 Global background styling for `ha-card` can cause "background stacking" issues with modern custom cards.
