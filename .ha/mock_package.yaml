@@ -245,6 +245,7 @@ template:
         state: "12"
         unit_of_measurement: "µg/m³"
         device_class: pm25
+        state_class: measurement
       - name: "Kitchen Air Quality VOC Index"
         unique_id: mock_kitchen_voc_index
         state: "142"
@@ -255,6 +256,7 @@ template:
         state: "24.8"
         unit_of_measurement: "°C"
         device_class: temperature
+        state_class: measurement
       - name: "Bedroom Temperature"
         unique_id: mock_bedroom_temperature
         state: "19.3"
@@ -270,6 +272,7 @@ template:
         state: "8.6"
         unit_of_measurement: "°C"
         device_class: temperature
+        state_class: measurement
 
       # -- Outdoor --
       - name: "Outdoor Temperature"
@@ -277,6 +280,7 @@ template:
         state: "5.2"
         unit_of_measurement: "°C"
         device_class: temperature
+        state_class: measurement
 
       # -- Weather station --
       - name: "Weather Station Carbon Dioxide"
@@ -343,32 +347,6 @@ template:
         unit_of_measurement: "W"
         device_class: power
         state_class: measurement
-
-      # -- Project: Graphite --
-      - name: "Graphite Stars"
-        unique_id: mock_graphite_stars
-        state: "1842"
-        icon: mdi:star
-      - name: "Graphite Issues"
-        unique_id: mock_graphite_issues
-        state: "7"
-        icon: mdi:alert-circle
-      - name: "Graphite Pull Requests"
-        unique_id: mock_graphite_prs
-        state: "2"
-        icon: mdi:source-pull
-      - name: "Graphite Latest Release"
-        unique_id: mock_graphite_latest_release
-        state: "2.7.3"
-        icon: mdi:tag
-      - name: "Graphite Discussions"
-        unique_id: mock_graphite_discussions
-        state: "15"
-        icon: mdi:forum
-      - name: "Graphite Latest Commit"
-        unique_id: mock_graphite_latest_commit
-        state: "fix(themes): badge text color"
-        icon: mdi:source-commit
 
       # -- Misc --
       - name: "Grid Frequency"

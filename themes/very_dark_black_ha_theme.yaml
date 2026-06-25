@@ -68,7 +68,7 @@ Black with White: &base_logic # --- 1. Named Colors (Defined first for alias saf
   primary-text-color: &base_text "#e1e1e1"
   secondary-text-color: &base_subtext "#a8a8a8" # Brightened for WCAG AA safety
   # Icons & Accents mapping to primary-color
-  accent-color: var(--primary-color)
+  accent-color: "var(--primary-color, #e0e0e0)"
   paper-item-icon-color: var(--primary-color)
   state-icon-color: var(--primary-color)
   state-icon-active-color: var(--primary-color)
@@ -203,7 +203,7 @@ Black with White: &base_logic # --- 1. Named Colors (Defined first for alias saf
   energy-battery-in-color: *acc_purple
   energy-gas-color: *acc_red
   energy-water-color: *acc_cyan
-  graph-color-1: "var(--primary-color, #e0e0e0)"
+  graph-color-1: var(--primary-color)
   graph-color-2: *acc_blue
   graph-color-3: *acc_green
   graph-color-4: *acc_purple

@@ -45,11 +45,7 @@ This is a simple theme focused on providing a very dark mode look. It's designed
   - 🟣 Purple
   - 💙 Indigo
   - 🔘 Silver (Monochrome)
-  - ⚪ White (No Accent)
-
-> [!NOTE]
->
-> **`Black with White` and the picker**: `Black with White` appears in the picker because Home Assistant requires the shared base configuration to be a named theme entry — there is no way to hide it. It is a fully functional dark theme: pure black surfaces, white text and icons, HA's standard semantic state colors (green/yellow/red for entity states). It has no accent color, which also means it works well in Light mode. Use it when you want a clean, neutral dark interface with no color emphasis.
+  - ⚪ White (Very Monochrome)
 
 ## 🔧 Requirements & Compatibility
 
@@ -312,7 +308,7 @@ If you installed via HACS:
 
 - **Color Picker**: The theme has eight pre-defined accent colors available, but there is no option to select your own accent color to work with the theme. To my knowledge, this functionality is not available within the Home Assistant basic theme file, it would require an additional script or custom component, so it is not in scope for this project.
 - **Light Theme**: The theme works in "Light" mode, but still applies the Very Dark Black theme, a dark mode theme. This is deliberate, this is not a light mode theme.
-- **`Black with White` in the picker**: `Black with White` appears alongside the accent variants because Home Assistant's theme architecture requires the shared base configuration to be a named theme entry. This cannot be changed without log warnings or a significantly larger theme file. `Black with White` is a fully functional dark theme and intentionally treated as a variant in its own right.
+- **Base Themes in Picker**: The base (anchor) theme `Black with White` appears in the picker alongside the accent variants. This is a known limitation of the Home Assistant theme file structure: building accent variants from a shared base requires that base to be a named theme entry, which makes it selectable. There are no plans to change this behavior — "Fixing" this either results in log warnings/errors or a huge theme file that becomes difficult to maintain. `Black with White` is a fully functional minimalist dark theme and intentionally treated as a variant in its own right.
 
 ## 📝 Maintenance Status
 
