@@ -9,15 +9,15 @@
 # ----------------------------------------------------------------
 
 # ----------------------------------------------------------------
-# SECTION A: SHARED LOGIC (Anchors for all themes)
+# BASE THEME: SHARED LOGIC (Single anchor for all themes)
 # ----------------------------------------------------------------
 
 # NOTE: Do NOT add primary-color, state-active-color, card-mod-theme, or any key
 # that individual color variants also define. This mapping IS the &base_logic anchor —
-# any key added here is inherited by Black (Standard) and all color variants via
-# merge (<<:). If a sub-theme also defines the same key, HA logs a duplicate key
-# warning for every theme in the file. Keys that vary per variant belong in Section C.
-Black (Background Only):
+# any key added here is inherited by all color variants via merge (<<:). If a
+# sub-theme also defines the same key, HA logs a duplicate key warning for every
+# theme in the file. Keys that vary per variant belong in Section B.
+Black (Standard):
   &base_logic # --- 1. Named Colors (Defined first for alias safety) ---
   red-color: &acc_red "#f44336"
   green-color: &acc_green "#4caf50"
@@ -361,7 +361,25 @@ Black (Background Only):
   table-row-background-color: *base_black
   table-row-alternative-background-color: *base_surface
 
-  # --- 19. Global Card-Mod ---
+  # --- 19. Card Surfaces & Dialogs ---
+  ha-card-background: *base_black
+  card-background-color: *base_black
+  ha-card-border-color: "rgba(255, 255, 255, 0.12)"
+  divider-color: "#222222"
+  mdc-dialog-scrim-color: "rgba(0,0,0,0.9)"
+  ha-dialog-surface-background: *base_black
+  paper-dialog-background-color: *base_black
+  mdc-theme-surface: *base_black
+  wa-color-surface-raised: *base_surface
+  mdc-ripple-hover-opacity: "0.12"
+  mdc-list-item-selected-container-color: "rgba(255, 255, 255, 0.1)"
+  mdc-text-field-outline-color: "#606060"
+  mdc-select-outline-color: "#606060"
+  ha-color-form-outline: "#606060"
+  ha-color-form-outline-hover: var(--primary-color)
+  input-dropdown-icon-color: "#ffffff"
+
+  # --- 20. Global Card-Mod ---
   card-mod-card: |
     ha-card {
       background-color: var(--ha-card-background, #000000) !important;
@@ -433,90 +451,61 @@ Black (Background Only):
     }
 
 # ----------------------------------------------------------------
-# SECTION B: STANDARD SURFACES (The 'Deep Black' defaults)
-# ----------------------------------------------------------------
-
-# NOTE: Do NOT add primary-color, state-active-color, card-mod-theme, or any key
-# that individual color variants also define. This mapping IS the &black_surfaces
-# anchor — any key added here is inherited by all color variants via merge (<<:).
-# If a sub-theme also defines the same key, HA logs a duplicate key warning for
-# every theme in the file. Keys that vary per variant belong in Section C.
-# See also: Black (Background Only) for the base_logic anchor with the same constraint.
-Black (Standard): &black_surfaces
-  <<: *base_logic
-  ha-card-background: *base_black
-  card-background-color: *base_black
-  ha-card-border-color: "rgba(255, 255, 255, 0.12)"
-  divider-color: "#222222"
-  mdc-dialog-scrim-color: "rgba(0,0,0,0.9)"
-  ha-dialog-surface-background: *base_black
-  paper-dialog-background-color: *base_black
-  mdc-theme-surface: *base_black
-  wa-color-surface-raised: *base_surface
-  mdc-ripple-hover-opacity: "0.12"
-  mdc-list-item-selected-container-color: "rgba(255, 255, 255, 0.1)"
-  mdc-text-field-outline-color: "#606060"
-  mdc-select-outline-color: "#606060"
-  ha-color-form-outline: "#606060"
-  ha-color-form-outline-hover: var(--primary-color)
-  input-dropdown-icon-color: "#ffffff"
-
-# ----------------------------------------------------------------
-# SECTION C: THE INDIVIDUAL THEMES
+# SECTION B: THE INDIVIDUAL THEMES
 # ----------------------------------------------------------------
 
 # 1. MAIN CYAN
 Black with Cyan:
-  <<: *black_surfaces
+  <<: *base_logic
   card-mod-theme: "Black with Cyan"
   primary-color: *acc_cyan
   state-active-color: var(--primary-color)
 
 # 2. MAIN GREEN
 Black with Green:
-  <<: *black_surfaces
+  <<: *base_logic
   card-mod-theme: "Black with Green"
   primary-color: *acc_green
   state-active-color: var(--primary-color)
 
 # 3. MAIN RED
 Black with Red:
-  <<: *black_surfaces
+  <<: *base_logic
   card-mod-theme: "Black with Red"
   primary-color: *acc_red
   state-active-color: var(--primary-color)
 
 # 4. MAIN FUCHSIA
 Black with Fuchsia:
-  <<: *black_surfaces
+  <<: *base_logic
   card-mod-theme: "Black with Fuchsia"
   primary-color: *acc_fuchsia
   state-active-color: var(--primary-color)
 
 # 5. PURPLE
 Black with Purple:
-  <<: *black_surfaces
+  <<: *base_logic
   card-mod-theme: "Black with Purple"
   primary-color: *acc_purple
   state-active-color: var(--primary-color)
 
 # 6. INDIGO
 Black with Indigo:
-  <<: *black_surfaces
+  <<: *base_logic
   card-mod-theme: "Black with Indigo"
   primary-color: *acc_indigo
   state-active-color: var(--primary-color)
 
 # 7. SILVER (Monochrome)
 Black with Silver:
-  <<: *black_surfaces
+  <<: *base_logic
   card-mod-theme: "Black with Silver"
   primary-color: *acc_silver
   state-active-color: var(--primary-color)
 
 # 8. ORANGE (with Red accents)
 Black with Orange:
-  <<: *black_surfaces
+  <<: *base_logic
   card-mod-theme: "Black with Orange"
   primary-color: *acc_orange
   state-active-color: *acc_red
