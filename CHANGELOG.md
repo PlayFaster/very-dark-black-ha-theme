@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.8] - 2026-06-25 - Release
+
+### Changed
+
+- **Black with White Theme**: A new monochrome theme has been implemented as the base anchor, replacing the previous _Standard_ and _Background Only_ themes.
+- **Form field hover state**: Changed Input field hover background from black to dark gray for better visual separation from surrounding surfaces.
+
 ## [1.3.7] - 2026-06-24 - Release
 
 ### Summary

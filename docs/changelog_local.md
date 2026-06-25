@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.8] - 2026-06-25 - Release
+
+### Changed
+
+- **Black with White Theme**: A new monochrome theme has been implemented as the base anchor, replacing the previous _Standard_ and _Background Only_ themes.
+- **Form field hover state**: Changed Input field hover background from black to dark gray for better visual separation from surrounding surfaces.
+
+## [1.3.8-dev9] - 2026-06-25 - Unreleased
+
+### Summary
+
+- **Base Theme Consolidation & Rename**: Eliminated "Black (Background Only)" as a separate picker entry by merging its surface tokens into the base anchor. Renamed "Black (Standard)" to "Black with White" for clarity and better sort order - its now a theme variant in its own right. Fixed the sparkline graph on "Black with White" which was invisible due to an unset `primary-color` chain. Reviewed HA 2026.7 frontend blog — no token changes, no theme action needed.
+
+### Changed
+
+- **Base theme consolidation**: Merged "Black (Background Only)" (`&black_surfaces`, Section B) into the base anchor (`&base_logic` / "Black with White"). The two-level inheritance chain A→B→C is now a single base anchor + Section B accent variants. All 8 accent themes now use `<<: *base_logic` directly. "Black (Background Only)" is gone from the picker — picker now shows 9 themes (Black with White + 8 accents).
+- **"Black (Standard)" renamed to "Black with White"**: More descriptive name — accurately reflects the pure-black-surface / white-text-and-icons character of the no-accent theme. New name sorts after "Black with Silver" in the picker (W > S); previously "Black (Standard)" sorted before all "Black with..." variants due to `(` vs `w` ASCII order.
+- **Docs**: Updated AGENTS.md, docs/DEVELOPMENT.md, and .notes/proj_structure.md to reflect the single-base architecture, rename, and new .ha/ directory. proj_structure.md bumped to v1.0.4 → v1.0.5.
+- View 4 of `ui-theme-test.yaml` (Compare view) received a `footer:` view-level key during this session — a dev-only dashboard annotation.
+
+### Fixed
+
+- **Sensor card graph invisible on "Black with White"**: Sensor card mini graphs were not rendering on the no-accent theme. Root cause: `accent-color: var(--primary-color)` with no fallback; `--primary-color` is intentionally unset on "Black with White" → `--accent-color` resolved to guaranteed-invalid → the graph component used it for line color → transparent/invisible line. Fixed by adding a grey fallback: `accent-color: "var(--primary-color, #e0e0e0)"`. Accent themes are unaffected (their `primary-color` is set).
+
+### Added
+
+- **HA 2026.7 Reference Doc**: Created `docs/change_ref_ha_v2026_7.md`. The 2026.7 frontend blog covers component size attribute renames (`small`/`medium`/`large` → `xs`/`s`/`m`/`l`/`xl` on `ha-button`, `ha-button-toggle-group`, `ha-slider`) and new infrastructure (virtualized lists, dirty state context). No CSS custom property changes — no theme YAML action required.
+
 ## [1.3.8-dev6] - 2026-06-25 - Unreleased
 
 ### Summary

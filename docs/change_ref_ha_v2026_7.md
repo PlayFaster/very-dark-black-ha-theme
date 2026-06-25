@@ -13,11 +13,11 @@ In the **Home Assistant 2026.7.0** release (June 2026), the changes are infrastr
 `ha-button`, `ha-button-toggle-group`, and `ha-slider` now use short Web Awesome size names.
 
 | Old attribute value | New attribute value |
-| --- | --- |
-| `small` | `s` |
-| `medium` | `m` |
-| `large` | `l` |
-| _(new)_ | `xs`, `xl` |
+| ------------------- | ------------------- |
+| `small`             | `s`                 |
+| `medium`            | `m`                 |
+| `large`             | `l`                 |
+| _(new)_             | `xs`, `xl`          |
 
 These are HTML attribute values, not CSS custom properties. The theme does not set size attributes on these elements in card-mod CSS. **No theme YAML change required.**
 
