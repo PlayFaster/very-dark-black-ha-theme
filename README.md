@@ -46,9 +46,12 @@ This is a simple theme focused on providing a very dark mode look. It's designed
   - 💙 Indigo
   - 🔘 Silver (Monochrome)
 
-  **Base themes (also appear in picker — not real variants):**
-  - ❌ Black (Standard): A monochrome theme; this is the base the variants are built on.
-  - ❌ Black (Background Only): This is the "sub-base" theme. It must show in the picker due to Home Assistant's theme structure.
+> [!NOTE]
+>
+> **Base themes also appear in picker**: These are not real variants. They can be selected but should not be - the visuals are inconsistent. These are the base themes or scaffolding that the accent variants are built on. They must show in the picker due to Home Assistant's theme structure.
+>
+> - ❌ Black (Standard): Sets black dashboard and card backgrounds. No accent color. Missing some indicators.
+> - ❌ Black (Background Only): Sets a black dashboard background, no change to card backgrounds. Missing some indicators.
 
 ## 🔧 Requirements & Compatibility
 
