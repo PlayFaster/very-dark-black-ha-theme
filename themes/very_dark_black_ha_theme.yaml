@@ -17,8 +17,7 @@
 # any key added here is inherited by all color variants via merge (<<:). If a
 # sub-theme also defines the same key, HA logs a duplicate key warning for every
 # theme in the file. Keys that vary per variant belong in Section B.
-Black (Standard):
-  &base_logic # --- 1. Named Colors (Defined first for alias safety) ---
+Black with White: &base_logic # --- 1. Named Colors (Defined first for alias safety) ---
   red-color: &acc_red "#f44336"
   green-color: &acc_green "#4caf50"
   blue-color: &acc_blue "#2196f3"
@@ -204,7 +203,7 @@ Black (Standard):
   energy-battery-in-color: *acc_purple
   energy-gas-color: *acc_red
   energy-water-color: *acc_cyan
-  graph-color-1: var(--primary-color)
+  graph-color-1: "var(--primary-color, #e0e0e0)"
   graph-color-2: *acc_blue
   graph-color-3: *acc_green
   graph-color-4: *acc_purple

@@ -45,13 +45,11 @@ This is a simple theme focused on providing a very dark mode look. It's designed
   - 🟣 Purple
   - 💙 Indigo
   - 🔘 Silver (Monochrome)
+  - ⚪ White (No Accent)
 
 > [!NOTE]
 >
-> **Base themes also appear in picker**: Due to Home Assistant's theme file structure, two internal base themes appear alongside the accent variants. They are fully functional dark themes — just without an accent color. The plain, basic baseline rather than a finished variant.
->
-> - ⚫ Black (Standard): Pure black backgrounds on dashboards and cards. No accent color, simple and plain.
-> - ⚪ Black (Background Only): Black background for dashboard (behind cards) only. Card backgrounds follow HA defaults. You must be in Auto or Dark theme mode, otherwise it becomes hard to view.
+> **`Black with White` and the picker**: `Black with White` appears in the picker because Home Assistant requires the shared base configuration to be a named theme entry — there is no way to hide it. It is a fully functional dark theme: pure black surfaces, white text and icons, HA's standard semantic state colors (green/yellow/red for entity states). It has no accent color, which also means it works well in Light mode. Use it when you want a clean, neutral dark interface with no color emphasis.
 
 ## 🔧 Requirements & Compatibility
 
@@ -100,7 +98,7 @@ The theme is fully usable from HA 2022.11 onwards. Newer versions have additiona
 - **Automated theme switching** — Use the startup automation pattern in the [Automate Theme Changes](#automate-theme-changes) section to switch accent colors based on time of day or presence.
 - **Startup indicator** — Set **Orange** (or any accent) at boot so every glance at the dashboard confirms Home Assistant is still initialising. An automation switches back to your normal theme after two minutes once startup is complete. See [Automate Theme Changes](#automate-theme-changes).
 - **Visual alert highlight** — Trigger **Red** automatically when an alert condition fires (motion, smoke, door contact, etc.) so the entire UI signals the alert state at a glance. Restore your normal theme when the condition clears. See [Automate Theme Changes](#automate-theme-changes).
-- **Minimal monochrome setup** — Choose **Silver** or **Black (Standard)** for a clean, color-neutral control panel that stays out of the way.
+- **Minimal monochrome setup** — Choose **Silver** or **White** for a clean, color-neutral control panel that stays out of the way.
 - **OLED and power-saving displays** — Pure black backgrounds draw no power on OLED panels, making this ideal for wall-mounted tablets or phones used as HA dashboards.
 - **Pairing with popular custom cards** — The theme explicitly sets transparent backgrounds for Mushroom, Bubble, and other widely-used custom card types, giving a seamless look on black dashboards.
 
@@ -314,7 +312,7 @@ If you installed via HACS:
 
 - **Color Picker**: The theme has eight pre-defined accent colors available, but there is no option to select your own accent color to work with the theme. To my knowledge, this functionality is not available within the Home Assistant basic theme file, it would require an additional script or custom component, so it is not in scope for this project.
 - **Light Theme**: The theme works in "Light" mode, but still applies the Very Dark Black theme, a dark mode theme. This is deliberate, this is not a light mode theme.
-- **Base Themes in Picker**: Two internal base themes — `Black (Background Only)` and `Black (Standard)` — appear in the picker alongside the accent variants. This is a known limitation of the Home Assistant theme file structure: building accent variants from a shared base requires that base to be a named theme entry, which makes it selectable. They are usable as minimalist dark themes but lack an accent color and differ in appearance from the accent variants. There are no plans to change this behavior — "Fixing" this either results in log warnings/errors or a huge theme file that becomes difficult to maintain.
+- **`Black with White` in the picker**: `Black with White` appears alongside the accent variants because Home Assistant's theme architecture requires the shared base configuration to be a named theme entry. This cannot be changed without log warnings or a significantly larger theme file. `Black with White` is a fully functional dark theme and intentionally treated as a variant in its own right.
 
 ## 📝 Maintenance Status
 

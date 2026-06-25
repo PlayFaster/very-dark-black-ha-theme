@@ -14,14 +14,14 @@ Strict validation (like `yamllint`) requires adherence to official YAML specific
 
 Home Assistant's theme loader is unique and highly restrictive.
 
-- **The "Every Key is a Theme" Rule**: Every top-level key in a theme file is treated as a selectable theme name in the HA UI. There is no mechanism to hide or exclude a theme from the picker — internal helpers (like `Black (Background Only)` and `Black (Standard)`) will always appear. The pragmatic solution is to give them a sensible name and accept their presence. Do NOT add `primary-color` to an anchor theme (Section A or B) — every color variant also defines it, and HA will log a duplicate key warning for every theme in the file.
+- **The "Every Key is a Theme" Rule**: Every top-level key in a theme file is treated as a selectable theme name in the HA UI. There is no mechanism to hide or exclude a theme from the picker — the base anchor theme (`Black with White`) will always appear alongside the accent variants. The pragmatic solution is to give it a sensible name and treat it as a usable variant. Do NOT add `primary-color` to the base anchor — every accent variant also defines it, and HA will log a duplicate key warning for every theme in the file.
 - **The "Everything is a String" Rule**: Home Assistant expects every variable inside a theme to be a string (representing a CSS variable).
   - **CRITICAL FAILURE**: Do NOT nest dictionaries (like a palette block) inside a theme block. This will crash the Home Assistant configuration loader and prevent a restart.
 - **Execution Order (Anchors vs. Aliases)**: YAML is processed sequentially within a file.
   - **CRITICAL FAILURE**: You MUST define an anchor (e.g., `&acc_red`) _before_ you reference it with an alias (e.g., `*acc_red`). Defining anchors at the bottom of a large shared configuration while referencing them at the top will cause a fatal "undefined alias" error that prevents HA from starting.
 - **Inheritance (Anchors/Aliases)**: To avoid "Duplicate Key" warnings, ensure that your base anchor contains _only_ shared settings. If the base anchor defines a property (e.g., `state-active-color: var(--primary-color)`) and a sub-theme overrides it (e.g., `*acc_red`), HA's restrictive loader will log a warning.
   - **The Fix**: Remove the key from the base config entirely and explicitly define it in every variant. Use a comment in the base config to document the intended default.
-  - **Gotcha — Section B redeclaring Section A tokens**: `black_surfaces` (Section B) uses `<<: *base_logic`. Any token already defined in `base_logic` must NOT be redefined in `black_surfaces`, even with an identical value — HA will still warn. Before adding a token to Section B, grep for it in Section A first. Tokens like `mdc-text-field-fill-color`, `wa-text-field-fill-background-color`, and `wa-select-fill-background-color` are already set in Section A (lines 99, 124, 125) and must not be duplicated in Section B.
+  - **Gotcha — variant redefining base anchor tokens**: Any token already defined in `base_logic` (the `Black with White` anchor) must NOT be redefined in a Section B accent variant, even with an identical value — HA will still warn. Before adding a token to any variant, grep for it in the base anchor first.
 
 ## 3. UI Accessibility & Polish
 
@@ -74,11 +74,11 @@ The component's internal CSS provides a concrete fallback value independent of t
 
 #### **Category B — Token chains to a theme-owned variable (especially `--primary-color`)**
 
-The component's internal CSS defaults to `var(--primary-color)` or another theme token, e.g. `background: var(--new-token, var(--primary-color))`. For accent themes this works correctly. For the base themes (`Black (Background Only)`, `Black (Standard)`), `--primary-color` is unset → `transparent` → the element becomes invisible. Approach: **mandatory and proactive** — add to Section A immediately using `var(--primary-color, #aaaaaa)` as the value. Do not wait for a visible problem; on base themes the failure is invisible by definition.
+The component's internal CSS defaults to `var(--primary-color)` or another theme token, e.g. `background: var(--new-token, var(--primary-color))`. For accent themes this works correctly. For the base theme (`Black with White`), `--primary-color` is unset → `transparent` → the element becomes invisible. Approach: **mandatory and proactive** — add to the base anchor immediately using `var(--primary-color, #aaaaaa)` as the value. Do not wait for a visible problem; on the base theme the failure is invisible by definition.
 
 To determine which category: inspect the component's shadow DOM `adoptedStyleSheets` in DevTools (or run the `theme_review.md` Playwright script). Look at what the internal CSS fallback resolves to — a hardcoded colour (Category A) or a `var(--primary-color)` chain (Category B).
 
-**Important:** the `:host` re-declaration trap. Some components set their own token internally via a `:host` CSS rule, e.g. `:host { --control-switch-on-color: var(--primary-color) }`. This overrides any inherited value — an external `control-switch-on-color` set by the theme is ignored. For these components, the only path is through `--primary-color` itself. Since adding `primary-color` to Section A or B causes duplicate key warnings (an absolute constraint), such components cannot be fixed for base themes. Document them as permanent known limitations.
+**Important:** the `:host` re-declaration trap. Some components set their own token internally via a `:host` CSS rule, e.g. `:host { --control-switch-on-color: var(--primary-color) }`. This overrides any inherited value — an external `control-switch-on-color` set by the theme is ignored. For these components, the only path is through `--primary-color` itself. Since adding `primary-color` to the base anchor causes duplicate key warnings (an absolute constraint), such components cannot be fixed for `Black with White`. Document them as permanent known limitations of that theme.
 
 ## 6. Card-Mod & Component Exclusions
 
