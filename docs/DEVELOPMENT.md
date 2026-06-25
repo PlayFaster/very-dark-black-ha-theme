@@ -100,7 +100,7 @@ The devcontainer mounts the entire project workspace at `/workspaces/${PROJECT_N
 Two files that are important for development are git-tracked in `.ha/` rather than buried in the gitignored `.devconfig/`:
 
 | File | Tracked path | Container path | How HA loads it |
-| :--- | :--- | :--- | :--- |
+| :-- | :-- | :-- | :-- |
 | Mock entities | `.ha/mock_package.yaml` | `/workspaces/${PROJECT_NAME}/.ha/mock_package.yaml` | `homeassistant.packages:` in `configuration.yaml` |
 | Test dashboard | `.ha/ui-theme-test.yaml` | `/workspaces/${PROJECT_NAME}/.ha/ui-theme-test.yaml` | Absolute `filename:` in the dashboard config |
 
@@ -109,6 +109,7 @@ Two files that are important for development are git-tracked in `.ha/` rather th
 `mock_package.yaml` uses HA's `homeassistant.packages:` mechanism because it defines entities across multiple domains (`template:`, `input_boolean:`, `input_number:`, `input_select:`, `media_player:`, etc.). A `!include` under `template:` would only load template-domain entities — `packages:` loads a full mini-config with any combination of domains.
 
 In `configuration.yaml`:
+
 ```yaml
 homeassistant:
   packages:
