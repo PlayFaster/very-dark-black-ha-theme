@@ -47,8 +47,8 @@ This is a simple theme focused on providing a very dark mode look. It's designed
   - 🔘 Silver (Monochrome)
 
   **Base themes (also appear in picker — not real variants):**
-  - Black (Standard): A monochrome theme; this is the base the variants are built on.
-  - Black (Background Only): This is the "sub-base" theme. It must show in the picker due to Home Assistant's theme structure.
+  - ❌ Black (Standard): A monochrome theme; this is the base the variants are built on.
+  - ❌ Black (Background Only): This is the "sub-base" theme. It must show in the picker due to Home Assistant's theme structure.
 
 ## 🔧 Requirements & Compatibility
 
