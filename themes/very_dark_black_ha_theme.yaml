@@ -3,7 +3,7 @@
 # Name: Very Dark Black HA Theme
 # HA Support: 2025.1–2026.4+ (HSL scales require 2026+)
 # Dependencies: card-mod (optional, for scrollbars & borders)
-# Last Updated: 2026-06-24
+# Last Updated: 2026-06-25
 # ----------------------------------------------------------------
 # VERY DARK BLACK THEME
 # ----------------------------------------------------------------
@@ -22,12 +22,14 @@ Black with White: &base_logic # --- 1. Named Colors (Defined first for alias saf
   green-color: &acc_green "#4caf50"
   blue-color: &acc_blue "#2196f3"
   orange-color: &acc_orange "#ff9800"
-  pink-color: "#e91e63"
-  purple-color: &acc_purple "#9c27b0"
+  pink-color: &acc_pink "#ec4899"
+  violet-color: &acc_violet "#7c3aed"
+  purple-color: "#9c27b0"
   amber-color: "#ffc107"
   cyan-color: &acc_cyan "#00bcd4"
   teal-color: "#009688"
-  fuchsia-color: &acc_fuchsia "#ff00ff"
+  emerald-color: &acc_emerald "#059669"
+  fuchsia-color: "#ff00ff"
   indigo-color: &acc_indigo "#5c6bc0"
   silver-color: &acc_silver "#e0e0e0"
 
@@ -45,6 +47,9 @@ Black with White: &base_logic # --- 1. Named Colors (Defined first for alias saf
   token-rgb-fuchsia: "255, 0, 255"
   token-rgb-indigo: "92, 107, 192"
   token-rgb-silver: "224, 224, 224"
+  token-rgb-violet: "124, 58, 237"
+  token-rgb-pink: "236, 72, 153"
+  token-rgb-emerald: "5, 150, 105"
 
   # --- 2. Dashboard Base & Branding ---
   lovelace-background: &base_black "#000000"
@@ -196,17 +201,17 @@ Black with White: &base_logic # --- 1. Named Colors (Defined first for alias saf
 
   # --- 13. Energy & Graphs ---
   energy-grid-consumption-color: *acc_blue
-  energy-grid-return-color: *acc_purple
+  energy-grid-return-color: *acc_violet
   energy-solar-color: *acc_orange
   energy-non-fossil-color: *acc_green
   energy-battery-out-color: *acc_cyan
-  energy-battery-in-color: *acc_purple
+  energy-battery-in-color: *acc_violet
   energy-gas-color: *acc_red
   energy-water-color: *acc_cyan
   graph-color-1: var(--primary-color)
   graph-color-2: *acc_blue
   graph-color-3: *acc_green
-  graph-color-4: *acc_purple
+  graph-color-4: *acc_violet
   graph-color-5: *acc_red
   graph-color-6: *acc_cyan
   graph-color-7: "#009688"
@@ -451,58 +456,45 @@ Black with White: &base_logic # --- 1. Named Colors (Defined first for alias saf
 
 # ----------------------------------------------------------------
 # SECTION B: THE INDIVIDUAL THEMES
+# (Alphabetical order — matches HA picker sort)
 # ----------------------------------------------------------------
 
-# 1. MAIN CYAN
+# 1. BLUE
+Black with Blue:
+  <<: *base_logic
+  card-mod-theme: "Black with Blue"
+  primary-color: *acc_blue
+  state-active-color: var(--primary-color)
+
+# 2. MAIN CYAN
 Black with Cyan:
   <<: *base_logic
   card-mod-theme: "Black with Cyan"
   primary-color: *acc_cyan
   state-active-color: var(--primary-color)
 
-# 2. MAIN GREEN
+# 3. EMERALD
+Black with Emerald:
+  <<: *base_logic
+  card-mod-theme: "Black with Emerald"
+  primary-color: *acc_emerald
+  state-active-color: var(--primary-color)
+
+# 4. MAIN GREEN
 Black with Green:
   <<: *base_logic
   card-mod-theme: "Black with Green"
   primary-color: *acc_green
   state-active-color: var(--primary-color)
 
-# 3. MAIN RED
-Black with Red:
-  <<: *base_logic
-  card-mod-theme: "Black with Red"
-  primary-color: *acc_red
-  state-active-color: var(--primary-color)
-
-# 4. MAIN FUCHSIA
-Black with Fuchsia:
-  <<: *base_logic
-  card-mod-theme: "Black with Fuchsia"
-  primary-color: *acc_fuchsia
-  state-active-color: var(--primary-color)
-
-# 5. PURPLE
-Black with Purple:
-  <<: *base_logic
-  card-mod-theme: "Black with Purple"
-  primary-color: *acc_purple
-  state-active-color: var(--primary-color)
-
-# 6. INDIGO
+# 5. INDIGO
 Black with Indigo:
   <<: *base_logic
   card-mod-theme: "Black with Indigo"
   primary-color: *acc_indigo
   state-active-color: var(--primary-color)
 
-# 7. SILVER (Monochrome)
-Black with Silver:
-  <<: *base_logic
-  card-mod-theme: "Black with Silver"
-  primary-color: *acc_silver
-  state-active-color: var(--primary-color)
-
-# 8. ORANGE (with Red accents)
+# 6. ORANGE (with Red accents)
 Black with Orange:
   <<: *base_logic
   card-mod-theme: "Black with Orange"
@@ -511,3 +503,31 @@ Black with Orange:
   state-switch-active-color: *acc_red
   state-plug-active-color: *acc_red
   state-binary_sensor-active-color: *acc_red
+
+# 7. PINK (was Fuchsia — shifted from 300° to 330°, #ff00ff → #ec4899)
+Black with Pink:
+  <<: *base_logic
+  card-mod-theme: "Black with Pink"
+  primary-color: *acc_pink
+  state-active-color: var(--primary-color)
+
+# 8. MAIN RED
+Black with Red:
+  <<: *base_logic
+  card-mod-theme: "Black with Red"
+  primary-color: *acc_red
+  state-active-color: var(--primary-color)
+
+# 9. SILVER (Monochrome)
+Black with Silver:
+  <<: *base_logic
+  card-mod-theme: "Black with Silver"
+  primary-color: *acc_silver
+  state-active-color: var(--primary-color)
+
+# 10. VIOLET (was Purple — shifted from 291° to 262°, #9c27b0 → #7c3aed)
+Black with Violet:
+  <<: *base_logic
+  card-mod-theme: "Black with Violet"
+  primary-color: *acc_violet
+  state-active-color: var(--primary-color)

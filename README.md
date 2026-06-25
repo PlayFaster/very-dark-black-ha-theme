@@ -36,15 +36,17 @@ A Home Assistant dark mode theme that provides black or very dark backgrounds wh
 This is a simple theme focused on providing a very dark mode look. It's designed to be clean and simple, with a choice of primary colors.
 
 - **Black Backgrounds**: Black background applied everywhere.
-- **Accent Color Choice**: Various sub-themes with different accent colors.
+- **Accent Color Choice**: 11 sub-themes with different accent colors.
+  - 💙 Blue
   - 🔵 Cyan
+  - 💚 Emerald
   - 🟢 Green
-  - 🔴 Red
-  - 🩷 Fuchsia
+  - 🔷 Indigo
   - 🟠 Orange
-  - 🟣 Purple
-  - 💙 Indigo
+  - 🩷 Pink
+  - 🔴 Red
   - 🔘 Silver (Monochrome)
+  - 🟣 Violet
   - ⚪ White (Very Monochrome)
 
 ## 🔧 Requirements & Compatibility
@@ -94,7 +96,7 @@ The theme is fully usable from HA 2022.11 onwards. Newer versions have additiona
 - **Automated theme switching** — Use the startup automation pattern in the [Automate Theme Changes](#automate-theme-changes) section to switch accent colors based on time of day or presence.
 - **Startup indicator** — Set **Orange** (or any accent) at boot so every glance at the dashboard confirms Home Assistant is still initialising. An automation switches back to your normal theme after two minutes once startup is complete. See [Automate Theme Changes](#automate-theme-changes).
 - **Visual alert highlight** — Trigger **Red** automatically when an alert condition fires (motion, smoke, door contact, etc.) so the entire UI signals the alert state at a glance. Restore your normal theme when the condition clears. See [Automate Theme Changes](#automate-theme-changes).
-- **Minimal monochrome setup** — Choose **Silver** or **White** for a clean, color-neutral control panel that stays out of the way.
+- **Minimal monochrome setup** — Choose **Silver** or **White** for a clean, color-neutral control panel that stays out of the way. **Violet** or **Indigo** work well for a subtle accent that reads neutral rather than bold.
 - **OLED and power-saving displays** — Pure black backgrounds draw no power on OLED panels, making this ideal for wall-mounted tablets or phones used as HA dashboards.
 - **Pairing with popular custom cards** — The theme explicitly sets transparent backgrounds for Mushroom, Bubble, and other widely-used custom card types, giving a seamless look on black dashboards.
 

@@ -6,12 +6,12 @@ This file provides guidance to AI coding agents when working with code in this r
 
 **Very Dark Black HA Theme** is a Home Assistant theme pack that provides pure black backgrounds with a choice of accent colors. The entire project ships as a single YAML file (`themes/very_dark_black_ha_theme.yaml`) that Home Assistant loads directly.
 
-Available accent color variants: Cyan, Green, Red, Fuchsia, Orange, Purple, Indigo, Silver (monochrome), White (no accent). `Black with White` doubles as the base anchor all variants inherit from — it appears in the picker as a structural side-effect of HA's theme architecture and is a usable no-accent variant in its own right.
+Available accent color variants: Blue, Cyan, Emerald, Green, Indigo, Orange, Pink, Red, Silver (monochrome), Violet, White (no accent). `Black with White` doubles as the base anchor all variants inherit from — it appears in the picker as a structural side-effect of HA's theme architecture and is a usable no-accent variant in its own right.
 
 ## Project Structure
 
 ```text
-themes/very_dark_black_ha_theme.yaml          ← The entire theme (single file, ~480 lines)
+themes/very_dark_black_ha_theme.yaml          ← The entire theme (single file, ~540 lines)
 docs/DEVELOPMENT.md                           ← Critical dev reference: pitfalls & architecture
 docs/change_ref_ha_v2026_4.md                 ← HA 2026.4 frontend migration notes
 docs/change_ref_ha_v2026_5.md                 ← HA 2026.5 Web Awesome component notes
@@ -70,7 +70,7 @@ docker exec -w /workspaces/<PROJECT_DIR> <CONTAINER_NAME> bash -c "yamllint -c .
 The single theme file uses YAML anchors/aliases to avoid duplication. The structure is strictly ordered — anchors must be defined before they are referenced:
 
 - **Base theme — `Black with White` (`&base_logic`)**: All shared tokens: backgrounds, card surfaces, dialogs, borders, dividers, typography, icons, inputs, color scales, energy/graph colors, named colors (`red-color`, `cyan-color`, etc.), and the global `card-mod-card` CSS block. This mapping IS the `&base_logic` anchor. It is also a usable no-accent variant (white text and icons, HA semantic state colors, no `primary-color`).
-- **Section B — Individual variants**: Each accent theme (e.g., `Black with Cyan`) extends the base via `<<: *base_logic` and only adds `primary-color`, `state-active-color`, and `card-mod-theme`.
+- **Section B — Individual variants**: Each accent theme (e.g., `Black with Cyan`) extends the base via `<<: *base_logic` and only adds `primary-color`, `state-active-color`, and `card-mod-theme`. Eleven variants: Blue, Cyan, Emerald, Green, Indigo, Orange, Pink, Red, Silver, Violet. Orange additionally overrides `state-switch-active-color`, `state-plug-active-color`, and `state-binary_sensor-active-color` to Red (to avoid yellow-adjacent active states).
 
 ## Critical Rules When Modifying the Theme
 
@@ -81,6 +81,7 @@ These rules are enforced by Home Assistant's theme loader and will cause failure
 3. **Anchors before aliases** — YAML is processed sequentially. An alias (`*acc_red`) must appear after its anchor (`&acc_red`) in the file.
 4. **No duplicate keys across anchor merges** — if a token is defined in the base anchor (`base_logic`), do NOT redefine it in any Section B variant, even with the same value. HA logs a warning per theme for every duplicate. Before adding a token to a variant, grep for it in the base anchor first.
 5. **Do not add `primary-color`, `state-active-color`, or `card-mod-theme` to the base anchor** — these vary per accent variant and belong only in Section B.
+6. **`card-mod-theme` must exactly match the HA picker name** — e.g. `"Black with Violet"` not `"Black Violet"`. Mismatch silently breaks card-mod theme profile tracking.
 
 ## YAML Standards (for linting)
 
