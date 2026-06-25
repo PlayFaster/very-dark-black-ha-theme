@@ -1,9 +1,8 @@
-
 # ==============================================================================
 # This file is included in Home Assistant config via a "packages:" call
 # ==============================================================================
 # Add the following to the Home Assistant configuration.yaml
-#  
+#
 # homeassistant:
 #   packages:
 #     dummy_mocks: !include /THE_PATH_TO_THIS_FILE/mock_package.yaml
@@ -929,5 +928,4 @@ input_datetime:
     has_date: true
     has_time: false
     icon: mdi:calendar
-
 # --- Scene --------------------------------------------------------------------

@@ -6,8 +6,8 @@
 # ══════════════════════════════════════════════════════════════════════════
 #
 # This is a YAML mode Home Assistant dashboard for Theme Testing
-# 
-# it is called from Home Assistant configuration.yaml using 
+#
+# it is called from Home Assistant configuration.yaml using
 #
 # lovelace:
 #   mode: storage
@@ -23,7 +23,6 @@
 
 title: Theme Test
 views:
-
   # ══════════════════════════════════════════════════════════════════════════
   # VIEW 1 — Controls & States (sections layout — default view)
   # Exercises: sections grid, section headers, all interactive controls,
@@ -57,7 +56,6 @@ views:
         name: TV
 
     sections:
-
       # ──────────────────────────────────────────────────────────────────────
       - title: Overview
         cards:
@@ -65,18 +63,18 @@ views:
             content: >
               ## Very Dark Black — Theme Test Dashboard
 
-              All major HA UI element types and states in one place.
-              Use **Developer Tools → YAML → Reload Lovelace** to refresh
-              after theme changes. Each section is labelled with what it exercises.
+              All major HA UI element types and states in one place. Use **Developer
+              Tools → YAML → Reload Lovelace** to refresh after theme changes. Each
+              section is labelled with what it exercises.
 
           - type: markdown
             title: "More Info Dialog — card-mod-more-info"
             content: >
-              **Tap any entity** to open its More Info dialog and test:
-              heading ink color (`#ffffff` override), dialog surface background
-              (pure black), scrim/backdrop (`rgba(0,0,0,0.9)`), on-surface text
-              contrast, form controls inside dialogs (input backgrounds, selects,
-              sliders), and the number / cover / climate / alarm detail views.
+              **Tap any entity** to open its More Info dialog and test: heading ink
+              color (`#ffffff` override), dialog surface background (pure black),
+              scrim/backdrop (`rgba(0,0,0,0.9)`), on-surface text contrast, form
+              controls inside dialogs (input backgrounds, selects, sliders), and the
+              number / cover / climate / alarm detail views.
 
           - type: heading
             heading: Heading Card — title style with entity badges
@@ -263,14 +261,14 @@ views:
           - type: markdown
             title: "Radio & Progress Bar — where to find"
             content: >
-              **ha-radio-option** — not embeddable in Lovelace cards. Test via:
-              Settings → System → General (language/region selectors) or by
-              opening any card editor that has a type/mode radio group.
+              **ha-radio-option** — not embeddable in Lovelace cards. Test via: Settings
+              → System → General (language/region selectors) or by opening any card
+              editor that has a type/mode radio group.
 
 
-              **ha-progress-bar** — not directly triggerable from dashboard.
-              Test via: Developer Tools → Updates (trigger an install), or open
-              the more-info dialog for a `backup_manager` or `update` entity.
+              **ha-progress-bar** — not directly triggerable from dashboard. Test via:
+              Developer Tools → Updates (trigger an install), or open the more-info
+              dialog for a `backup_manager` or `update` entity.
 
           - type: entities
             title: Date & Time Inputs
@@ -555,8 +553,8 @@ views:
             content: >
               The card below is a `type: conditional` — it is wrapped in
               `hui-conditional-card`, which is in the card-mod transparent exclusion
-              list. The wrapper itself must have no border or background; the
-              **inner** card should still have the normal card surface.
+              list. The wrapper itself must have no border or background; the **inner**
+              card should still have the normal card surface.
 
           - type: conditional
             conditions:
@@ -592,7 +590,6 @@ views:
     max_columns: 2
 
     sections:
-
       # ──────────────────────────────────────────────────────────────────────
       - title: Sensor Sparklines
         cards:
@@ -997,7 +994,6 @@ views:
                   - entity: input_button.wood_added
                     name: Button
 
-
       # ──────────────────────────────────────────────────────────────────────
       - title: Typography
         cards:
@@ -1080,15 +1076,14 @@ views:
         name: TV
 
     cards:
-
       # ─────────────────────────────────────────────────────────────────────
       - type: markdown
         content: >
           ## Very Dark Black — Theme Test Dashboard
 
-          All major HA UI element types and states in one place.
-          Use **Developer Tools → YAML → Reload Lovelace** to refresh
-          after theme changes. Each section is labelled with what it exercises.
+          All major HA UI element types and states in one place. Use **Developer Tools →
+          YAML → Reload Lovelace** to refresh after theme changes. Each section is
+          labelled with what it exercises.
 
       # ════════════════════════════════════════════════════════════════════
       # MORE INFO DIALOG NOTE
@@ -1096,11 +1091,11 @@ views:
       - type: markdown
         title: "More Info Dialog — card-mod-more-info"
         content: >
-          **Tap any entity** to open its More Info dialog and test:
-          heading ink color (`#ffffff` override), dialog surface background
-          (pure black), scrim/backdrop (`rgba(0,0,0,0.9)`), on-surface text
-          contrast, form controls inside dialogs (input backgrounds, selects,
-          sliders), and the number / cover / climate / alarm detail views.
+          **Tap any entity** to open its More Info dialog and test: heading ink color
+          (`#ffffff` override), dialog surface background (pure black), scrim/backdrop
+          (`rgba(0,0,0,0.9)`), on-surface text contrast, form controls inside dialogs
+          (input backgrounds, selects, sliders), and the number / cover / climate /
+          alarm detail views.
 
       # ════════════════════════════════════════════════════════════════════
       # HEADING CARD — title / subtitle / badges
@@ -1901,9 +1896,9 @@ views:
       - type: markdown
         content: >
           The card below is a `type: conditional` — it is wrapped in
-          `hui-conditional-card`, which is in the card-mod transparent exclusion
-          list. The wrapper itself must have no border or background; the
-          **inner** card should still have the normal card surface.
+          `hui-conditional-card`, which is in the card-mod transparent exclusion list.
+          The wrapper itself must have no border or background; the **inner** card
+          should still have the normal card surface.
 
       - type: conditional
         conditions:
@@ -2241,30 +2236,28 @@ views:
         entity: binary_sensor.internet_connectivity
 
     sections:
-
       # ── Title — full width ───────────────────────────────────────────────
 
       # ── Left — default (no theme) ─────────────────────────────────────────
       - type: grid
         column_span: 1
         cards:
-
           - type: markdown
             content: >
               ## Very Dark Black — Theme Test Dashboard
 
-              All major HA UI element types and states in one place.
-              Use **Developer Tools → YAML → Reload Lovelace** to refresh
-              after theme changes. Each section is labelled with what it exercises.
+              All major HA UI element types and states in one place. Use **Developer
+              Tools → YAML → Reload Lovelace** to refresh after theme changes. Each
+              section is labelled with what it exercises.
 
           - type: markdown
             title: "More Info Dialog — card-mod-more-info"
             content: >
-              **Tap any entity** to open its More Info dialog and test:
-              heading ink color (`#ffffff` override), dialog surface background
-              (pure black), scrim/backdrop (`rgba(0,0,0,0.9)`), on-surface text
-              contrast, form controls inside dialogs (input backgrounds, selects,
-              sliders), and the number / cover / climate / alarm detail views.
+              **Tap any entity** to open its More Info dialog and test: heading ink
+              color (`#ffffff` override), dialog surface background (pure black),
+              scrim/backdrop (`rgba(0,0,0,0.9)`), on-surface text contrast, form
+              controls inside dialogs (input backgrounds, selects, sliders), and the
+              number / cover / climate / alarm detail views.
 
           - type: heading
             heading: Heading Card — title style with entity badges
@@ -2459,14 +2452,14 @@ views:
           - type: markdown
             title: "Radio & Progress Bar — where to find"
             content: >
-              **ha-radio-option** — not embeddable in Lovelace cards. Test via:
-              Settings → System → General (language/region selectors) or by
-              opening any card editor that has a type/mode radio group.
+              **ha-radio-option** — not embeddable in Lovelace cards. Test via: Settings
+              → System → General (language/region selectors) or by opening any card
+              editor that has a type/mode radio group.
 
 
-              **ha-progress-bar** — not directly triggerable from dashboard.
-              Test via: Developer Tools → Updates (trigger an install), or open
-              the more-info dialog for a `backup_manager` or `update` entity.
+              **ha-progress-bar** — not directly triggerable from dashboard. Test via:
+              Developer Tools → Updates (trigger an install), or open the more-info
+              dialog for a `backup_manager` or `update` entity.
 
           - type: entities
             title: Date & Time Inputs
@@ -3006,8 +2999,8 @@ views:
             content: >
               The card below is a `type: conditional` — it is wrapped in
               `hui-conditional-card`, which is in the card-mod transparent exclusion
-              list. The wrapper itself must have no border or background; the
-              **inner** card should still have the normal card surface.
+              list. The wrapper itself must have no border or background; the **inner**
+              card should still have the normal card surface.
 
           - type: conditional
             conditions:
@@ -3288,23 +3281,22 @@ views:
         column_span: 1
         theme: Black with Cyan
         cards:
-
           - type: markdown
             content: >
               ## Very Dark Black — Theme Test Dashboard
 
-              All major HA UI element types and states in one place.
-              Use **Developer Tools → YAML → Reload Lovelace** to refresh
-              after theme changes. Each section is labelled with what it exercises.
+              All major HA UI element types and states in one place. Use **Developer
+              Tools → YAML → Reload Lovelace** to refresh after theme changes. Each
+              section is labelled with what it exercises.
 
           - type: markdown
             title: "More Info Dialog — card-mod-more-info"
             content: >
-              **Tap any entity** to open its More Info dialog and test:
-              heading ink color (`#ffffff` override), dialog surface background
-              (pure black), scrim/backdrop (`rgba(0,0,0,0.9)`), on-surface text
-              contrast, form controls inside dialogs (input backgrounds, selects,
-              sliders), and the number / cover / climate / alarm detail views.
+              **Tap any entity** to open its More Info dialog and test: heading ink
+              color (`#ffffff` override), dialog surface background (pure black),
+              scrim/backdrop (`rgba(0,0,0,0.9)`), on-surface text contrast, form
+              controls inside dialogs (input backgrounds, selects, sliders), and the
+              number / cover / climate / alarm detail views.
 
           - type: heading
             heading: Heading Card — title style with entity badges
@@ -3499,14 +3491,14 @@ views:
           - type: markdown
             title: "Radio & Progress Bar — where to find"
             content: >
-              **ha-radio-option** — not embeddable in Lovelace cards. Test via:
-              Settings → System → General (language/region selectors) or by
-              opening any card editor that has a type/mode radio group.
+              **ha-radio-option** — not embeddable in Lovelace cards. Test via: Settings
+              → System → General (language/region selectors) or by opening any card
+              editor that has a type/mode radio group.
 
 
-              **ha-progress-bar** — not directly triggerable from dashboard.
-              Test via: Developer Tools → Updates (trigger an install), or open
-              the more-info dialog for a `backup_manager` or `update` entity.
+              **ha-progress-bar** — not directly triggerable from dashboard. Test via:
+              Developer Tools → Updates (trigger an install), or open the more-info
+              dialog for a `backup_manager` or `update` entity.
 
           - type: entities
             title: Date & Time Inputs
@@ -4046,8 +4038,8 @@ views:
             content: >
               The card below is a `type: conditional` — it is wrapped in
               `hui-conditional-card`, which is in the card-mod transparent exclusion
-              list. The wrapper itself must have no border or background; the
-              **inner** card should still have the normal card surface.
+              list. The wrapper itself must have no border or background; the **inner**
+              card should still have the normal card surface.
 
           - type: conditional
             conditions:
