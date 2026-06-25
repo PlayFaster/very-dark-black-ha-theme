@@ -73,17 +73,11 @@ Global background styling for `ha-card` can cause "background stacking" issues w
 
 ## 7. Devcontainer Configuration — Template Entity Pitfalls
 
-The `.devcontainer/.devconfig/` directory (gitignored) contains the live HA configuration
-for the devcontainer, including mock entities used by the theme test dashboard. The following
-pitfalls were found while building that configuration — they are non-obvious and not clearly
-documented in the HA integration reference pages.
+The `.devcontainer/.devconfig/` directory (gitignored) contains the live HA configuration for the devcontainer, including mock entities used by the theme test dashboard. The following pitfalls were found while building that configuration — they are non-obvious and not clearly documented in the HA integration reference pages.
 
 ### `media_player` is not a valid key inside `template:`
 
-HA's `template:` integration block does not support `media_player:`. Putting it there
-produces `'media_player' is an invalid option for 'template'` and the entity is silently
-dropped. Use `media_player: platform: universal` instead, wired to `input_boolean`,
-`input_select`, and `input_number` helpers.
+HA's `template:` integration block does not support `media_player:`. Putting it there produces `'media_player' is an invalid option for 'template'` and the entity is silently dropped. Use `media_player: platform: universal` instead, wired to `input_boolean`, `input_select`, and `input_number` helpers.
 
 ### Template `select` options must be a string template, not a YAML list
 
@@ -99,16 +93,11 @@ options: "{{ ['Option A', 'Option B', 'Option C'] }}"
 
 ### `binary_sensor` device_class `problem` and `heat` only belong in the `binary_sensor:` list
 
-Placing a template sensor with `device_class: problem` or `device_class: heat` under the
-`sensor:` key produces `expected SensorDeviceClass ... got 'problem'`. These are
-binary-sensor-only device classes and must go under the `binary_sensor:` key in the
-template block.
+Placing a template sensor with `device_class: problem` or `device_class: heat` under the `sensor:` key produces `expected SensorDeviceClass ... got 'problem'`. These are binary-sensor-only device classes and must go under the `binary_sensor:` key in the template block.
 
 ### Template `weather` uses `*_template` suffix on every key
 
-Unlike every other template integration type (`sensor`, `binary_sensor`, `select`, `number`,
-etc.) where the key name is bare (`state:`, `options:`, `min:`, `max:`), the weather
-integration requires `_template` appended to each value key:
+Unlike every other template integration type (`sensor`, `binary_sensor`, `select`, `number`, etc.) where the key name is bare (`state:`, `options:`, `min:`, `max:`), the weather integration requires `_template` appended to each value key:
 
 ```yaml
 # WRONG — causes "required key 'condition_template' not provided"
@@ -124,10 +113,7 @@ integration requires `_template` appended to each value key:
 
 ### `precipitation_template` is invalid — precipitation is forecast-only
 
-`precipitation_template` is not a valid key for the `weather:` template block. Precipitation
-is a forecast-only attribute and cannot be set as a current-conditions property. Using it
-produces `'precipitation_template' is an invalid option for 'template'...weather->0->...`.
-Remove it entirely; no workaround exists at the current-conditions level.
+`precipitation_template` is not a valid key for the `weather:` template block. Precipitation is a forecast-only attribute and cannot be set as a current-conditions property. Using it produces `'precipitation_template' is an invalid option for 'template'...weather->0->...`. Remove it entirely; no workaround exists at the current-conditions level.
 
 ---
 

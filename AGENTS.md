@@ -24,10 +24,7 @@ hacs.json                                     ← HACS metadata
 
 No build system, no scripts, no dependencies to install. Changes are made directly to the YAML file and reloaded in Home Assistant via `frontend.reload_themes`.
 
-> **Note:** `.devcontainer/.devconfig/` is gitignored and never committed. The files there
-> are local-only. `ui-theme-test.yaml` is a comprehensive 3-view Lovelace dashboard
-> (sections × 2, masonry × 1) that exercises every major card type, state, and theme token.
-> `configuration.yaml` contains all mock entities that back the test dashboard.
+> **Note:** `.devcontainer/.devconfig/` is gitignored and never committed. The files there are local-only. `ui-theme-test.yaml` is a comprehensive 3-view Lovelace dashboard (sections × 2, masonry × 1) that exercises every major card type, state, and theme token. `configuration.yaml` contains all mock entities that back the test dashboard.
 
 ## Commands
 
