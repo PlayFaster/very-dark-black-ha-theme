@@ -272,11 +272,17 @@ Black (Background Only):
   ha-switch-checked-border-color: "var(--primary-color)"
   ha-switch-checked-thumb-border-color: "var(--primary-color)"
   ha-switch-checked-thumb-border-color-hover: "var(--primary-color)"
+  # ha-control-switch (tile card / entity row toggle) — actual active token
+  control-switch-on-color: "var(--primary-color, #aaaaaa)"
 
   # Entity Toggle Size Overrides (PR #51984)
   ha-entity-toggle-switch-width: "38px"
   ha-entity-toggle-switch-size: "20px"
   ha-entity-toggle-switch-thumb-size: "14px"
+
+  # HA Control Slider (ha-slider)
+  ha-slider-thumb-color: "var(--primary-color, #aaaaaa)"
+  ha-slider-indicator-color: "var(--primary-color, #aaaaaa)"
 
   # Web Awesome Checkbox
   ha-checkbox-size: "18px"
