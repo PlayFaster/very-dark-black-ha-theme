@@ -6,49 +6,26 @@ All notable changes to this project will be documented in this file.
 
 ### Summary
 
-- **Base Theme Fixes**: Investigated and resolved invisible UI elements (`ha-slider`, `ha-checkbox`,
-  `ha-radio-option`, `ha-progress-bar`) on `Black (Background Only)` and `Black (Standard)`.
-  Root cause: those components chain their active/checked color to `var(--primary-color)`, which
-  is intentionally unset on the base themes. Fixed by adding CSS fallback values in Section A.
+- **Base Theme Fixes**: Investigated and resolved invisible UI elements (`ha-slider`, `ha-checkbox`, `ha-radio-option`, `ha-progress-bar`) on `Black (Background Only)` and `Black (Standard)`. Root cause: those components chain their active/checked color to `var(--primary-color)`, which is intentionally unset on the base themes. Fixed by adding CSS fallback values in Section A.
 
 ### Fixed
 
-- **ha-slider invisible on base themes**: Added `ha-slider-thumb-color` and
-  `ha-slider-indicator-color` to Section A using `var(--primary-color, #aaaaaa)`. The
-  `<ha-slider>` component reads these via CSS inheritance; the fallback activates when
-  `--primary-color` is unset.
-- **ha-checkbox checked state invisible on base themes**: Changed
-  `ha-checkbox-checked-background-color` and `ha-checkbox-checked-background-color-hover`
-  from `var(--primary-color)` to `var(--primary-color, #aaaaaa)`.
-- **ha-radio-option checked state invisible on base themes**: Same fallback applied to
-  `ha-radio-option-active-color` and `ha-radio-option-checked-background-color`.
-- **ha-progress-bar invisible on base themes**: Same fallback applied to
-  `ha-progress-bar-indicator-color` and `ha-progress-bar-indicator-background`.
+- **ha-slider invisible on base themes**: Added `ha-slider-thumb-color` and `ha-slider-indicator-color` to Section A using `var(--primary-color, #aaaaaa)`. The `<ha-slider>` component reads these via CSS inheritance; the fallback activates when `--primary-color` is unset.
+- **ha-checkbox checked state invisible on base themes**: Changed `ha-checkbox-checked-background-color` and `ha-checkbox-checked-background-color-hover` from `var(--primary-color)` to `var(--primary-color, #aaaaaa)`.
+- **ha-radio-option checked state invisible on base themes**: Same fallback applied to `ha-radio-option-active-color` and `ha-radio-option-checked-background-color`.
+- **ha-progress-bar invisible on base themes**: Same fallback applied to `ha-progress-bar-indicator-color` and `ha-progress-bar-indicator-background`.
 
 ### Added
 
-- **control-switch-on-color** added to Section A (`var(--primary-color, #aaaaaa)`). This is the
-  actual token `<ha-control-switch>` binds its active color to. Currently has no effect because
-  the component re-declares it via a `:host` CSS rule (overriding inheritance), but is kept for
-  potential future component changes.
+- **control-switch-on-color** added to Section A (`var(--primary-color, #aaaaaa)`). This is the actual token `<ha-control-switch>` binds its active color to. Currently has no effect because the component redeclares it via a `:host` CSS rule (overriding inheritance), but is kept for potential future component changes.
 
 ### Known Limitation — switch ON state on base themes
 
-`<ha-control-switch>` (the tile card toggle in HA 2026.6+) re-declares
-`--control-switch-on-color: var(--primary-color)` in a `:host` CSS rule, overriding any
-externally inherited value. Since `--primary-color` is unset on base themes and adding it to
-Section A causes duplicate key warnings (an absolute constraint), the switch ON state remains
-transparent on base themes. No fix is available within the current architecture. This is a
-permanent known limitation.
+`<ha-control-switch>` (the tile card toggle in HA 2026.6+) redeclares `--control-switch-on-color: var(--primary-color)` in a `:host` CSS rule, overriding any externally inherited value. Since `--primary-color` is unset on base themes and adding it to Section A causes duplicate key warnings (an absolute constraint), the switch ON state remains transparent on base themes. No fix is available within the current architecture. This is a permanent known limitation.
 
 ### Investigation Notes
 
-Full investigation documented in `.notes/issues/base_theme_issues/`. The original symptom (switch
-ON and slider invisible) was initially investigated against HA 2026.5b0 (beta), which produced
-misleading results. Re-investigation on HA 2026.6.4 (release) produced definitive findings. The
-key discovery: `ha-switch-checked-*` and `paper-slider-*` tokens, added to the theme in 1.3.4,
-are not consumed by the actual components in HA 2026.6.4. Those tokens are retained for backward
-compatibility (they fail silently).
+Full investigation documented in `.notes/issues/base_theme_issues/`. The original symptom (switch ON and slider invisible) was initially investigated against HA 2026.5b0 (beta), which produced misleading results. Re-investigation on HA 2026.6.4 (release) produced definitive findings. The key discovery: `ha-switch-checked-*` and `paper-slider-*` tokens, added to the theme in 1.3.4, are not consumed by the actual components in HA 2026.6.4. Those tokens are retained for backward compatibility (they fail silently).
 
 ## [1.3.8-dev2] - 2026-06-25 - Unreleased
 
