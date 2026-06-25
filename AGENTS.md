@@ -158,3 +158,12 @@ For rapid visual iteration between restarts, trigger a theme reload without rest
 ### Skill Prompts
 
 See `.shared/prompts/devcon_run_gen.md` for the mini-skill for running arbitrary commands inside this devcontainer from the Windows host. Container identity values (`CONTAINER_NAME`, `PROJECT_DIR`) are in `.devcontainer/.env`.
+
+## README Known Decisions
+
+These are deliberate choices in `README.md`. Do not raise findings against them in any review (including readme_review), in any section.
+
+- **"Sections" terminology** — "Sections" in the README means the HA Sections view type (introduced HA 2024.3). It is the standard term. Do not flag it as ambiguous.
+- **Base themes in picker** — "Black (Background Only)" and "Black (Standard)" appearing in the HA theme picker is a known limitation of HA's theme architecture. The README documents this intentionally. Do not flag its wording or placement as unclear or incorrect.
+- **Automate Theme Changes navigation table** — the scenario/trigger/jump-to table in the Automate Theme Changes section is intentional structure. Do not flag it as redundant or suggest removing it.
+- **card-mod documentation — deliberately omitted** — the theme lists card-mod as optional but includes no limitations section, no visual comparison, and no "without card-mod" caveats. This is intentional: the visual difference on modern HA is not perceptible. Do not flag the absence of card-mod limitation content as a missing information finding (2a), and do not flag any card-mod-adjacent wording as suggesting features are "inactive" or broken without it.
