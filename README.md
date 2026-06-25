@@ -56,10 +56,10 @@ This is a simple theme focused on providing a very dark mode look. It's designed
 
 To ensure all features (like custom scrollbars and border removals) work correctly, verify you meet these minimum requirements:
 
-| Dependency         | Minimum Version | Reason                                   |
-| :----------------- | :-------------- | :--------------------------------------- |
-| **Home Assistant** | `2022.11.0`     | Required for `ha-card` border variables. |
-| **card-mod**       | `3.0.0`         | Optional but recommended for theme-level CSS injection |
+| Dependency | Minimum Version | Reason |
+| :-- | :-- | :-- |
+| **Home Assistant** | `2022.11.0` | Required for `ha-card` border variables. |
+| **card-mod** | `3.0.0` | Optional but recommended for theme-level CSS injection |
 
 The theme is fully usable from HA 2022.11 onwards. Newer versions have additional refinements:
 
