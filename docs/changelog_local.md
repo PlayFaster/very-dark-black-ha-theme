@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.8-dev2] - 2026-06-25 - Unreleased
+
+### Summary
+
+- **Theme Test Dashboard**: Created a Theme Test dashboard in the devcontainer to have the various theme elements present in one place for testing purposes
+
+### Added
+
+- **"ui-theme-test.yaml**: Added file /.devcontainer/.devconfig/ui-theme-test.yaml as the Theme Test dashboard.
+- **Dummy Sensors**: Added a large number of dummy sensors based on the setup used by the **Graphite** theme
+
 ## [1.3.8-dev1] - 2026-06-25 - Unreleased
 
 ### Summary
