@@ -72,9 +72,9 @@ The theme is fully usable from HA 2022.11 onwards. Newer versions have additiona
 
 ### Accent Colors
 
-| Cyan | Fuchsia | Silver |
+| Cyan | Pink | Silver |
 | :-: | :-: | :-: |
-| ![Cyan](.github/images/vdbt_preview_sensors_cyan.png) | ![Fuchsia](.github/images/vdbt_preview_sensors_fuchsia.png) | ![Silver](.github/images/vdbt_preview_sensors_silver.png) |
+| ![Cyan](.github/images/vdbt_preview_sensors_cyan.png) | ![Pink](.github/images/vdbt_preview_sensors_fuchsia.png) | ![Silver](.github/images/vdbt_preview_sensors_silver.png) |
 
 | Indigo | Orange | Red |
 | :-: | :-: | :-: |
