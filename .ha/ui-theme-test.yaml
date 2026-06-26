@@ -824,26 +824,10 @@ views:
               show_state: true
 
       # ──────────────────────────────────────────────────────────────────────
-      - title: Theme Colour Variants
+      - title: Theme Colour Variants 1
         cards:
           - type: vertical-stack
             cards:
-              - type: entities
-                title: Cyan
-                show_header_toggle: true
-                state_color: true
-                theme: Black with Cyan
-                entities:
-                  - entity: switch.smart_plug_tv
-                    name: TV Switch
-                  - entity: input_number.mock_volume_level
-                    name: Volume
-                  - entity: sensor.kitchen_temperature
-                    name: Temp
-                  - entity: binary_sensor.mock_problem_alert
-                    name: Problem Alert
-                  - entity: input_button.wood_added
-                    name: Button
               - type: entities
                 title: Green
                 show_header_toggle: true
@@ -861,10 +845,10 @@ views:
                   - entity: input_button.wood_added
                     name: Button
               - type: entities
-                title: Emerald
+                title: Cyan
                 show_header_toggle: true
                 state_color: true
-                theme: Black with Emerald
+                theme: Black with Cyan
                 entities:
                   - entity: switch.smart_plug_tv
                     name: TV Switch
@@ -877,10 +861,10 @@ views:
                   - entity: input_button.wood_added
                     name: Button
               - type: entities
-                title: Red
+                title: Indigo
                 show_header_toggle: true
                 state_color: true
-                theme: Black with Red
+                theme: Black with Indigo
                 entities:
                   - entity: switch.smart_plug_tv
                     name: TV Switch
@@ -909,31 +893,10 @@ views:
                   - entity: input_button.wood_added
                     name: Button
               - type: entities
-                title: White
+                title: Orange
                 show_header_toggle: true
                 state_color: true
-                theme: Black with White
-                entities:
-                  - entity: switch.smart_plug_tv
-                    name: TV Switch
-                  - entity: input_number.mock_volume_level
-                    name: Volume
-                  - entity: sensor.kitchen_temperature
-                    name: Temp
-                  - entity: binary_sensor.mock_problem_alert
-                    name: Problem Alert
-                  - entity: input_button.wood_added
-                    name: Button
-
-      - title: Theme Colour Variants
-        cards:
-          - type: vertical-stack
-            cards:
-              - type: entities
-                title: Indigo
-                show_header_toggle: true
-                state_color: true
-                theme: Black with Indigo
+                theme: Black with Orange
                 entities:
                   - entity: switch.smart_plug_tv
                     name: TV Switch
@@ -961,11 +924,32 @@ views:
                     name: Problem Alert
                   - entity: input_button.wood_added
                     name: Button
+
+      - title: Theme Colour Variants 2
+        cards:
+          - type: vertical-stack
+            cards:
               - type: entities
-                title: Orange
+                title: Emerald
                 show_header_toggle: true
                 state_color: true
-                theme: Black with Orange
+                theme: Black with Emerald
+                entities:
+                  - entity: switch.smart_plug_tv
+                    name: TV Switch
+                  - entity: input_number.mock_volume_level
+                    name: Volume
+                  - entity: sensor.kitchen_temperature
+                    name: Temp
+                  - entity: binary_sensor.mock_problem_alert
+                    name: Problem Alert
+                  - entity: input_button.wood_added
+                    name: Button
+              - type: entities
+                title: Blue
+                show_header_toggle: true
+                state_color: true
+                theme: Black with Blue
                 entities:
                   - entity: switch.smart_plug_tv
                     name: TV Switch
@@ -994,10 +978,42 @@ views:
                   - entity: input_button.wood_added
                     name: Button
               - type: entities
-                title: Blue
+                title: Orange
                 show_header_toggle: true
                 state_color: true
-                theme: Black with Blue
+                theme: Black with Orange
+                entities:
+                  - entity: switch.smart_plug_tv
+                    name: TV Switch
+                  - entity: input_number.mock_volume_level
+                    name: Volume
+                  - entity: sensor.kitchen_temperature
+                    name: Temp
+                  - entity: binary_sensor.mock_problem_alert
+                    name: Problem Alert
+                  - entity: input_button.wood_added
+                    name: Button
+              - type: entities
+                title: Red
+                show_header_toggle: true
+                state_color: true
+                theme: Black with Red
+                entities:
+                  - entity: switch.smart_plug_tv
+                    name: TV Switch
+                  - entity: input_number.mock_volume_level
+                    name: Volume
+                  - entity: sensor.kitchen_temperature
+                    name: Temp
+                  - entity: binary_sensor.mock_problem_alert
+                    name: Problem Alert
+                  - entity: input_button.wood_added
+                    name: Button
+              - type: entities
+                title: White
+                show_header_toggle: true
+                state_color: true
+                theme: Black with White
                 entities:
                   - entity: switch.smart_plug_tv
                     name: TV Switch
@@ -1982,29 +1998,13 @@ views:
       # Each card uses `theme:` to show the primary colour in isolation.
       # The icon tint, toggle colour, and accent all follow primary-color.
       # ════════════════════════════════════════════════════════════════════
-      - type: heading
-        heading: Theme Colour Variants
-        heading_style: title
-        icon: mdi:palette-swatch
 
       - type: vertical-stack
         cards:
-          - type: entities
-            title: Cyan
-            show_header_toggle: true
-            state_color: true
-            theme: Black with Cyan
-            entities:
-              - entity: switch.smart_plug_tv
-                name: TV Switch
-              - entity: input_number.mock_volume_level
-                name: Volume
-              - entity: sensor.kitchen_temperature
-                name: Temp
-              - entity: binary_sensor.mock_problem_alert
-                name: Problem Alert
-              - entity: input_button.wood_added
-                name: Button
+          - type: heading
+            heading: Theme Colour Variants 3
+            heading_style: title
+            icon: mdi:palette-swatch
           - type: entities
             title: Green
             show_header_toggle: true
@@ -2022,61 +2022,10 @@ views:
               - entity: input_button.wood_added
                 name: Button
           - type: entities
-            title: Emerald
+            title: Cyan
             show_header_toggle: true
             state_color: true
-            theme: Black with Emerald
-            entities:
-              - entity: switch.smart_plug_tv
-                name: TV Switch
-              - entity: input_number.mock_volume_level
-                name: Volume
-              - entity: sensor.kitchen_temperature
-                name: Temp
-              - entity: binary_sensor.mock_problem_alert
-                name: Problem Alert
-              - entity: input_button.wood_added
-                name: Button
-          - type: entities
-            title: Red
-            show_header_toggle: true
-            state_color: true
-            theme: Black with Red
-            entities:
-              - entity: switch.smart_plug_tv
-                name: TV Switch
-              - entity: input_number.mock_volume_level
-                name: Volume
-              - entity: sensor.kitchen_temperature
-                name: Temp
-              - entity: binary_sensor.mock_problem_alert
-                name: Problem Alert
-              - entity: input_button.wood_added
-                name: Button
-          - type: entities
-            title: Pink
-            show_header_toggle: true
-            state_color: true
-            theme: Black with Pink
-            entities:
-              - entity: switch.smart_plug_tv
-                name: TV Switch
-              - entity: input_number.mock_volume_level
-                name: Volume
-              - entity: sensor.kitchen_temperature
-                name: Temp
-              - entity: binary_sensor.mock_problem_alert
-                name: Problem Alert
-              - entity: input_button.wood_added
-                name: Button
-
-      - type: vertical-stack
-        cards:
-          - type: entities
-            title: Violet
-            show_header_toggle: true
-            state_color: true
-            theme: Black with Violet
+            theme: Black with Cyan
             entities:
               - entity: switch.smart_plug_tv
                 name: TV Switch
@@ -2105,10 +2054,10 @@ views:
               - entity: input_button.wood_added
                 name: Button
           - type: entities
-            title: Silver
+            title: Pink
             show_header_toggle: true
             state_color: true
-            theme: Black with Silver
+            theme: Black with Pink
             entities:
               - entity: switch.smart_plug_tv
                 name: TV Switch
@@ -2136,14 +2085,34 @@ views:
                 name: Problem Alert
               - entity: input_button.wood_added
                 name: Button
+          - type: entities
+            title: Silver
+            show_header_toggle: true
+            state_color: true
+            theme: Black with Silver
+            entities:
+              - entity: switch.smart_plug_tv
+                name: TV Switch
+              - entity: input_number.mock_volume_level
+                name: Volume
+              - entity: sensor.kitchen_temperature
+                name: Temp
+              - entity: binary_sensor.mock_problem_alert
+                name: Problem Alert
+              - entity: input_button.wood_added
+                name: Button
 
       - type: vertical-stack
         cards:
+          - type: heading
+            heading: Theme Colour Variants 4
+            heading_style: title
+            icon: mdi:palette-swatch
           - type: entities
-            title: White
+            title: Emerald
             show_header_toggle: true
             state_color: true
-            theme: Black with White
+            theme: Black with Emerald
             entities:
               - entity: switch.smart_plug_tv
                 name: TV Switch
@@ -2160,6 +2129,70 @@ views:
             show_header_toggle: true
             state_color: true
             theme: Black with Blue
+            entities:
+              - entity: switch.smart_plug_tv
+                name: TV Switch
+              - entity: input_number.mock_volume_level
+                name: Volume
+              - entity: sensor.kitchen_temperature
+                name: Temp
+              - entity: binary_sensor.mock_problem_alert
+                name: Problem Alert
+              - entity: input_button.wood_added
+                name: Button
+          - type: entities
+            title: Violet
+            show_header_toggle: true
+            state_color: true
+            theme: Black with Violet
+            entities:
+              - entity: switch.smart_plug_tv
+                name: TV Switch
+              - entity: input_number.mock_volume_level
+                name: Volume
+              - entity: sensor.kitchen_temperature
+                name: Temp
+              - entity: binary_sensor.mock_problem_alert
+                name: Problem Alert
+              - entity: input_button.wood_added
+                name: Button
+          - type: entities
+            title: Orange
+            show_header_toggle: true
+            state_color: true
+            theme: Black with Orange
+            entities:
+              - entity: switch.smart_plug_tv
+                name: TV Switch
+              - entity: input_number.mock_volume_level
+                name: Volume
+              - entity: sensor.kitchen_temperature
+                name: Temp
+              - entity: binary_sensor.mock_problem_alert
+                name: Problem Alert
+              - entity: input_button.wood_added
+                name: Button
+          - type: entities
+            title: Red
+            show_header_toggle: true
+            state_color: true
+            theme: Black with Red
+            entities:
+              - entity: switch.smart_plug_tv
+                name: TV Switch
+              - entity: input_number.mock_volume_level
+                name: Volume
+              - entity: sensor.kitchen_temperature
+                name: Temp
+              - entity: binary_sensor.mock_problem_alert
+                name: Problem Alert
+              - entity: input_button.wood_added
+                name: Button
+          - type: entities
+            title: White
+            show_header_toggle: true
+            state_color: true
+            theme: Black with White
             entities:
               - entity: switch.smart_plug_tv
                 name: TV Switch
@@ -3092,29 +3125,12 @@ views:
                 entity: light.unavailable_light
                 name: Light Unavailable
 
-          - type: heading
-            heading: Theme Colour Variants
-            heading_style: title
-            icon: mdi:palette-swatch
-
           - type: vertical-stack
             cards:
-              - type: entities
-                title: Cyan
-                show_header_toggle: true
-                state_color: true
-                theme: Black with Cyan
-                entities:
-                  - entity: switch.smart_plug_tv
-                    name: TV Switch
-                  - entity: input_number.mock_volume_level
-                    name: Volume
-                  - entity: sensor.kitchen_temperature
-                    name: Temp
-                  - entity: binary_sensor.mock_problem_alert
-                    name: Problem Alert
-                  - entity: input_button.wood_added
-                    name: Button
+              - type: heading
+                heading: Theme Colour Variants 5
+                heading_style: title
+                icon: mdi:palette-swatch
               - type: entities
                 title: Green
                 show_header_toggle: true
@@ -3148,10 +3164,10 @@ views:
                   - entity: input_button.wood_added
                     name: Button
               - type: entities
-                title: Red
+                title: Cyan
                 show_header_toggle: true
                 state_color: true
-                theme: Black with Red
+                theme: Black with Cyan
                 entities:
                   - entity: switch.smart_plug_tv
                     name: TV Switch
@@ -3164,10 +3180,26 @@ views:
                   - entity: input_button.wood_added
                     name: Button
               - type: entities
-                title: Pink
+                title: Blue
                 show_header_toggle: true
                 state_color: true
-                theme: Black with Pink
+                theme: Black with Blue
+                entities:
+                  - entity: switch.smart_plug_tv
+                    name: TV Switch
+                  - entity: input_number.mock_volume_level
+                    name: Volume
+                  - entity: sensor.kitchen_temperature
+                    name: Temp
+                  - entity: binary_sensor.mock_problem_alert
+                    name: Problem Alert
+                  - entity: input_button.wood_added
+                    name: Button
+              - type: entities
+                title: Indigo
+                show_header_toggle: true
+                state_color: true
+                theme: Black with Indigo
                 entities:
                   - entity: switch.smart_plug_tv
                     name: TV Switch
@@ -3199,26 +3231,10 @@ views:
                   - entity: input_button.wood_added
                     name: Button
               - type: entities
-                title: Indigo
+                title: Pink
                 show_header_toggle: true
                 state_color: true
-                theme: Black with Indigo
-                entities:
-                  - entity: switch.smart_plug_tv
-                    name: TV Switch
-                  - entity: input_number.mock_volume_level
-                    name: Volume
-                  - entity: sensor.kitchen_temperature
-                    name: Temp
-                  - entity: binary_sensor.mock_problem_alert
-                    name: Problem Alert
-                  - entity: input_button.wood_added
-                    name: Button
-              - type: entities
-                title: Silver
-                show_header_toggle: true
-                state_color: true
-                theme: Black with Silver
+                theme: Black with Pink
                 entities:
                   - entity: switch.smart_plug_tv
                     name: TV Switch
@@ -3246,14 +3262,30 @@ views:
                     name: Problem Alert
                   - entity: input_button.wood_added
                     name: Button
+              - type: entities
+                title: Red
+                show_header_toggle: true
+                state_color: true
+                theme: Black with Red
+                entities:
+                  - entity: switch.smart_plug_tv
+                    name: TV Switch
+                  - entity: input_number.mock_volume_level
+                    name: Volume
+                  - entity: sensor.kitchen_temperature
+                    name: Temp
+                  - entity: binary_sensor.mock_problem_alert
+                    name: Problem Alert
+                  - entity: input_button.wood_added
+                    name: Button
 
           - type: vertical-stack
             cards:
               - type: entities
-                title: White
+                title: Silver
                 show_header_toggle: true
                 state_color: true
-                theme: Black with White
+                theme: Black with Silver
                 entities:
                   - entity: switch.smart_plug_tv
                     name: TV Switch
@@ -3266,10 +3298,10 @@ views:
                   - entity: input_button.wood_added
                     name: Button
               - type: entities
-                title: Blue
+                title: White
                 show_header_toggle: true
                 state_color: true
-                theme: Black with Blue
+                theme: Black with White
                 entities:
                   - entity: switch.smart_plug_tv
                     name: TV Switch
@@ -4147,29 +4179,12 @@ views:
                 entity: light.unavailable_light
                 name: Light Unavailable
 
-          - type: heading
-            heading: Theme Colour Variants
-            heading_style: title
-            icon: mdi:palette-swatch
-
           - type: vertical-stack
             cards:
-              - type: entities
-                title: Cyan
-                show_header_toggle: true
-                state_color: true
-                theme: Black with Cyan
-                entities:
-                  - entity: switch.smart_plug_tv
-                    name: TV Switch
-                  - entity: input_number.mock_volume_level
-                    name: Volume
-                  - entity: sensor.kitchen_temperature
-                    name: Temp
-                  - entity: binary_sensor.mock_problem_alert
-                    name: Problem Alert
-                  - entity: input_button.wood_added
-                    name: Button
+              - type: heading
+                heading: Theme Colour Variants 6
+                heading_style: title
+                icon: mdi:palette-swatch
               - type: entities
                 title: Green
                 show_header_toggle: true
@@ -4203,10 +4218,10 @@ views:
                   - entity: input_button.wood_added
                     name: Button
               - type: entities
-                title: Red
+                title: Cyan
                 show_header_toggle: true
                 state_color: true
-                theme: Black with Red
+                theme: Black with Cyan
                 entities:
                   - entity: switch.smart_plug_tv
                     name: TV Switch
@@ -4219,10 +4234,26 @@ views:
                   - entity: input_button.wood_added
                     name: Button
               - type: entities
-                title: Pink
+                title: Blue
                 show_header_toggle: true
                 state_color: true
-                theme: Black with Pink
+                theme: Black with Blue
+                entities:
+                  - entity: switch.smart_plug_tv
+                    name: TV Switch
+                  - entity: input_number.mock_volume_level
+                    name: Volume
+                  - entity: sensor.kitchen_temperature
+                    name: Temp
+                  - entity: binary_sensor.mock_problem_alert
+                    name: Problem Alert
+                  - entity: input_button.wood_added
+                    name: Button
+              - type: entities
+                title: Indigo
+                show_header_toggle: true
+                state_color: true
+                theme: Black with Indigo
                 entities:
                   - entity: switch.smart_plug_tv
                     name: TV Switch
@@ -4254,26 +4285,10 @@ views:
                   - entity: input_button.wood_added
                     name: Button
               - type: entities
-                title: Indigo
+                title: Pink
                 show_header_toggle: true
                 state_color: true
-                theme: Black with Indigo
-                entities:
-                  - entity: switch.smart_plug_tv
-                    name: TV Switch
-                  - entity: input_number.mock_volume_level
-                    name: Volume
-                  - entity: sensor.kitchen_temperature
-                    name: Temp
-                  - entity: binary_sensor.mock_problem_alert
-                    name: Problem Alert
-                  - entity: input_button.wood_added
-                    name: Button
-              - type: entities
-                title: Silver
-                show_header_toggle: true
-                state_color: true
-                theme: Black with Silver
+                theme: Black with Pink
                 entities:
                   - entity: switch.smart_plug_tv
                     name: TV Switch
@@ -4301,14 +4316,30 @@ views:
                     name: Problem Alert
                   - entity: input_button.wood_added
                     name: Button
+              - type: entities
+                title: Red
+                show_header_toggle: true
+                state_color: true
+                theme: Black with Red
+                entities:
+                  - entity: switch.smart_plug_tv
+                    name: TV Switch
+                  - entity: input_number.mock_volume_level
+                    name: Volume
+                  - entity: sensor.kitchen_temperature
+                    name: Temp
+                  - entity: binary_sensor.mock_problem_alert
+                    name: Problem Alert
+                  - entity: input_button.wood_added
+                    name: Button
 
           - type: vertical-stack
             cards:
               - type: entities
-                title: White
+                title: Silver
                 show_header_toggle: true
                 state_color: true
-                theme: Black with White
+                theme: Black with Silver
                 entities:
                   - entity: switch.smart_plug_tv
                     name: TV Switch
@@ -4321,10 +4352,10 @@ views:
                   - entity: input_button.wood_added
                     name: Button
               - type: entities
-                title: Blue
+                title: White
                 show_header_toggle: true
                 state_color: true
-                theme: Black with Blue
+                theme: Black with White
                 entities:
                   - entity: switch.smart_plug_tv
                     name: TV Switch

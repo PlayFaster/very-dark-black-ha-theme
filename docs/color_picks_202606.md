@@ -108,6 +108,8 @@ Backward compat: `fuchsia-color: "#ff00ff"` and `purple-color: "#9c27b0"` are re
 
 Only one slot remains before hitting the stated 12-theme maximum (10 colors + Silver + White).
 
+- 12 max is arbitrary, based on the thought that above that, it gets messy and crowded.
+
 The clearest candidate: a **warm rose** in the Violet→Pink gap (~300°, the old Fuchsia position), but currently that gap is acceptable. No candidate identified that is clearly missing.
 
 ---
