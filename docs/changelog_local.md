@@ -25,6 +25,7 @@ All notable changes to this project will be documented in this file.
 - **Energy & graph tokens**: `energy-grid-return-color`, `energy-battery-in-color`, and `graph-color-4` updated from `*acc_purple` → `*acc_violet`. These now render in the Violet hex (`#7c3aed`) in the energy dashboard and multi-series graph palette.
 - **Section B ordering**: Reordered to match HA picker alphabetical sort — Blue, Cyan, Emerald, Green, Indigo, Orange, Pink, Red, Silver, Violet. Previously unordered. White (base anchor) remains first in the file as required by YAML anchor-before-alias rules.
 - **Theme metadata header**: `Last Updated` bumped to 2026-06-25.
+- **Theme Test Dashboard**: Updated ui-theme-test.yaml to display the new and changed themes for testing visibility.
 
 ### Docs Updated
 
