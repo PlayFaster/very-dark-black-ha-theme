@@ -6,17 +6,17 @@ Documented here: the full hue-spread analysis leading to the expansion from 9 to
 
 ## Starting Point (9 themes, v1.3.8)
 
-| Theme | Hex | Hue° | Notes |
-| ----- | --- | ----- | ----- |
-| Black with Cyan | `#00bcd4` | 187° | Primary/default |
-| Black with Green | `#4caf50` | 122° | |
-| Black with Red | `#f44336` | 4° | |
-| Black with Fuchsia | `#ff00ff` | 300° | Pure magenta |
-| Black with Purple | `#9c27b0` | 291° | |
-| Black with Indigo | `#5c6bc0` | 231° | |
-| Black with Silver | `#e0e0e0` | — | Achromatic/monochrome |
-| Black with Orange | `#ff9800` | 36° | Red state accents |
-| Black with White | — | — | No accent / base anchor |
+| Theme              | Hex       | Hue° | Notes                   |
+| ------------------ | --------- | ---- | ----------------------- |
+| Black with Cyan    | `#00bcd4` | 187° | Primary/default         |
+| Black with Green   | `#4caf50` | 122° |                         |
+| Black with Red     | `#f44336` | 4°   |                         |
+| Black with Fuchsia | `#ff00ff` | 300° | Pure magenta            |
+| Black with Purple  | `#9c27b0` | 291° |                         |
+| Black with Indigo  | `#5c6bc0` | 231° |                         |
+| Black with Silver  | `#e0e0e0` | —    | Achromatic/monochrome   |
+| Black with Orange  | `#ff9800` | 36°  | Red state accents       |
+| Black with White   | —         | —    | No accent / base anchor |
 
 **Problems identified:**
 
@@ -35,6 +35,7 @@ Material Blue `#2196f3` (207°). The `&acc_blue` anchor was already defined in t
 ### Emerald — ADDED ✓
 
 Emerald-600 `#059669` (161°). Fills the Green→Cyan gap. Called "Emerald" not "Teal" because:
+
 - The hex sits at 161° hue — true emerald territory (cool-green)
 - "Teal" conventionally implies 170–185°, which would crowd Cyan at 187° (only 14° gap)
 - Placing it at 161° gives Green→Emerald = 39°, Emerald→Cyan = 26° — both acceptable
@@ -71,6 +72,7 @@ Backward compat: `fuchsia-color: "#ff00ff"` and `purple-color: "#9c27b0"` are re
 ### Maroon
 
 **Rejected.** Two independent reasons:
+
 1. **Luminance**: Maroon (`#800000`) has a WCAG contrast ratio of ~1.9:1 against black — invisible as an accent. Even "bright" dark-reds like Crimson (`#dc143c`) only reach ~4.2:1 (below the 4.5:1 AA minimum). Dark colors simply don't work as accents on pure black.
 2. **Hue**: Maroon sits at ~0–5° — the same hue as Red (`#f44336`). It adds no hue diversity.
 
@@ -83,7 +85,7 @@ Backward compat: `fuchsia-color: "#ff00ff"` and `purple-color: "#9c27b0"` are re
 ## Final 11-Theme Spread (v1.3.9)
 
 | Theme | Hex | Hue° | Gap to next |
-| ----- | --- | ----- | ----------- |
+| --- | --- | --- | --- |
 | Black with Red | `#f44336` | 4° | +32° |
 | Black with Orange | `#ff9800` | 36° | +86° (Yellow zone — excluded) |
 | Black with Green | `#4caf50` | 122° | +39° |
@@ -98,6 +100,7 @@ Backward compat: `fuchsia-color: "#ff00ff"` and `purple-color: "#9c27b0"` are re
 | Black with White | — | — | No accent |
 
 **Gap summary:**
+
 - Largest gap: Violet→Pink at 68°. The Violet→Pink→Red zone (262°→330°→4°) spans 102° with one theme in the middle — the Rose/Crimson slot would go here if ever needed. Not needed now.
 - Yellow gap (86°): deliberate exclusion, noted above.
 - Cool-blue cluster (Emerald→Cyan→Blue→Indigo, 161°–231°): four themes in 70°. Each has distinct color character: Emerald reads green-cool, Cyan blue-green, Blue pure blue, Indigo violet-leaning. Acceptable.
