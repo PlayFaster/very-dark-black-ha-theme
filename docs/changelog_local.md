@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.9-dev3] - 2026-06-27 - Unreleased
+
+### Summary
+
+- **Screenshots**: First batch of screenshot changes for the README file using the 11 variants and the Theme Test dashboard. A start, needs more work.
+
+### Changed
+
+- **Screenshots**: Changed from one to two theme selection screenshots (so that full selection list could be shown, across the two images). Added the grid of identical entity cards, each with one of the variants applied, sorted in color order. Gives a good sense of the accent colors, but may be basic.
+
 ## [1.3.9-dev2] - 2026-06-27 - Unreleased
 
 ### Summary

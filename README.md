@@ -80,13 +80,15 @@ The theme is fully usable from HA 2022.11 onwards. Newer versions have additiona
 | :-: | :-: | :-: |
 | ![Indigo](.github/images/vdbt_preview_sensors_indigo.png) | ![Orange](.github/images/vdbt_preview_sensors_orange.png) | ![Red](.github/images/vdbt_preview_sensors_red.png) |
 
-### Themed Sections (mixed)
+### Themed Cards (all themes compared)
 
-![Mixed Theme Sections](.github/images/vdbt_preview_home_mixed_all_8.png)
+![Mixed Theme Sections](.github/images/vdbt_preview_all_themes_grid1.png)
 
 ### Theme Selection
 
-![Black with Green Theme Selection](.github/images/vdbt_preview_theme_select_green.png)
+| Theme Select Green | Theme Select Violet |
+| :-: | :-: |
+| ![Theme Select Green](.github/images/vdbt_preview_theme_select_green.png) | ![Theme Select Violet](.github/images/vdbt_preview_theme_select_violet_2.png) |
 
 ## 🎯 Use Cases
 
