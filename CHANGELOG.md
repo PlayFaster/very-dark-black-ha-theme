@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.9] - To Be Released
+
+### Summary
+
+- Release v[1.3.9] will be all about moving from 9 to 11 theme variants, adding blue and emerald; and changing pink/fuchsia and violet/purple.
+
 ## [1.3.8] - 2026-06-25 - Release
 
 ### Changed
