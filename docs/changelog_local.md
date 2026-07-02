@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.9-dev4] - 2026-07-03 - Unreleased
+
+### Bumps
+
+- **Shared .github CI Validation**: Bump .github Shared CI Validation via SHA from v2.0.4 to v2.0.5
+
 ## [1.3.9-dev3] - 2026-06-27 - Unreleased
 
 ### Summary
