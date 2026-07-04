@@ -90,6 +90,31 @@ Black with White: &base_logic # --- 1. Named Colors (Defined first for alias saf
   title-font-weight: "500"
   ha-font-smoothing: "antialiased"
 
+  # --- 4b. Optional Accent Emphasis (opt-in — all disabled by default) ---
+  # Theme philosophy: white/near-white text carries the body; the accent
+  # (primary-color) pops on icons and active controls only. The tokens below
+  # extend that pop to EMPHASIS TEXT (titles/headers). All are commented out so
+  # default behaviour is unchanged — uncomment individually to taste. Each is a
+  # real HA native token verified against the frontend `dev` branch; the fallback
+  # shown in the comment is what HA uses today when the token is unset.
+  #
+  # Section card / heading-card TITLE (default: --primary-text-color #e1e1e1).
+  # The heading-card ICON already pops accent (inherits state-icon-color).
+  ha-heading-card-title-color: var(--primary-color)
+  #
+  # Heading-card SUBTITLE line (default: --secondary-text-color #a8a8a8).
+  ha-heading-card-subtitle-color: var(--primary-color)
+  #
+  # Standard card titles — Entities/Glance/etc. .card-header (default: #ffffff).
+  # Hook is live: the Section 20 card-mod uses var(--ha-card-header-color,#ffffff)
+  # and paper-card-header-color mirrors it, so uncommenting this drives both the
+  # modern and legacy header paths.
+  ha-card-header-color: var(--primary-color)
+  #
+  # Top toolbar / view title text (default below is #ffffff — replace value).
+  # Note: this also tints header action icons. app-header-text-color is set in
+  # Section 2; change it there rather than duplicating the key here.
+
   # --- 5. Sidebar & Navigation ---
   sidebar-icon-color: *base_subtext
   sidebar-text-color: *base_text
@@ -367,7 +392,7 @@ Black with White: &base_logic # --- 1. Named Colors (Defined first for alias saf
 
   # Legacy & Paper Components Fallback
   paper-card-background-color: *base_black
-  paper-card-header-color: "#ffffff"
+  paper-card-header-color: "var(--ha-card-header-color, #ffffff)"
   paper-toggle-button-checked-bar-color: "var(--primary-color)"
   paper-toggle-button-checked-button-color: "var(--primary-color)"
   paper-toggle-button-checked-ink-color: "var(--primary-color)"
@@ -427,7 +452,9 @@ Black with White: &base_logic # --- 1. Named Colors (Defined first for alias saf
     }
     .card-header {
       background-color: var(--ha-card-background, #000000) !important;
-      color: #ffffff !important;
+      /* var-with-fallback keeps the white default but lets the optional
+         ha-card-header-color accent hook (see Section 4b) actually win */
+      color: var(--ha-card-header-color, #ffffff) !important;
       font-weight: var(--ha-font-weight-heading) !important;
     }
     :host {

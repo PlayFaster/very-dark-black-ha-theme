@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.9-dev8] - 2026-07-04 - Unreleased
+
+### Summary
+
+- **Optional accent emphasis**: Added a commented-out, opt-in block (new Section 4b) exposing emphasis-text tokens that can route the accent onto titles/headers — extending the theme's "white carries the body, accent pops on icons/controls" philosophy to text hierarchy. Default rendering is unchanged.
+
+### Added
+
+- **Section 4b — Optional Accent Emphasis (opt-in, all commented out)**: Verified-native tokens users can uncomment to accent emphasis text — `ha-heading-card-title-color` (section/heading-card title, default `--primary-text-color`), `ha-heading-card-subtitle-color` (default `--secondary-text-color`), and `ha-card-header-color` (standard card titles, default `#ffffff`). Each documented with its live default and caveats. The heading-card icon was intentionally omitted — it already inherits the accent via `state-icon-color`.
+
+### Changed
+
+- **Card-header accent hook made live**: The Section 20 `card-mod-card` `.card-header` rule changed from a hard `color: #ffffff !important` to `color: var(--ha-card-header-color, #ffffff) !important`, and `paper-card-header-color` now mirrors the same var-with-fallback. White remains the default; this makes the optional `ha-card-header-color` accent token in Section 4b actually take effect (previously the `!important` would have silently overridden it) across both modern and legacy header paths.
+
+### Notes
+
+- **Re-scoped from dev7**: `ha-heading-card-title-color` was initially set aside as a no-op (its default already resolves to `--primary-text-color`). It now lives in the Section 4b opt-in block set to `var(--primary-color)` — as an accent choice rather than a default, which is where it adds value.
+
 ## [1.3.9-dev7] - 2026-07-04 - Unreleased
 
 ### Summary
@@ -17,7 +35,7 @@ All notable changes to this project will be documented in this file.
 
 ### Notes
 
-- **Deliberately skipped**: `state-climate-*-color` (HA's heat=orange/cool=blue conventions aid usability); `ha-heading-card-title-color` (its default already resolves to `--primary-text-color`, so setting it to that is a no-op); `table-header-background-color` (verified against HA frontend `dev` — not a real variable, HA never reads it, so it cannot replace the existing data-table-header card-mod which also sets the `#050505` shade and border-bottom).
+- **Deliberately skipped**: `state-climate-*-color` (HA's heat=orange/cool=blue conventions aid usability); `table-header-background-color` (verified against HA frontend `dev` — not a real variable, HA never reads it, so it cannot replace the existing data-table-header card-mod which also sets the `#050505` shade and border-bottom).
 
 ## [1.3.9-dev6] - 2026-07-04 - Unreleased
 
