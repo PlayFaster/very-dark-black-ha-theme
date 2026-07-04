@@ -2,7 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.3.9-dev9] - 2026-07-04 - Unreleased
+## [1.4.0] - 2026-07-04 - Release
+
+### Summary
+
+- Expands the theme from 8 to 11 accent colours — adding Blue and Emerald, and renaming/re-hueing Purple → Violet and Fuchsia → Pink — alongside a large amount of under-the-hood token and structural work.
+
+### Added
+
+- **Two new accent variants — Blue and Emerald**, bringing the picker to 11 selectable themes.
+- **Lock entity colours**: lock states now follow the theme's accent/neutral scheme (locked = accent, unlocked/transitional = muted grey, jammed = red) instead of HA's fixed green/red.
+- **Inline code contrast**: inline code text colour is now set for readability on the dark code background.
+- **Code editor surface**: the YAML/automation/template editor now uses a pure-black background instead of a lighter default panel.
+
+### Changed
+
+- **"Black with Purple" → "Black with Violet"**: renamed and shifted bluer (`#9c27b0` → `#7c3aed`) for clearer separation in the picker.
+- **"Black with Fuchsia" → "Black with Pink"**: renamed and shifted to true pink (`#ff00ff` → `#ec4899`). Old `var(--purple-color)` / `var(--fuchsia-color)` references remain available for backward compatibility.
+- **Card title/header colour** is now themeable via `ha-card-header-color` (white remains the default).
+
+## [1.4.0-dev9] - 2026-07-04 - Unreleased
 
 ### Summary
 
@@ -30,7 +49,7 @@ All notable changes to this project will be documented in this file.
 - **docs/DEVELOPMENT.md**: Corrected §1 YAML standards to match `.validate/.yamllint` (no `---`, no line-length limit); added a "Single-Source Neutral Tokens (Neutral Ramp)" subsection under §4 explaining the anchor-vs-keyed-token distinction, why only keyed tokens reach `card-mod`, and the anchor-resolution diff used to verify zero-drift refactors.
 - **README.md**: No content change for the consolidation (internal) or the accent-emphasis opt-in (requires editing the YAML) — neither affects user-facing install/usage docs. Separately fixed a broken anchor link: the "Startup Indicator" heading (line 178) used a VS16 compound emoji (`⏱️` = U+23F1 + U+FE0F), whose invisible variation selector broke the Table/TOC anchor match; swapped to a single-codepoint always-colour emoji (`⏳` U+23F3), per the DEVELOPMENT.md §9 / AGENTS.md §9 convention.
 
-## [1.3.9-dev8] - 2026-07-04 - Unreleased
+## [1.4.0-dev8] - 2026-07-04 - Unreleased
 
 ### Summary
 
@@ -48,7 +67,7 @@ All notable changes to this project will be documented in this file.
 
 - **Re-scoped from dev7**: `ha-heading-card-title-color` was initially set aside as a no-op (its default already resolves to `--primary-text-color`). It now lives in the Section 4b opt-in block set to `var(--primary-color)` — as an accent choice rather than a default, which is where it adds value.
 
-## [1.3.9-dev7] - 2026-07-04 - Unreleased
+## [1.4.0-dev7] - 2026-07-04 - Unreleased
 
 ### Summary
 
@@ -65,13 +84,13 @@ All notable changes to this project will be documented in this file.
 
 - **Deliberately skipped**: `state-climate-*-color` (HA's heat=orange/cool=blue conventions aid usability); `table-header-background-color` (verified against HA frontend `dev` — not a real variable, HA never reads it, so it cannot replace the existing data-table-header card-mod which also sets the `#050505` shade and border-bottom).
 
-## [1.3.9-dev6] - 2026-07-04 - Unreleased
+## [1.4.0-dev6] - 2026-07-04 - Unreleased
 
 ### Changed
 
 - **Documentation**: Updated the README to align with the ZTE/Huwaei/WiFI Project README files.
 
-## [1.3.9-dev5] - 2026-07-04 - Unreleased
+## [1.4.0-dev5] - 2026-07-04 - Unreleased
 
 ### Bumps
 
@@ -79,13 +98,13 @@ All notable changes to this project will be documented in this file.
   - **Validate Bump**: Update `ruff` to 0.15.20
   - **Validate Bump**: Bumped `pytest-homeassistant-custom-component` to 0.13.345
 
-## [1.3.9-dev4] - 2026-07-03 - Unreleased
+## [1.4.0-dev4] - 2026-07-03 - Unreleased
 
 ### Bumps
 
 - **Shared .github CI Validation**: Bump .github Shared CI Validation via SHA from v2.0.4 to v2.0.5
 
-## [1.3.9-dev3] - 2026-06-27 - Unreleased
+## [1.4.0-dev3] - 2026-06-27 - Unreleased
 
 ### Summary
 
@@ -95,7 +114,7 @@ All notable changes to this project will be documented in this file.
 
 - **Screenshots**: Changed from one to two theme selection screenshots (so that full selection list could be shown, across the two images). Added the grid of identical entity cards, each with one of the variants applied, sorted in color order. Gives a good sense of the accent colors, but may be basic.
 
-## [1.3.9-dev2] - 2026-06-27 - Unreleased
+## [1.4.0-dev2] - 2026-06-27 - Unreleased
 
 ### Summary
 
@@ -108,7 +127,7 @@ All notable changes to this project will be documented in this file.
 - **Tasks.json**: Updated tasks.json, via hosts-tooling so that YAML-Lint only runs on git tracked files.
 - **Note**: This DOES change the themes/very_dark_black_ha_theme.yaml file, removing the "---" at the start of the file. Non functional, but is a file change.
 
-## [1.3.9-dev1] - 2026-06-26 - Unreleased
+## [1.4.0-dev1] - 2026-06-26 - Unreleased
 
 ### Summary
 

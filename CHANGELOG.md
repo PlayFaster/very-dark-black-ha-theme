@@ -2,11 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.3.9] - To Be Released
+## [1.4.0] - 2026-07-04 - Release
 
 ### Summary
 
-- Release v[1.3.9] will be all about moving from 9 to 11 theme variants, adding blue and emerald; and changing pink/fuchsia and violet/purple.
+- Expands the theme from 8 to 11 accent colours — adding Blue and Emerald, and renaming/re-hueing Purple → Violet and Fuchsia → Pink — alongside a large amount of under-the-hood token and structural work.
+
+### Added
+
+- **Two new accent variants — Blue and Emerald**, bringing the picker to 11 selectable themes.
+- **Lock entity colours**: lock states now follow the theme's accent/neutral scheme (locked = accent, unlocked/transitional = muted grey, jammed = red) instead of HA's fixed green/red.
+- **Inline code contrast**: inline code text colour is now set for readability on the dark code background.
+- **Code editor surface**: the YAML/automation/template editor now uses a pure-black background instead of a lighter default panel.
+
+### Changed
+
+- **"Black with Purple" → "Black with Violet"**: renamed and shifted bluer (`#9c27b0` → `#7c3aed`) for clearer separation in the picker.
+- **"Black with Fuchsia" → "Black with Pink"**: renamed and shifted to true pink (`#ff00ff` → `#ec4899`). Old `var(--purple-color)` / `var(--fuchsia-color)` references remain available for backward compatibility.
+- **Card title/header colour** is now themeable via `ha-card-header-color` (white remains the default).
 
 ## [1.3.8] - 2026-06-25 - Release
 
