@@ -19,15 +19,15 @@ A Home Assistant dark mode theme that provides black or very dark backgrounds wh
 - [Very Dark Black Theme for Home Assistant](#very-dark-black-theme-for-home-assistant)
   - [📋 Table of Contents](#-table-of-contents)
   - [✅ Features](#-features)
+  - [📸 Screenshots](#-screenshots)
   - [🔧 Compatibility \& Requirements](#-compatibility--requirements)
   - [🎯 Use Cases](#-use-cases)
-  - [📸 Screenshots](#-screenshots)
   - [📥 Installation](#-installation)
   - [💡 Automations for Theme Changes](#-automations-for-theme-changes)
   - [🔩 Under the Hood - Technical Architecture](#-under-the-hood---technical-architecture)
   - [❓ FAQ \& Troubleshooting](#-faq--troubleshooting)
-  - [❌ Removal](#-removal)
   - [❗ Known Limitations /❔ What's Missing?](#-known-limitations--whats-missing)
+  - [❌ Removal](#-removal)
   - [📝 Maintenance Status](#-maintenance-status)
   - [🤝 Contributors \& Acknowledgements](#-contributors--acknowledgements)
   - [📄 License](#-license)
@@ -49,6 +49,28 @@ This is a simple theme focused on providing a very dark mode look. It's designed
   - 🔘 Silver (Monochrome)
   - 🟣 Violet
   - ⚪ White (Very Monochrome)
+
+## 📸 Screenshots
+
+### Themed Cards (all themes compared)
+
+![Mixed Theme Sections](.github/images/vdbt_preview_all_themes_grid1.png)
+
+### Accent Colors
+
+| Cyan | Pink | Silver |
+| :-: | :-: | :-: |
+| ![Cyan](.github/images/vdbt_preview_sensors_cyan.png) | ![Pink](.github/images/vdbt_preview_sensors_fuchsia.png) | ![Silver](.github/images/vdbt_preview_sensors_silver.png) |
+
+| Indigo | Orange | Red |
+| :-: | :-: | :-: |
+| ![Indigo](.github/images/vdbt_preview_sensors_indigo.png) | ![Orange](.github/images/vdbt_preview_sensors_orange.png) | ![Red](.github/images/vdbt_preview_sensors_red.png) |
+
+### Theme Selection
+
+| Theme Select Green | Theme Select Violet |
+| :-: | :-: |
+| ![Theme Select Green](.github/images/vdbt_preview_theme_select_green.png) | ![Theme Select Violet](.github/images/vdbt_preview_theme_select_violet_2.png) |
 
 ## 🔧 Compatibility & Requirements
 
@@ -80,28 +102,6 @@ The theme is fully usable from HA 2022.11 onwards. Newer versions have additiona
 - **Minimal monochrome setup** — Choose **Silver** or **White** for a clean, color-neutral control panel that stays out of the way. **Violet** or **Indigo** work well for a subtle accent that reads neutral rather than bold.
 - **OLED and power-saving displays** — Pure black backgrounds draw no power on OLED panels, making this ideal for wall-mounted tablets or phones used as HA dashboards.
 - **Pairing with popular custom cards** — The theme explicitly sets transparent backgrounds for Mushroom, Bubble, and other widely-used custom card types, giving a seamless look on black dashboards.
-
-## 📸 Screenshots
-
-### Accent Colors
-
-| Cyan | Pink | Silver |
-| :-: | :-: | :-: |
-| ![Cyan](.github/images/vdbt_preview_sensors_cyan.png) | ![Pink](.github/images/vdbt_preview_sensors_fuchsia.png) | ![Silver](.github/images/vdbt_preview_sensors_silver.png) |
-
-| Indigo | Orange | Red |
-| :-: | :-: | :-: |
-| ![Indigo](.github/images/vdbt_preview_sensors_indigo.png) | ![Orange](.github/images/vdbt_preview_sensors_orange.png) | ![Red](.github/images/vdbt_preview_sensors_red.png) |
-
-### Themed Cards (all themes compared)
-
-![Mixed Theme Sections](.github/images/vdbt_preview_all_themes_grid1.png)
-
-### Theme Selection
-
-| Theme Select Green | Theme Select Violet |
-| :-: | :-: |
-| ![Theme Select Green](.github/images/vdbt_preview_theme_select_green.png) | ![Theme Select Violet](.github/images/vdbt_preview_theme_select_violet_2.png) |
 
 ## 📥 Installation
 
@@ -291,6 +291,12 @@ For technical details on the YAML standards, logic, and various display element 
 - Home Assistant occasionally renames or adds CSS tokens when it updates its frontend components. If a UI element loses its styling after an HA update, it is likely a new or renamed token that the theme has not yet been updated to cover.
 - Check the [GitHub repository](https://github.com/PlayFaster/very-dark-black-ha-theme) for a recent release addressing the update, or open an issue there.
 
+## ❗ Known Limitations /❔ What's Missing?
+
+- **Color Picker**: The theme has eight pre-defined accent colors available, but there is no option to select your own accent color to work with the theme. To my knowledge, this functionality is not available within the Home Assistant basic theme file, it would require an additional script or custom component, so it is not in scope for this project.
+- **Light Theme**: The theme works in "Light" mode, but still applies the Very Dark Black theme, a dark mode theme. This is deliberate, this is not a light mode theme.
+- **Base Themes in Picker**: The base (anchor) theme `Black with White` appears in the picker alongside the accent variants. This is a known limitation of the Home Assistant theme file structure: building accent variants from a shared base requires that base to be a named theme entry, which makes it selectable. There are no plans to change this behavior — "Fixing" this either results in log warnings/errors or a huge theme file that becomes difficult to maintain. `Black with White` is a fully functional minimalist dark theme and intentionally treated as a variant in its own right.
+
 ## ❌ Removal
 
 First, set a different theme:
@@ -308,12 +314,6 @@ If you installed via HACS:
 2. Find **Very Dark Black HA Theme** and click into it.
 3. Click the **three dots** (⋮) at the top right and select **Remove**.
 4. Restart Home Assistant.
-
-## ❗ Known Limitations /❔ What's Missing?
-
-- **Color Picker**: The theme has eight pre-defined accent colors available, but there is no option to select your own accent color to work with the theme. To my knowledge, this functionality is not available within the Home Assistant basic theme file, it would require an additional script or custom component, so it is not in scope for this project.
-- **Light Theme**: The theme works in "Light" mode, but still applies the Very Dark Black theme, a dark mode theme. This is deliberate, this is not a light mode theme.
-- **Base Themes in Picker**: The base (anchor) theme `Black with White` appears in the picker alongside the accent variants. This is a known limitation of the Home Assistant theme file structure: building accent variants from a shared base requires that base to be a named theme entry, which makes it selectable. There are no plans to change this behavior — "Fixing" this either results in log warnings/errors or a huge theme file that becomes difficult to maintain. `Black with White` is a fully functional minimalist dark theme and intentionally treated as a variant in its own right.
 
 ## 📝 Maintenance Status
 
