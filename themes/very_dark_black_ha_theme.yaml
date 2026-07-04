@@ -59,16 +59,16 @@ Black with White: &base_logic # --- 1. Named Colors (Defined first for alias saf
   # NOTE: token-neutral-white is deliberately SEPARATE from primary-text-color
   # (#e1e1e1). White = max-contrast emphasis (icons, input ink, dialog headings);
   # #e1e1e1 = body text. Do not merge them.
-  token-neutral-white:       &base_white   "#ffffff"
-  token-neutral-black:       &base_black   "#000000"
-  token-neutral-deep:        &base_deep    "#050505"
-  token-neutral-surface:     &base_surface "#0a0a0a"
-  token-neutral-hover:       &base_hover   "#151515"
-  token-neutral-border:      &base_border  "#1a1a1a"
+  token-neutral-white: &base_white "#ffffff"
+  token-neutral-black: &base_black "#000000"
+  token-neutral-deep: &base_deep "#050505"
+  token-neutral-surface: &base_surface "#0a0a0a"
+  token-neutral-hover: &base_hover "#151515"
+  token-neutral-border: &base_border "#1a1a1a"
   token-neutral-line-strong: &acc_charcoal "#333333"
   token-neutral-line-medium: &acc_graphite "#444444"
-  token-neutral-line-soft:   &acc_medium   "#666666"
-  token-neutral-outline:     &base_outline "#606060"
+  token-neutral-line-soft: &acc_medium "#666666"
+  token-neutral-outline: &base_outline "#606060"
 
   # --- 2. Dashboard Base & Branding ---
   lovelace-background: *base_black

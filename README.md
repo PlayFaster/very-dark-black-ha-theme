@@ -175,7 +175,7 @@ actions:
 mode: single
 ```
 
-### ⏱️ Startup Indicator with Delayed Restore
+### ⏳ Startup Indicator with Delayed Restore
 
 Example automation for a **startup indicator** that signals Home Assistant is initialising, then switches back to your normal theme after 2 minutes:
 
