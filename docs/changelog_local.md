@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.9-dev5] - 2026-07-04 - Unreleased
+
+### Bumps
+
+- **Unused Bumps**:  These utilities are not used in the VDB Theme but are used by the shared CI Validation
+  - **Validate Bump**: Update `ruff` to 0.15.20
+  - **Validate Bump**: Bumped `pytest-homeassistant-custom-component` to 0.13.345
+
 ## [1.3.9-dev4] - 2026-07-03 - Unreleased
 
 ### Bumps
