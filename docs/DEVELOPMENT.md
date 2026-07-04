@@ -4,11 +4,12 @@ This document serves as a technical reference based on the development of the "V
 
 ## 1. YAML Standards & Linting
 
-Strict validation (like `yamllint`) requires adherence to official YAML specifications.
+Validation is `yamllint` configured by `.validate/.yamllint` (`extends: default`) with two `default`-rule relaxations chosen to match Home Assistant convention:
 
-- **Document Start**: Always start `.yaml` files with `---`. Home Assistant core often works without it, but CI/CD pipelines and linters will flag it as an error.
-- **Line Length**: Keep lines under 80 characters. For long CSS properties (like `border`), split them into individual components (`border-width`, `border-style`, `border-color`) rather than using shorthand.
-- **Trailing Spaces**: Never leave spaces at the end of a line. These are invisible but considered errors in clean code environments.
+- **Document Start**: `document-start` is **disabled**. Home Assistant does not use the `---` document-start marker, so the theme file intentionally omits it. Do **not** add `---`. (This was flipped from the original "always add `---`" stance once the linter was aligned to HA — a bare `---` is not wanted here.)
+- **Line Length**: `line-length` is **disabled**. Long lines are allowed — for example, the aligned Section 1c Neutral Ramp token block exceeds 80 characters by design. Do not reflow or split lines solely to satisfy an 80-char limit; splitting genuine CSS shorthand (`border` → `border-width`/`-style`/`-color`) is still fine for readability, but it is not required by the linter.
+- **Trailing Spaces**: Still enforced by the `default` ruleset — never leave spaces at the end of a line.
+- **Comment Spacing**: `comments: min-spaces-from-content: 1` — inline comments need at least one space before the `#`.
 
 ## 2. Shared Configs & Hidden Anchors
 
@@ -42,6 +43,35 @@ Dark themes often suffer from "White-on-White" text issues or "Dead Flat" backgr
   - `state-icon-color`: Controls icons in their "neutral" or "inactive" states.
   - `state-icon-active-color`: Controls icons when an entity is "On" or active.
 - **Best Practice**: Define these variables in each individual color variant theme to ensure the icons match the chosen accent (Red, Green, etc.) rather than defaulting to a single global color.
+
+### Single-Source Neutral Tokens (the "Neutral Ramp")
+
+Repeated neutral colours (whites, greys, surfaces, borders) should be defined **once** and referenced everywhere else, never re-typed as literals. This theme collects them in a **Neutral Ramp** (Section 1c) where each `token-neutral-*` key is a single source that works through **both** reuse mechanisms at once:
+
+- **YAML anchor** (`&base_white`, `&acc_charcoal`, …) — parse-time reuse. Alias it (`*base_white`) in ordinary YAML values. Invisible to CSS.
+- **Keyed token** — because every theme key auto-registers as a CSS custom property, the same definition is reachable as `var(--token-neutral-white)`, **including inside `card-mod` blocks**.
+
+This is the key distinction: a YAML anchor **cannot** be referenced from a `card-mod` CSS string (anchors are resolved at YAML parse time, before any CSS exists). Only a keyed token becomes a `--custom-property` that `card-mod` can read. So to feed a colour into `card-mod` from a single source, it must be a token key, not merely an anchor. Pattern (always keep the literal fallback):
+
+```yaml
+# Section 1c — one definition, two reuse paths
+token-neutral-line-strong: &acc_charcoal "#333333"
+
+# YAML value elsewhere → anchor alias
+ha-switch-border-color: *acc_charcoal
+
+# card-mod CSS → CSS var with literal fallback
+card-mod-card: |
+  :host { --scrollbar-thumb-color: var(--token-neutral-line-strong, #333333) !important; }
+```
+
+**Guidelines:**
+
+- Add a new repeated neutral to Section 1c; do not scatter its hex. One-off colours (used once) stay inline — anchoring them adds indirection with no dedupe benefit.
+- Keep `token-neutral-white` (`#ffffff`, max-contrast emphasis: icons, input ink, dialog headings) separate from `primary-text-color` (`#e1e1e1`, body text). Same "whiteness", different roles.
+- Leave inert `var(--primary-color, #aaaaaa)` fallbacks as literals — they only render if `--primary-color` is unset (never, except conceptually on the base theme), so they are not drift.
+- Mirrors the pre-existing `token-rgb-*` and `token-size-radius-*` conventions — the ramp is the same idea applied to neutrals.
+- **Verify refactors with an anchor-resolution diff**: a consolidation must not change any resolved value. Load the YAML before and after with a parser that resolves anchors, and assert every existing key maps to the same value (only intentionally-edited `card-mod` strings should differ).
 
 ## 5. Modern Token Migration (2025-2026+)
 

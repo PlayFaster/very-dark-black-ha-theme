@@ -56,16 +56,6 @@ This is a simple theme focused on providing a very dark mode look. It's designed
 
 ![Mixed Theme Sections](.github/images/vdbt_preview_all_themes_grid1.png)
 
-### Accent Colors
-
-| Cyan | Pink | Silver |
-| :-: | :-: | :-: |
-| ![Cyan](.github/images/vdbt_preview_sensors_cyan.png) | ![Pink](.github/images/vdbt_preview_sensors_fuchsia.png) | ![Silver](.github/images/vdbt_preview_sensors_silver.png) |
-
-| Indigo | Orange | Red |
-| :-: | :-: | :-: |
-| ![Indigo](.github/images/vdbt_preview_sensors_indigo.png) | ![Orange](.github/images/vdbt_preview_sensors_orange.png) | ![Red](.github/images/vdbt_preview_sensors_red.png) |
-
 ### Theme Selection
 
 | Theme Select Green | Theme Select Violet |

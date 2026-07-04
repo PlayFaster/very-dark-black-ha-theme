@@ -50,12 +50,32 @@ Black with White: &base_logic # --- 1. Named Colors (Defined first for alias saf
   token-rgb-pink: "236, 72, 153"
   token-rgb-emerald: "5, 150, 105"
 
+  # --- 1c. Neutral Ramp (single source: keyed tokens = CSS vars + YAML anchors) ---
+  # Every repeated neutral is defined ONCE here. Each key doubles as a CSS custom
+  # property (--token-neutral-*) so card-mod (Section 20) can reference it via
+  # var(), and carries a YAML anchor for parse-time reuse in the values below.
+  # Legacy anchor names (base_black, acc_charcoal, …) are kept so all existing
+  # *aliases keep resolving unchanged — only the DEFINITION site moved up here.
+  # NOTE: token-neutral-white is deliberately SEPARATE from primary-text-color
+  # (#e1e1e1). White = max-contrast emphasis (icons, input ink, dialog headings);
+  # #e1e1e1 = body text. Do not merge them.
+  token-neutral-white:       &base_white   "#ffffff"
+  token-neutral-black:       &base_black   "#000000"
+  token-neutral-deep:        &base_deep    "#050505"
+  token-neutral-surface:     &base_surface "#0a0a0a"
+  token-neutral-hover:       &base_hover   "#151515"
+  token-neutral-border:      &base_border  "#1a1a1a"
+  token-neutral-line-strong: &acc_charcoal "#333333"
+  token-neutral-line-medium: &acc_graphite "#444444"
+  token-neutral-line-soft:   &acc_medium   "#666666"
+  token-neutral-outline:     &base_outline "#606060"
+
   # --- 2. Dashboard Base & Branding ---
-  lovelace-background: &base_black "#000000"
+  lovelace-background: *base_black
   primary-background-color: *base_black
-  secondary-background-color: &base_surface "#0a0a0a"
+  secondary-background-color: *base_surface
   app-header-background-color: *base_black
-  app-header-text-color: "#ffffff"
+  app-header-text-color: *base_white
   sidebar-background-color: *base_black
   app-theme-color: *base_black
 
@@ -98,18 +118,18 @@ Black with White: &base_logic # --- 1. Named Colors (Defined first for alias saf
   # real HA native token verified against the frontend `dev` branch; the fallback
   # shown in the comment is what HA uses today when the token is unset.
   #
-  # Section card / heading-card TITLE (default: --primary-text-color #e1e1e1).
-  # The heading-card ICON already pops accent (inherits state-icon-color).
-  ha-heading-card-title-color: var(--primary-color)
-  #
-  # Heading-card SUBTITLE line (default: --secondary-text-color #a8a8a8).
-  ha-heading-card-subtitle-color: var(--primary-color)
-  #
   # Standard card titles — Entities/Glance/etc. .card-header (default: #ffffff).
   # Hook is live: the Section 20 card-mod uses var(--ha-card-header-color,#ffffff)
   # and paper-card-header-color mirrors it, so uncommenting this drives both the
   # modern and legacy header paths.
-  ha-card-header-color: var(--primary-color)
+  # ha-card-header-color: var(--primary-color)
+  #
+  # Section card / heading-card TITLE (default: --primary-text-color #e1e1e1).
+  # The heading-card ICON already pops accent (inherits state-icon-color).
+  # ha-heading-card-title-color: var(--primary-color)
+  #
+  # Heading-card SUBTITLE line (default: --secondary-text-color #a8a8a8).
+  ha-heading-card-subtitle-color: var(--primary-color)
   #
   # Top toolbar / view title text (default below is #ffffff — replace value).
   # Note: this also tints header action icons. app-header-text-color is set in
@@ -120,12 +140,12 @@ Black with White: &base_logic # --- 1. Named Colors (Defined first for alias saf
   sidebar-text-color: *base_text
 
   # --- 6. Control States (Off/Unselected) ---
-  paper-radio-button-unchecked-color: &acc_graphite "#444444"
+  paper-radio-button-unchecked-color: *acc_graphite
   paper-checkbox-unchecked-color: *acc_graphite
-  control-item-icon-color: "#ffffff"
-  switch-unchecked-button-color: &acc_medium "#666666"
-  switch-unchecked-track-color: &acc_charcoal "#333333"
-  mdc-switch-unselected-icon-color: "#ffffff"
+  control-item-icon-color: *base_white
+  switch-unchecked-button-color: *acc_medium
+  switch-unchecked-track-color: *acc_charcoal
+  mdc-switch-unselected-icon-color: *base_white
   mdc-switch-unselected-track-color: *acc_charcoal
   mdc-switch-unselected-handle-color: *acc_medium
 
@@ -134,17 +154,17 @@ Black with White: &base_logic # --- 1. Named Colors (Defined first for alias saf
   dialog-box-shadow: "none"
   mdc-theme-on-surface: *base_text
   mdc-theme-background: *base_black
-  mdc-list-item-hover-leading-icon-color: "#ffffff"
+  mdc-list-item-hover-leading-icon-color: *base_white
   # Data Table Styling
   data-table-background-color: *base_black
   mdc-data-table-header-cell-font-weight: "600"
 
   # --- 8. Inputs & Text Fields ---
   mdc-text-field-fill-color: *base_black
-  mdc-text-field-ink-color: "#ffffff"
+  mdc-text-field-ink-color: *base_white
   mdc-text-field-label-ink-color: *base_subtext
   mdc-select-fill-color: *base_black
-  mdc-select-ink-color: "#ffffff"
+  mdc-select-ink-color: *base_white
   ha-select-fill-color: *base_black
   ha-textfield-fill-color: *base_black
   input-fill-color: *base_black
@@ -161,7 +181,7 @@ Black with White: &base_logic # --- 1. Named Colors (Defined first for alias saf
   ha-color-form-background: *base_black
   ha-color-form-background-hover: *base_surface
   ha-color-form-background-disabled: "var(--ha-color-fill-disabled-normal-resting)"
-  input-label-ink-color: "#ffffff"
+  input-label-ink-color: *base_white
   input-idle-line-color: "transparent"
   mdc-select-idle-line-color: "transparent"
   mdc-text-field-idle-line-color: "transparent"
@@ -172,9 +192,9 @@ Black with White: &base_logic # --- 1. Named Colors (Defined first for alias saf
 
   # --- 9. Lists & Notifications ---
   paper-listbox-background-color: *base_black
-  paper-listbox-color: "#ffffff"
-  mdc-snackbar-container-color: &base_border "#1a1a1a"
-  mdc-snackbar-content-ink-color: "#ffffff"
+  paper-listbox-color: *base_white
+  mdc-snackbar-container-color: *base_border
+  mdc-snackbar-content-ink-color: *base_white
 
   # --- 10. Mode Handling ---
   theme-base: dark
@@ -188,12 +208,12 @@ Black with White: &base_logic # --- 1. Named Colors (Defined first for alias saf
   ha-color-fill-neutral-quiet-hover: *base_surface
   ha-color-fill-neutral-quiet-active: *base_black
   ha-color-fill-neutral-normal-resting: *base_surface
-  ha-color-fill-neutral-normal-hover: "#151515"
+  ha-color-fill-neutral-normal-hover: *base_hover
   ha-color-fill-neutral-normal-active: *base_surface
   md-sys-color-on-surface-variant: var(--secondary-text-color)
   md-sys-color-outline-variant: *acc_graphite
   md-sys-color-error: *acc_red
-  md-sys-color-on-error: "#ffffff"
+  md-sys-color-on-error: *base_white
   md-sys-color-warning: *acc_orange
   md-sys-color-success: *acc_green
   md-sys-color-info: *acc_blue
@@ -284,10 +304,10 @@ Black with White: &base_logic # --- 1. Named Colors (Defined first for alias saf
   ha-box-shadow-l: "none"
 
   # Surface Colors (Tooltips & Popovers)
-  ha-color-surface-default: "#0a0a0a"
-  ha-color-surface-low: "#050505"
-  ha-color-surface-lower: "#000000"
-  ha-color-surface-default-inverted: "#ffffff"
+  ha-color-surface-default: *base_surface
+  ha-color-surface-low: *base_deep
+  ha-color-surface-lower: *base_black
+  ha-color-surface-default-inverted: *base_white
   ha-color-surface-low-inverted: "#f5f5f5"
   ha-color-surface-lower-inverted: "#e0e0e0"
   ha-tooltip-background-color: "var(--secondary-background-color)"
@@ -296,17 +316,17 @@ Black with White: &base_logic # --- 1. Named Colors (Defined first for alias saf
   # Progress Bar Customization
   ha-progress-bar-indicator-color: "var(--primary-color, #aaaaaa)"
   ha-progress-bar-indicator-background: "var(--primary-color, #aaaaaa)"
-  ha-progress-bar-track-color: "#1a1a1a"
+  ha-progress-bar-track-color: *base_border
   ha-progress-bar-track-height: "4px"
   ha-progress-bar-border-radius: "4px"
 
   # Web Awesome Switch - Unchecked
   ha-switch-background-color: "#1e1e1e"
-  ha-switch-thumb-background-color: "#666666"
+  ha-switch-thumb-background-color: *acc_medium
   ha-switch-background-color-hover: "#2a2a2a"
   ha-switch-thumb-background-color-hover: "#888888"
-  ha-switch-border-color: "#333333"
-  ha-switch-thumb-border-color: "#666666"
+  ha-switch-border-color: *acc_charcoal
+  ha-switch-thumb-border-color: *acc_medium
 
   # Web Awesome Switch - Checked
   ha-switch-checked-background-color: "var(--ha-color-primary-10)"
@@ -332,28 +352,28 @@ Black with White: &base_logic # --- 1. Named Colors (Defined first for alias saf
   ha-checkbox-size: "18px"
   ha-checkbox-border-width: "1.5px"
   ha-checkbox-border-radius: "4px"
-  ha-checkbox-border-color: "#444444"
-  ha-checkbox-border-color-hover: "#666666"
+  ha-checkbox-border-color: *acc_graphite
+  ha-checkbox-border-color-hover: *acc_medium
   ha-checkbox-background-color: "transparent"
-  ha-checkbox-background-color-hover: "#151515"
+  ha-checkbox-background-color-hover: *base_hover
   ha-checkbox-checked-background-color: "var(--primary-color, #aaaaaa)"
   ha-checkbox-checked-background-color-hover: "var(--primary-color, #aaaaaa)"
-  ha-checkbox-checked-icon-color: "#ffffff"
+  ha-checkbox-checked-icon-color: *base_white
 
   # --- 17. 2026.6 Web Awesome Radio ---
   ha-radio-option-active-color: "var(--primary-color, #aaaaaa)"
-  ha-radio-option-border-color: "#444444"
-  ha-radio-option-border-color-hover: "#666666"
+  ha-radio-option-border-color: *acc_graphite
+  ha-radio-option-border-color-hover: *acc_medium
   ha-radio-option-border-width: "1.5px"
   ha-radio-option-background-color: "transparent"
-  ha-radio-option-background-color-hover: "#151515"
+  ha-radio-option-background-color-hover: *base_hover
   ha-radio-option-checked-background-color: "var(--primary-color, #aaaaaa)"
-  ha-radio-option-checked-icon-color: "#ffffff"
+  ha-radio-option-checked-icon-color: *base_white
 
   # --- 18. Forum Discovered Elements & Compatibility Patches ---
   # Dropdown Inputs & Outlined Inputs
   mdc-select-label-ink-color: "var(--secondary-text-color)"
-  input-outlined-idle-border-color: "#444444"
+  input-outlined-idle-border-color: *acc_graphite
   input-outlined-hover-border-color: "var(--primary-color)"
   input-outlined-disabled-border-color: "transparent"
 
@@ -364,12 +384,12 @@ Black with White: &base_logic # --- 1. Named Colors (Defined first for alias saf
   markdown-code-text-color: "var(--primary-text-color)"
 
   # Web Awesome Input Shims
-  ha-color-ink-color: "#ffffff"
+  ha-color-ink-color: *base_white
   ha-color-fill-color: *base_black
   ha-color-disabled-fill-color: "transparent"
   ha-color-label-ink-color: "var(--secondary-text-color)"
   ha-color-disabled-ink-color: "rgba(155, 155, 155, 0.5)"
-  ha-color-dropdown-icon-color: "#ffffff"
+  ha-color-dropdown-icon-color: *base_white
   ha-color-idle-line-color: "transparent"
   ha-color-hover-line-color: "transparent"
 
@@ -383,7 +403,7 @@ Black with White: &base_logic # --- 1. Named Colors (Defined first for alias saf
 
   # Badges Customization (Contrast-safe overrides for white text)
   label-badge-background-color: *base_black
-  label-badge-text-color: "#ffffff"
+  label-badge-text-color: *base_white
   label-badge-red: "#ae1332"
   label-badge-green: "#1a703e"
   label-badge-blue: "#0a687f"
@@ -423,11 +443,11 @@ Black with White: &base_logic # --- 1. Named Colors (Defined first for alias saf
   wa-color-surface-raised: *base_surface
   mdc-ripple-hover-opacity: "0.12"
   mdc-list-item-selected-container-color: "rgba(255, 255, 255, 0.1)"
-  mdc-text-field-outline-color: "#606060"
-  mdc-select-outline-color: "#606060"
-  ha-color-form-outline: "#606060"
+  mdc-text-field-outline-color: *base_outline
+  mdc-select-outline-color: *base_outline
+  ha-color-form-outline: *base_outline
   ha-color-form-outline-hover: var(--primary-color)
-  input-dropdown-icon-color: "#ffffff"
+  input-dropdown-icon-color: *base_white
 
   # --- 20. Global Card-Mod ---
   card-mod-card: |
@@ -458,14 +478,14 @@ Black with White: &base_logic # --- 1. Named Colors (Defined first for alias saf
       font-weight: var(--ha-font-weight-heading) !important;
     }
     :host {
-      --scrollbar-thumb-color: #333333 !important;
+      --scrollbar-thumb-color: var(--token-neutral-line-strong, #333333) !important;
       color-scheme: dark !important;
       -webkit-font-smoothing: antialiased !important;
       -moz-osx-font-smoothing: grayscale !important;
     }
     *::-webkit-scrollbar { width: 4px !important; }
     *::-webkit-scrollbar-thumb {
-      background-color: #333333 !important;
+      background-color: var(--token-neutral-line-strong, #333333) !important;
       border-radius: 8px !important;
     }
     /* Subtle Inset Shadow for Inputs */
@@ -476,7 +496,7 @@ Black with White: &base_logic # --- 1. Named Colors (Defined first for alias saf
     }
     /* Data Table & List Refinements */
     .mdc-data-table__header-cell {
-      background-color: #050505 !important;
+      background-color: var(--token-neutral-deep, #050505) !important;
       border-bottom: 1px solid var(--divider-color) !important;
     }
     .mdc-data-table__row:hover {
@@ -498,8 +518,8 @@ Black with White: &base_logic # --- 1. Named Colors (Defined first for alias saf
        improves in future HA versions. */
     ha-more-info-dialog $ ha-dialog,
     ha-more-info-dialog $ wa-dialog {
-        --mdc-dialog-heading-ink-color: #ffffff;
-        --mdc-theme-on-surface: #ffffff;
+        --mdc-dialog-heading-ink-color: var(--token-neutral-white, #ffffff);
+        --mdc-theme-on-surface: var(--token-neutral-white, #ffffff);
     }
 
 # ----------------------------------------------------------------

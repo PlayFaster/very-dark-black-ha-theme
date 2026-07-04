@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.9-dev9] - 2026-07-04 - Unreleased
+
+### Summary
+
+- **Neutral colour consolidation**: Repeated neutral hex literals (whites, greys, surfaces, borders) were consolidated into a single-source **Neutral Ramp** (new Section 1c). Each canonical neutral is now defined once as a keyed token that doubles as both a CSS custom property (`--token-neutral-*`, reachable from card-mod) and a YAML anchor (parse-time reuse). Purely a refactor — every existing key resolves to its exact previous value; verified by an anchor-resolution diff across all 11 themes (only the two card-mod blocks changed, as intended).
+
+### Added
+
+- **Section 1c — Neutral Ramp**: Ten keyed tokens as the single source for repeated neutrals — `token-neutral-white` `#ffffff`, `-black` `#000000`, `-deep` `#050505`, `-surface` `#0a0a0a`, `-hover` `#151515`, `-border` `#1a1a1a`, `-line-strong` `#333333`, `-line-medium` `#444444`, `-line-soft` `#666666`, `-outline` `#606060`. Legacy anchor names (`base_black`, `base_surface`, `base_border`, `acc_charcoal`, `acc_graphite`, `acc_medium`) were retained on these definitions so every existing `*alias` keeps resolving; the anchor *definition sites* simply moved up into 1c. Follows the existing `token-rgb-*` / `token-size-radius-*` convention. `token-neutral-white` is kept deliberately separate from `primary-text-color` (`#e1e1e1`): white = max-contrast emphasis, `#e1e1e1` = body.
+
+### Changed
+
+- **Option A — `#ffffff` consolidated**: 17 standalone `#ffffff` YAML values now alias `*base_white` (`token-neutral-white`). `var(..., #ffffff)` fallbacks and comment references left untouched.
+- **Option B — anchor stragglers**: ~11 literals that duplicated an existing anchor's value (`#000000`, `#0a0a0a`, `#1a1a1a`, `#333333`, `#444444`, `#666666`) swapped to their anchors, eliminating "same colour, two forms" drift.
+- **Option C — new neutral anchors**: repeated-but-unnamed `#151515` (control hover ×3), `#606060` (input outline ×3), and `#050505` (deep panel) given anchors and aliased.
+- **Option D — card-mod de-literalised**: the 5 hard hex literals inside the card-mod blocks (`#333333` scrollbar ×2, `#050505` data-table header, `#ffffff` more-info dialog ×2) now read from the Neutral Ramp via `var(--token-neutral-*, <literal>)`, each keeping its original hex as a fallback. This is the first time a card-mod block references a *theme-defined* token (previously only native HA tokens), extending the established `token-*`-as-CSS-var pattern.
+
+### Notes
+
+- **Zero visual change intended**: all swaps are value-identical. Guarded by a resolved-value diff (Python anchor resolution) confirming all 307 keys × 11 themes are unchanged except the two card-mod strings. The card-mod `var()` references carry literal fallbacks, so rendering is safe even if a token were ever unset.
+- **Deliberately left as literals**: the 9 `var(--primary-color, #aaaaaa)` fallbacks (inert — primary-color is never unset); one-off singletons (`#1e1e1e`, `#2a2a2a`, `#888888`, `#f5f5f5`, `#222222`, badge and graph hues); and `#e0e0e0` on `ha-color-surface-lower-inverted` (not aliased to the `acc_silver` accent — same hex, different semantic role).
+
+### Docs Updated
+
+- **AGENTS.md**: Documented the Section 1c Neutral Ramp (single-source token/anchor dual mechanism) and its rules under Theme File Architecture; noted that `card-mod` referencing theme-defined `--token-neutral-*` tokens (with literal fallback) is now a sanctioned pattern; added a guardrail that the Section 4b accent-emphasis block and Section 13b lock states are intentional opt-ins (not dead code); corrected the stale YAML-standards block (project `.yamllint` disables `document-start` and `line-length`); bumped the file-size note (~540 → ~600 lines).
+- **docs/DEVELOPMENT.md**: Corrected §1 YAML standards to match `.validate/.yamllint` (no `---`, no line-length limit); added a "Single-Source Neutral Tokens (Neutral Ramp)" subsection under §4 explaining the anchor-vs-keyed-token distinction, why only keyed tokens reach `card-mod`, and the anchor-resolution diff used to verify zero-drift refactors.
+- **README.md**: No change — the consolidation is internal and the accent-emphasis opt-in requires editing the YAML, so neither affects the user-facing install/usage docs.
+
 ## [1.3.9-dev8] - 2026-07-04 - Unreleased
 
 ### Summary
