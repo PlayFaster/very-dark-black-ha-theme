@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.9-dev6] - 2026-07-04 - Unreleased
+
+### Changed
+
+- **Documentation**: Updated the README to align with the ZTE/Huwaei/WiFI Project README files.
+
 ## [1.3.9-dev5] - 2026-07-04 - Unreleased
 
 ### Bumps
