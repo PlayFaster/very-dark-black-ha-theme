@@ -2,7 +2,7 @@
 # Name: Very Dark Black HA Theme
 # HA Support: 2025.1–2026.4+ (HSL scales require 2026+)
 # Dependencies: card-mod (optional, for scrollbars & borders)
-# Last Updated: 2026-06-25
+# Last Updated: 2026-07-04
 # ----------------------------------------------------------------
 # VERY DARK BLACK THEME
 # ----------------------------------------------------------------
@@ -218,9 +218,25 @@ Black with White: &base_logic # --- 1. Named Colors (Defined first for alias saf
   graph-color-9: "#ff5722"
   graph-color-10: "#3f51b5"
 
+  # --- 13b. Lock States ---
+  # HA defaults these to fixed green/red hues that clash with the monochrome
+  # accent scheme. Mapped to the theme's own active/inactive/danger pattern:
+  # locked = accent (active, like switch-on), transitional/unlocked = muted
+  # grey (inactive), jammed = red (a genuine fault that warrants breaking
+  # monochrome). Flip locked/unlocked here if you prefer unlocked to alert.
+  state-lock-locked-color: var(--primary-color)
+  state-lock-unlocked-color: var(--secondary-text-color)
+  state-lock-locking-color: var(--secondary-text-color)
+  state-lock-unlocking-color: var(--secondary-text-color)
+  state-lock-open-color: var(--secondary-text-color)
+  state-lock-jammed-color: *acc_red
+
   # --- 14. Disabled Fills ---
   ha-color-fill-disabled-normal-resting: "rgba(155, 155, 155, 0.08)"
   ha-color-on-disabled-normal: "rgba(155, 155, 155, 0.5)"
+  # Legacy token — still drives disabled labels in older component paths that
+  # predate ha-color-on-disabled-normal. Kept literal (not aliased) for safety.
+  disabled-text-color: "rgba(155, 155, 155, 0.5)"
 
   # --- 15. Danger/Warning Tag Fills ---
   # Dark theme: low-opacity fills give a subtle tint on pure black;
@@ -318,6 +334,9 @@ Black with White: &base_logic # --- 1. Named Colors (Defined first for alias saf
 
   # Markdown Inline Code Styling
   markdown-code-background-color: "var(--secondary-background-color)"
+  # Pairs with the background above — without this, inline-code text falls back
+  # to a default that risks low contrast on the #0a0a0a code fill.
+  markdown-code-text-color: "var(--primary-text-color)"
 
   # Web Awesome Input Shims
   ha-color-ink-color: "#ffffff"
@@ -369,6 +388,9 @@ Black with White: &base_logic # --- 1. Named Colors (Defined first for alias saf
   card-background-color: *base_black
   ha-card-border-color: "rgba(255, 255, 255, 0.12)"
   divider-color: "#222222"
+  # CodeMirror surface (YAML/automation/template editors) — does not follow
+  # card backgrounds natively, leaving a lighter panel on pure black.
+  code-editor-background-color: *base_black
   mdc-dialog-scrim-color: "rgba(0,0,0,0.9)"
   ha-dialog-surface-background: *base_black
   paper-dialog-background-color: *base_black

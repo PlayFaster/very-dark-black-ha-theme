@@ -185,7 +185,7 @@ actions:
 mode: single
 ```
 
-### 🟠 Startup Indicator with Delayed Restore
+### ⏱️ Startup Indicator with Delayed Restore
 
 Example automation for a **startup indicator** that signals Home Assistant is initialising, then switches back to your normal theme after 2 minutes:
 
@@ -293,7 +293,7 @@ For technical details on the YAML standards, logic, and various display element 
 
 ## ❗ Known Limitations /❔ What's Missing?
 
-- **Color Picker**: The theme has eight pre-defined accent colors available, but there is no option to select your own accent color to work with the theme. To my knowledge, this functionality is not available within the Home Assistant basic theme file, it would require an additional script or custom component, so it is not in scope for this project.
+- **Color Picker**: The theme has eleven pre-defined accent colors available, but there is no option to select your own accent color to work with the theme. To my knowledge, this functionality is not available within the Home Assistant basic theme file, it would require an additional script or custom component, so it is not in scope for this project.
 - **Light Theme**: The theme works in "Light" mode, but still applies the Very Dark Black theme, a dark mode theme. This is deliberate, this is not a light mode theme.
 - **Base Themes in Picker**: The base (anchor) theme `Black with White` appears in the picker alongside the accent variants. This is a known limitation of the Home Assistant theme file structure: building accent variants from a shared base requires that base to be a named theme entry, which makes it selectable. There are no plans to change this behavior — "Fixing" this either results in log warnings/errors or a huge theme file that becomes difficult to maintain. `Black with White` is a fully functional minimalist dark theme and intentionally treated as a variant in its own right.
 

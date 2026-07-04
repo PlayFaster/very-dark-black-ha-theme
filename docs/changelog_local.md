@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.9-dev7] - 2026-07-04 - Unreleased
+
+### Summary
+
+- **LCARS Theme**: Reviewed the ha-lcars theme for useful features, and identified four. All keys added to the `&base_logic` anchor, so every accent variant inherits them.
+
+### Added
+
+- **`markdown-code-text-color`** (`var(--primary-text-color)`): Pairs with the existing `markdown-code-background-color`. Without it, inline-code text fell back to a default that risked low contrast on the `#0a0a0a` code fill.
+- **`code-editor-background-color`** (`#000000`): CodeMirror surface (YAML/automation/template editors) does not follow card backgrounds natively, leaving a lighter panel on pure black.
+- **`disabled-text-color`** (`rgba(155, 155, 155, 0.5)`): Legacy token still driving disabled labels in older component paths that predate `ha-color-on-disabled-normal`. Kept literal to match the existing disabled ink value.
+- **Lock state colors** (new Section 13b): `state-lock-locked-color` → `var(--primary-color)`, `state-lock-unlocked-color` / `-locking-color` / `-unlocking-color` / `-open-color` → `var(--secondary-text-color)`, `state-lock-jammed-color` → `#f44336`. HA defaults these to fixed green/red hues that clash with the monochrome accent scheme; mapped to the theme's own active (accent) / inactive (muted grey) / danger (red) pattern.
+
+### Notes
+
+- **Deliberately skipped**: `state-climate-*-color` (HA's heat=orange/cool=blue conventions aid usability); `ha-heading-card-title-color` (its default already resolves to `--primary-text-color`, so setting it to that is a no-op); `table-header-background-color` (verified against HA frontend `dev` — not a real variable, HA never reads it, so it cannot replace the existing data-table-header card-mod which also sets the `#050505` shade and border-bottom).
+
 ## [1.3.9-dev6] - 2026-07-04 - Unreleased
 
 ### Changed
