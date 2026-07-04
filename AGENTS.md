@@ -6,12 +6,12 @@ This file provides guidance to AI coding agents when working with code in this r
 
 **Very Dark Black HA Theme** is a Home Assistant theme pack that provides pure black backgrounds with a choice of accent colors. The entire project ships as a single YAML file (`themes/very_dark_black_ha_theme.yaml`) that Home Assistant loads directly.
 
-Available accent color variants: Cyan, Green, Red, Fuchsia, Orange, Purple, Indigo, Silver (monochrome), White (no accent). `Black with White` doubles as the base anchor all variants inherit from — it appears in the picker as a structural side-effect of HA's theme architecture and is a usable no-accent variant in its own right.
+Available accent color variants: Blue, Cyan, Emerald, Green, Indigo, Orange, Pink, Red, Silver (monochrome), Violet, White (no accent). `Black with White` doubles as the base anchor all variants inherit from — it appears in the picker as a structural side-effect of HA's theme architecture and is a usable no-accent variant in its own right.
 
 ## Project Structure
 
 ```text
-themes/very_dark_black_ha_theme.yaml          ← The entire theme (single file, ~480 lines)
+themes/very_dark_black_ha_theme.yaml          ← The entire theme (single file, ~600 lines)
 docs/DEVELOPMENT.md                           ← Critical dev reference: pitfalls & architecture
 docs/change_ref_ha_v2026_4.md                 ← HA 2026.4 frontend migration notes
 docs/change_ref_ha_v2026_5.md                 ← HA 2026.5 Web Awesome component notes
@@ -70,7 +70,24 @@ docker exec -w /workspaces/<PROJECT_DIR> <CONTAINER_NAME> bash -c "yamllint -c .
 The single theme file uses YAML anchors/aliases to avoid duplication. The structure is strictly ordered — anchors must be defined before they are referenced:
 
 - **Base theme — `Black with White` (`&base_logic`)**: All shared tokens: backgrounds, card surfaces, dialogs, borders, dividers, typography, icons, inputs, color scales, energy/graph colors, named colors (`red-color`, `cyan-color`, etc.), and the global `card-mod-card` CSS block. This mapping IS the `&base_logic` anchor. It is also a usable no-accent variant (white text and icons, HA semantic state colors, no `primary-color`).
-- **Section B — Individual variants**: Each accent theme (e.g., `Black with Cyan`) extends the base via `<<: *base_logic` and only adds `primary-color`, `state-active-color`, and `card-mod-theme`.
+- **Section B — Individual variants**: Each accent theme (e.g., `Black with Cyan`) extends the base via `<<: *base_logic` and only adds `primary-color`, `state-active-color`, and `card-mod-theme`. Eleven variants: Blue, Cyan, Emerald, Green, Indigo, Orange, Pink, Red, Silver, Violet. Orange additionally overrides `state-switch-active-color`, `state-plug-active-color`, and `state-binary_sensor-active-color` to Red (to avoid yellow-adjacent active states).
+
+### Neutral Ramp — single source for repeated neutrals (Section 1c)
+
+Every repeated neutral colour (whites, greys, surfaces, borders) is defined **once** in the **Section 1c Neutral Ramp** as a `token-neutral-*` key, and nowhere else. Each definition does double duty:
+
+- It is a **keyed token**, so HA auto-registers it as a CSS custom property (`--token-neutral-*`) that the `card-mod` blocks can read via `var()`.
+- It carries a **YAML anchor** (`&base_white`, `&acc_charcoal`, etc.) for parse-time reuse in the plain YAML values below.
+
+This mirrors the existing `token-rgb-*` and `token-size-radius-*` conventions. **Rules when touching neutrals:**
+
+- Do **not** hardcode a repeated neutral hex anywhere else — alias the anchor (`*base_white`) in YAML values, or reference the CSS var (`var(--token-neutral-line-strong, #333333)`) inside `card-mod`. Add new repeated neutrals to Section 1c.
+- The two distinct "whites" are intentional and must stay separate: `token-neutral-white` (`#ffffff`) = max-contrast emphasis (icons, input ink, dialog headings); `primary-text-color` (`#e1e1e1`) = body text. Do not merge them.
+- One-off colours (used once) and inert `var(--primary-color, #aaaaaa)` fallbacks are deliberately left as literals — do not "consolidate" them.
+
+### Optional Accent Emphasis (Section 4b) — intentional opt-in
+
+Section 4b holds commented-out emphasis-text tokens (`ha-heading-card-title-color`, `ha-heading-card-subtitle-color`, `ha-card-header-color`) set to `var(--primary-color)`. These are a **deliberate opt-in**: default behaviour keeps titles/headers white; a user uncomments a line to route the accent onto emphasis text. The theme's philosophy is "white/near-white carries the body; the accent pops on icons and active controls only." Do **not** flag the commented block as dead code, and do not uncomment it by default. The `card-header` accent hook is live via a var-with-fallback in the Section 20 `card-mod-card` (`var(--ha-card-header-color, #ffffff)`); keep that fallback so white stays the default. Section 13b similarly holds intentional per-state lock colours.
 
 ## Critical Rules When Modifying the Theme
 
@@ -81,12 +98,16 @@ These rules are enforced by Home Assistant's theme loader and will cause failure
 3. **Anchors before aliases** — YAML is processed sequentially. An alias (`*acc_red`) must appear after its anchor (`&acc_red`) in the file.
 4. **No duplicate keys across anchor merges** — if a token is defined in the base anchor (`base_logic`), do NOT redefine it in any Section B variant, even with the same value. HA logs a warning per theme for every duplicate. Before adding a token to a variant, grep for it in the base anchor first.
 5. **Do not add `primary-color`, `state-active-color`, or `card-mod-theme` to the base anchor** — these vary per accent variant and belong only in Section B.
+6. **`card-mod-theme` must exactly match the HA picker name** — e.g. `"Black with Violet"` not `"Black Violet"`. Mismatch silently breaks card-mod theme profile tracking.
 
 ## YAML Standards (for linting)
 
-- Start `.yaml` files with `---`
-- Lines must be under 80 characters — split CSS shorthand properties (`border` → `border-width`, `border-style`, `border-color`)
-- No trailing whitespace
+Rules come from `.validate/.yamllint` (`extends: default`, with `document-start: disable`, `line-length: disable`, and `comments: min-spaces-from-content: 1`). Notably:
+
+- **No `---` document start** — `document-start` is disabled to match Home Assistant convention (HA does not use it). Do not add `---` to the theme file.
+- **No line-length limit** — `line-length` is disabled, so aligned token blocks (e.g. the Section 1c Neutral Ramp) may exceed 80 characters. Do not reflow or split lines purely to satisfy an 80-char rule; it is not enforced.
+- **No trailing whitespace** (still enforced by the `default` ruleset).
+- **Inline comments** need at least one space from content.
 
 ## HA Version Compatibility
 
@@ -122,8 +143,9 @@ The `hsl(from ...)` relative color syntax used for the `ha-color-neutral-*` and 
 - Explicitly sets `background: transparent; border: none` for cards intended to be transparent: `hui-heading-card`, `mushroom-title-card`, `mushroom-chips-card`, `.type-custom-bubble-card`, `hui-conditional-card`, `custom-button-card`.
 - Applies custom scrollbar styling and `-webkit-font-smoothing: antialiased`.
 - `card-mod-more-info` overrides dialog heading/surface text to pure white (needed for black backgrounds; standard themes don't require this).
+- References both native HA tokens (`var(--ha-card-background)`, `var(--divider-color)`) **and** the theme's own Neutral Ramp tokens (`var(--token-neutral-line-strong, #333333)`, `var(--token-neutral-deep, …)`, `var(--token-neutral-white, …)`). Theme-defined tokens in `card-mod` are a sanctioned pattern as of the Section 1c consolidation — always keep the literal `var()` fallback so the block still renders if a token is unset.
 
-Avoid deep shadow-DOM selectors (e.g., `ha-card-picker $ ha-sub-page`) — they break when HA updates its component structure. Prefer native CSS tokens.
+Avoid deep shadow-DOM selectors (e.g., `ha-card-picker $ ha-sub-page`) — they break when HA updates its component structure. Prefer CSS tokens (native HA tokens, or the theme's `--token-neutral-*` ramp with a literal fallback) over hardcoded hex literals.
 
 ## Modern Token Migration Context
 

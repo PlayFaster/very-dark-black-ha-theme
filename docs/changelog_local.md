@@ -2,6 +2,169 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.0] - 2026-07-04 - Release
+
+### Summary
+
+- Expands the theme from 8 to 11 accent colours — adding Blue and Emerald, and renaming/re-hueing Purple → Violet and Fuchsia → Pink — alongside a large amount of under-the-hood token and structural work.
+
+### Added
+
+- **Two new accent variants — Blue and Emerald**, bringing the picker to 11 selectable themes.
+- **Lock entity colours**: lock states now follow the theme's accent/neutral scheme (locked = accent, unlocked/transitional = muted grey, jammed = red) instead of HA's fixed green/red.
+- **Inline code contrast**: inline code text colour is now set for readability on the dark code background.
+- **Code editor surface**: the YAML/automation/template editor now uses a pure-black background instead of a lighter default panel.
+
+### Changed
+
+- **"Black with Purple" → "Black with Violet"**: renamed and shifted bluer (`#9c27b0` → `#7c3aed`) for clearer separation in the picker.
+- **"Black with Fuchsia" → "Black with Pink"**: renamed and shifted to true pink (`#ff00ff` → `#ec4899`). Old `var(--purple-color)` / `var(--fuchsia-color)` references remain available for backward compatibility.
+- **Card title/header colour** is now themeable via `ha-card-header-color` (white remains the default).
+
+## [1.4.0-dev9] - 2026-07-04 - Unreleased
+
+### Summary
+
+- **Neutral colour consolidation**: Repeated neutral hex literals (whites, greys, surfaces, borders) were consolidated into a single-source **Neutral Ramp** (new Section 1c). Each canonical neutral is now defined once as a keyed token that doubles as both a CSS custom property (`--token-neutral-*`, reachable from card-mod) and a YAML anchor (parse-time reuse). Purely a refactor — every existing key resolves to its exact previous value; verified by an anchor-resolution diff across all 11 themes (only the two card-mod blocks changed, as intended).
+
+### Added
+
+- **Section 1c — Neutral Ramp**: Ten keyed tokens as the single source for repeated neutrals — `token-neutral-white` `#ffffff`, `-black` `#000000`, `-deep` `#050505`, `-surface` `#0a0a0a`, `-hover` `#151515`, `-border` `#1a1a1a`, `-line-strong` `#333333`, `-line-medium` `#444444`, `-line-soft` `#666666`, `-outline` `#606060`. Legacy anchor names (`base_black`, `base_surface`, `base_border`, `acc_charcoal`, `acc_graphite`, `acc_medium`) were retained on these definitions so every existing `*alias` keeps resolving; the anchor _definition sites_ simply moved up into 1c. Follows the existing `token-rgb-*` / `token-size-radius-*` convention. `token-neutral-white` is kept deliberately separate from `primary-text-color` (`#e1e1e1`): white = max-contrast emphasis, `#e1e1e1` = body.
+
+### Changed
+
+- **Option A — `#ffffff` consolidated**: 17 standalone `#ffffff` YAML values now alias `*base_white` (`token-neutral-white`). `var(..., #ffffff)` fallbacks and comment references left untouched.
+- **Option B — anchor stragglers**: ~11 literals that duplicated an existing anchor's value (`#000000`, `#0a0a0a`, `#1a1a1a`, `#333333`, `#444444`, `#666666`) swapped to their anchors, eliminating "same colour, two forms" drift.
+- **Option C — new neutral anchors**: repeated-but-unnamed `#151515` (control hover ×3), `#606060` (input outline ×3), and `#050505` (deep panel) given anchors and aliased.
+- **Option D — card-mod de-literalised**: the 5 hard hex literals inside the card-mod blocks (`#333333` scrollbar ×2, `#050505` data-table header, `#ffffff` more-info dialog ×2) now read from the Neutral Ramp via `var(--token-neutral-*, <literal>)`, each keeping its original hex as a fallback. This is the first time a card-mod block references a _theme-defined_ token (previously only native HA tokens), extending the established `token-*`-as-CSS-var pattern.
+
+### Notes
+
+- **Zero visual change intended**: all swaps are value-identical. Guarded by a resolved-value diff (Python anchor resolution) confirming all 307 keys × 11 themes are unchanged except the two card-mod strings. The card-mod `var()` references carry literal fallbacks, so rendering is safe even if a token were ever unset.
+- **Deliberately left as literals**: the 9 `var(--primary-color, #aaaaaa)` fallbacks (inert — primary-color is never unset); one-off singletons (`#1e1e1e`, `#2a2a2a`, `#888888`, `#f5f5f5`, `#222222`, badge and graph hues); and `#e0e0e0` on `ha-color-surface-lower-inverted` (not aliased to the `acc_silver` accent — same hex, different semantic role).
+
+### Docs Updated
+
+- **AGENTS.md**: Documented the Section 1c Neutral Ramp (single-source token/anchor dual mechanism) and its rules under Theme File Architecture; noted that `card-mod` referencing theme-defined `--token-neutral-*` tokens (with literal fallback) is now a sanctioned pattern; added a guardrail that the Section 4b accent-emphasis block and Section 13b lock states are intentional opt-ins (not dead code); corrected the stale YAML-standards block (project `.yamllint` disables `document-start` and `line-length`); bumped the file-size note (~540 → ~600 lines).
+- **docs/DEVELOPMENT.md**: Corrected §1 YAML standards to match `.validate/.yamllint` (no `---`, no line-length limit); added a "Single-Source Neutral Tokens (Neutral Ramp)" subsection under §4 explaining the anchor-vs-keyed-token distinction, why only keyed tokens reach `card-mod`, and the anchor-resolution diff used to verify zero-drift refactors.
+- **README.md**: No content change for the consolidation (internal) or the accent-emphasis opt-in (requires editing the YAML) — neither affects user-facing install/usage docs. Separately fixed a broken anchor link: the "Startup Indicator" heading (line 178) used a VS16 compound emoji (`⏱️` = U+23F1 + U+FE0F), whose invisible variation selector broke the Table/TOC anchor match; swapped to a single-codepoint always-colour emoji (`⏳` U+23F3), per the DEVELOPMENT.md §9 / AGENTS.md §9 convention.
+
+## [1.4.0-dev8] - 2026-07-04 - Unreleased
+
+### Summary
+
+- **Optional accent emphasis**: Added a commented-out, opt-in block (new Section 4b) exposing emphasis-text tokens that can route the accent onto titles/headers — extending the theme's "white carries the body, accent pops on icons/controls" philosophy to text hierarchy. Default rendering is unchanged.
+
+### Added
+
+- **Section 4b — Optional Accent Emphasis (opt-in, all commented out)**: Verified-native tokens users can uncomment to accent emphasis text — `ha-heading-card-title-color` (section/heading-card title, default `--primary-text-color`), `ha-heading-card-subtitle-color` (default `--secondary-text-color`), and `ha-card-header-color` (standard card titles, default `#ffffff`). Each documented with its live default and caveats. The heading-card icon was intentionally omitted — it already inherits the accent via `state-icon-color`.
+
+### Changed
+
+- **Card-header accent hook made live**: The Section 20 `card-mod-card` `.card-header` rule changed from a hard `color: #ffffff !important` to `color: var(--ha-card-header-color, #ffffff) !important`, and `paper-card-header-color` now mirrors the same var-with-fallback. White remains the default; this makes the optional `ha-card-header-color` accent token in Section 4b actually take effect (previously the `!important` would have silently overridden it) across both modern and legacy header paths.
+
+### Notes
+
+- **Re-scoped from dev7**: `ha-heading-card-title-color` was initially set aside as a no-op (its default already resolves to `--primary-text-color`). It now lives in the Section 4b opt-in block set to `var(--primary-color)` — as an accent choice rather than a default, which is where it adds value.
+
+## [1.4.0-dev7] - 2026-07-04 - Unreleased
+
+### Summary
+
+- **LCARS Theme**: Reviewed the ha-lcars theme for useful features, and identified four. All keys added to the `&base_logic` anchor, so every accent variant inherits them.
+
+### Added
+
+- **`markdown-code-text-color`** (`var(--primary-text-color)`): Pairs with the existing `markdown-code-background-color`. Without it, inline-code text fell back to a default that risked low contrast on the `#0a0a0a` code fill.
+- **`code-editor-background-color`** (`#000000`): CodeMirror surface (YAML/automation/template editors) does not follow card backgrounds natively, leaving a lighter panel on pure black.
+- **`disabled-text-color`** (`rgba(155, 155, 155, 0.5)`): Legacy token still driving disabled labels in older component paths that predate `ha-color-on-disabled-normal`. Kept literal to match the existing disabled ink value.
+- **Lock state colors** (new Section 13b): `state-lock-locked-color` → `var(--primary-color)`, `state-lock-unlocked-color` / `-locking-color` / `-unlocking-color` / `-open-color` → `var(--secondary-text-color)`, `state-lock-jammed-color` → `#f44336`. HA defaults these to fixed green/red hues that clash with the monochrome accent scheme; mapped to the theme's own active (accent) / inactive (muted grey) / danger (red) pattern.
+
+### Notes
+
+- **Deliberately skipped**: `state-climate-*-color` (HA's heat=orange/cool=blue conventions aid usability); `table-header-background-color` (verified against HA frontend `dev` — not a real variable, HA never reads it, so it cannot replace the existing data-table-header card-mod which also sets the `#050505` shade and border-bottom).
+
+## [1.4.0-dev6] - 2026-07-04 - Unreleased
+
+### Changed
+
+- **Documentation**: Updated the README to align with the ZTE/Huwaei/WiFI Project README files.
+
+## [1.4.0-dev5] - 2026-07-04 - Unreleased
+
+### Bumps
+
+- **Unused Bumps**: These utilities are not used in the VDB Theme but are used by the shared CI Validation
+  - **Validate Bump**: Update `ruff` to 0.15.20
+  - **Validate Bump**: Bumped `pytest-homeassistant-custom-component` to 0.13.345
+
+## [1.4.0-dev4] - 2026-07-03 - Unreleased
+
+### Bumps
+
+- **Shared .github CI Validation**: Bump .github Shared CI Validation via SHA from v2.0.4 to v2.0.5
+
+## [1.4.0-dev3] - 2026-06-27 - Unreleased
+
+### Summary
+
+- **Screenshots**: First batch of screenshot changes for the README file using the 11 variants and the Theme Test dashboard. A start, needs more work.
+
+### Changed
+
+- **Screenshots**: Changed from one to two theme selection screenshots (so that full selection list could be shown, across the two images). Added the grid of identical entity cards, each with one of the variants applied, sorted in color order. Gives a good sense of the accent colors, but may be basic.
+
+## [1.4.0-dev2] - 2026-06-27 - Unreleased
+
+### Summary
+
+- **All about YAML Lint**: Multiple YAML Lint local validation warns/fails in the ha-dev-pf stub repo highlighted some shortcomings with YAML Lint implementation. Updated to avoid need for "---" at the top of every YAML file, which is a YAML standard, but NOT the HA standard. Also updated to only run on git tracked files (avoids linting devcon files for example).
+
+### Changed
+
+- **YAML Lint**: Added "document-start: disable" to .yamllint rule file, to stop warns/fails for "no --- at document start", which brings it in line with Home Assistant.
+- **YAML Files**: Updated YAML files to remove any "---" document starts added.
+- **Tasks.json**: Updated tasks.json, via hosts-tooling so that YAML-Lint only runs on git tracked files.
+- **Note**: This DOES change the themes/very_dark_black_ha_theme.yaml file, removing the "---" at the start of the file. Non functional, but is a file change.
+
+## [1.4.0-dev1] - 2026-06-26 - Unreleased
+
+### Summary
+
+- **9 → 11 themes**: Added Blue and Emerald as new accent variants. Tweaked Purple → Violet (hex shifted bluer, name changed) and Fuchsia → Pink (hex shifted pinker, name changed). Section B reordered alphabetically. Full hue-spread analysis documented in `docs/color_picks_202606.md`.
+
+### Added
+
+- **Black with Blue**: New Section B theme using the pre-existing `&acc_blue "#2196f3"` anchor (207° hue). The anchor was already defined and used internally for energy dashboard and graph tokens — this change simply exposes it as a selectable theme. Fills the most obvious perceptual gap between Cyan (187°) and Indigo (231°).
+- **Black with Emerald**: New Section B theme using new anchor `&acc_emerald "#059669"` (161° hue). Named "Emerald" rather than "Teal" because the hex sits at 161° (cool green-dominant), whereas "Teal" conventionally implies 170–185°. A Teal candidate at `#0d9488` (173°) was rejected for leaving only a 14° gap to Cyan (187°) — too close to justify a separate picker entry. Emerald at 161° gives Green→Emerald = 39°, Emerald→Cyan = 26°, both acceptable.
+- **`emerald-color: &acc_emerald "#059669"`**: Named color token in Section 1. Also usable as `var(--emerald-color)` in card-mod user CSS.
+- **`violet-color: &acc_violet "#7c3aed"`**: Named color token added to Section 1 with accent anchor. Replaces `acc_purple` as the active accent anchor.
+- **RGB primitives**: `token-rgb-violet: "124, 58, 237"`, `token-rgb-pink: "236, 72, 153"`, `token-rgb-emerald: "5, 150, 105"` added to Section 1b. Expose channel values for `rgba()` opacity variants in card-mod CSS, consistent with the existing RGB primitive set.
+- **`docs/color_picks_202606.md`**: New reference document. Full hue-spread analysis: starting point (9 themes with hue degrees), all options considered, colors explicitly rejected (Yellow/Amber, Teal at 173°, Maroon, Rose/Crimson) with rationale for each, final 11-theme spread table with gap analysis, and a note on the remaining 12th-slot candidate.
+
+### Changed
+
+- **"Black with Purple" → "Black with Violet"**: Renamed. Hex changed `#9c27b0` (291°) → `#7c3aed` (262°). At 291°, Purple was only 9° from Fuchsia (300°) — near-identical in the picker. Shifting to 262° moves it into true violet/blue-violet territory, increases separation from the new Pink (330°) to 68°, and makes the name accurate to the visible color. `acc_purple` anchor retired; replaced by `acc_violet`.
+- **"Black with Fuchsia" → "Black with Pink"**: Renamed. Hex changed `#ff00ff` (300°, pure magenta) → `#ec4899` (330°). After Purple shifted to Violet (262°), the old Fuchsia slot at 300° still read as purple-magenta. Shifting to 330° places it clearly in hot-pink territory and away from Violet (68° gap). `acc_fuchsia` anchor retired; replaced by `acc_pink`. "Pink" is the accurate name for this hex; "Fuchsia" at 330° would be a misnomer.
+- **Backward compatibility**: `purple-color: "#9c27b0"` and `fuchsia-color: "#ff00ff"` are retained in Section 1 as bare named color tokens (no anchors). Users referencing `var(--purple-color)` or `var(--fuchsia-color)` in card-mod CSS are unaffected. The old hex values remain available.
+- **Energy & graph tokens**: `energy-grid-return-color`, `energy-battery-in-color`, and `graph-color-4` updated from `*acc_purple` → `*acc_violet`. These now render in the Violet hex (`#7c3aed`) in the energy dashboard and multi-series graph palette.
+- **Section B ordering**: Reordered to match HA picker alphabetical sort — Blue, Cyan, Emerald, Green, Indigo, Orange, Pink, Red, Silver, Violet. Previously unordered. White (base anchor) remains first in the file as required by YAML anchor-before-alias rules.
+- **Theme metadata header**: `Last Updated` bumped to 2026-06-25.
+- **Theme Test Dashboard**: Updated ui-theme-test.yaml to display the new and changed themes for testing visibility.
+
+### Docs Updated
+
+- **AGENTS.md**: Accent variant list updated to 11 (Blue, Cyan, Emerald, Green, Indigo, Orange, Pink, Red, Silver, Violet, White); line count estimate updated (~480 → ~540); Section B description updated to enumerate all 11 variants and note Orange's red state overrides; Critical Rule 6 added (`card-mod-theme` must exactly match the HA picker name).
+- **README.md**: Features list reordered alphabetically; emoji updated; new entries (Blue 💙, Emerald 💚, Pink 🩷, Violet 🟣) added; Fuchsia/Purple entries removed; "Various sub-themes" updated to "11 sub-themes"; monochrome use-case line extended to mention Violet/Indigo as subtle accent options.
+- **`.notes/proj_structure.md`**: Section B table updated — 8 → 11 variants with hex and hue columns; `color_picks_202606.md` added to docs table; version bumped to v1.0.6.
+
+### Design Rationale (See `docs/color_picks_202606.md` for Full Detail)
+
+- **Yellow/Amber rejected**: Yellow is a standard HA semantic icon color (warning/attention states) — an accent theme in that range creates confusion with HA's own state indicators.
+- **Teal at 173° rejected**: Only 14° from Cyan (187°) — too close to justify a separate theme. Emerald at 161° fills the same gap with better separation.
+- **Maroon rejected**: Contrast ratio ~1.9:1 against black (WCAG AA requires 4.5:1) plus same hue as Red — adds no diversity.
+- **Rose/Crimson rejected**: Only ~15° clearance from both Pink and Red — crowds an already-tight zone with a luminance problem.
+
 ## [1.3.8] - 2026-06-25 - Release
 
 ### Changed
