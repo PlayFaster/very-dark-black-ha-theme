@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.1-dev2] - 2026-07-12 - Unreleased
+
+### Bumps
+
+- **Validate Bump**: Bumped pytest-homeassistant-custom-component from 0.13.345 to 0.13.346
+  - This does NOT impact this VDB Theme project, but as the CI is shared the files come across.
+
+### Changed
+
+- **Formats**: Codespell alignment, words like behavior and color etc.
+
 ## [1.4.1-dev1] - 2026-07-06 - Unreleased
 
 ### Bumps
@@ -18,26 +29,26 @@ All notable changes to this project will be documented in this file.
 
 ### Summary
 
-- Expands the theme from 8 to 11 accent colours — adding Blue and Emerald, and renaming/re-hueing Purple → Violet and Fuchsia → Pink — alongside a large amount of under-the-hood token and structural work.
+- Expands the theme from 8 to 11 accent colors — adding Blue and Emerald, and renaming/re-hueing Purple → Violet and Fuchsia → Pink — alongside a large amount of under-the-hood token and structural work.
 
 ### Added
 
 - **Two new accent variants — Blue and Emerald**, bringing the picker to 11 selectable themes.
-- **Lock entity colours**: lock states now follow the theme's accent/neutral scheme (locked = accent, unlocked/transitional = muted grey, jammed = red) instead of HA's fixed green/red.
-- **Inline code contrast**: inline code text colour is now set for readability on the dark code background.
+- **Lock entity colors**: lock states now follow the theme's accent/neutral scheme (locked = accent, unlocked/transitional = muted grey, jammed = red) instead of HA's fixed green/red.
+- **Inline code contrast**: inline code text color is now set for readability on the dark code background.
 - **Code editor surface**: the YAML/automation/template editor now uses a pure-black background instead of a lighter default panel.
 
 ### Changed
 
 - **"Black with Purple" → "Black with Violet"**: renamed and shifted bluer (`#9c27b0` → `#7c3aed`) for clearer separation in the picker.
 - **"Black with Fuchsia" → "Black with Pink"**: renamed and shifted to true pink (`#ff00ff` → `#ec4899`). Old `var(--purple-color)` / `var(--fuchsia-color)` references remain available for backward compatibility.
-- **Card title/header colour** is now themeable via `ha-card-header-color` (white remains the default).
+- **Card title/header color** is now themeable via `ha-card-header-color` (white remains the default).
 
 ## [1.4.0-dev9] - 2026-07-04 - Unreleased
 
 ### Summary
 
-- **Neutral colour consolidation**: Repeated neutral hex literals (whites, greys, surfaces, borders) were consolidated into a single-source **Neutral Ramp** (new Section 1c). Each canonical neutral is now defined once as a keyed token that doubles as both a CSS custom property (`--token-neutral-*`, reachable from card-mod) and a YAML anchor (parse-time reuse). Purely a refactor — every existing key resolves to its exact previous value; verified by an anchor-resolution diff across all 11 themes (only the two card-mod blocks changed, as intended).
+- **Neutral color consolidation**: Repeated neutral hex literals (whites, greys, surfaces, borders) were consolidated into a single-source **Neutral Ramp** (new Section 1c). Each canonical neutral is now defined once as a keyed token that doubles as both a CSS custom property (`--token-neutral-*`, reachable from card-mod) and a YAML anchor (parse-time reuse). Purely a refactor — every existing key resolves to its exact previous value; verified by an anchor-resolution diff across all 11 themes (only the two card-mod blocks changed, as intended).
 
 ### Added
 
@@ -46,7 +57,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 - **Option A — `#ffffff` consolidated**: 17 standalone `#ffffff` YAML values now alias `*base_white` (`token-neutral-white`). `var(..., #ffffff)` fallbacks and comment references left untouched.
-- **Option B — anchor stragglers**: ~11 literals that duplicated an existing anchor's value (`#000000`, `#0a0a0a`, `#1a1a1a`, `#333333`, `#444444`, `#666666`) swapped to their anchors, eliminating "same colour, two forms" drift.
+- **Option B — anchor stragglers**: ~11 literals that duplicated an existing anchor's value (`#000000`, `#0a0a0a`, `#1a1a1a`, `#333333`, `#444444`, `#666666`) swapped to their anchors, eliminating "same color, two forms" drift.
 - **Option C — new neutral anchors**: repeated-but-unnamed `#151515` (control hover ×3), `#606060` (input outline ×3), and `#050505` (deep panel) given anchors and aliased.
 - **Option D — card-mod de-literalised**: the 5 hard hex literals inside the card-mod blocks (`#333333` scrollbar ×2, `#050505` data-table header, `#ffffff` more-info dialog ×2) now read from the Neutral Ramp via `var(--token-neutral-*, <literal>)`, each keeping its original hex as a fallback. This is the first time a card-mod block references a _theme-defined_ token (previously only native HA tokens), extending the established `token-*`-as-CSS-var pattern.
 
@@ -59,7 +70,7 @@ All notable changes to this project will be documented in this file.
 
 - **AGENTS.md**: Documented the Section 1c Neutral Ramp (single-source token/anchor dual mechanism) and its rules under Theme File Architecture; noted that `card-mod` referencing theme-defined `--token-neutral-*` tokens (with literal fallback) is now a sanctioned pattern; added a guardrail that the Section 4b accent-emphasis block and Section 13b lock states are intentional opt-ins (not dead code); corrected the stale YAML-standards block (project `.yamllint` disables `document-start` and `line-length`); bumped the file-size note (~540 → ~600 lines).
 - **docs/DEVELOPMENT.md**: Corrected §1 YAML standards to match `.validate/.yamllint` (no `---`, no line-length limit); added a "Single-Source Neutral Tokens (Neutral Ramp)" subsection under §4 explaining the anchor-vs-keyed-token distinction, why only keyed tokens reach `card-mod`, and the anchor-resolution diff used to verify zero-drift refactors.
-- **README.md**: No content change for the consolidation (internal) or the accent-emphasis opt-in (requires editing the YAML) — neither affects user-facing install/usage docs. Separately fixed a broken anchor link: the "Startup Indicator" heading (line 178) used a VS16 compound emoji (`⏱️` = U+23F1 + U+FE0F), whose invisible variation selector broke the Table/TOC anchor match; swapped to a single-codepoint always-colour emoji (`⏳` U+23F3), per the DEVELOPMENT.md §9 / AGENTS.md §9 convention.
+- **README.md**: No content change for the consolidation (internal) or the accent-emphasis opt-in (requires editing the YAML) — neither affects user-facing install/usage docs. Separately fixed a broken anchor link: the "Startup Indicator" heading (line 178) used a VS16 compound emoji (`⏱️` = U+23F1 + U+FE0F), whose invisible variation selector broke the Table/TOC anchor match; swapped to a single-codepoint always-color emoji (`⏳` U+23F3), per the DEVELOPMENT.md §9 / AGENTS.md §9 convention.
 
 ## [1.4.0-dev8] - 2026-07-04 - Unreleased
 
@@ -414,7 +425,7 @@ Full investigation documented in `.notes/issues/base_theme_issues/`. The origina
 
 ### Added
 
-- **HA 2026.6 Web Awesome Radio Tokens**: Added `ha-radio-option-active-color`, `ha-radio-option-border-color`, `ha-radio-option-border-color-hover`, `ha-radio-option-border-width`, `ha-radio-option-background-color`, `ha-radio-option-background-color-hover`, `ha-radio-option-checked-background-color`, and `ha-radio-option-checked-icon-color` to Section A (`base_logic`). Styled consistently with the existing `ha-checkbox-*` pattern (matching border colours, hover fills, and checked accent). Covers the new Web Awesome `ha-radio-group` / `ha-radio-option` component that replaces `ha-radio` in HA 2026.6. Sizing tokens (`ha-radio-option-height`, `toggle-size`, `checked-icon-scale`, `control-margin`, required-marker tokens) are intentionally omitted — the theme does not override equivalent checkbox sizing.
+- **HA 2026.6 Web Awesome Radio Tokens**: Added `ha-radio-option-active-color`, `ha-radio-option-border-color`, `ha-radio-option-border-color-hover`, `ha-radio-option-border-width`, `ha-radio-option-background-color`, `ha-radio-option-background-color-hover`, `ha-radio-option-checked-background-color`, and `ha-radio-option-checked-icon-color` to Section A (`base_logic`). Styled consistently with the existing `ha-checkbox-*` pattern (matching border colors, hover fills, and checked accent). Covers the new Web Awesome `ha-radio-group` / `ha-radio-option` component that replaces `ha-radio` in HA 2026.6. Sizing tokens (`ha-radio-option-height`, `toggle-size`, `checked-icon-scale`, `control-margin`, required-marker tokens) are intentionally omitted — the theme does not override equivalent checkbox sizing.
 - **Reference Doc**: Created `docs/change_ref_ha_v2026_6.md` documenting HA 2026.6 frontend changes: radio component migration, omitted sizing tokens, layout-width token renames (`ha-sidebar-width`, `ha-top-app-bar-width` — no action needed for this theme), removed/migrated components, and backward compatibility rationale.
 
 ## [1.3.5-dev2] - 2026-06-04 - Unreleased
@@ -427,7 +438,7 @@ Full investigation documented in `.notes/issues/base_theme_issues/`. The origina
 
 ### Changed
 
-- **README**: Added `## 💡 Use Cases` section with 5 practical scenarios (OLED displays, monochrome setup, color-coded views, automated switching, custom card pairing); expanded FAQ & Troubleshooting from 2 to 5 entries — added "Theme does not appear in picker", "card-mod CSS features not working", and "Specific elements un-styled after HA update"; expanded Under the Hood section description to summarise the dev reference contents.
+- **README**: Added `## 💡 Use Cases` section with 5 practical scenarios (OLED displays, monochrome setup, color-coded views, automated switching, custom card pairing); expanded FAQ & Troubleshooting from 2 to 5 entries — added "Theme does not appear in picker", "card-mod CSS features not working", and "Specific elements un-styled after HA update"; expanded Under the Hood section description to summarize the dev reference contents.
 - **CI Validation** (`.github/workflows/validate.yaml`): Added `concurrency` block to cancel in-progress duplicate runs; added `permissions: contents: read` at workflow level; added `persist-credentials: false` to all checkout steps; pinned all action refs from floating tags to full SHA hashes; added Codespell job (Job 4); added Zizmor workflow security audit job (Job 5, `continue-on-error: true`); added Prettier Format Check step to `lint_val` job.
 - **Local Validation** (`.vscode/tasks.json`): Removed inapplicable `HA: Verify Manifest` task (theme has no `manifest.json`); added `Zizmor: GitHub Actions Audit` and `Zizmor: Fix (Safe Auto-Fix)` tasks; updated `Validate All` sequence to include Zizmor and remove the manifest task. **DevCon**: Updates to the DevCon setup, to standardize with other projects, esp. on mapping shared folders.
 

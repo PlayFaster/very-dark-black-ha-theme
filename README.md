@@ -87,7 +87,7 @@ The theme is fully usable from HA 2022.11 onwards. Newer versions have additiona
 
 - **Color-coded views and sections** — Apply different accent colors to individual dashboard **views** (full screen) or **sections** (part of the screen) to visually separate areas of your home at a glance — for example, Cyan for climate, Orange for lighting, Red for security. See [Apply to Individual Dashboard Views or Sections](#apply-to-individual-dashboard-views-or-sections).
 - **Automated theme switching** — Use the startup automation pattern in the [Automate Theme Changes](#-automations-for-theme-changes) section to switch accent colors based on time of day or presence.
-- **Startup indicator** — Set **Orange** (or any accent) at boot so every glance at the dashboard confirms Home Assistant is still initialising. An automation switches back to your normal theme after two minutes once startup is complete. See [Automate Theme Changes](#-automations-for-theme-changes).
+- **Startup indicator** — Set **Orange** (or any accent) at boot so every glance at the dashboard confirms Home Assistant is still initializing. An automation switches back to your normal theme after two minutes once startup is complete. See [Automate Theme Changes](#-automations-for-theme-changes).
 - **Visual alert highlight** — Trigger **Red** automatically when an alert condition fires (motion, smoke, door contact, etc.) so the entire UI signals the alert state at a glance. Restore your normal theme when the condition clears. See [Automate Theme Changes](#-automations-for-theme-changes).
 - **Minimal monochrome setup** — Choose **Silver** or **White** for a clean, color-neutral control panel that stays out of the way. **Violet** or **Indigo** work well for a subtle accent that reads neutral rather than bold.
 - **OLED and power-saving displays** — Pure black backgrounds draw no power on OLED panels, making this ideal for wall-mounted tablets or phones used as HA dashboards.
@@ -146,7 +146,7 @@ You can use a Home Assistant automation to change the system theme at startup, o
 | Scenario | Trigger | Jump to |
 | :-- | :-- | :-- |
 | Set a theme every time HA starts | HA startup | [Set Theme at Startup](#-set-theme-at-startup) |
-| Signal initialising, then restore your normal theme | HA startup + 2 min delay | [Startup Indicator](#-startup-indicator-with-delayed-restore) |
+| Signal initializing, then restore your normal theme | HA startup + 2 min delay | [Startup Indicator](#-startup-indicator-with-delayed-restore) |
 | Switch to Red on an alert, restore when it clears | Entity state on / off | [Visual Alert](#-visual-alert-theme) |
 
 ### 🔧 Setup Requirements
@@ -177,7 +177,7 @@ mode: single
 
 ### ⏳ Startup Indicator with Delayed Restore
 
-Example automation for a **startup indicator** that signals Home Assistant is initialising, then switches back to your normal theme after 2 minutes:
+Example automation for a **startup indicator** that signals Home Assistant is initializing, then switches back to your normal theme after 2 minutes:
 
 ```yaml
 alias: Startup Indicator - Theme

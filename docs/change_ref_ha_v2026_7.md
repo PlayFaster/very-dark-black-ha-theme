@@ -2,7 +2,7 @@
 
 ## From the [HA Developers Blog](https://developers.home-assistant.io/blog/2026/06/23/frontend-component-updates-2026.7/)
 
-In the **Home Assistant 2026.7.0** release (June 2026), the changes are infrastructure and component-behaviour focused rather than CSS-token focused. No new CSS custom properties were introduced, no existing tokens were renamed or deprecated, and no theme YAML changes are required.
+In the **Home Assistant 2026.7.0** release (June 2026), the changes are infrastructure and component-behavior focused rather than CSS-token focused. No new CSS custom properties were introduced, no existing tokens were renamed or deprecated, and no theme YAML changes are required.
 
 ---
 

@@ -46,12 +46,12 @@ Dark themes often suffer from "White-on-White" text issues or "Dead Flat" backgr
 
 ### Single-Source Neutral Tokens (the "Neutral Ramp")
 
-Repeated neutral colours (whites, greys, surfaces, borders) should be defined **once** and referenced everywhere else, never re-typed as literals. This theme collects them in a **Neutral Ramp** (Section 1c) where each `token-neutral-*` key is a single source that works through **both** reuse mechanisms at once:
+Repeated neutral colors (whites, greys, surfaces, borders) should be defined **once** and referenced everywhere else, never re-typed as literals. This theme collects them in a **Neutral Ramp** (Section 1c) where each `token-neutral-*` key is a single source that works through **both** reuse mechanisms at once:
 
 - **YAML anchor** (`&base_white`, `&acc_charcoal`, …) — parse-time reuse. Alias it (`*base_white`) in ordinary YAML values. Invisible to CSS.
 - **Keyed token** — because every theme key auto-registers as a CSS custom property, the same definition is reachable as `var(--token-neutral-white)`, **including inside `card-mod` blocks**.
 
-This is the key distinction: a YAML anchor **cannot** be referenced from a `card-mod` CSS string (anchors are resolved at YAML parse time, before any CSS exists). Only a keyed token becomes a `--custom-property` that `card-mod` can read. So to feed a colour into `card-mod` from a single source, it must be a token key, not merely an anchor. Pattern (always keep the literal fallback):
+This is the key distinction: a YAML anchor **cannot** be referenced from a `card-mod` CSS string (anchors are resolved at YAML parse time, before any CSS exists). Only a keyed token becomes a `--custom-property` that `card-mod` can read. So to feed a color into `card-mod` from a single source, it must be a token key, not merely an anchor. Pattern (always keep the literal fallback):
 
 ```yaml
 # Section 1c — one definition, two reuse paths
@@ -67,7 +67,7 @@ card-mod-card: |
 
 **Guidelines:**
 
-- Add a new repeated neutral to Section 1c; do not scatter its hex. One-off colours (used once) stay inline — anchoring them adds indirection with no dedupe benefit.
+- Add a new repeated neutral to Section 1c; do not scatter its hex. One-off colors (used once) stay inline — anchoring them adds indirection with no dedupe benefit.
 - Keep `token-neutral-white` (`#ffffff`, max-contrast emphasis: icons, input ink, dialog headings) separate from `primary-text-color` (`#e1e1e1`, body text). Same "whiteness", different roles.
 - Leave inert `var(--primary-color, #aaaaaa)` fallbacks as literals — they only render if `--primary-color` is unset (never, except conceptually on the base theme), so they are not drift.
 - Mirrors the pre-existing `token-rgb-*` and `token-size-radius-*` conventions — the ramp is the same idea applied to neutrals.
@@ -106,7 +106,7 @@ The component's internal CSS provides a concrete fallback value independent of t
 
 The component's internal CSS defaults to `var(--primary-color)` or another theme token, e.g. `background: var(--new-token, var(--primary-color))`. For accent themes this works correctly. For the base theme (`Black with White`), `--primary-color` is unset → `transparent` → the element becomes invisible. Approach: **mandatory and proactive** — add to the base anchor immediately using `var(--primary-color, #aaaaaa)` as the value. Do not wait for a visible problem; on the base theme the failure is invisible by definition.
 
-To determine which category: inspect the component's shadow DOM `adoptedStyleSheets` in DevTools (or run the `theme_review.md` Playwright script). Look at what the internal CSS fallback resolves to — a hardcoded colour (Category A) or a `var(--primary-color)` chain (Category B).
+To determine which category: inspect the component's shadow DOM `adoptedStyleSheets` in DevTools (or run the `theme_review.md` Playwright script). Look at what the internal CSS fallback resolves to — a hardcoded color (Category A) or a `var(--primary-color)` chain (Category B).
 
 **Important:** the `:host` re-declaration trap. Some components set their own token internally via a `:host` CSS rule, e.g. `:host { --control-switch-on-color: var(--primary-color) }`. This overrides any inherited value — an external `control-switch-on-color` set by the theme is ignored. For these components, the only path is through `--primary-color` itself. Since adding `primary-color` to the base anchor causes duplicate key warnings (an absolute constraint), such components cannot be fixed for `Black with White`. Document them as permanent known limitations of that theme.
 
@@ -204,9 +204,9 @@ Unlike every other template integration type (`sensor`, `binary_sensor`, `select
 
 ## 9. Documentation & README Conventions
 
-### Emoji in Headings — Always-Colour Single-Codepoint Only
+### Emoji in Headings — Always-Color Single-Codepoint Only
 
-When writing or editing the README, always use **always-colour single-codepoint emoji** in headings and Table of Contents links. Never use VS16 compound emoji (e.g., `⚙️`, `🏗️`, `⚠️`, `🗑️`).
+When writing or editing the README, always use **always-color single-codepoint emoji** in headings and Table of Contents links. Never use VS16 compound emoji (e.g., `⚙️`, `🏗️`, `⚠️`, `🗑️`).
 
 **Why**: VS16 (U+FE0F, Variation Selector-16) is an invisible byte that forces emoji rendering. GitHub's anchor generator strips it when computing heading anchors, but Markdown tooling includes it in `href` values — causing Table of Contents links to 404. The problem is completely invisible in source editors.
 

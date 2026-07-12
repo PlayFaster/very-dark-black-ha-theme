@@ -114,7 +114,7 @@ Black with White: &base_logic # --- 1. Named Colors (Defined first for alias saf
   # Theme philosophy: white/near-white text carries the body; the accent
   # (primary-color) pops on icons and active controls only. The tokens below
   # extend that pop to EMPHASIS TEXT (titles/headers). All are commented out so
-  # default behaviour is unchanged — uncomment individually to taste. Each is a
+  # default behavior is unchanged — uncomment individually to taste. Each is a
   # real HA native token verified against the frontend `dev` branch; the fallback
   # shown in the comment is what HA uses today when the token is unset.
   #

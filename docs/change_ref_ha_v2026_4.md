@@ -12,7 +12,7 @@ In 2026.4, Home Assistant introduced new **semantic theme variables** for form e
 
 The following variables were introduced/updated this week:
 
-- `--ha-color-form-background`: Now defaults to a light/neutral grey (`var(--ha-color-neutral-95)`). mayneed to force this to black.
+- `--ha-color-form-background`: Now defaults to a light/neutral grey (`var(--ha-color-neutral-95)`). May need to force this to black.
 - `--ha-color-form-background-hover`: Controls the "highlight" when you hover over the collapsed dropdown.
 - `--ha-color-form-background-disabled`: The state when a dropdown cannot be clicked.
 
