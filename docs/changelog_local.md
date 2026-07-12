@@ -1,6 +1,12 @@
-# Changelog
+# Internal Detailed Changelog: Very Dark Black Home Assistant Theme
 
 All notable changes to this project will be documented in this file.
+
+## [1.4.1-dev3] - 2026-07-12 - Unreleased
+
+### Changed
+
+- **Docs Formats**: Codespell alignment, words like behavior and color etc.
 
 ## [1.4.1-dev2] - 2026-07-12 - Unreleased
 
