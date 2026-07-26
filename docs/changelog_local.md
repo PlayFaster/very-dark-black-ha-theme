@@ -1,6 +1,24 @@
 # Internal Detailed Changelog: Very Dark Black Home Assistant Theme
 
-All notable changes to this project will be documented in this file.
+All changes to this project will be documented in this file. This is the detailed changelog, to include non user facing changes and intra-release changes.
+
+---
+
+## [1.4.1-dev4] - 2026-07-26 - Unreleased
+
+### Changed
+
+- **Logo**: Added a logo to the top of `README` file. Themes in HA don't have icons or logos, unlike integrations. This is just for branding and visibility in the `README`.
+- **Readme**: Updated the readme with collapseable sections, similar to other PlayFaster README files.
+- **AGents**: Updated AGENTS.md to sync with Readme and in-line with current theme behavior.
+
+### Bumps
+
+- **Shared .github CI Validation**: Bump .github Shared CI Validation via SHA from v2.0.5 to v2.0.6
+- **Validate Bump**: Update `codespell`from 2.42 to 2.43
+- These do NOT affect this project but are part of Shared CI.
+  - **Validate Bump**: Bumped PHACC `pytest-homeassistant-custom-component` from 0.13.346 to 0.13.348
+  - **Validate Bump**: Update `ruff`from 0.15.20 to 0.15.21
 
 ## [1.4.1-dev3] - 2026-07-12 - Unreleased
 
@@ -12,8 +30,8 @@ All notable changes to this project will be documented in this file.
 
 ### Bumps
 
-- **Validate Bump**: Bumped pytest-homeassistant-custom-component from 0.13.345 to 0.13.346
-  - This does NOT impact this VDB Theme project, but as the CI is shared the files come across.
+- These do NOT affect this project but are part of Shared CI.
+  - **Validate Bump**: Bumped PHACC `pytest-homeassistant-custom-component` from 0.13.345 to 0.13.346
 
 ### Changed
 
@@ -65,7 +83,7 @@ All notable changes to this project will be documented in this file.
 - **Option A — `#ffffff` consolidated**: 17 standalone `#ffffff` YAML values now alias `*base_white` (`token-neutral-white`). `var(..., #ffffff)` fallbacks and comment references left untouched.
 - **Option B — anchor stragglers**: ~11 literals that duplicated an existing anchor's value (`#000000`, `#0a0a0a`, `#1a1a1a`, `#333333`, `#444444`, `#666666`) swapped to their anchors, eliminating "same color, two forms" drift.
 - **Option C — new neutral anchors**: repeated-but-unnamed `#151515` (control hover ×3), `#606060` (input outline ×3), and `#050505` (deep panel) given anchors and aliased.
-- **Option D — card-mod de-literalised**: the 5 hard hex literals inside the card-mod blocks (`#333333` scrollbar ×2, `#050505` data-table header, `#ffffff` more-info dialog ×2) now read from the Neutral Ramp via `var(--token-neutral-*, <literal>)`, each keeping its original hex as a fallback. This is the first time a card-mod block references a _theme-defined_ token (previously only native HA tokens), extending the established `token-*`-as-CSS-var pattern.
+- **Option D — card-mod de-literalized**: the 5 hard hex literals inside the card-mod blocks (`#333333` scrollbar ×2, `#050505` data-table header, `#ffffff` more-info dialog ×2) now read from the Neutral Ramp via `var(--token-neutral-*, <literal>)`, each keeping its original hex as a fallback. This is the first time a card-mod block references a _theme-defined_ token (previously only native HA tokens), extending the established `token-*`-as-CSS-var pattern.
 
 ### Notes
 
@@ -474,7 +492,7 @@ Full investigation documented in `.notes/issues/base_theme_issues/`. The origina
 
 ### Changed
 
-- **DevCon Improvements**: Changes to the devcontainer for better symmlinked folder mapping and additional checks (prettier) in tasks.json.
+- **DevCon Improvements**: Changes to the devcontainer for better symm-linked folder mapping and additional checks (prettier) in tasks.json.
 
 ## [1.3.3] - 2026-05-02
 

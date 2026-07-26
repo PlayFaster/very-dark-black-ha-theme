@@ -16,6 +16,9 @@ docs/DEVELOPMENT.md                           ← Critical dev reference: pitfal
 docs/change_ref_ha_v2026_4.md                 ← HA 2026.4 frontend migration notes
 docs/change_ref_ha_v2026_5.md                 ← HA 2026.5 Web Awesome component notes
 docs/change_ref_ha_v2026_6.md                 ← HA 2026.6 Web Awesome radio component notes
+docs/change_ref_ha_v2026_7.md                 ← HA 2026.7 — component behaviour only, no token changes
+docs/color_picks_202606.md                    ← Accent colour selection rationale
+docs/changelog_local.md                       ← Working changelog notes
 hacs.json                                     ← HACS metadata
 .ha/                                          ← GIT-TRACKED devcontainer config files
   mock_package.yaml                           ←   Mock entities (multi-domain HA package)
@@ -54,23 +57,23 @@ Python-specific tasks (`Ruff`, `Mypy`, `Pytest`, `Pre-commit`) are present in th
 
 ### Running tools directly inside the devcontainer
 
-For one-off commands, use `docker exec` from the Windows host:
+Agents run on the Windows host and reach the container via `docker exec` — the full workflow, the `.devcontainer/.env` identity lookup, and the Git Bash path-mangling trap are in [shared conventions §1](.shared/dev_std/agent_conventions.md). Theme-flavoured examples:
 
 ```bash
-# Confirm the container is up first
-docker ps --filter "name=<CONTAINER_NAME>" --format "{{.Names}}"
-
-# Run a tool inside the container (-w sets the in-container working dir)
 docker exec -w /workspaces/<PROJECT_DIR> <CONTAINER_NAME> bash -c "codespell ."
 docker exec -w /workspaces/<PROJECT_DIR> <CONTAINER_NAME> bash -c "yamllint -c .validate/.yamllint themes/"
 ```
 
-## Theme File Architecture (3-Section YAML)
+Note that §2 of that file (pytest, ruff, mypy, pre-commit) does **not** apply here — this project has no Python source and no tests.
 
-The single theme file uses YAML anchors/aliases to avoid duplication. The structure is strictly ordered — anchors must be defined before they are referenced:
+## Theme File Architecture (2-Section YAML)
 
-- **Base theme — `Black with White` (`&base_logic`)**: All shared tokens: backgrounds, card surfaces, dialogs, borders, dividers, typography, icons, inputs, color scales, energy/graph colors, named colors (`red-color`, `cyan-color`, etc.), and the global `card-mod-card` CSS block. This mapping IS the `&base_logic` anchor. It is also a usable no-accent variant (white text and icons, HA semantic state colors, no `primary-color`).
-- **Section B — Individual variants**: Each accent theme (e.g., `Black with Cyan`) extends the base via `<<: *base_logic` and only adds `primary-color`, `state-active-color`, and `card-mod-theme`. Eleven variants: Blue, Cyan, Emerald, Green, Indigo, Orange, Pink, Red, Silver, Violet. Orange additionally overrides `state-switch-active-color`, `state-plug-active-color`, and `state-binary_sensor-active-color` to Red (to avoid yellow-adjacent active states).
+The single theme file uses YAML anchors/aliases to avoid duplication. The structure is strictly ordered — anchors must be defined before they are referenced. There are **two** top-level sections:
+
+- **Base theme — `Black with White` (`&base_logic`)**: All shared tokens: backgrounds, card surfaces, dialogs, borders, dividers, typography, icons, inputs, color scales, energy/graph colors, named colors (`red-color`, `cyan-color`, etc.), and the global `card-mod-card` CSS block. This mapping IS the `&base_logic` anchor. It is also a usable no-accent variant (white text and icons, HA semantic state colors, no `primary-color`). Internally it is organized into numbered subsections 1–20 (`# --- 1. Named Colors ---` … `# --- 20. Global Card-Mod ---`), including the 1b/1c/4b/13b lettered inserts referenced elsewhere in this file.
+- **Section B — Individual variants**: Each accent theme (e.g., `Black with Cyan`) extends the base via `<<: *base_logic` and only adds `primary-color`, `state-active-color`, and `card-mod-theme`. **Ten** variants, alphabetical to match the HA picker sort: Blue, Cyan, Emerald, Green, Indigo, Orange, Pink, Red, Silver, Violet. Orange additionally overrides `state-switch-active-color`, `state-plug-active-color`, and `state-binary_sensor-active-color` to Red (to avoid yellow-adjacent active states).
+
+Counting note: **ten** Section B variants, but **eleven** entries in the HA picker — the base anchor `Black with White` is itself a named theme and therefore appears alongside them. The README's "11 sub-themes" is the picker count and is correct; do not reconcile the two numbers by changing either.
 
 ### Neutral Ramp — single source for repeated neutrals (Section 1c)
 
@@ -151,7 +154,7 @@ Avoid deep shadow-DOM selectors (e.g., `ha-card-picker $ ha-sub-page`) — they 
 
 HA is migrating from `paper-` / `mdc-` variables to **Web Awesome** (Shoelace/Lit) and **Material 3** tokens. When a UI element appears unstyled after an HA update, the likely cause is a renamed or new token. Reference themes used for comparison: [`Frosted Glass`](https://github.com/wessamlauf/homeassistant-frosted-glass-themes) and [`Graphite`](https://github.com/TilmanGriesel/graphite).
 
-Token hierarchy for icons (define in each Section C variant for per-accent matching):
+Token hierarchy for icons — all three are defined **once in the base anchor** (Section 4, around lines 96–98) as `var(--primary-color)`, so each variant picks up its own accent through the merge. Do **not** redefine them per variant: there is no "Section C", and duplicating a base key into a Section B variant violates Critical Rule 4 and makes HA log a duplicate-key warning for every theme in the file.
 
 - `paper-item-icon-color` — legacy/standard icon color
 - `state-icon-color` — neutral/inactive icon state
@@ -171,11 +174,13 @@ See `docs/DEVELOPMENT.md` Section 5 for full detail and examples.
 
 The project uses a VS Code devcontainer running a live Home Assistant instance for manual theme testing. The container image is `ha-dev-base:latest`. Theme changes take effect immediately without restarting HA — reload via `Developer Tools → YAML → Reload Themes` or the `frontend.reload_themes` service call.
 
-### MCP Access (ha-mcp-dev)
+### Interrogating the running HA instance
 
-When the devcontainer is running, the `ha-mcp-dev` MCP server automatically connects to the HA instance inside it (`http://localhost:8123`). Use it to verify theme changes without leaving the editor.
+Use **HAB → MCP → Script**, in that order — the full protocol (the host-side `hab` executable, its per-project credential trap, the availability pre-flight) is in [shared conventions §3](.shared/dev_std/agent_conventions.md). For this project the common needs are reading theme state and forcing a reload; both work over any of the three.
 
 **After any modification, follow the post-modification process** — see [`.shared/prompts/post_mod_process.md`](.shared/prompts/post_mod_process.md). Specify a `SCOPE` when invoking it. Python-specific steps (mypy, pytest, pre-commit, ruff) skip automatically — `project.category = theme` guards them in the shared task definitions.
+
+The SCOPE table below is **theme-specific** and replaces the integration table in the shared conventions file — the `Full` and `Complete` rows differ because there is nothing Python to run.
 
 | SCOPE      | What runs                                                              |
 | :--------- | :--------------------------------------------------------------------- |
@@ -190,9 +195,9 @@ For rapid visual iteration between restarts, trigger a theme reload without rest
 
 ### Skill Prompts
 
-See `.shared/prompts/devcon_run_gen.md` for the mini-skill for running arbitrary commands inside this devcontainer from the Windows host. Container identity values (`CONTAINER_NAME`, `PROJECT_DIR`) are in `.devcontainer/.env`.
+The shared prompt catalogue is listed in [shared conventions §3](.shared/dev_std/agent_conventions.md) — `devcon_run_gen.md` for arbitrary commands inside the devcontainer, `post_mod_process.md` for the SCOPE-driven validation pass. Container identity values (`CONTAINER_NAME`, `PROJECT_DIR`) are in `.devcontainer/.env`.
 
-See `.shared/prompts/theme_review.md` for the theme token drift review guide. Use it when an HA update is suspected to have renamed or removed tokens. It provides a Playwright-based workflow for inspecting component shadow DOMs, reading `adoptedStyleSheets`, and cross-referencing against the theme YAML to detect invalid `var()` chains, dead tokens, and missing Category B overrides.
+One prompt is specific to this project: `.shared/prompts/theme_review.md`, the theme token drift review guide. Use it when an HA update is suspected to have renamed or removed tokens. It provides a Playwright-based workflow for inspecting component shadow DOMs, reading `adoptedStyleSheets`, and cross-referencing against the theme YAML to detect invalid `var()` chains, dead tokens, and missing Category B overrides.
 
 ## README Known Decisions
 
@@ -202,3 +207,9 @@ These are deliberate choices in `README.md`. Do not raise findings against them 
 - **`Black with White` in picker** — `Black with White` appearing in the picker alongside the accent variants is a structural consequence of HA's theme architecture (the base anchor must be a named theme entry). It is intentionally treated as a usable no-accent variant, not flagged as an error or infrastructure artifact. Do not flag its presence or description as a limitation finding.
 - **Automate Theme Changes navigation table** — the scenario/trigger/jump-to table in the Automate Theme Changes section is intentional structure. Do not flag it as redundant or suggest removing it.
 - **card-mod documentation — deliberately omitted** — the theme lists card-mod as optional but includes no limitations section, no visual comparison, and no "without card-mod" caveats. This is intentional: the visual difference on modern HA is not perceptible. Do not flag the absence of card-mod limitation content as a missing information finding (2a), and do not flag any card-mod-adjacent wording as suggesting features are "inactive" or broken without it.
+
+## Shared Conventions
+
+Markdown rules (the single-codepoint emoji ban for headings), temporary-file placement, the no-nuclear-restart rule, and progress reporting are centralized — see [`.shared/dev_std/agent_conventions.md`](.shared/dev_std/agent_conventions.md) §5–7. Sections 1–4 of that file are integration-specific; only §1 (`docker exec`) and §3 (HA interrogation) apply here, and the Python tooling in §2 and §4 does not.
+
+The emoji rule matters for this project in particular: `README.md` uses emoji in almost every heading.
