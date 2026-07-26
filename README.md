@@ -16,7 +16,6 @@ A Home Assistant dark mode theme that provides black or very dark backgrounds wh
 >
 > **Is this the right theme for you?**
 >
-> - If you want a very dark black theme, with black backgrounds everywhere and a choice of accent colors, then **yes**.
 > - **This theme is for you if** you want:
 >   - **Black Backgrounds Everywhere** — Pure black background applied everywhere possible.
 >   - **A Clean Plain Look** — Black, white and an accent color are what you get on most views.
@@ -31,7 +30,7 @@ A Home Assistant dark mode theme that provides black or very dark backgrounds wh
   - [🔧 Compatibility \& Requirements](#-compatibility--requirements)
   - [🎯 Use Cases](#-use-cases)
   - [📥 Installation](#-installation)
-  - [✨ Apply Theme](#-apply-theme)
+  - [🪄 Apply Theme](#-apply-theme)
   - [💡 Automations for Theme Changes](#-automations-for-theme-changes)
   - [🔩 Under the Hood - Technical Architecture](#-under-the-hood---technical-architecture)
   - [❓ FAQ \& Troubleshooting](#-faq--troubleshooting)
@@ -43,9 +42,9 @@ A Home Assistant dark mode theme that provides black or very dark backgrounds wh
 
 ## ✅ Features
 
-This is a simple theme focused on providing a very dark mode look. It's designed to be clean and simple, with a choice of primary colors.
+This is a straightforward theme focused on providing a very dark mode look. It's designed to be clean and simple, with a choice of primary colors.
 
-- **Black Backgrounds**: Black background applied everywhere.
+- **Black Backgrounds**: Black background applied everywhere possible.
 - **Accent Color Choice**: 11 sub-themes with different accent colors.
   - 💙 Blue
   - 🔵 Cyan
@@ -94,7 +93,7 @@ The theme is fully usable from HA 2022.11 onwards. Newer versions have additiona
 
 - **2022.11+** — Core dark backgrounds, cards, sidebar, and text
 - **2025.1+** — Inputs, dialogs, and modern card layouts
-- **2026.4+** — Dynamic HSL color scales
+- **2026.4+** — Dynamic HSL color scales (2024 or later: Chrome/Edge 119+, Safari 16.4+, Firefox 128+; on older browsers only these scales fall back, the theme is otherwise unaffected)
 - **2026.5+** — More Web Awesome tokens for `ha-switch`, `ha-checkbox` and `ha-progress-bar`.
 - **2026.6+** — Web Awesome radio button tokens for `ha-radio-group` and `ha-radio-option`.
 
@@ -118,6 +117,10 @@ The theme is fully usable from HA 2022.11 onwards. Newer versions have additiona
 
 ## 📥 Installation
 
+> [!NOTE]
+>
+> **Do the prerequisites first.** If you need to add the `frontend:` block below to `configuration.yaml`, add it and restart Home Assistant **before** downloading the theme — a `frontend.reload_themes` call will not pick up a `configuration.yaml` change, and the theme will not appear in the picker.
+
 ### Prerequisites: Enable themes and install card-mod
 
 1. [_Optional_ but recommended] Install `card-mod` via [HACS](https://hacs.xyz/) or per the instructions on its [GitHub page](https://github.com/thomasloven/lovelace-card-mod "card-mod").
@@ -133,7 +136,7 @@ frontend:
 
 [![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=PlayFaster&repository=very-dark-black-ha-theme&category=theme)
 
-Use the **shortcut badge** above, then click **Download** - or just …
+Use the **shortcut badge** above, then click **Download** — or just …
 
 1. Open HACS in Home Assistant and search for **Very Dark Black HA Theme**
 2. Click into _Very Dark Black HA Theme_ and then Click **Download** (bottom right)
@@ -141,8 +144,8 @@ Use the **shortcut badge** above, then click **Download** - or just …
 
 ### 💾 Manual Installation
 
-1. Under the Home Assistant `config` folder, create a new folder named `themes`.
-2. Copy the theme YAML file into it.
+1. Under the Home Assistant `config` folder, create a new folder named `themes` (if it does not already exist).
+2. Download `very_dark_black_ha_theme.yaml` from the [latest release](https://github.com/PlayFaster/very-dark-black-ha-theme/releases) and copy it directly into that folder — not into a sub-folder.
 3. Run the `frontend.reload_themes` action (Restart Home Assistant if `configuration.yaml` changes were made).
 
 ### 🔄 Updating
@@ -163,7 +166,7 @@ Standard HACS Theme update behavior:
 </details>
 <br>
 
-## ✨ Apply Theme
+## 🪄 Apply Theme
 
 ### Manual Control
 
@@ -319,7 +322,7 @@ Replace `binary_sensor.your_alert_sensor` with any entity that signals your aler
 
 ## 🔩 Under the Hood - Technical Architecture
 
-For technical details on the YAML standards, logic, and various display element tokens used in this theme, see the [Development Reference](docs/DEVELOPMENT.md). It covers the 3-section YAML anchor structure used to share tokens across accent variants without duplication, the full list of HA display element tokens targeted, card-mod CSS injection details, and guidance for adding new accent color variants.
+For technical details on the YAML standards, logic, and various display element tokens used in this theme, see the [Development Reference](docs/DEVELOPMENT.md). It covers the 2-section YAML anchor structure used to share tokens across accent variants without duplication, the full list of HA display element tokens targeted, card-mod CSS injection details, and guidance for adding new accent color variants.
 
 ## ❓ FAQ & Troubleshooting
 
@@ -351,7 +354,7 @@ For technical details on the YAML standards, logic, and various display element 
 </summary><br>
 
 - Items like custom dashboards (dashboard views), cards and card elements can have specific themes applied, separate to the system theme.
-- To check or modify this for views or sections, see [Apply Theme](#apply-theme) above.
+- To check or modify this for views or sections, see [Apply Theme](#-apply-theme) above.
 - If one element has a different (unexpected) theme, it may be a theme or color setting inside the individual card:
   - To check use the pencil icon (top right), then click into the specific card and look for theme and/or color options in the settings.
 
@@ -435,7 +438,7 @@ For technical details on the YAML standards, logic, and various display element 
 
 ## ❌ Removal
 
-To remove the integration from Home Assistant:
+To remove the theme from Home Assistant:
 
 <details>
 
@@ -457,7 +460,7 @@ If you installed via HACS:
 1. Go to **HACS**.
 2. Find **Very Dark Black HA Theme** and click into it.
 3. Click the **three dots** (⋮) at the top right and select **Remove**.
-4. Restart Home Assistant.
+4. Run the `frontend.reload_themes` action (or restart Home Assistant) to clear the theme from the picker.
 
 ---
 
