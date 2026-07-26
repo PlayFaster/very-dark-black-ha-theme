@@ -4,6 +4,13 @@ All changes to this project will be documented in this file. This is the detaile
 
 ---
 
+## [1.4.1-dev5] - 2026-07-26 - Unreleased
+
+### Bumps
+
+- These do NOT affect this project but are part of Shared CI.
+  - **Validate Bump**: Update `ruff`from 0.15.21 to 0.15.22
+
 ## [1.4.1-dev4] - 2026-07-26 - Unreleased
 
 ### Changed
