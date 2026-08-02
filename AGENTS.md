@@ -218,6 +218,19 @@ For rapid visual iteration between restarts, trigger a theme reload without rest
 
 - Call `ha_call_service` with domain `frontend`, service `reload_themes`
 
+### Switching themes — check the profile first
+
+`frontend.set_theme` sets the **backend default** only. An explicit theme selected in the user's HA profile **overrides it and the call is silently ignored** — the service still returns success. This is deliberate Home Assistant behavior: a backend action never overwrites a human's per-device choice. No service call clears it, and writing the value directly does not survive a reload.
+
+Before switching themes, check — and if a theme is set, ask the user to clear it (**Profile → Theme → X**, leaving _Use default theme_) rather than trying to work around it:
+
+```javascript
+document.querySelector("home-assistant").hass.selectedTheme; // {theme: ""} = OK
+document.documentElement.__themes.cacheKey; // what is ACTUALLY applied
+```
+
+Two related traps: `frontend.set_theme` needs `"mode": "dark"` when a dark-mode default is set, and the `theme-test` dashboard pins per-card themes in places, so a card may not reflect the page theme. Full detail and the five-layer precedence order are in [`.shared/prompts/theme_review.md`](.shared/prompts/theme_review.md) STEP 0.
+
 ### Skill Prompts
 
 The shared prompt catalogue is listed in [shared conventions §3](.shared/dev_std/agent_conventions.md) — `devcon_run_gen.md` for arbitrary commands inside the devcontainer, `post_mod_process.md` for the SCOPE-driven validation pass. Container identity values (`CONTAINER_NAME`, `PROJECT_DIR`) are in `.devcontainer/.env`.

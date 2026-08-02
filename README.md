@@ -144,9 +144,20 @@ Use the **shortcut badge** above, then click **Download** — or just …
 
 ### 💾 Manual Installation
 
+<details>
+
+<summary>
+&nbsp; &nbsp; ➕ &nbsp; &nbsp; Click to Expand for Details:
+</summary><br>
+
 1. Under the Home Assistant `config` folder, create a new folder named `themes` (if it does not already exist).
 2. Download `very_dark_black_ha_theme.yaml` from the [latest release](https://github.com/PlayFaster/very-dark-black-ha-theme/releases) and copy it directly into that folder — not into a sub-folder.
 3. Run the `frontend.reload_themes` action (Restart Home Assistant if `configuration.yaml` changes were made).
+
+---
+
+</details>
+<br>
 
 ### 🔄 Updating
 
