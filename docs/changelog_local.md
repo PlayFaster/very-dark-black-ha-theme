@@ -4,11 +4,68 @@ All changes to this project will be documented in this file. This is the detaile
 
 ---
 
+- [Internal Detailed Changelog: Very Dark Black Home Assistant Theme](#internal-detailed-changelog-very-dark-black-home-assistant-theme)
+  - [\[1.4.1-dev6\] - 2026-08-02 - Unreleased](#141-dev6---2026-08-02---unreleased)
+  - [\[1.4.1-dev5\] - 2026-07-26 - Unreleased](#141-dev5---2026-07-26---unreleased)
+  - [\[1.4.1-dev4\] - 2026-07-26 - Unreleased](#141-dev4---2026-07-26---unreleased)
+  - [\[1.4.1-dev3\] - 2026-07-12 - Unreleased](#141-dev3---2026-07-12---unreleased)
+  - [\[1.4.1-dev2\] - 2026-07-12 - Unreleased](#141-dev2---2026-07-12---unreleased)
+  - [\[1.4.1-dev1\] - 2026-07-06 - Unreleased](#141-dev1---2026-07-06---unreleased)
+  - [\[1.4.0\] - 2026-07-04 - Release](#140---2026-07-04---release)
+  - [\[1.4.0-dev9\] - 2026-07-04 - Unreleased](#140-dev9---2026-07-04---unreleased)
+  - [\[1.4.0-dev8\] - 2026-07-04 - Unreleased](#140-dev8---2026-07-04---unreleased)
+  - [\[1.4.0-dev7\] - 2026-07-04 - Unreleased](#140-dev7---2026-07-04---unreleased)
+  - [\[1.4.0-dev6\] - 2026-07-04 - Unreleased](#140-dev6---2026-07-04---unreleased)
+  - [\[1.4.0-dev5\] - 2026-07-04 - Unreleased](#140-dev5---2026-07-04---unreleased)
+  - [\[1.4.0-dev4\] - 2026-07-03 - Unreleased](#140-dev4---2026-07-03---unreleased)
+  - [\[1.4.0-dev3\] - 2026-06-27 - Unreleased](#140-dev3---2026-06-27---unreleased)
+  - [\[1.4.0-dev2\] - 2026-06-27 - Unreleased](#140-dev2---2026-06-27---unreleased)
+  - [\[1.4.0-dev1\] - 2026-06-26 - Unreleased](#140-dev1---2026-06-26---unreleased)
+  - [\[1.3.8\] - 2026-06-25 - Release](#138---2026-06-25---release)
+  - [\[1.3.8-dev9\] - 2026-06-25 - Unreleased](#138-dev9---2026-06-25---unreleased)
+  - [\[1.3.8-dev6\] - 2026-06-25 - Unreleased](#138-dev6---2026-06-25---unreleased)
+  - [\[1.3.8-dev3\] - 2026-06-25 - Unreleased](#138-dev3---2026-06-25---unreleased)
+  - [\[1.3.8-dev2\] - 2026-06-25 - Unreleased](#138-dev2---2026-06-25---unreleased)
+  - [\[1.3.8-dev1\] - 2026-06-25 - Unreleased](#138-dev1---2026-06-25---unreleased)
+  - [\[1.3.7\] - 2026-06-24 - Release](#137---2026-06-24---release)
+  - [\[1.3.7-dev10\] - 2026-06-24 - Unreleased](#137-dev10---2026-06-24---unreleased)
+  - [\[1.3.7-dev9\] - 2026-06-24 - Unreleased](#137-dev9---2026-06-24---unreleased)
+  - [\[1.3.7-dev8\] - 2026-06-24 - Unreleased](#137-dev8---2026-06-24---unreleased)
+  - [\[1.3.7-dev7\] - 2026-06-24 - Unreleased](#137-dev7---2026-06-24---unreleased)
+  - [\[1.3.7-dev6\] - 2026-06-20 - Unreleased](#137-dev6---2026-06-20---unreleased)
+  - [\[1.3.7-dev4\] - 2026-06-18 - Unreleased](#137-dev4---2026-06-18---unreleased)
+  - [\[1.3.6\] - 2026-06-15](#136---2026-06-15)
+  - [\[1.3.6-dev5\] - 2026-06-15 - Unreleased](#136-dev5---2026-06-15---unreleased)
+  - [\[1.3.6-dev4\] - 2026-06-15 - Unreleased](#136-dev4---2026-06-15---unreleased)
+  - [\[1.3.6-dev3\] - 2026-06-11 - Unreleased](#136-dev3---2026-06-11---unreleased)
+  - [\[1.3.5\] - 2026-06-05](#135---2026-06-05)
+  - [\[1.3.5-dev4\] - 2026-06-05 - Unreleased](#135-dev4---2026-06-05---unreleased)
+  - [\[1.3.5-dev3\] - 2026-06-05 - Unreleased](#135-dev3---2026-06-05---unreleased)
+  - [\[1.3.5-dev2\] - 2026-06-04 - Unreleased](#135-dev2---2026-06-04---unreleased)
+  - [\[1.3.5-dev1\] - 2026-05-24 - Unreleased](#135-dev1---2026-05-24---unreleased)
+  - [\[1.3.4\] - 2026-05-20](#134---2026-05-20)
+  - [\[1.3.4-dev3\] - 2026-05-20 - Unreleased](#134-dev3---2026-05-20---unreleased)
+  - [\[1.3.4-dev2\] - 2026-05-08 - Unreleased](#134-dev2---2026-05-08---unreleased)
+  - [\[1.3.3\] - 2026-05-02](#133---2026-05-02)
+  - [\[1.3.3-dev13\] - 2026-05-01](#133-dev13---2026-05-01)
+  - [\[1.3.3-dev12\] - 2026-05-01](#133-dev12---2026-05-01)
+  - [\[1.3.3-dev11\] - 2026-05-01](#133-dev11---2026-05-01)
+  - [\[1.3.3-dev9\] - 2026-05-01](#133-dev9---2026-05-01)
+  - [\[1.3.2\] - 2026-04-03](#132---2026-04-03)
+  - [\[1.3.1\] - 2026-04-01](#131---2026-04-01)
+  - [\[1.2.2\] - 2026-03-30](#122---2026-03-30)
+  - [\[1.2.1\] - 2026-01-16](#121---2026-01-16)
+  - [\[1.1.1\] - 2025-12-04](#111---2025-12-04)
+  - [\[1.0.1\] - 2025-11-18](#101---2025-11-18)
+
+---
+
 ## [1.4.1-dev6] - 2026-08-02 - Unreleased
 
 ### Changes
 
 - **README**: Updated to add _Documentation Accuracy_ section, standard now across all project README files.
+- **`changelog_local`**: Added Table of Contents
 
 ### Bumps
 
