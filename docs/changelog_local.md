@@ -5,6 +5,7 @@ All changes to this project will be documented in this file. This is the detaile
 ---
 
 - [Internal Detailed Changelog: Very Dark Black Home Assistant Theme](#internal-detailed-changelog-very-dark-black-home-assistant-theme)
+  - [\[1.4.1-dev9\] - 2026-08-02 - Theme Review Process; YAML Quoting Rule; Token Documentation](#141-dev9---2026-08-02---theme-review-process-yaml-quoting-rule-token-documentation)
   - [\[1.4.1-dev8\] - 2026-08-02 - Primary Color Scale \& Control Fallbacks; Subtitle Accent Docs](#141-dev8---2026-08-02---primary-color-scale--control-fallbacks-subtitle-accent-docs)
   - [\[1.4.1-dev7\] - 2026-08-02 - Bump Shared CI .github to v2.0.9](#141-dev7---2026-08-02---bump-shared-ci-github-to-v209)
   - [\[1.4.1-dev6\] - 2026-08-02 - README Documentation Accuracy; Changelog ToC Added](#141-dev6---2026-08-02---readme-documentation-accuracy-changelog-toc-added)
@@ -61,6 +62,37 @@ All changes to this project will be documented in this file. This is the detaile
   - [\[1.0.1\] - 2025-11-18 - Initial Release, Cyan Accent](#101---2025-11-18---initial-release-cyan-accent)
 
 ---
+
+
+
+## [1.4.1-dev9] - 2026-08-02 - Theme Review Process; YAML Quoting Rule; Token Documentation
+
+Documentation and process only — no change to `very_dark_black_ha_theme.yaml`. Implements the agreed items from `.notes/theme_review/20260802/further_changes_20260802.md`.
+
+### Added
+
+- **Critical Rule 7 — quote any value containing `#`** (`AGENTS.md`): in YAML an unquoted value ends at a space followed by `#`. `ha-color-primary-05: hsl(from var(--primary-color, #aaaaaa) …)` loads as `hsl(from var(--primary-color,` — broken CSS on every theme in the file. This fault occurred during dev8 and truncated 20 tokens before it was caught.
+- **`#` truncation detection** (`AGENTS.md`, YAML Standards): `yamllint` flags it as `missing starting space in comment`, one per affected line. Documented that it is a **warning, not an error** — so a broken file still passes CI — and that `codespell` cannot detect it. Includes a `yaml.safe_load` one-liner to confirm a value survived parsing.
+- **Token sweep step** (`theme_review.md`, new step 6): run `sweep_consumers.py` and `token_drift_scan.py` after every HA minor upgrade, with the three-way `not_consumed` / `with_fallback` / `no_fallback` classification and a warning that a `with_fallback` chain can still fail if the fallback target is itself dead. This is the check that would have caught the `ha-switch-checked-*` gap three releases earlier.
+- **Report output requirement** (`theme_review.md`): reviews are written to `.notes\theme_review\theme_review_YYYYMMDD_HHMM.md` — flat, no dated sub-folder, since `.notes\` is a junction and the `_HHMM` suffix already guarantees uniqueness. Never overwrite; a re-run names the file it follows.
+
+### Changed
+
+- **HA compatibility table** (`AGENTS.md`): added 2026.7 and 2026.8 rows. 2026.8 introduces `ha-bottom-sheet-*` tokens; `paper-item-icon-color` and `state-icon-active-color` are no longer referenced by the frontend. Verified against 2026.8.0b3.
+- **Icon token hierarchy** (`AGENTS.md`): `state-icon-color` marked as the only one of the three still referenced on 2026.8; the other two are legacy, retained for older HA. Notes that per-domain colors are built at runtime as `--state-<domain>-<state>-color`, so a literal grep finding nothing does not mean a token is unused.
+- **`theme_review.md` — measure first, explain second**: the guide previously led with static bundle analysis, written for a tool without browser access. Bundle source shows which tokens exist, never what a component paints, because parent inline styles and `:host` declarations both outrank an inherited theme value. Findings must now be graded measured or inferred.
+- **`theme_review.md` — `"mode"` is mandatory** on `frontend.set_theme`, plus a `document.documentElement.__themes.cacheKey` confirmation step. A dark-mode-specific default outranks the general default, so the call reports `success` while changing nothing.
+- **`theme_review.md` — reporting template** rewritten to numbered findings carrying evidence, grade, recommendation and a status line updated as work proceeds. Fix-path wording corrected from the superseded three-section / `black_surfaces` architecture to the current two-section layout.
+- **HAB command table** (`.shared/dev_std/agent_conventions.md`): the log row was listed as `log`, which does not exist. Corrected to `system logs` (`-n N`, default 100). Notes it returns the error log, not the full `home-assistant.log`. Shared file — the fix applies to all five projects.
+- **`invisible_elements.md`**: marked as a historical record. It describes the superseded three-section layout with `Black (Background Only)` / `Black (Standard)` and nine variants; the current file is two sections with ten accent variants.
+
+### Rejected
+
+- **Web Awesome system token shim** (`wa-color-*`, `wa-form-control-*`): the sweep found no `wa-*` token resolving to empty on `Black with White`. With no observed defect, the risk of overriding low-level design-system tokens at `:root` — affecting third-party cards, popovers and dialogs — is the deciding factor.
+
+### Deferred
+
+- **Moving the review scripts to a tracked `scripts/` folder**: agreed but not scheduled. The project runs no Python tooling (no `[tool.ruff]` config, no `tests/`, and both `tasks.json` and CI skip Python via `project.category = theme`), so the scripts would arrive unlinted and untested. Scoped in `.notes/theme_review/20260802/script_relocation_20260802.md`.
 
 ## [1.4.1-dev8] - 2026-08-02 - Primary Color Scale & Control Fallbacks; Subtitle Accent Docs
 

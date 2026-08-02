@@ -102,6 +102,7 @@ These rules are enforced by Home Assistant's theme loader and will cause failure
 4. **No duplicate keys across anchor merges** — if a token is defined in the base anchor (`base_logic`), do NOT redefine it in any Section B variant, even with the same value. HA logs a warning per theme for every duplicate. Before adding a token to a variant, grep for it in the base anchor first.
 5. **Do not add `primary-color`, `state-active-color`, or `card-mod-theme` to the base anchor** — these vary per accent variant and belong only in Section B.
 6. **`card-mod-theme` must exactly match the HA picker name** — e.g. `"Black with Violet"` not `"Black Violet"`. Mismatch silently breaks card-mod theme profile tracking.
+7. **Quote any value containing `#`** — in YAML an unquoted value ends at a space followed by `#`; the rest becomes a comment. `ha-color-primary-05: hsl(from var(--primary-color, #aaaaaa) …)` silently loads as `hsl(from var(--primary-color,` — broken CSS on **every** theme in the file, not just the one being edited. Always write `"…"` around a value that contains a hex color inside a `var()` fallback. See YAML Standards below for how to detect it.
 
 ## YAML Standards (for linting)
 
@@ -112,6 +113,22 @@ Rules come from `.validate/.yamllint` (`extends: default`, with `document-start:
 - **No trailing whitespace** (still enforced by the `default` ruleset).
 - **Inline comments** need at least one space from content.
 
+### Detecting the `#` truncation trap (Critical Rule 7)
+
+`yamllint` reports one `missing starting space in comment` warning per affected line — it is parsing the discarded remainder as a comment. That is the signature:
+
+```bash
+yamllint -c .validate/.yamllint themes/
+```
+
+Two things make this dangerous. It is a **warning, not an error**, so a broken file still passes CI. And `codespell` cannot see it at all — a spell checker is not a validator. After editing any value containing `#`, run `yamllint` and confirm the value survives:
+
+```bash
+python -c "import yaml;print(yaml.safe_load(open('themes/very_dark_black_ha_theme.yaml'))['Black with White']['ha-color-primary-05'])"
+```
+
+A value ending in `,` is truncated. This occurred on 2026-08-02 and broke 20 tokens across all 11 themes.
+
 ## HA Version Compatibility
 
 | HA Version | Feature Added                                                     |
@@ -121,8 +138,12 @@ Rules come from `.validate/.yamllint` (`extends: default`, with `document-start:
 | 2026.4+    | Dynamic HSL color scales (`hsl(from var(...) ...)`)               |
 | 2026.5+    | Web Awesome tokens: `ha-switch`, `ha-checkbox`, `ha-progress-bar` |
 | 2026.6+    | Web Awesome tokens: `ha-radio-group`, `ha-radio-option`           |
+| 2026.7+    | Component behavior only — no token changes                        |
+| 2026.8+    | `ha-bottom-sheet-*` tokens (adaptive dialogs). `paper-item-icon-color` and `state-icon-active-color` no longer referenced by the frontend |
 
 The `hsl(from ...)` relative color syntax used for the `ha-color-neutral-*` and `ha-color-primary-*` scales requires HA 2026.4+ and a modern browser.
+
+Verified against HA 2026.8.0b3 on 2026-08-02. Per-version notes are in `docs/change_ref_ha_v2026_*.md`.
 
 ## Adding a New Accent Color Variant
 
@@ -154,11 +175,15 @@ Avoid deep shadow-DOM selectors (e.g., `ha-card-picker $ ha-sub-page`) — they 
 
 HA is migrating from `paper-` / `mdc-` variables to **Web Awesome** (Shoelace/Lit) and **Material 3** tokens. When a UI element appears unstyled after an HA update, the likely cause is a renamed or new token. Reference themes used for comparison: [`Frosted Glass`](https://github.com/wessamlauf/homeassistant-frosted-glass-themes) and [`Graphite`](https://github.com/TilmanGriesel/graphite).
 
-Token hierarchy for icons — all three are defined **once in the base anchor** (Section 4, around lines 96–98) as `var(--primary-color)`, so each variant picks up its own accent through the merge. Do **not** redefine them per variant: there is no "Section C", and duplicating a base key into a Section B variant violates Critical Rule 4 and makes HA log a duplicate-key warning for every theme in the file.
+Token hierarchy for icons — all three are defined **once in the base anchor** (Section 4) as `var(--primary-color, #aaaaaa)`, so each variant picks up its own accent through the merge. Do **not** redefine them per variant: there is no "Section C", and duplicating a base key into a Section B variant violates Critical Rule 4 and makes HA log a duplicate-key warning for every theme in the file.
 
-- `paper-item-icon-color` — legacy/standard icon color
-- `state-icon-color` — neutral/inactive icon state
-- `state-icon-active-color` — "On"/active icon state
+- `state-icon-color` — **the live token on HA 2026.8.** The only one of the three the compiled frontend still references
+- `paper-item-icon-color` — **legacy.** Zero occurrences in the 2026.8 bundles. Retained for older HA
+- `state-icon-active-color` — **legacy.** Zero occurrences in the 2026.8 bundles. Retained for older HA
+
+Modern HA also builds per-domain icon colors at runtime as `--state-<domain>-<state>-color`, which take precedence over the tokens above. A literal search for those names in the bundles finds nothing — they are constructed from template strings, so absence from a grep does not mean absence from the product.
+
+Keep all three (see Backward compatibility below), but when diagnosing an icon color on 2026.8, `state-icon-color` is the one that matters.
 
 **Backward compatibility:** Keep old/superseded tokens (`paper-*`, `mdc-*`). They fail silently on newer HA — no warnings, no visual impact. Removing them breaks older HA versions. Only remove if a token actively causes a conflict or warning.
 
