@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.4.0] - 2026-07-04 - Release
+## [1.4.0] - 2026-07-04 - Release - Eleven Accent Colors; Violet and Pink Renamed
 
 ### Summary
 
@@ -21,14 +21,14 @@ All notable changes to this project will be documented in this file.
 - **"Black with Fuchsia" → "Black with Pink"**: renamed and shifted to true pink (`#ff00ff` → `#ec4899`). Old `var(--purple-color)` / `var(--fuchsia-color)` references remain available for backward compatibility.
 - **Card title/header color** is now themeable via `ha-card-header-color` (white remains the default).
 
-## [1.3.8] - 2026-06-25 - Release
+## [1.3.8] - 2026-06-25 - Release - Black with White Base Theme
 
 ### Changed
 
 - **Black with White Theme**: A new monochrome theme has been implemented as the base anchor, replacing the previous _Standard_ and _Background Only_ themes.
 - **Form field hover state**: Changed Input field hover background from black to dark gray for better visual separation from surrounding surfaces.
 
-## [1.3.7] - 2026-06-24 - Release
+## [1.3.7] - 2026-06-24 - Release - HACS Listing; WCAG AA Contrast Fixes
 
 ### Summary
 
@@ -45,13 +45,13 @@ All notable changes to this project will be documented in this file.
 - **Label Badges**: Darkened standard badge background colors (label-badge-red, label-badge-green, label-badge-blue, label-badge-yellow, label-badge-grey) to meet WCAG AA accessibility requirements and ensure high contrast against white text overlays.
 - **Documentation**: Updated README file based on release of theme on HACS. HACS install instructions updated to remove requirement to add as custom repository. Also update HACS badges in README header.
 
-## [1.3.6] - 2026-06-15
+## [1.3.6] - 2026-06-15 - CI Validation Test Release
 
 ### Summary
 
 - **CI Validation Only**: Changes to the CI Validation set-up require a release to test properly, but there are no user changes in this release, background/infrastructure only.
 
-## [1.3.5] - 2026-06-05
+## [1.3.5] - 2026-06-05 - HA 2026.6 Radio Tokens; README Use Cases
 
 Home Assistant 2026.6 Compatibility
 
@@ -63,7 +63,7 @@ Home Assistant 2026.6 Compatibility
 
 - **README**: Added Table of Contents; expanded Use Cases with new **Startup Indicator** (set a distinct accent at boot, auto-restore after 2 minutes) and **Visual Alert Highlight** (trigger Red on an alert condition, restore on clear) scenarios, each with a ready-to-use YAML automation example; promoted per-view and per-section theming from a tip callout to a dedicated subsection with scope-level descriptions; improved FAQ with grouped, emoji-labelled headings.
 
-## [1.3.4] - 2026-05-20
+## [1.3.4] - 2026-05-20 - HA 2026.5 Web Awesome Tokens
 
 ### Added
 
@@ -75,7 +75,7 @@ Home Assistant 2026.6 Compatibility
 
 - **Documentation**: Updated the README file with additional details including on applying themes to dashboard views and sections, as well as at the system level.
 
-## [1.3.3] - 2026-05-02
+## [1.3.3] - 2026-05-02 - M3 and Web Awesome Tokens; Energy and Graph Palettes
 
 ### Added
 
@@ -96,7 +96,7 @@ Home Assistant 2026.6 Compatibility
 
 - **Brightened Secondary Text**: Secondary text raised to meet contrast guidelines on pure black backgrounds.
 
-## [1.3.2] - 2026-04-03
+## [1.3.2] - 2026-04-03 - Drop-down Placeholder Color Fixed
 
 ### Fixed
 
@@ -111,7 +111,7 @@ Home Assistant 2026.6 Compatibility
 - **Validation**: Additional GitHub and Local validation steps.
 - **Formatting**: Additional local formatting checks.
 
-## [1.3.1] - 2026-04-01
+## [1.3.1] - 2026-04-01 - Purple, Indigo and Silver Variants
 
 ### Added
 
@@ -135,19 +135,19 @@ Home Assistant 2026.6 Compatibility
 
 - **"with Test" Option**: Removed the "Black with Orange plus Test" variant to simplify the theme list.
 
-## [1.2.2] - 2026-03-30
+## [1.2.2] - 2026-03-30 - Initial GitHub Release
 
 ### Changed
 
 - **GitHub**: Initial release to GitHub repository.
 
-## [1.2.1] - 2026-01-16
+## [1.2.1] - 2026-01-16 - TEST Visibility Marker
 
 ### Added
 
 - **TEST Visibility**: Added option for TEST text near top left, for identifying a test or backup system.
 
-## [1.1.1] - 2025-12-04
+## [1.1.1] - 2025-12-04 - Green, Red, Fuchsia and Orange Variants
 
 ### Added
 
@@ -157,7 +157,7 @@ Home Assistant 2026.6 Compatibility
 
 - **Invisible Menu Fix**: Fixed some of the black-on-black invisible menus.
 
-## [1.0.1] - 2025-11-18
+## [1.0.1] - 2025-11-18 - Initial Release, Cyan Accent
 
 ### Added
 
@@ -168,3 +168,24 @@ Home Assistant 2026.6 Compatibility
 ### Format
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+Entry structure — headers, titles, category headings and the split between this file and its counterpart — follows `.shared/dev_std/changelog_format.md`.
+
+---
+
+- [Changelog](#changelog)
+  - [\[1.4.0\] - 2026-07-04 - Release - Eleven Accent Colors; Violet and Pink Renamed](#140---2026-07-04---release---eleven-accent-colors-violet-and-pink-renamed)
+  - [\[1.3.8\] - 2026-06-25 - Release - Black with White Base Theme](#138---2026-06-25---release---black-with-white-base-theme)
+  - [\[1.3.7\] - 2026-06-24 - Release - HACS Listing; WCAG AA Contrast Fixes](#137---2026-06-24---release---hacs-listing-wcag-aa-contrast-fixes)
+  - [\[1.3.6\] - 2026-06-15 - CI Validation Test Release](#136---2026-06-15---ci-validation-test-release)
+  - [\[1.3.5\] - 2026-06-05 - HA 2026.6 Radio Tokens; README Use Cases](#135---2026-06-05---ha-20266-radio-tokens-readme-use-cases)
+  - [\[1.3.4\] - 2026-05-20 - HA 2026.5 Web Awesome Tokens](#134---2026-05-20---ha-20265-web-awesome-tokens)
+  - [\[1.3.3\] - 2026-05-02 - M3 and Web Awesome Tokens; Energy and Graph Palettes](#133---2026-05-02---m3-and-web-awesome-tokens-energy-and-graph-palettes)
+  - [\[1.3.2\] - 2026-04-03 - Drop-down Placeholder Color Fixed](#132---2026-04-03---drop-down-placeholder-color-fixed)
+  - [\[1.3.1\] - 2026-04-01 - Purple, Indigo and Silver Variants](#131---2026-04-01---purple-indigo-and-silver-variants)
+  - [\[1.2.2\] - 2026-03-30 - Initial GitHub Release](#122---2026-03-30---initial-github-release)
+  - [\[1.2.1\] - 2026-01-16 - TEST Visibility Marker](#121---2026-01-16---test-visibility-marker)
+  - [\[1.1.1\] - 2025-12-04 - Green, Red, Fuchsia and Orange Variants](#111---2025-12-04---green-red-fuchsia-and-orange-variants)
+  - [\[1.0.1\] - 2025-11-18 - Initial Release, Cyan Accent](#101---2025-11-18---initial-release-cyan-accent)
+
+---
