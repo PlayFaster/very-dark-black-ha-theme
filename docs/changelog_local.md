@@ -5,6 +5,7 @@ All changes to this project will be documented in this file. This is the detaile
 ---
 
 - [Internal Detailed Changelog: Very Dark Black Home Assistant Theme](#internal-detailed-changelog-very-dark-black-home-assistant-theme)
+  - [\[1.4.1\] - 2026-08-02 - Visible Controls on the No-Accent Theme](#141---2026-08-02---visible-controls-on-the-no-accent-theme)
   - [\[1.4.1-dev9\] - 2026-08-02 - Theme Review Process; YAML Quoting Rule; Token Documentation](#141-dev9---2026-08-02---theme-review-process-yaml-quoting-rule-token-documentation)
   - [\[1.4.1-dev8\] - 2026-08-02 - Primary Color Scale \& Control Fallbacks; Subtitle Accent Docs](#141-dev8---2026-08-02---primary-color-scale--control-fallbacks-subtitle-accent-docs)
   - [\[1.4.1-dev7\] - 2026-08-02 - Bump Shared CI .github to v2.0.9](#141-dev7---2026-08-02---bump-shared-ci-github-to-v209)
@@ -63,7 +64,16 @@ All changes to this project will be documented in this file. This is the detaile
 
 ---
 
+## [1.4.1] - 2026-08-02 - Visible Controls on the No-Accent Theme
 
+### Summary
+
+- Fixes washed-out controls on **Black with White**, the no-accent variant. A switch that was on showed only a faint outline with no fill, making it hard to tell apart from one that was off.
+- The ten accent variants — Blue, Cyan, Emerald, Green, Indigo, Orange, Pink, Red, Silver, Violet — are unchanged.
+
+### Fixed
+
+- **Switched-on controls were barely visible on Black with White**: because that variant deliberately has no accent color, a group of controls had no color to fall back on and drew with no fill at all — an active switch showed only a thin near-white outline. Switches now render a filled grey track and thumb, clearly distinct from the off state. The same missing-fallback problem affected other accent-driven tokens, which previously resolved to nothing and now resolve to grey: `ha-switch-checked-*` (seven tokens), the `ha-color-primary-05`–`95` scale, `state-icon-color`, `sidebar-selected-icon-color`, `mdc-theme-primary`, `input-outlined-hover-border-color` and `ha-color-form-outline-hover`.
 
 ## [1.4.1-dev9] - 2026-08-02 - Theme Review Process; YAML Quoting Rule; Token Documentation
 

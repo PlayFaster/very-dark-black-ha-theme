@@ -4,16 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [1.4.1] - 2026-08-02 - Visible Controls on the No-Accent Theme
 
-### Summary
+### Fixed
 
 - Fixes washed-out controls on **Black with White**, the no-accent variant. A switch that was on showed only a faint outline with no fill, making it hard to tell apart from one that was off.
 - The ten accent variants — Blue, Cyan, Emerald, Green, Indigo, Orange, Pink, Red, Silver, Violet — are unchanged.
-
-### Fixed
-
-- **Switched-on controls were barely visible on Black with White**: because that variant deliberately has no accent color, a group of controls had no color to fall back on and drew with no fill at all — an active switch showed only a thin near-white outline. Switches now render a filled grey track and thumb, clearly distinct from the off state. The same missing-fallback problem affected other accent-driven tokens, which previously resolved to nothing and now resolve to grey: `ha-switch-checked-*` (seven tokens), the `ha-color-primary-05`–`95` scale, `state-icon-color`, `sidebar-selected-icon-color`, `mdc-theme-primary`, `input-outlined-hover-border-color` and `ha-color-form-outline-hover`.
-
-_Full technical detail for every change in this release is in [`docs/changelog_local.md`](docs/changelog_local.md)._
 
 ## [1.4.0] - 2026-07-04 - Release - Eleven Accent Colors; Violet and Pink Renamed
 
@@ -187,6 +181,7 @@ Entry structure — headers, titles, category headings and the split between thi
 ---
 
 - [Changelog](#changelog)
+  - [\[1.4.1\] - 2026-08-02 - Visible Controls on the No-Accent Theme](#141---2026-08-02---visible-controls-on-the-no-accent-theme)
   - [\[1.4.0\] - 2026-07-04 - Release - Eleven Accent Colors; Violet and Pink Renamed](#140---2026-07-04---release---eleven-accent-colors-violet-and-pink-renamed)
   - [\[1.3.8\] - 2026-06-25 - Release - Black with White Base Theme](#138---2026-06-25---release---black-with-white-base-theme)
   - [\[1.3.7\] - 2026-06-24 - Release - HACS Listing; WCAG AA Contrast Fixes](#137---2026-06-24---release---hacs-listing-wcag-aa-contrast-fixes)

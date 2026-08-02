@@ -131,15 +131,15 @@ A value ending in `,` is truncated. This occurred on 2026-08-02 and broke 20 tok
 
 ## HA Version Compatibility
 
-| HA Version | Feature Added                                                     |
-| :--------- | :---------------------------------------------------------------- |
-| 2022.11+   | Core dark backgrounds, cards, sidebar                             |
-| 2025.1+    | Inputs, dialogs, modern card layouts                              |
-| 2026.4+    | Dynamic HSL color scales (`hsl(from var(...) ...)`)               |
-| 2026.5+    | Web Awesome tokens: `ha-switch`, `ha-checkbox`, `ha-progress-bar` |
-| 2026.6+    | Web Awesome tokens: `ha-radio-group`, `ha-radio-option`           |
-| 2026.7+    | Component behavior only — no token changes                        |
-| 2026.8+    | `ha-bottom-sheet-*` tokens (adaptive dialogs). `paper-item-icon-color` and `state-icon-active-color` no longer referenced by the frontend |
+| HA Version | Feature Added |
+| :-- | :-- |
+| 2022.11+ | Core dark backgrounds, cards, sidebar |
+| 2025.1+ | Inputs, dialogs, modern card layouts |
+| 2026.4+ | Dynamic HSL color scales (`hsl(from var(...) ...)`) |
+| 2026.5+ | Web Awesome tokens: `ha-switch`, `ha-checkbox`, `ha-progress-bar` |
+| 2026.6+ | Web Awesome tokens: `ha-radio-group`, `ha-radio-option` |
+| 2026.7+ | Component behavior only — no token changes |
+| 2026.8+ | `ha-bottom-sheet-*` tokens (adaptive dialogs). `paper-item-icon-color` and `state-icon-active-color` no longer referenced by the frontend |
 
 The `hsl(from ...)` relative color syntax used for the `ha-color-neutral-*` and `ha-color-primary-*` scales requires HA 2026.4+ and a modern browser.
 
