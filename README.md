@@ -472,6 +472,12 @@ If you installed via HACS:
 
 This is a **personal project**. Support and updates are provided on a **"best-effort"** basis only. While I use this theme daily and aim to keep it functional with the latest Home Assistant releases, I cannot guarantee immediate fixes for issues or compatibility with all releases.
 
+### 📖 Documentation Accuracy
+
+- This README is updated whenever the integration changes, and is intended to describe the current release accurately.
+- Two things can put it out of step: a passage this document missed during a revision, or a Home Assistant screen or setting that has been renamed or moved since it was written.
+- If you find either, please [open an issue](https://github.com/PlayFaster/very-dark-black-ha-theme/issues). It will be corrected.
+
 ## 🤝 Contributors & Acknowledgements
 
 - 🙏 Inspired by these excellent themes - thank you!

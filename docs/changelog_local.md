@@ -4,6 +4,21 @@ All changes to this project will be documented in this file. This is the detaile
 
 ---
 
+## [1.4.1-dev6] - 2026-08-02 - Unreleased
+
+### Changes
+
+- **README**: Updated to add _Documentation Accuracy_ section, standard now across all project README files.
+
+### Bumps
+
+- **Shared CI**: Bump `.github` Shared CI Validation via SHA from v2.0.7 to v2.0.8
+- **Validate Bump**: Update `zizmor` from 1.25.2 to 1.28.0
+- These do NOT affect this project but are part of Shared CI.
+  - **Validate Bump**: Update `ruff` from 0.15.22 to 0.16.0
+  - **Validate Bump**: Bumped PHACC `pytest-homeassistant-custom-component` from 0.13.348 to 0.13.341
+- **`tasks.json`**: Added a new hardware checks section to tasks.json, for local hardware validation.
+
 ## [1.4.1-dev5] - 2026-07-26 - Unreleased
 
 ### Bumps
@@ -16,7 +31,7 @@ All changes to this project will be documented in this file. This is the detaile
 ### Changed
 
 - **Logo**: Added a logo to the top of `README` file. Themes in HA don't have icons or logos, unlike integrations. This is just for branding and visibility in the `README`.
-- **Readme**: Updated the readme with collapseable sections, similar to other PlayFaster README files.
+- **Readme**: Updated the readme with collapsible sections, similar to other PlayFaster README files.
 - **AGents**: Updated AGENTS.md to sync with Readme and in-line with current theme behavior.
 
 ### Bumps
