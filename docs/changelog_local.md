@@ -1,31 +1,218 @@
-# Changelog
+# Internal Detailed Changelog: Very Dark Black Home Assistant Theme
 
-All notable changes to this project will be documented in this file.
+All changes to this project will be documented in this file. This is the detailed changelog, to include non user facing changes and intra-release changes.
 
-## [1.4.0] - 2026-07-04 - Release
+---
+
+- [Internal Detailed Changelog: Very Dark Black Home Assistant Theme](#internal-detailed-changelog-very-dark-black-home-assistant-theme)
+  - [\[1.4.1\] - 2026-08-02 - Visible Controls on the No-Accent Theme](#141---2026-08-02---visible-controls-on-the-no-accent-theme)
+  - [\[1.4.1-dev9\] - 2026-08-02 - Theme Review Process; YAML Quoting Rule; Token Documentation](#141-dev9---2026-08-02---theme-review-process-yaml-quoting-rule-token-documentation)
+  - [\[1.4.1-dev8\] - 2026-08-02 - Primary Color Scale \& Control Fallbacks; Subtitle Accent Docs](#141-dev8---2026-08-02---primary-color-scale--control-fallbacks-subtitle-accent-docs)
+  - [\[1.4.1-dev7\] - 2026-08-02 - Bump Shared CI .github to v2.0.9](#141-dev7---2026-08-02---bump-shared-ci-github-to-v209)
+  - [\[1.4.1-dev6\] - 2026-08-02 - README Documentation Accuracy; Changelog ToC Added](#141-dev6---2026-08-02---readme-documentation-accuracy-changelog-toc-added)
+  - [\[1.4.1-dev5\] - 2026-07-26 - Ruff Bump 0.15.21 → 0.15.22](#141-dev5---2026-07-26---ruff-bump-01521--01522)
+  - [\[1.4.1-dev4\] - 2026-07-26 - README Logo and Collapsible Sections; AGENTS Synced](#141-dev4---2026-07-26---readme-logo-and-collapsible-sections-agents-synced)
+  - [\[1.4.1-dev3\] - 2026-07-12 - Codespell Alignment Across Docs](#141-dev3---2026-07-12---codespell-alignment-across-docs)
+  - [\[1.4.1-dev2\] - 2026-07-12 - PHACC Bump; Codespell Alignment](#141-dev2---2026-07-12---phacc-bump-codespell-alignment)
+  - [\[1.4.1-dev1\] - 2026-07-06 - Shared CI v2.0.6; Ruff and IQS Checks Extended](#141-dev1---2026-07-06---shared-ci-v206-ruff-and-iqs-checks-extended)
+  - [\[1.4.0\] - 2026-07-04 - Release - Eleven Accent Colors; Violet and Pink Renamed](#140---2026-07-04---release---eleven-accent-colors-violet-and-pink-renamed)
+  - [\[1.4.0-dev9\] - 2026-07-04 - Neutral Ramp: Single-Source Neutral Tokens](#140-dev9---2026-07-04---neutral-ramp-single-source-neutral-tokens)
+  - [\[1.4.0-dev8\] - 2026-07-04 - Optional Accent Emphasis, Section 4b](#140-dev8---2026-07-04---optional-accent-emphasis-section-4b)
+  - [\[1.4.0-dev7\] - 2026-07-04 - Four Tokens Adopted From ha-lcars; Lock State Colors](#140-dev7---2026-07-04---four-tokens-adopted-from-ha-lcars-lock-state-colors)
+  - [\[1.4.0-dev6\] - 2026-07-04 - README Aligned With the Integration Projects](#140-dev6---2026-07-04---readme-aligned-with-the-integration-projects)
+  - [\[1.4.0-dev5\] - 2026-07-04 - Ruff and PHACC Bumps](#140-dev5---2026-07-04---ruff-and-phacc-bumps)
+  - [\[1.4.0-dev4\] - 2026-07-03 - Shared CI Bump v2.0.4 → v2.0.5](#140-dev4---2026-07-03---shared-ci-bump-v204--v205)
+  - [\[1.4.0-dev3\] - 2026-06-27 - First Screenshot Batch for the Eleven Variants](#140-dev3---2026-06-27---first-screenshot-batch-for-the-eleven-variants)
+  - [\[1.4.0-dev2\] - 2026-06-27 - YAML Lint Aligned With Home Assistant](#140-dev2---2026-06-27---yaml-lint-aligned-with-home-assistant)
+  - [\[1.4.0-dev1\] - 2026-06-26 - Nine Themes to Eleven; Blue and Emerald Added](#140-dev1---2026-06-26---nine-themes-to-eleven-blue-and-emerald-added)
+  - [\[1.3.8\] - 2026-06-25 - Release - Black with White Base Theme](#138---2026-06-25---release---black-with-white-base-theme)
+  - [\[1.3.8-dev9\] - 2026-06-25 - Base Theme Consolidated and Renamed to Black with White](#138-dev9---2026-06-25---base-theme-consolidated-and-renamed-to-black-with-white)
+  - [\[1.3.8-dev6\] - 2026-06-25 - Theme Test Dashboard and Mock Entities](#138-dev6---2026-06-25---theme-test-dashboard-and-mock-entities)
+  - [\[1.3.8-dev3\] - 2026-06-25 - Invisible Controls Fixed on the Base Themes](#138-dev3---2026-06-25---invisible-controls-fixed-on-the-base-themes)
+  - [\[1.3.8-dev2\] - 2026-06-25 - Theme Test Dashboard Created](#138-dev2---2026-06-25---theme-test-dashboard-created)
+  - [\[1.3.8-dev1\] - 2026-06-25 - Code-Review Changes; Sections Renumbered](#138-dev1---2026-06-25---code-review-changes-sections-renumbered)
+  - [\[1.3.7\] - 2026-06-24 - Release - HACS Listing; WCAG AA Contrast Fixes](#137---2026-06-24---release---hacs-listing-wcag-aa-contrast-fixes)
+  - [\[1.3.7-dev10\] - 2026-06-24 - Danger and Warning Foreground Colors Fixed](#137-dev10---2026-06-24---danger-and-warning-foreground-colors-fixed)
+  - [\[1.3.7-dev9\] - 2026-06-24 - RGB Primitive Tokens for `rgba()` Variants](#137-dev9---2026-06-24---rgb-primitive-tokens-for-rgba-variants)
+  - [\[1.3.7-dev8\] - 2026-06-24 - Tooltip and Tag-Fill Contrast; Label Badges Darkened](#137-dev8---2026-06-24---tooltip-and-tag-fill-contrast-label-badges-darkened)
+  - [\[1.3.7-dev7\] - 2026-06-24 - Shared CI v2.0.4; Ruff Bump](#137-dev7---2026-06-24---shared-ci-v204-ruff-bump)
+  - [\[1.3.7-dev6\] - 2026-06-20 - README Updated for the HACS Listing](#137-dev6---2026-06-20---readme-updated-for-the-hacs-listing)
+  - [\[1.3.7-dev4\] - 2026-06-18 - CI Validation Overhaul](#137-dev4---2026-06-18---ci-validation-overhaul)
+  - [\[1.3.6\] - 2026-06-15 - CI Validation Test Release](#136---2026-06-15---ci-validation-test-release)
+  - [\[1.3.6-dev5\] - 2026-06-15 - Shared CI and Local Validation Sync](#136-dev5---2026-06-15---shared-ci-and-local-validation-sync)
+  - [\[1.3.6-dev4\] - 2026-06-15 - Prettier Config as JSON; AGENTS.md Added](#136-dev4---2026-06-15---prettier-config-as-json-agentsmd-added)
+  - [\[1.3.6-dev3\] - 2026-06-11 - Validation Tooling Sync; Dependabot Added](#136-dev3---2026-06-11---validation-tooling-sync-dependabot-added)
+  - [\[1.3.5\] - 2026-06-05 - HA 2026.6 Radio Tokens; README Use Cases](#135---2026-06-05---ha-20266-radio-tokens-readme-use-cases)
+  - [\[1.3.5-dev4\] - 2026-06-05 - README Use Cases and Apply-Scope Sections](#135-dev4---2026-06-05---readme-use-cases-and-apply-scope-sections)
+  - [\[1.3.5-dev3\] - 2026-06-05 - HA 2026.6 Web Awesome Radio Tokens](#135-dev3---2026-06-05---ha-20266-web-awesome-radio-tokens)
+  - [\[1.3.5-dev2\] - 2026-06-04 - Devcontainer Aligned With Other Projects](#135-dev2---2026-06-04---devcontainer-aligned-with-other-projects)
+  - [\[1.3.5-dev1\] - 2026-05-24 - README Use Cases and FAQ; CI Hardening](#135-dev1---2026-05-24---readme-use-cases-and-faq-ci-hardening)
+  - [\[1.3.4\] - 2026-05-20 - HA 2026.5 Web Awesome Tokens](#134---2026-05-20---ha-20265-web-awesome-tokens)
+  - [\[1.3.4-dev3\] - 2026-05-20 - HA 2026.5 Web Awesome and Shadow Tokens](#134-dev3---2026-05-20---ha-20265-web-awesome-and-shadow-tokens)
+  - [\[1.3.4-dev2\] - 2026-05-08 - Devcontainer Folder Mapping and Prettier](#134-dev2---2026-05-08---devcontainer-folder-mapping-and-prettier)
+  - [\[1.3.3\] - 2026-05-02 - M3 and Web Awesome Tokens; Energy and Graph Palettes](#133---2026-05-02---m3-and-web-awesome-tokens-energy-and-graph-palettes)
+  - [\[1.3.3-dev13\] - 2026-05-01 - Black (Background Only) Renamed; Two Test Themes Removed](#133-dev13---2026-05-01---black-background-only-renamed-two-test-themes-removed)
+  - [\[1.3.3-dev12\] - 2026-05-01 - Black More More Added; Black More Contrast Redesigned](#133-dev12---2026-05-01---black-more-more-added-black-more-contrast-redesigned)
+  - [\[1.3.3-dev11\] - 2026-05-01 - Utility Themes Renamed; card-mod Names and Primary Scale Corrected](#133-dev11---2026-05-01---utility-themes-renamed-card-mod-names-and-primary-scale-corrected)
+  - [\[1.3.3-dev9\] - 2026-05-01 - Black More Contrast Added; HA 2026.4 Element Expansion](#133-dev9---2026-05-01---black-more-contrast-added-ha-20264-element-expansion)
+  - [\[1.3.2\] - 2026-04-03 - Drop-down Placeholder Color Fixed](#132---2026-04-03---drop-down-placeholder-color-fixed)
+  - [\[1.3.1\] - 2026-04-01 - Purple, Indigo and Silver Variants](#131---2026-04-01---purple-indigo-and-silver-variants)
+  - [\[1.2.2\] - 2026-03-30 - Initial GitHub Release](#122---2026-03-30---initial-github-release)
+  - [\[1.2.1\] - 2026-01-16 - TEST Visibility Marker](#121---2026-01-16---test-visibility-marker)
+  - [\[1.1.1\] - 2025-12-04 - Green, Red, Fuchsia and Orange Variants](#111---2025-12-04---green-red-fuchsia-and-orange-variants)
+  - [\[1.0.1\] - 2025-11-18 - Initial Release, Cyan Accent](#101---2025-11-18---initial-release-cyan-accent)
+
+---
+
+## [1.4.1] - 2026-08-02 - Visible Controls on the No-Accent Theme
 
 ### Summary
 
-- Expands the theme from 8 to 11 accent colours — adding Blue and Emerald, and renaming/re-hueing Purple → Violet and Fuchsia → Pink — alongside a large amount of under-the-hood token and structural work.
+- Fixes washed-out controls on **Black with White**, the no-accent variant. A switch that was on showed only a faint outline with no fill, making it hard to tell apart from one that was off.
+- The ten accent variants — Blue, Cyan, Emerald, Green, Indigo, Orange, Pink, Red, Silver, Violet — are unchanged.
+
+### Fixed
+
+- **Switched-on controls were barely visible on Black with White**: because that variant deliberately has no accent color, a group of controls had no color to fall back on and drew with no fill at all — an active switch showed only a thin near-white outline. Switches now render a filled grey track and thumb, clearly distinct from the off state. The same missing-fallback problem affected other accent-driven tokens, which previously resolved to nothing and now resolve to grey: `ha-switch-checked-*` (seven tokens), the `ha-color-primary-05`–`95` scale, `state-icon-color`, `sidebar-selected-icon-color`, `mdc-theme-primary`, `input-outlined-hover-border-color` and `ha-color-form-outline-hover`.
+
+## [1.4.1-dev9] - 2026-08-02 - Theme Review Process; YAML Quoting Rule; Token Documentation
+
+Documentation and process only — no change to `very_dark_black_ha_theme.yaml`. Implements the agreed items from `.notes/theme_review/20260802/further_changes_20260802.md`.
+
+### Added
+
+- **Critical Rule 7 — quote any value containing `#`** (`AGENTS.md`): in YAML an unquoted value ends at a space followed by `#`. `ha-color-primary-05: hsl(from var(--primary-color, #aaaaaa) …)` loads as `hsl(from var(--primary-color,` — broken CSS on every theme in the file. This fault occurred during dev8 and truncated 20 tokens before it was caught.
+- **`#` truncation detection** (`AGENTS.md`, YAML Standards): `yamllint` flags it as `missing starting space in comment`, one per affected line. Documented that it is a **warning, not an error** — so a broken file still passes CI — and that `codespell` cannot detect it. Includes a `yaml.safe_load` one-liner to confirm a value survived parsing.
+- **Token sweep step** (`theme_review.md`, new step 6): run `sweep_consumers.py` and `token_drift_scan.py` after every HA minor upgrade, with the three-way `not_consumed` / `with_fallback` / `no_fallback` classification and a warning that a `with_fallback` chain can still fail if the fallback target is itself dead. This is the check that would have caught the `ha-switch-checked-*` gap three releases earlier.
+- **Report output requirement** (`theme_review.md`): reviews are written to `.notes\theme_review\theme_review_YYYYMMDD_HHMM.md` — flat, no dated sub-folder, since `.notes\` is a junction and the `_HHMM` suffix already guarantees uniqueness. Never overwrite; a re-run names the file it follows.
+
+### Changed
+
+- **HA compatibility table** (`AGENTS.md`): added 2026.7 and 2026.8 rows. 2026.8 introduces `ha-bottom-sheet-*` tokens; `paper-item-icon-color` and `state-icon-active-color` are no longer referenced by the frontend. Verified against 2026.8.0b3.
+- **Icon token hierarchy** (`AGENTS.md`): `state-icon-color` marked as the only one of the three still referenced on 2026.8; the other two are legacy, retained for older HA. Notes that per-domain colors are built at runtime as `--state-<domain>-<state>-color`, so a literal grep finding nothing does not mean a token is unused.
+- **`theme_review.md` — measure first, explain second**: the guide previously led with static bundle analysis, written for a tool without browser access. Bundle source shows which tokens exist, never what a component paints, because parent inline styles and `:host` declarations both outrank an inherited theme value. Findings must now be graded measured or inferred.
+- **`theme_review.md` — `"mode"` is mandatory** on `frontend.set_theme`, plus a `document.documentElement.__themes.cacheKey` confirmation step. A dark-mode-specific default outranks the general default, so the call reports `success` while changing nothing.
+- **`theme_review.md` — reporting template** rewritten to numbered findings carrying evidence, grade, recommendation and a status line updated as work proceeds. Fix-path wording corrected from the superseded three-section / `black_surfaces` architecture to the current two-section layout.
+- **HAB command table** (`.shared/dev_std/agent_conventions.md`): the log row was listed as `log`, which does not exist. Corrected to `system logs` (`-n N`, default 100). Notes it returns the error log, not the full `home-assistant.log`. Shared file — the fix applies to all five projects.
+- **`invisible_elements.md`**: marked as a historical record. It describes the superseded three-section layout with `Black (Background Only)` / `Black (Standard)` and nine variants; the current file is two sections with ten accent variants.
+
+### Rejected
+
+- **Web Awesome system token shim** (`wa-color-*`, `wa-form-control-*`): the sweep found no `wa-*` token resolving to empty on `Black with White`. With no observed defect, the risk of overriding low-level design-system tokens at `:root` — affecting third-party cards, popovers and dialogs — is the deciding factor.
+
+### Deferred
+
+- **Moving the review scripts to a tracked `scripts/` folder**: agreed but not scheduled. The project runs no Python tooling (no `[tool.ruff]` config, no `tests/`, and both `tasks.json` and CI skip Python via `project.category = theme`), so the scripts would arrive unlinted and untested. Scoped in `.notes/theme_review/20260802/script_relocation_20260802.md`.
+
+## [1.4.1-dev8] - 2026-08-02 - Primary Color Scale & Control Fallbacks; Subtitle Accent Docs
+
+### Fixed
+
+- **Primary Color Scale & Fallbacks Quoting**: Enclosed all 20 `var(--primary-color, #aaaaaa)` fallback values in double quotes across Section 4 and Section 12 (primary color scale `ha-color-primary-05` through `ha-color-primary-95`) to prevent YAML inline comment truncation (`#aaaaaa)`).
+- **Web Awesome Switch & Form Outline Tokens**: Added `"var(--primary-color, #aaaaaa)"` fallbacks to 5 direct switch tokens (`ha-switch-checked-thumb-background-color`, `ha-switch-checked-thumb-background-color-hover`, `ha-switch-checked-border-color`, `ha-switch-checked-thumb-border-color`, `ha-switch-checked-thumb-border-color-hover`) in Section 16 and `ha-color-form-outline-hover` in Section 19.
+- **Secondary Control Tokens**: Added `"var(--primary-color, #aaaaaa)"` fallbacks to `state-icon-color`, `sidebar-selected-icon-color`, `mdc-theme-primary`, `paper-item-icon-color`, `state-icon-active-color`, `sidebar-selected-text-color`, `paper-item-icon-active-color`, `sl-color-primary-base`, `mdc-ripple-color`, and `input-outlined-hover-border-color`.
+
+### Changed
+
+- **Documentation**: Updated Section 4b comments in `very_dark_black_ha_theme.yaml` and `AGENTS.md` to document `ha-heading-card-subtitle-color: var(--primary-color)` as active by design. Appended complete audit analysis into `.notes/issues/base_theme_issues/black_with_white_visibility_changes_20260802.md`.
+
+## [1.4.1-dev7] - 2026-08-02 - Bump Shared CI .github to v2.0.9
+
+### Bumps
+
+- **Shared CI**: Bump `.github` Shared CI Validation via SHA from v2.0.8 to v2.0.9
+
+## [1.4.1-dev6] - 2026-08-02 - README Documentation Accuracy; Changelog ToC Added
+
+### Changed
+
+- **README**: Updated to add _Documentation Accuracy_ section, standard now across all project README files. **`changelog_local` ToC**: Added Table of Contents to `changelog_local` (top-of-file) and to end of `CHANGELOG`.
+
+### Bumps
+
+- **Shared CI**: Bump `.github` Shared CI Validation via SHA from v2.0.7 to v2.0.8
+- **Validate Bump**: Update `zizmor` from 1.25.2 to 1.28.0
+- These do NOT affect this project but are part of Shared CI.
+  - **Validate Bump**: Update `ruff` from 0.15.22 to 0.16.0
+  - **Validate Bump**: Bumped PHACC `pytest-homeassistant-custom-component` from 0.13.348 to 0.13.351
+- **`tasks.json`**: Added a new hardware checks section to tasks.json, for local hardware validation.
+
+## [1.4.1-dev5] - 2026-07-26 - Ruff Bump 0.15.21 → 0.15.22
+
+### Bumps
+
+- These do NOT affect this project but are part of Shared CI.
+  - **Validate Bump**: Update `ruff`from 0.15.21 to 0.15.22
+
+## [1.4.1-dev4] - 2026-07-26 - README Logo and Collapsible Sections; AGENTS Synced
+
+### Changed
+
+- **Logo**: Added a logo to the top of `README` file. Themes in HA don't have icons or logos, unlike integrations. This is just for branding and visibility in the `README`.
+- **Readme**: Updated the readme with collapsible sections, similar to other PlayFaster README files.
+- **AGENTS**: Updated AGENTS.md to sync with Readme and in-line with current theme behavior.
+
+### Bumps
+
+- **Shared .github CI Validation**: Bump .github Shared CI Validation via SHA from v2.0.5 to v2.0.6
+- **Validate Bump**: Update `codespell`from 2.42 to 2.43
+- These do NOT affect this project but are part of Shared CI.
+  - **Validate Bump**: Bumped PHACC `pytest-homeassistant-custom-component` from 0.13.346 to 0.13.348
+  - **Validate Bump**: Update `ruff`from 0.15.20 to 0.15.21
+
+## [1.4.1-dev3] - 2026-07-12 - Codespell Alignment Across Docs
+
+### Changed
+
+- **Docs Formats**: Codespell alignment, words like behavior and color etc.
+
+## [1.4.1-dev2] - 2026-07-12 - PHACC Bump; Codespell Alignment
+
+### Bumps
+
+- These do NOT affect this project but are part of Shared CI.
+  - **Validate Bump**: Bumped PHACC `pytest-homeassistant-custom-component` from 0.13.345 to 0.13.346
+
+### Changed
+
+- **Formats**: Codespell alignment, words like behavior and color etc.
+
+## [1.4.1-dev1] - 2026-07-06 - Shared CI v2.0.6; Ruff and IQS Checks Extended
+
+### Bumps
+
+- **Shared .github CI Validation**: Bump .github Shared CI Validation via SHA from v2.0.5 to v2.0.6
+
+### Changed
+
+- **Shared Local CI**: These do **NOT** impact this VDB Theme project (ruff = python), but because the CI is shared the files come across.
+  - **Ruff Checks Extended**: As of shared CI Dev-workbench v2.2.1, Ruff checks have been extended to align with Home Assistant. This involves INcluding a wide range of checks and then EXcluding several items because of the wider range. In this project, that lead to 17 issues to be addressed.
+  - **IQS Validation**: `dev-workbench` script `iqs_static_check.py` added via `tasks.json` now checks for Home Assistant Integration Quality Scale ( IQS ) compliance to 7 basic IQS rules.
+
+## [1.4.0] - 2026-07-04 - Release - Eleven Accent Colors; Violet and Pink Renamed
+
+### Summary
+
+- Expands the theme from 8 to 11 accent colors — adding Blue and Emerald, and renaming/re-hueing Purple → Violet and Fuchsia → Pink — alongside a large amount of under-the-hood token and structural work.
 
 ### Added
 
 - **Two new accent variants — Blue and Emerald**, bringing the picker to 11 selectable themes.
-- **Lock entity colours**: lock states now follow the theme's accent/neutral scheme (locked = accent, unlocked/transitional = muted grey, jammed = red) instead of HA's fixed green/red.
-- **Inline code contrast**: inline code text colour is now set for readability on the dark code background.
+- **Lock entity colors**: lock states now follow the theme's accent/neutral scheme (locked = accent, unlocked/transitional = muted grey, jammed = red) instead of HA's fixed green/red.
+- **Inline code contrast**: inline code text color is now set for readability on the dark code background.
 - **Code editor surface**: the YAML/automation/template editor now uses a pure-black background instead of a lighter default panel.
 
 ### Changed
 
 - **"Black with Purple" → "Black with Violet"**: renamed and shifted bluer (`#9c27b0` → `#7c3aed`) for clearer separation in the picker.
 - **"Black with Fuchsia" → "Black with Pink"**: renamed and shifted to true pink (`#ff00ff` → `#ec4899`). Old `var(--purple-color)` / `var(--fuchsia-color)` references remain available for backward compatibility.
-- **Card title/header colour** is now themeable via `ha-card-header-color` (white remains the default).
+- **Card title/header color** is now themeable via `ha-card-header-color` (white remains the default).
 
-## [1.4.0-dev9] - 2026-07-04 - Unreleased
+## [1.4.0-dev9] - 2026-07-04 - Neutral Ramp: Single-Source Neutral Tokens
 
 ### Summary
 
-- **Neutral colour consolidation**: Repeated neutral hex literals (whites, greys, surfaces, borders) were consolidated into a single-source **Neutral Ramp** (new Section 1c). Each canonical neutral is now defined once as a keyed token that doubles as both a CSS custom property (`--token-neutral-*`, reachable from card-mod) and a YAML anchor (parse-time reuse). Purely a refactor — every existing key resolves to its exact previous value; verified by an anchor-resolution diff across all 11 themes (only the two card-mod blocks changed, as intended).
+- **Neutral color consolidation**: Repeated neutral hex literals (whites, greys, surfaces, borders) were consolidated into a single-source **Neutral Ramp** (new Section 1c). Each canonical neutral is now defined once as a keyed token that doubles as both a CSS custom property (`--token-neutral-*`, reachable from card-mod) and a YAML anchor (parse-time reuse). Purely a refactor — every existing key resolves to its exact previous value; verified by an anchor-resolution diff across all 11 themes (only the two card-mod blocks changed, as intended).
 
 ### Added
 
@@ -34,22 +221,22 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 - **Option A — `#ffffff` consolidated**: 17 standalone `#ffffff` YAML values now alias `*base_white` (`token-neutral-white`). `var(..., #ffffff)` fallbacks and comment references left untouched.
-- **Option B — anchor stragglers**: ~11 literals that duplicated an existing anchor's value (`#000000`, `#0a0a0a`, `#1a1a1a`, `#333333`, `#444444`, `#666666`) swapped to their anchors, eliminating "same colour, two forms" drift.
+- **Option B — anchor stragglers**: ~11 literals that duplicated an existing anchor's value (`#000000`, `#0a0a0a`, `#1a1a1a`, `#333333`, `#444444`, `#666666`) swapped to their anchors, eliminating "same color, two forms" drift.
 - **Option C — new neutral anchors**: repeated-but-unnamed `#151515` (control hover ×3), `#606060` (input outline ×3), and `#050505` (deep panel) given anchors and aliased.
-- **Option D — card-mod de-literalised**: the 5 hard hex literals inside the card-mod blocks (`#333333` scrollbar ×2, `#050505` data-table header, `#ffffff` more-info dialog ×2) now read from the Neutral Ramp via `var(--token-neutral-*, <literal>)`, each keeping its original hex as a fallback. This is the first time a card-mod block references a _theme-defined_ token (previously only native HA tokens), extending the established `token-*`-as-CSS-var pattern.
+- **Option D — card-mod de-literalized**: the 5 hard hex literals inside the card-mod blocks (`#333333` scrollbar ×2, `#050505` data-table header, `#ffffff` more-info dialog ×2) now read from the Neutral Ramp via `var(--token-neutral-*, <literal>)`, each keeping its original hex as a fallback. This is the first time a card-mod block references a _theme-defined_ token (previously only native HA tokens), extending the established `token-*`-as-CSS-var pattern.
 
 ### Notes
 
 - **Zero visual change intended**: all swaps are value-identical. Guarded by a resolved-value diff (Python anchor resolution) confirming all 307 keys × 11 themes are unchanged except the two card-mod strings. The card-mod `var()` references carry literal fallbacks, so rendering is safe even if a token were ever unset.
 - **Deliberately left as literals**: the 9 `var(--primary-color, #aaaaaa)` fallbacks (inert — primary-color is never unset); one-off singletons (`#1e1e1e`, `#2a2a2a`, `#888888`, `#f5f5f5`, `#222222`, badge and graph hues); and `#e0e0e0` on `ha-color-surface-lower-inverted` (not aliased to the `acc_silver` accent — same hex, different semantic role).
 
-### Docs Updated
+### Documentation
 
 - **AGENTS.md**: Documented the Section 1c Neutral Ramp (single-source token/anchor dual mechanism) and its rules under Theme File Architecture; noted that `card-mod` referencing theme-defined `--token-neutral-*` tokens (with literal fallback) is now a sanctioned pattern; added a guardrail that the Section 4b accent-emphasis block and Section 13b lock states are intentional opt-ins (not dead code); corrected the stale YAML-standards block (project `.yamllint` disables `document-start` and `line-length`); bumped the file-size note (~540 → ~600 lines).
 - **docs/DEVELOPMENT.md**: Corrected §1 YAML standards to match `.validate/.yamllint` (no `---`, no line-length limit); added a "Single-Source Neutral Tokens (Neutral Ramp)" subsection under §4 explaining the anchor-vs-keyed-token distinction, why only keyed tokens reach `card-mod`, and the anchor-resolution diff used to verify zero-drift refactors.
-- **README.md**: No content change for the consolidation (internal) or the accent-emphasis opt-in (requires editing the YAML) — neither affects user-facing install/usage docs. Separately fixed a broken anchor link: the "Startup Indicator" heading (line 178) used a VS16 compound emoji (`⏱️` = U+23F1 + U+FE0F), whose invisible variation selector broke the Table/TOC anchor match; swapped to a single-codepoint always-colour emoji (`⏳` U+23F3), per the DEVELOPMENT.md §9 / AGENTS.md §9 convention.
+- **README.md**: No content change for the consolidation (internal) or the accent-emphasis opt-in (requires editing the YAML) — neither affects user-facing install/usage docs. Separately fixed a broken anchor link: the "Startup Indicator" heading (line 178) used a VS16 compound emoji (`⏱️` = U+23F1 + U+FE0F), whose invisible variation selector broke the Table/TOC anchor match; swapped to a single-codepoint always-color emoji (`⏳` U+23F3), per the DEVELOPMENT.md §9 / AGENTS.md §9 convention.
 
-## [1.4.0-dev8] - 2026-07-04 - Unreleased
+## [1.4.0-dev8] - 2026-07-04 - Optional Accent Emphasis, Section 4b
 
 ### Summary
 
@@ -67,7 +254,7 @@ All notable changes to this project will be documented in this file.
 
 - **Re-scoped from dev7**: `ha-heading-card-title-color` was initially set aside as a no-op (its default already resolves to `--primary-text-color`). It now lives in the Section 4b opt-in block set to `var(--primary-color)` — as an accent choice rather than a default, which is where it adds value.
 
-## [1.4.0-dev7] - 2026-07-04 - Unreleased
+## [1.4.0-dev7] - 2026-07-04 - Four Tokens Adopted From ha-lcars; Lock State Colors
 
 ### Summary
 
@@ -84,13 +271,13 @@ All notable changes to this project will be documented in this file.
 
 - **Deliberately skipped**: `state-climate-*-color` (HA's heat=orange/cool=blue conventions aid usability); `table-header-background-color` (verified against HA frontend `dev` — not a real variable, HA never reads it, so it cannot replace the existing data-table-header card-mod which also sets the `#050505` shade and border-bottom).
 
-## [1.4.0-dev6] - 2026-07-04 - Unreleased
+## [1.4.0-dev6] - 2026-07-04 - README Aligned With the Integration Projects
 
 ### Changed
 
 - **Documentation**: Updated the README to align with the ZTE/Huwaei/WiFI Project README files.
 
-## [1.4.0-dev5] - 2026-07-04 - Unreleased
+## [1.4.0-dev5] - 2026-07-04 - Ruff and PHACC Bumps
 
 ### Bumps
 
@@ -98,13 +285,13 @@ All notable changes to this project will be documented in this file.
   - **Validate Bump**: Update `ruff` to 0.15.20
   - **Validate Bump**: Bumped `pytest-homeassistant-custom-component` to 0.13.345
 
-## [1.4.0-dev4] - 2026-07-03 - Unreleased
+## [1.4.0-dev4] - 2026-07-03 - Shared CI Bump v2.0.4 → v2.0.5
 
 ### Bumps
 
 - **Shared .github CI Validation**: Bump .github Shared CI Validation via SHA from v2.0.4 to v2.0.5
 
-## [1.4.0-dev3] - 2026-06-27 - Unreleased
+## [1.4.0-dev3] - 2026-06-27 - First Screenshot Batch for the Eleven Variants
 
 ### Summary
 
@@ -114,7 +301,7 @@ All notable changes to this project will be documented in this file.
 
 - **Screenshots**: Changed from one to two theme selection screenshots (so that full selection list could be shown, across the two images). Added the grid of identical entity cards, each with one of the variants applied, sorted in color order. Gives a good sense of the accent colors, but may be basic.
 
-## [1.4.0-dev2] - 2026-06-27 - Unreleased
+## [1.4.0-dev2] - 2026-06-27 - YAML Lint Aligned With Home Assistant
 
 ### Summary
 
@@ -127,7 +314,7 @@ All notable changes to this project will be documented in this file.
 - **Tasks.json**: Updated tasks.json, via hosts-tooling so that YAML-Lint only runs on git tracked files.
 - **Note**: This DOES change the themes/very_dark_black_ha_theme.yaml file, removing the "---" at the start of the file. Non functional, but is a file change.
 
-## [1.4.0-dev1] - 2026-06-26 - Unreleased
+## [1.4.0-dev1] - 2026-06-26 - Nine Themes to Eleven; Blue and Emerald Added
 
 ### Summary
 
@@ -152,7 +339,7 @@ All notable changes to this project will be documented in this file.
 - **Theme metadata header**: `Last Updated` bumped to 2026-06-25.
 - **Theme Test Dashboard**: Updated ui-theme-test.yaml to display the new and changed themes for testing visibility.
 
-### Docs Updated
+### Documentation
 
 - **AGENTS.md**: Accent variant list updated to 11 (Blue, Cyan, Emerald, Green, Indigo, Orange, Pink, Red, Silver, Violet, White); line count estimate updated (~480 → ~540); Section B description updated to enumerate all 11 variants and note Orange's red state overrides; Critical Rule 6 added (`card-mod-theme` must exactly match the HA picker name).
 - **README.md**: Features list reordered alphabetically; emoji updated; new entries (Blue 💙, Emerald 💚, Pink 🩷, Violet 🟣) added; Fuchsia/Purple entries removed; "Various sub-themes" updated to "11 sub-themes"; monochrome use-case line extended to mention Violet/Indigo as subtle accent options.
@@ -165,14 +352,14 @@ All notable changes to this project will be documented in this file.
 - **Maroon rejected**: Contrast ratio ~1.9:1 against black (WCAG AA requires 4.5:1) plus same hue as Red — adds no diversity.
 - **Rose/Crimson rejected**: Only ~15° clearance from both Pink and Red — crowds an already-tight zone with a luminance problem.
 
-## [1.3.8] - 2026-06-25 - Release
+## [1.3.8] - 2026-06-25 - Release - Black with White Base Theme
 
 ### Changed
 
 - **Black with White Theme**: A new monochrome theme has been implemented as the base anchor, replacing the previous _Standard_ and _Background Only_ themes.
 - **Form field hover state**: Changed Input field hover background from black to dark gray for better visual separation from surrounding surfaces.
 
-## [1.3.8-dev9] - 2026-06-25 - Unreleased
+## [1.3.8-dev9] - 2026-06-25 - Base Theme Consolidated and Renamed to Black with White
 
 ### Summary
 
@@ -193,7 +380,7 @@ All notable changes to this project will be documented in this file.
 
 - **HA 2026.7 Reference Doc**: Created `docs/change_ref_ha_v2026_7.md`. The 2026.7 frontend blog covers component size attribute renames (`small`/`medium`/`large` → `xs`/`s`/`m`/`l`/`xl` on `ha-button`, `ha-button-toggle-group`, `ha-slider`) and new infrastructure (virtualized lists, dirty state context). No CSS custom property changes — no theme YAML action required.
 
-## [1.3.8-dev6] - 2026-06-25 - Unreleased
+## [1.3.8-dev6] - 2026-06-25 - Theme Test Dashboard and Mock Entities
 
 ### Summary
 
@@ -205,7 +392,7 @@ All notable changes to this project will be documented in this file.
 - **Theme Test Dashboard**: A YAML mode theme test dashboard is now in place on the Home Assistant instance in the devcon of the project. This allows for visually checking many card and sensor types and combinations. It also has a compare view where the applied (default) theme can be compared to one of the VDB (Cyan) themes.
 - **Docs**: Updated relevant documents AGENTS, DEVELOPMENT, proj_Structure, README to account for the updated functionality.
 
-## [1.3.8-dev3] - 2026-06-25 - Unreleased
+## [1.3.8-dev3] - 2026-06-25 - Invisible Controls Fixed on the Base Themes
 
 ### Summary
 
@@ -226,7 +413,7 @@ All notable changes to this project will be documented in this file.
 
 Full investigation documented in `.notes/issues/base_theme_issues/`. The original symptom (switch ON and slider invisible) was initially investigated against HA 2026.5b0 (beta), which produced misleading results. Re-investigation on HA 2026.6.4 (release) produced definitive findings. The key discovery: `ha-switch-checked-*` and `paper-slider-*` tokens, added to the theme in 1.3.4, are not consumed by the actual components in HA 2026.6.4. Those tokens are retained for backward compatibility (as with all prev version tokens, they fail silently).
 
-## [1.3.8-dev2] - 2026-06-25 - Unreleased
+## [1.3.8-dev2] - 2026-06-25 - Theme Test Dashboard Created
 
 ### Summary
 
@@ -237,7 +424,7 @@ Full investigation documented in `.notes/issues/base_theme_issues/`. The origina
 - **"ui-theme-test.yaml**: Added file /.devcontainer/.devconfig/ui-theme-test.yaml as the Theme Test dashboard.
 - **Dummy Sensors**: Added a large number of dummy sensors based on the setup used by the **Graphite** theme
 
-## [1.3.8-dev1] - 2026-06-25 - Unreleased
+## [1.3.8-dev1] - 2026-06-25 - Code-Review Changes; Sections Renumbered
 
 ### Summary
 
@@ -249,7 +436,7 @@ Full investigation documented in `.notes/issues/base_theme_issues/`. The origina
 - **Section Numbers**: Previous re-orgs and updates of the theme file structure meant that the sections numbers were out of order. Re-numbers, sections 1 to 19 now.
 - **Comments**: Added several comments to confirm some decisions to that they would not be flagged again. Also ensured all comments are under 80 chars
 
-## [1.3.7] - 2026-06-24 - Release
+## [1.3.7] - 2026-06-24 - Release - HACS Listing; WCAG AA Contrast Fixes
 
 ### Summary
 
@@ -266,13 +453,13 @@ Full investigation documented in `.notes/issues/base_theme_issues/`. The origina
 - **Label Badges**: Darkened standard badge background colors (label-badge-red, label-badge-green, label-badge-blue, label-badge-yellow, label-badge-grey) to meet WCAG AA accessibility requirements and ensure high contrast against white text overlays.
 - **Documentation**: Updated README file based on release of theme on HACS. HACS install instructions updated to remove requirement to add as custom repository. Also update HACS badges in README header.
 
-## [1.3.7-dev10] - 2026-06-24 - Unreleased
+## [1.3.7-dev10] - 2026-06-24 - Danger and Warning Foreground Colors Fixed
 
 ### Fixed
 
 - **Danger / Warning**: Fixed ha-color-on-danger-normal and ha-color-on-warning-normal so that they display an alert (Red) color, same as HA default, not the text default (white)
 
-## [1.3.7-dev9] - 2026-06-24 - Unreleased
+## [1.3.7-dev9] - 2026-06-24 - RGB Primitive Tokens for `rgba()` Variants
 
 ### Summary
 
@@ -282,7 +469,7 @@ Full investigation documented in `.notes/issues/base_theme_issues/`. The origina
 
 - **RGB Primitive Tokens**: Added a set of raw RGB tuple tokens for Danger/Warning Fill Indirection (`token-rgb-red`, `token-rgb-orange`, `token-rgb-green`, etc.) alongside the existing hex color anchors in Section A. These expose each accent color's channel values as a standalone CSS custom property, enabling `rgba()` opacity variants anywhere in the theme without duplicating the numbers. Applied immediately to the danger and warning fill tokens, which previously hardcoded the RGB values at each opacity step. Further color changes now requires editing the hex anchor and its RGB primitive once; all opacity variants follow without further edits. This is inspired by the **Graphite** theme
 
-## [1.3.7-dev8] - 2026-06-24 - Unreleased
+## [1.3.7-dev8] - 2026-06-24 - Tooltip and Tag-Fill Contrast; Label Badges Darkened
 
 ### Summary
 
@@ -297,7 +484,7 @@ Full investigation documented in `.notes/issues/base_theme_issues/`. The origina
 
 - Label Badges: Darkened standard badge background colors (label-badge-red, label-badge-green, label-badge-blue, label-badge-yellow, label-badge-grey) to meet WCAG AA accessibility requirements and ensure high contrast against white text overlays.
 
-## [1.3.7-dev7] - 2026-06-24 - Unreleased
+## [1.3.7-dev7] - 2026-06-24 - Shared CI v2.0.4; Ruff Bump
 
 ### Changed
 
@@ -305,13 +492,13 @@ Full investigation documented in `.notes/issues/base_theme_issues/`. The origina
 - **Bump**: Bumped Ruff from 0.15.16 to 0.15.17 (Note used for theme , part of overall CI Validation)
 - **gitignore**: Updated .gitignore file (scratch folder)
 
-## [1.3.7-dev6] - 2026-06-20 - Unreleased
+## [1.3.7-dev6] - 2026-06-20 - README Updated for the HACS Listing
 
 ### Changed
 
 - **Documentation**: Updated README file based on release of theme on HACS. HACS install instructions updated to remove need to install custom repository. Also update HACS badges in README header.
 
-## [1.3.7-dev4] - 2026-06-18 - Unreleased
+## [1.3.7-dev4] - 2026-06-18 - CI Validation Overhaul
 
 ### Summary
 
@@ -326,13 +513,13 @@ Full investigation documented in `.notes/issues/base_theme_issues/`. The origina
 - **CodeQL**: Added a shared CodeQL validation config to the shared validation repo, pulled into each project, incl this one.
 - **Link Check**: Updated markdown-link-check to ignore .notes/ and .shared/ links in projects as these are excluded.
 
-## [1.3.6] - 2026-06-15
+## [1.3.6] - 2026-06-15 - CI Validation Test Release
 
 ### Summary
 
 - **CI Validation Only**: Changes to the CI Validation set-up require a release to test properly, but there are no user changes in this release, background/infrastructure only.
 
-## [1.3.6-dev5] - 2026-06-15 - Unreleased
+## [1.3.6-dev5] - 2026-06-15 - Shared CI and Local Validation Sync
 
 ### Changed
 
@@ -348,7 +535,7 @@ Full investigation documented in `.notes/issues/base_theme_issues/`. The origina
 
 -- **pyproject.toml**: Local validation sync (see above) means that the project (which is not a python project) has a pyproject.toml file. This is to allow the codespell config to be the same across all in sync projects.
 
-## [1.3.6-dev4] - 2026-06-15 - Unreleased
+## [1.3.6-dev4] - 2026-06-15 - Prettier Config as JSON; AGENTS.md Added
 
 ### Changed
 
@@ -359,7 +546,7 @@ Full investigation documented in `.notes/issues/base_theme_issues/`. The origina
 
 - **AGENTS.md**: Added AGENTS.md to repo root
 
-## [1.3.6-dev3] - 2026-06-11 - Unreleased
+## [1.3.6-dev3] - 2026-06-11 - Validation Tooling Sync; Dependabot Added
 
 ### Changed
 
@@ -377,7 +564,7 @@ Full investigation documented in `.notes/issues/base_theme_issues/`. The origina
 - **Dependabot**: Added Dependabot to the github.com CI. Is used for other PlayFaster projects but had not been in place for Very Dark Black Theme before.
 - **AGENTS.md**: Added AGENTS.md to repo root
 
-## [1.3.5] - 2026-06-05
+## [1.3.5] - 2026-06-05 - HA 2026.6 Radio Tokens; README Use Cases
 
 ### Added
 
@@ -387,7 +574,7 @@ Full investigation documented in `.notes/issues/base_theme_issues/`. The origina
 
 - **README**: Added Table of Contents; expanded Use Cases with new **Startup Indicator** (set a distinct accent at boot, auto-restore after 2 minutes) and **Visual Alert Highlight** (trigger Red on an alert condition, restore on clear) scenarios, each with a ready-to-use YAML automation example; promoted per-view and per-section theming from a tip callout to a dedicated subsection with scope-level descriptions; improved FAQ with grouped, emoji-labelled headings.
 
-## [1.3.5-dev4] - 2026-06-05 - Unreleased
+## [1.3.5-dev4] - 2026-06-05 - README Use Cases and Apply-Scope Sections
 
 ### Changed
 
@@ -398,28 +585,28 @@ Full investigation documented in `.notes/issues/base_theme_issues/`. The origina
 - **README — FAQ**: Grouped five FAQ items under two emoji sub-headings (`### 🔧 Installation & Setup`, `### 🎨 Display & Styling`); added per-item emoji headings (⚠️ 🖼️ 🔍 🖱️ 🔄).
 - **README — Contributors**: Added 🙏 prefix to contributor acknowledgement lines.
 
-## [1.3.5-dev3] - 2026-06-05 - Unreleased
+## [1.3.5-dev3] - 2026-06-05 - HA 2026.6 Web Awesome Radio Tokens
 
 ### Added
 
-- **HA 2026.6 Web Awesome Radio Tokens**: Added `ha-radio-option-active-color`, `ha-radio-option-border-color`, `ha-radio-option-border-color-hover`, `ha-radio-option-border-width`, `ha-radio-option-background-color`, `ha-radio-option-background-color-hover`, `ha-radio-option-checked-background-color`, and `ha-radio-option-checked-icon-color` to Section A (`base_logic`). Styled consistently with the existing `ha-checkbox-*` pattern (matching border colours, hover fills, and checked accent). Covers the new Web Awesome `ha-radio-group` / `ha-radio-option` component that replaces `ha-radio` in HA 2026.6. Sizing tokens (`ha-radio-option-height`, `toggle-size`, `checked-icon-scale`, `control-margin`, required-marker tokens) are intentionally omitted — the theme does not override equivalent checkbox sizing.
+- **HA 2026.6 Web Awesome Radio Tokens**: Added `ha-radio-option-active-color`, `ha-radio-option-border-color`, `ha-radio-option-border-color-hover`, `ha-radio-option-border-width`, `ha-radio-option-background-color`, `ha-radio-option-background-color-hover`, `ha-radio-option-checked-background-color`, and `ha-radio-option-checked-icon-color` to Section A (`base_logic`). Styled consistently with the existing `ha-checkbox-*` pattern (matching border colors, hover fills, and checked accent). Covers the new Web Awesome `ha-radio-group` / `ha-radio-option` component that replaces `ha-radio` in HA 2026.6. Sizing tokens (`ha-radio-option-height`, `toggle-size`, `checked-icon-scale`, `control-margin`, required-marker tokens) are intentionally omitted — the theme does not override equivalent checkbox sizing.
 - **Reference Doc**: Created `docs/change_ref_ha_v2026_6.md` documenting HA 2026.6 frontend changes: radio component migration, omitted sizing tokens, layout-width token renames (`ha-sidebar-width`, `ha-top-app-bar-width` — no action needed for this theme), removed/migrated components, and backward compatibility rationale.
 
-## [1.3.5-dev2] - 2026-06-04 - Unreleased
+## [1.3.5-dev2] - 2026-06-04 - Devcontainer Aligned With Other Projects
 
 ### Changed
 
 - **DevCon**: Aligned the Devcontainer environment with other projects.
 
-## [1.3.5-dev1] - 2026-05-24 - Unreleased
+## [1.3.5-dev1] - 2026-05-24 - README Use Cases and FAQ; CI Hardening
 
 ### Changed
 
-- **README**: Added `## 💡 Use Cases` section with 5 practical scenarios (OLED displays, monochrome setup, color-coded views, automated switching, custom card pairing); expanded FAQ & Troubleshooting from 2 to 5 entries — added "Theme does not appear in picker", "card-mod CSS features not working", and "Specific elements un-styled after HA update"; expanded Under the Hood section description to summarise the dev reference contents.
+- **README**: Added `## 💡 Use Cases` section with 5 practical scenarios (OLED displays, monochrome setup, color-coded views, automated switching, custom card pairing); expanded FAQ & Troubleshooting from 2 to 5 entries — added "Theme does not appear in picker", "card-mod CSS features not working", and "Specific elements un-styled after HA update"; expanded Under the Hood section description to summarize the dev reference contents.
 - **CI Validation** (`.github/workflows/validate.yaml`): Added `concurrency` block to cancel in-progress duplicate runs; added `permissions: contents: read` at workflow level; added `persist-credentials: false` to all checkout steps; pinned all action refs from floating tags to full SHA hashes; added Codespell job (Job 4); added Zizmor workflow security audit job (Job 5, `continue-on-error: true`); added Prettier Format Check step to `lint_val` job.
 - **Local Validation** (`.vscode/tasks.json`): Removed inapplicable `HA: Verify Manifest` task (theme has no `manifest.json`); added `Zizmor: GitHub Actions Audit` and `Zizmor: Fix (Safe Auto-Fix)` tasks; updated `Validate All` sequence to include Zizmor and remove the manifest task. **DevCon**: Updates to the DevCon setup, to standardize with other projects, esp. on mapping shared folders.
 
-## [1.3.4] - 2026-05-20
+## [1.3.4] - 2026-05-20 - HA 2026.5 Web Awesome Tokens
 
 ### Added
 
@@ -431,7 +618,7 @@ Full investigation documented in `.notes/issues/base_theme_issues/`. The origina
 
 - **Documentation**: Updated the README file with additional details including on applying themes to dashboard views and sections, as well as at the system level.
 
-## [1.3.4-dev3] - 2026-05-20 - Unreleased
+## [1.3.4-dev3] - 2026-05-20 - HA 2026.5 Web Awesome and Shadow Tokens
 
 ### Added
 
@@ -441,13 +628,13 @@ Full investigation documented in `.notes/issues/base_theme_issues/`. The origina
 - **Reference Docs**: Created `docs/change_ref_ha_v2026_5.md` documenting HA 2026.5 frontend theme element updates.
 - **Documentation**: Updated the README file with additional details including on applying themes to dashboard views and sections, as well as at the system level. Added additional screenshots.
 
-## [1.3.4-dev2] - 2026-05-08 - Unreleased
+## [1.3.4-dev2] - 2026-05-08 - Devcontainer Folder Mapping and Prettier
 
 ### Changed
 
-- **DevCon Improvements**: Changes to the devcontainer for better symmlinked folder mapping and additional checks (prettier) in tasks.json.
+- **DevCon Improvements**: Changes to the devcontainer for better symm-linked folder mapping and additional checks (prettier) in tasks.json.
 
-## [1.3.3] - 2026-05-02
+## [1.3.3] - 2026-05-02 - M3 and Web Awesome Tokens; Energy and Graph Palettes
 
 ### Added
 
@@ -468,7 +655,7 @@ Full investigation documented in `.notes/issues/base_theme_issues/`. The origina
 
 - **Brightened Secondary Text**: Secondary text raised to meet contrast guidelines on pure black backgrounds.
 
-## [1.3.3-dev13] - 2026-05-01
+## [1.3.3-dev13] - 2026-05-01 - Black (Background Only) Renamed; Two Test Themes Removed
 
 ### Changed
 
@@ -482,7 +669,7 @@ Full investigation documented in `.notes/issues/base_theme_issues/`. The origina
 
 ---
 
-## [1.3.3-dev12] - 2026-05-01
+## [1.3.3-dev12] - 2026-05-01 - Black More More Added; Black More Contrast Redesigned
 
 ### Added
 
@@ -520,7 +707,7 @@ Core ethos: pure black everywhere. The contrast themes exist to prevent confusio
 
 ---
 
-## [1.3.3-dev11] - 2026-05-01
+## [1.3.3-dev11] - 2026-05-01 - Utility Themes Renamed; card-mod Names and Primary Scale Corrected
 
 ### Changed
 
@@ -566,7 +753,7 @@ Core ethos: pure black everywhere. The contrast themes exist to prevent confusio
 - Code review notes for this session: `.notes/code_review/code_review_20260501.md`
 - Project structure documented for future sessions: `.notes/proj_structure.md`
 
-## [1.3.3-dev9] - 2026-05-01
+## [1.3.3-dev9] - 2026-05-01 - Black More Contrast Added; HA 2026.4 Element Expansion
 
 ### Added
 
@@ -622,7 +809,7 @@ Core ethos: pure black everywhere. The contrast themes exist to prevent confusio
   - Standardized heading icons.
   - Included License info.
 
-## [1.3.2] - 2026-04-03
+## [1.3.2] - 2026-04-03 - Drop-down Placeholder Color Fixed
 
 ### Fixed
 
@@ -637,7 +824,7 @@ Core ethos: pure black everywhere. The contrast themes exist to prevent confusio
 - **Validation**: Additional GitHub and Local validation steps.
 - **Formatting**: Additional local formatting checks.
 
-## [1.3.1] - 2026-04-01
+## [1.3.1] - 2026-04-01 - Purple, Indigo and Silver Variants
 
 ### Added
 
@@ -661,19 +848,19 @@ Core ethos: pure black everywhere. The contrast themes exist to prevent confusio
 
 - **"with Test" Option**: Removed the "Black with Orange plus Test" variant to simplify the theme list.
 
-## [1.2.2] - 2026-03-30
+## [1.2.2] - 2026-03-30 - Initial GitHub Release
 
 ### Changed
 
 - **GitHub**: Initial release to GitHub repository.
 
-## [1.2.1] - 2026-01-16
+## [1.2.1] - 2026-01-16 - TEST Visibility Marker
 
 ### Added
 
 - **TEST Visibility**: Added option for TEST text near top left, for identifying a test or backup system.
 
-## [1.1.1] - 2025-12-04
+## [1.1.1] - 2025-12-04 - Green, Red, Fuchsia and Orange Variants
 
 ### Added
 
@@ -683,7 +870,7 @@ Core ethos: pure black everywhere. The contrast themes exist to prevent confusio
 
 - **Invisible Menu Fix**: Fixed some of the black-on-black invisible menus.
 
-## [1.0.1] - 2025-11-18
+## [1.0.1] - 2025-11-18 - Initial Release, Cyan Accent
 
 ### Added
 
@@ -694,3 +881,5 @@ Core ethos: pure black everywhere. The contrast themes exist to prevent confusio
 ### Format
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+Entry structure — headers, titles, category headings and the split between this file and its counterpart — follows `.shared/dev_std/changelog_format.md`.
