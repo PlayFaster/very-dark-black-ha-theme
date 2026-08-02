@@ -5,6 +5,7 @@ All changes to this project will be documented in this file. This is the detaile
 ---
 
 - [Internal Detailed Changelog: Very Dark Black Home Assistant Theme](#internal-detailed-changelog-very-dark-black-home-assistant-theme)
+  - [\[1.4.2-dev1\] - 2026-08-03 - Docs Readme Agents](#142-dev1---2026-08-03---docs-readme-agents)
   - [\[1.4.1\] - 2026-08-02 - Visible Controls on the No-Accent Theme](#141---2026-08-02---visible-controls-on-the-no-accent-theme)
   - [\[1.4.1-dev9\] - 2026-08-02 - Theme Review Process; YAML Quoting Rule; Token Documentation](#141-dev9---2026-08-02---theme-review-process-yaml-quoting-rule-token-documentation)
   - [\[1.4.1-dev8\] - 2026-08-02 - Primary Color Scale \& Control Fallbacks; Subtitle Accent Docs](#141-dev8---2026-08-02---primary-color-scale--control-fallbacks-subtitle-accent-docs)
@@ -63,6 +64,12 @@ All changes to this project will be documented in this file. This is the detaile
   - [\[1.0.1\] - 2025-11-18 - Initial Release, Cyan Accent](#101---2025-11-18---initial-release-cyan-accent)
 
 ---
+
+## [1.4.2-dev1] - 2026-08-03 - Docs Readme Agents
+
+### Changed
+
+- **Docs**: Minor updates to `REAMDME.md` and `AGENTS.md`.
 
 ## [1.4.1] - 2026-08-02 - Visible Controls on the No-Accent Theme
 
