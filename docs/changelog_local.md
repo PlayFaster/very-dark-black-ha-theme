@@ -73,7 +73,7 @@ All changes to this project will be documented in this file. This is the detaile
 - **Validate Bump**: Update `zizmor` from 1.25.2 to 1.28.0
 - These do NOT affect this project but are part of Shared CI.
   - **Validate Bump**: Update `ruff` from 0.15.22 to 0.16.0
-  - **Validate Bump**: Bumped PHACC `pytest-homeassistant-custom-component` from 0.13.348 to 0.13.341
+  - **Validate Bump**: Bumped PHACC `pytest-homeassistant-custom-component` from 0.13.348 to 0.13.351
 - **`tasks.json`**: Added a new hardware checks section to tasks.json, for local hardware validation.
 
 ## [1.4.1-dev5] - 2026-07-26 - Unreleased
