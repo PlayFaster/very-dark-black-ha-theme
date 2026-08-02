@@ -93,16 +93,16 @@ Black with White: &base_logic # --- 1. Named Colors (Defined first for alias saf
   secondary-text-color: &base_subtext "#a8a8a8" # Brightened for WCAG AA safety
   # Icons & Accents mapping to primary-color
   accent-color: "var(--primary-color, #e0e0e0)"
-  paper-item-icon-color: var(--primary-color)
-  state-icon-color: var(--primary-color)
-  state-icon-active-color: var(--primary-color)
+  paper-item-icon-color: "var(--primary-color, #aaaaaa)"
+  state-icon-color: "var(--primary-color, #aaaaaa)"
+  state-icon-active-color: "var(--primary-color, #aaaaaa)"
   # state-active-color is defined in individual themes to avoid YAML merge warnings
-  sidebar-selected-icon-color: var(--primary-color)
-  sidebar-selected-text-color: var(--primary-color)
-  mdc-theme-primary: var(--primary-color)
-  paper-item-icon-active-color: var(--primary-color)
-  sl-color-primary-base: var(--primary-color)
-  mdc-ripple-color: var(--primary-color)
+  sidebar-selected-icon-color: "var(--primary-color, #aaaaaa)"
+  sidebar-selected-text-color: "var(--primary-color, #aaaaaa)"
+  mdc-theme-primary: "var(--primary-color, #aaaaaa)"
+  paper-item-icon-active-color: "var(--primary-color, #aaaaaa)"
+  sl-color-primary-base: "var(--primary-color, #aaaaaa)"
+  mdc-ripple-color: "var(--primary-color, #aaaaaa)"
   mdc-icon-button-ripple-opacity: "0.08"
   ha-font-weight-heading: "500"
   ha-font-weight-medium: "500"
@@ -110,13 +110,10 @@ Black with White: &base_logic # --- 1. Named Colors (Defined first for alias saf
   title-font-weight: "500"
   ha-font-smoothing: "antialiased"
 
-  # --- 4b. Optional Accent Emphasis (opt-in — all disabled by default) ---
+  # --- 4b. Optional Accent Emphasis ---
   # Theme philosophy: white/near-white text carries the body; the accent
-  # (primary-color) pops on icons and active controls only. The tokens below
-  # extend that pop to EMPHASIS TEXT (titles/headers). All are commented out so
-  # default behavior is unchanged — uncomment individually to taste. Each is a
-  # real HA native token verified against the frontend `dev` branch; the fallback
-  # shown in the comment is what HA uses today when the token is unset.
+  # (primary-color) pops on icons and active controls. The tokens below
+  # extend that pop to EMPHASIS TEXT (titles/headers).
   #
   # Standard card titles — Entities/Glance/etc. .card-header (default: #ffffff).
   # Hook is live: the Section 20 card-mod uses var(--ha-card-header-color,#ffffff)
@@ -129,6 +126,7 @@ Black with White: &base_logic # --- 1. Named Colors (Defined first for alias saf
   # ha-heading-card-title-color: var(--primary-color)
   #
   # Heading-card SUBTITLE line (default: --secondary-text-color #a8a8a8).
+  # Intentionally active: subtitle line pops with accent color on accent themes.
   ha-heading-card-subtitle-color: var(--primary-color)
   #
   # Top toolbar / view title text (default below is #ffffff — replace value).
@@ -231,17 +229,17 @@ Black with White: &base_logic # --- 1. Named Colors (Defined first for alias saf
   ha-color-neutral-80: hsl(from var(--secondary-text-color) h s calc(l * 1.60))
   ha-color-neutral-90: hsl(from var(--secondary-text-color) h s calc(l * 1.75))
   ha-color-neutral-95: hsl(from var(--secondary-text-color) h s calc(l * 1.90))
-  ha-color-primary-05: hsl(from var(--primary-color) h s calc(l * 0.15))
-  ha-color-primary-10: hsl(from var(--primary-color) h s calc(l * 0.25))
-  ha-color-primary-20: hsl(from var(--primary-color) h s calc(l * 0.40))
-  ha-color-primary-30: hsl(from var(--primary-color) h s calc(l * 0.70))
-  ha-color-primary-40: var(--primary-color)
-  ha-color-primary-50: hsl(from var(--primary-color) h s calc(l * 1.15))
-  ha-color-primary-60: hsl(from var(--primary-color) h s calc(l * 1.30))
-  ha-color-primary-70: hsl(from var(--primary-color) h s calc(l * 1.45))
-  ha-color-primary-80: hsl(from var(--primary-color) h s calc(l * 1.60))
-  ha-color-primary-90: hsl(from var(--primary-color) h s calc(l * 1.75))
-  ha-color-primary-95: hsl(from var(--primary-color) h s calc(l * 1.90))
+  ha-color-primary-05: "hsl(from var(--primary-color, #aaaaaa) h s calc(l * 0.15))"
+  ha-color-primary-10: "hsl(from var(--primary-color, #aaaaaa) h s calc(l * 0.25))"
+  ha-color-primary-20: "hsl(from var(--primary-color, #aaaaaa) h s calc(l * 0.40))"
+  ha-color-primary-30: "hsl(from var(--primary-color, #aaaaaa) h s calc(l * 0.70))"
+  ha-color-primary-40: "var(--primary-color, #aaaaaa)"
+  ha-color-primary-50: "hsl(from var(--primary-color, #aaaaaa) h s calc(l * 1.15))"
+  ha-color-primary-60: "hsl(from var(--primary-color, #aaaaaa) h s calc(l * 1.30))"
+  ha-color-primary-70: "hsl(from var(--primary-color, #aaaaaa) h s calc(l * 1.45))"
+  ha-color-primary-80: "hsl(from var(--primary-color, #aaaaaa) h s calc(l * 1.60))"
+  ha-color-primary-90: "hsl(from var(--primary-color, #aaaaaa) h s calc(l * 1.75))"
+  ha-color-primary-95: "hsl(from var(--primary-color, #aaaaaa) h s calc(l * 1.90))"
 
   # --- 13. Energy & Graphs ---
   energy-grid-consumption-color: *acc_blue
@@ -330,13 +328,13 @@ Black with White: &base_logic # --- 1. Named Colors (Defined first for alias saf
 
   # Web Awesome Switch - Checked
   ha-switch-checked-background-color: "var(--ha-color-primary-10)"
-  ha-switch-checked-thumb-background-color: "var(--primary-color)"
+  ha-switch-checked-thumb-background-color: "var(--primary-color, #aaaaaa)"
   ha-switch-checked-background-color-hover: "var(--ha-color-primary-20)"
-  ha-switch-checked-thumb-background-color-hover: "var(--primary-color)"
-  ha-switch-checked-border-color: "var(--primary-color)"
-  ha-switch-checked-thumb-border-color: "var(--primary-color)"
-  ha-switch-checked-thumb-border-color-hover: "var(--primary-color)"
-  # ha-control-switch (tile card / entity row toggle) — actual active token
+  ha-switch-checked-thumb-background-color-hover: "var(--primary-color, #aaaaaa)"
+  ha-switch-checked-border-color: "var(--primary-color, #aaaaaa)"
+  ha-switch-checked-thumb-border-color: "var(--primary-color, #aaaaaa)"
+  ha-switch-checked-thumb-border-color-hover: "var(--primary-color, #aaaaaa)"
+  # ha-control-switch fallback for legacy/standalone control paths (tile cards override inline)
   control-switch-on-color: "var(--primary-color, #aaaaaa)"
 
   # Entity Toggle Size Overrides (PR #51984)
@@ -374,7 +372,7 @@ Black with White: &base_logic # --- 1. Named Colors (Defined first for alias saf
   # Dropdown Inputs & Outlined Inputs
   mdc-select-label-ink-color: "var(--secondary-text-color)"
   input-outlined-idle-border-color: *acc_graphite
-  input-outlined-hover-border-color: "var(--primary-color)"
+  input-outlined-hover-border-color: "var(--primary-color, #aaaaaa)"
   input-outlined-disabled-border-color: "transparent"
 
   # Markdown Inline Code Styling
@@ -446,7 +444,7 @@ Black with White: &base_logic # --- 1. Named Colors (Defined first for alias saf
   mdc-text-field-outline-color: *base_outline
   mdc-select-outline-color: *base_outline
   ha-color-form-outline: *base_outline
-  ha-color-form-outline-hover: var(--primary-color)
+  ha-color-form-outline-hover: "var(--primary-color, #aaaaaa)"
   input-dropdown-icon-color: *base_white
 
   # --- 20. Global Card-Mod ---

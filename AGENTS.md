@@ -90,7 +90,7 @@ This mirrors the existing `token-rgb-*` and `token-size-radius-*` conventions. *
 
 ### Optional Accent Emphasis (Section 4b) — intentional opt-in
 
-Section 4b holds commented-out emphasis-text tokens (`ha-heading-card-title-color`, `ha-heading-card-subtitle-color`, `ha-card-header-color`) set to `var(--primary-color)`. These are a **deliberate opt-in**: default behavior keeps titles/headers white; a user uncomments a line to route the accent onto emphasis text. The theme's philosophy is "white/near-white carries the body; the accent pops on icons and active controls only." Do **not** flag the commented block as dead code, and do not uncomment it by default. The `card-header` accent hook is live via a var-with-fallback in the Section 20 `card-mod-card` (`var(--ha-card-header-color, #ffffff)`); keep that fallback so white stays the default. Section 13b similarly holds intentional per-state lock colors.
+Section 4b holds emphasis-text tokens (`ha-heading-card-title-color`, `ha-heading-card-subtitle-color`, `ha-card-header-color`) set to `var(--primary-color)`. `ha-heading-card-subtitle-color` is intentionally active by default so section heading subtitles pop with accent color on accent themes. Other emphasis tokens (`ha-card-header-color`, `ha-heading-card-title-color`) remain commented out as a **deliberate opt-in**: default behavior keeps card titles white; a user uncomments a line to route the accent onto card title text. The `card-header` accent hook is live via a var-with-fallback in the Section 20 `card-mod-card` (`var(--ha-card-header-color, #ffffff)`); keep that fallback so white stays the default. Section 13b similarly holds intentional per-state lock colors.
 
 ## Critical Rules When Modifying the Theme
 

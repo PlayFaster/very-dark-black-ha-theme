@@ -5,6 +5,7 @@ All changes to this project will be documented in this file. This is the detaile
 ---
 
 - [Internal Detailed Changelog: Very Dark Black Home Assistant Theme](#internal-detailed-changelog-very-dark-black-home-assistant-theme)
+  - [\[1.4.1-dev8\] - 2026-08-02 - Primary Color Scale \& Control Fallbacks; Subtitle Accent Docs](#141-dev8---2026-08-02---primary-color-scale--control-fallbacks-subtitle-accent-docs)
   - [\[1.4.1-dev7\] - 2026-08-02 - Bump Shared CI .github to v2.0.9](#141-dev7---2026-08-02---bump-shared-ci-github-to-v209)
   - [\[1.4.1-dev6\] - 2026-08-02 - README Documentation Accuracy; Changelog ToC Added](#141-dev6---2026-08-02---readme-documentation-accuracy-changelog-toc-added)
   - [\[1.4.1-dev5\] - 2026-07-26 - Ruff Bump 0.15.21 → 0.15.22](#141-dev5---2026-07-26---ruff-bump-01521--01522)
@@ -61,6 +62,18 @@ All changes to this project will be documented in this file. This is the detaile
 
 ---
 
+## [1.4.1-dev8] - 2026-08-02 - Primary Color Scale & Control Fallbacks; Subtitle Accent Docs
+
+### Fixed
+
+- **Primary Color Scale & Fallbacks Quoting**: Enclosed all 20 `var(--primary-color, #aaaaaa)` fallback values in double quotes across Section 4 and Section 12 (primary color scale `ha-color-primary-05` through `ha-color-primary-95`) to prevent YAML inline comment truncation (`#aaaaaa)`).
+- **Web Awesome Switch & Form Outline Tokens**: Added `"var(--primary-color, #aaaaaa)"` fallbacks to 5 direct switch tokens (`ha-switch-checked-thumb-background-color`, `ha-switch-checked-thumb-background-color-hover`, `ha-switch-checked-border-color`, `ha-switch-checked-thumb-border-color`, `ha-switch-checked-thumb-border-color-hover`) in Section 16 and `ha-color-form-outline-hover` in Section 19.
+- **Secondary Control Tokens**: Added `"var(--primary-color, #aaaaaa)"` fallbacks to `state-icon-color`, `sidebar-selected-icon-color`, `mdc-theme-primary`, `paper-item-icon-color`, `state-icon-active-color`, `sidebar-selected-text-color`, `paper-item-icon-active-color`, `sl-color-primary-base`, `mdc-ripple-color`, and `input-outlined-hover-border-color`.
+
+### Changed
+
+- **Documentation**: Updated Section 4b comments in `very_dark_black_ha_theme.yaml` and `AGENTS.md` to document `ha-heading-card-subtitle-color: var(--primary-color)` as active by design. Appended complete audit analysis into `.notes/issues/base_theme_issues/black_with_white_visibility_changes_20260802.md`.
+
 ## [1.4.1-dev7] - 2026-08-02 - Bump Shared CI .github to v2.0.9
 
 ### Bumps
@@ -71,8 +84,7 @@ All changes to this project will be documented in this file. This is the detaile
 
 ### Changed
 
-- **README**: Updated to add _Documentation Accuracy_ section, standard now across all project README files.
-**`changelog_local` ToC**: Added Table of Contents to `changelog_local` (top-of-file) and to end of `CHANGELOG`.
+- **README**: Updated to add _Documentation Accuracy_ section, standard now across all project README files. **`changelog_local` ToC**: Added Table of Contents to `changelog_local` (top-of-file) and to end of `CHANGELOG`.
 
 ### Bumps
 
@@ -96,7 +108,7 @@ All changes to this project will be documented in this file. This is the detaile
 
 - **Logo**: Added a logo to the top of `README` file. Themes in HA don't have icons or logos, unlike integrations. This is just for branding and visibility in the `README`.
 - **Readme**: Updated the readme with collapsible sections, similar to other PlayFaster README files.
-- **AGents**: Updated AGENTS.md to sync with Readme and in-line with current theme behavior.
+- **AGENTS**: Updated AGENTS.md to sync with Readme and in-line with current theme behavior.
 
 ### Bumps
 
