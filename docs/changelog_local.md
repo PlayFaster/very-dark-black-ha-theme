@@ -5,6 +5,7 @@ All changes to this project will be documented in this file. This is the detaile
 ---
 
 - [Internal Detailed Changelog: Very Dark Black Home Assistant Theme](#internal-detailed-changelog-very-dark-black-home-assistant-theme)
+  - [\[1.4.2-dev2\] - 2026-08-07 - CI Bumps; Docs, Formats \& Spelling](#142-dev2---2026-08-07---ci-bumps-docs-formats--spelling)
   - [\[1.4.2-dev1\] - 2026-08-03 - Docs Readme Agents](#142-dev1---2026-08-03---docs-readme-agents)
   - [\[1.4.1\] - 2026-08-02 - Visible Controls on the No-Accent Theme](#141---2026-08-02---visible-controls-on-the-no-accent-theme)
   - [\[1.4.1-dev9\] - 2026-08-02 - Theme Review Process; YAML Quoting Rule; Token Documentation](#141-dev9---2026-08-02---theme-review-process-yaml-quoting-rule-token-documentation)
@@ -64,6 +65,26 @@ All changes to this project will be documented in this file. This is the detaile
   - [\[1.0.1\] - 2025-11-18 - Initial Release, Cyan Accent](#101---2025-11-18---initial-release-cyan-accent)
 
 ---
+
+## [1.4.2-dev2] - 2026-08-07 - CI Bumps; Docs, Formats & Spelling
+
+### Bumps
+
+- **Shared CI**: Bump `.github` Shared CI Validation via SHA from v2.0.9 to v2.0.10
+- Shared CI Bumps That Do Not Affect This Project
+  - **Validate Bump**: Update `ruff` from 0.16.0 to 0.16.1
+  - **Validate Bump**: Bumped PHACC `pytest-homeassistant-custom-component` from 0.13.351 to 0.13.354
+
+### Changed
+
+- **Shared Sync Do Not Edit**: Added comments to several of the shared sync files to clarify they were shared and not to be edited locally.
+- **AGENTS No git:** Updated `AGENTS.md` to clarify strict restrictive rules around write git use.
+- **US UK Spelling**: Updated spelling to US standard (z vs s, color vs colour etc), to match HA standard.
+- **Tools not Dev Tools**: Changed References to "Developer Tools" to "Tools" to align with HA 2026.8+
+- Shared CI Changes That Do Not Affect This Project
+  - **`ruff`Rules:** Updated `ruff`rules, via shared CI to match latest HA exclusions and inclusions.
+  - **PyTest Branch Coverage:** Added branch coverage to existing PyTest line coverage measurement. Added via shared sync `tasks.json`.
+  - **`mutmut`:** Added `mutmut` via shared Dockerfile base image for Mutation Testing. Added task to `tasks.json`via shared sync.
 
 ## [1.4.2-dev1] - 2026-08-03 - Docs Readme Agents
 
