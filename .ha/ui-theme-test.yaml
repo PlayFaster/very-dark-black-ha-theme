@@ -1,6 +1,6 @@
 # VDB Theme Test Dashboard
 # Exercises all major HA UI element types, states, and surfaces.
-# Reload: Developer Tools → YAML → Reload Lovelace Resources
+# Reload: Tools → YAML → Reload Lovelace Resources
 
 # To change the COMPARE RHS Section search "Right — Black with Cyan"
 
@@ -268,7 +268,7 @@ views:
 
 
               **ha-progress-bar** — not directly triggerable from dashboard. Test via:
-              Developer Tools → Updates (trigger an install), or open the more-info
+              Tools → Updates (trigger an install), or open the more-info
               dialog for a `backup_manager` or `update` entity.
 
           - type: entities
@@ -1114,7 +1114,7 @@ views:
         content: >
           ## Very Dark Black — Theme Test Dashboard
 
-          All major HA UI element types and states in one place. Use **Developer Tools →
+          All major HA UI element types and states in one place. Use **Tools →
           YAML → Reload Lovelace** to refresh after theme changes. Each section is
           labelled with what it exercises.
 
@@ -2524,7 +2524,7 @@ views:
 
 
               **ha-progress-bar** — not directly triggerable from dashboard. Test via:
-              Developer Tools → Updates (trigger an install), or open the more-info
+              Tools → Updates (trigger an install), or open the more-info
               dialog for a `backup_manager` or `update` entity.
 
           - type: entities
@@ -3578,7 +3578,7 @@ views:
 
 
               **ha-progress-bar** — not directly triggerable from dashboard. Test via:
-              Developer Tools → Updates (trigger an install), or open the more-info
+              Tools → Updates (trigger an install), or open the more-info
               dialog for a `backup_manager` or `update` entity.
 
           - type: entities

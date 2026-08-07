@@ -2,6 +2,10 @@
 
 This file provides guidance to AI coding agents when working with code in this repository.
 
+> [!CAUTION]
+> **Never run `git checkout`, `git restore`, `git reset`, `git stash` or `git clean`. Ask first, every time — no exceptions, whoever's changes you think they are.** Reading git (`status`, `diff`, `log`, `show`) is always fine. Full rule and the incident behind it: [`agent_conventions.md`](.shared/dev_std/agent_conventions.md).
+
+
 ## What This Theme Does
 
 **Very Dark Black HA Theme** is a Home Assistant theme pack that provides pure black backgrounds with a choice of accent colors. The entire project ships as a single YAML file (`themes/very_dark_black_ha_theme.yaml`) that Home Assistant loads directly.
@@ -16,8 +20,8 @@ docs/DEVELOPMENT.md                           ← Critical dev reference: pitfal
 docs/change_ref_ha_v2026_4.md                 ← HA 2026.4 frontend migration notes
 docs/change_ref_ha_v2026_5.md                 ← HA 2026.5 Web Awesome component notes
 docs/change_ref_ha_v2026_6.md                 ← HA 2026.6 Web Awesome radio component notes
-docs/change_ref_ha_v2026_7.md                 ← HA 2026.7 — component behaviour only, no token changes
-docs/color_picks_202606.md                    ← Accent colour selection rationale
+docs/change_ref_ha_v2026_7.md                 ← HA 2026.7 — component behavior only, no token changes
+docs/color_picks_202606.md                    ← Accent color selection rationale
 docs/changelog_local.md                       ← Working changelog notes
 hacs.json                                     ← HACS metadata
 .ha/                                          ← GIT-TRACKED devcontainer config files
@@ -197,7 +201,7 @@ See `docs/DEVELOPMENT.md` Section 5 for full detail and examples.
 
 ## Development Environment
 
-The project uses a VS Code devcontainer running a live Home Assistant instance for manual theme testing. The container image is `ha-dev-base:latest`. Theme changes take effect immediately without restarting HA — reload via `Developer Tools → YAML → Reload Themes` or the `frontend.reload_themes` service call.
+The project uses a VS Code devcontainer running a live Home Assistant instance for manual theme testing. The container image is `ha-dev-base:latest`. Theme changes take effect immediately without restarting HA — reload via `Tools → YAML → Reload Themes` or the `frontend.reload_themes` service call.
 
 ### Interrogating the running HA instance
 
