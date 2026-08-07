@@ -832,7 +832,7 @@ views:
               - type: entities
                 title: Green
                 show_header_toggle: true
-                state_color: true
+                color: state
                 theme: Black with Green
                 entities:
                   - entity: switch.smart_plug_tv
@@ -848,7 +848,7 @@ views:
               - type: entities
                 title: Cyan
                 show_header_toggle: true
-                state_color: true
+                color: state
                 theme: Black with Cyan
                 entities:
                   - entity: switch.smart_plug_tv
@@ -864,7 +864,7 @@ views:
               - type: entities
                 title: Indigo
                 show_header_toggle: true
-                state_color: true
+                color: state
                 theme: Black with Indigo
                 entities:
                   - entity: switch.smart_plug_tv
@@ -880,7 +880,7 @@ views:
               - type: entities
                 title: Pink
                 show_header_toggle: true
-                state_color: true
+                color: state
                 theme: Black with Pink
                 entities:
                   - entity: switch.smart_plug_tv
@@ -896,7 +896,7 @@ views:
               - type: entities
                 title: Orange
                 show_header_toggle: true
-                state_color: true
+                color: state
                 theme: Black with Orange
                 entities:
                   - entity: switch.smart_plug_tv
@@ -912,7 +912,7 @@ views:
               - type: entities
                 title: Silver
                 show_header_toggle: true
-                state_color: true
+                color: state
                 theme: Black with Silver
                 entities:
                   - entity: switch.smart_plug_tv
@@ -933,7 +933,7 @@ views:
               - type: entities
                 title: Emerald
                 show_header_toggle: true
-                state_color: true
+                color: state
                 theme: Black with Emerald
                 entities:
                   - entity: switch.smart_plug_tv
@@ -949,7 +949,7 @@ views:
               - type: entities
                 title: Blue
                 show_header_toggle: true
-                state_color: true
+                color: state
                 theme: Black with Blue
                 entities:
                   - entity: switch.smart_plug_tv
@@ -965,7 +965,7 @@ views:
               - type: entities
                 title: Violet
                 show_header_toggle: true
-                state_color: true
+                color: state
                 theme: Black with Violet
                 entities:
                   - entity: switch.smart_plug_tv
@@ -981,7 +981,7 @@ views:
               - type: entities
                 title: Orange
                 show_header_toggle: true
-                state_color: true
+                color: state
                 theme: Black with Orange
                 entities:
                   - entity: switch.smart_plug_tv
@@ -997,7 +997,7 @@ views:
               - type: entities
                 title: Red
                 show_header_toggle: true
-                state_color: true
+                color: state
                 theme: Black with Red
                 entities:
                   - entity: switch.smart_plug_tv
@@ -1013,7 +1013,7 @@ views:
               - type: entities
                 title: White
                 show_header_toggle: true
-                state_color: true
+                color: state
                 theme: Black with White
                 entities:
                   - entity: switch.smart_plug_tv
@@ -2009,7 +2009,7 @@ views:
           - type: entities
             title: Green
             show_header_toggle: true
-            state_color: true
+            color: state
             theme: Black with Green
             entities:
               - entity: switch.smart_plug_tv
@@ -2025,7 +2025,7 @@ views:
           - type: entities
             title: Cyan
             show_header_toggle: true
-            state_color: true
+            color: state
             theme: Black with Cyan
             entities:
               - entity: switch.smart_plug_tv
@@ -2041,7 +2041,7 @@ views:
           - type: entities
             title: Indigo
             show_header_toggle: true
-            state_color: true
+            color: state
             theme: Black with Indigo
             entities:
               - entity: switch.smart_plug_tv
@@ -2057,7 +2057,7 @@ views:
           - type: entities
             title: Pink
             show_header_toggle: true
-            state_color: true
+            color: state
             theme: Black with Pink
             entities:
               - entity: switch.smart_plug_tv
@@ -2073,7 +2073,7 @@ views:
           - type: entities
             title: Orange
             show_header_toggle: true
-            state_color: true
+            color: state
             theme: Black with Orange
             entities:
               - entity: switch.smart_plug_tv
@@ -2089,7 +2089,7 @@ views:
           - type: entities
             title: Silver
             show_header_toggle: true
-            state_color: true
+            color: state
             theme: Black with Silver
             entities:
               - entity: switch.smart_plug_tv
@@ -2112,7 +2112,7 @@ views:
           - type: entities
             title: Emerald
             show_header_toggle: true
-            state_color: true
+            color: state
             theme: Black with Emerald
             entities:
               - entity: switch.smart_plug_tv
@@ -2128,7 +2128,7 @@ views:
           - type: entities
             title: Blue
             show_header_toggle: true
-            state_color: true
+            color: state
             theme: Black with Blue
             entities:
               - entity: switch.smart_plug_tv
@@ -2144,7 +2144,7 @@ views:
           - type: entities
             title: Violet
             show_header_toggle: true
-            state_color: true
+            color: state
             theme: Black with Violet
             entities:
               - entity: switch.smart_plug_tv
@@ -2160,7 +2160,7 @@ views:
           - type: entities
             title: Orange
             show_header_toggle: true
-            state_color: true
+            color: state
             theme: Black with Orange
             entities:
               - entity: switch.smart_plug_tv
@@ -2176,7 +2176,7 @@ views:
           - type: entities
             title: Red
             show_header_toggle: true
-            state_color: true
+            color: state
             theme: Black with Red
             entities:
               - entity: switch.smart_plug_tv
@@ -2192,7 +2192,7 @@ views:
           - type: entities
             title: White
             show_header_toggle: true
-            state_color: true
+            color: state
             theme: Black with White
             entities:
               - entity: switch.smart_plug_tv
@@ -3135,7 +3135,7 @@ views:
               - type: entities
                 title: Green
                 show_header_toggle: true
-                state_color: true
+                color: state
                 theme: Black with Green
                 entities:
                   - entity: switch.smart_plug_tv
@@ -3151,7 +3151,7 @@ views:
               - type: entities
                 title: Emerald
                 show_header_toggle: true
-                state_color: true
+                color: state
                 theme: Black with Emerald
                 entities:
                   - entity: switch.smart_plug_tv
@@ -3167,7 +3167,7 @@ views:
               - type: entities
                 title: Cyan
                 show_header_toggle: true
-                state_color: true
+                color: state
                 theme: Black with Cyan
                 entities:
                   - entity: switch.smart_plug_tv
@@ -3183,7 +3183,7 @@ views:
               - type: entities
                 title: Blue
                 show_header_toggle: true
-                state_color: true
+                color: state
                 theme: Black with Blue
                 entities:
                   - entity: switch.smart_plug_tv
@@ -3199,7 +3199,7 @@ views:
               - type: entities
                 title: Indigo
                 show_header_toggle: true
-                state_color: true
+                color: state
                 theme: Black with Indigo
                 entities:
                   - entity: switch.smart_plug_tv
@@ -3218,7 +3218,7 @@ views:
               - type: entities
                 title: Violet
                 show_header_toggle: true
-                state_color: true
+                color: state
                 theme: Black with Violet
                 entities:
                   - entity: switch.smart_plug_tv
@@ -3234,7 +3234,7 @@ views:
               - type: entities
                 title: Pink
                 show_header_toggle: true
-                state_color: true
+                color: state
                 theme: Black with Pink
                 entities:
                   - entity: switch.smart_plug_tv
@@ -3250,7 +3250,7 @@ views:
               - type: entities
                 title: Orange
                 show_header_toggle: true
-                state_color: true
+                color: state
                 theme: Black with Orange
                 entities:
                   - entity: switch.smart_plug_tv
@@ -3266,7 +3266,7 @@ views:
               - type: entities
                 title: Red
                 show_header_toggle: true
-                state_color: true
+                color: state
                 theme: Black with Red
                 entities:
                   - entity: switch.smart_plug_tv
@@ -3285,7 +3285,7 @@ views:
               - type: entities
                 title: Silver
                 show_header_toggle: true
-                state_color: true
+                color: state
                 theme: Black with Silver
                 entities:
                   - entity: switch.smart_plug_tv
@@ -3301,7 +3301,7 @@ views:
               - type: entities
                 title: White
                 show_header_toggle: true
-                state_color: true
+                color: state
                 theme: Black with White
                 entities:
                   - entity: switch.smart_plug_tv
@@ -4189,7 +4189,7 @@ views:
               - type: entities
                 title: Green
                 show_header_toggle: true
-                state_color: true
+                color: state
                 theme: Black with Green
                 entities:
                   - entity: switch.smart_plug_tv
@@ -4205,7 +4205,7 @@ views:
               - type: entities
                 title: Emerald
                 show_header_toggle: true
-                state_color: true
+                color: state
                 theme: Black with Emerald
                 entities:
                   - entity: switch.smart_plug_tv
@@ -4221,7 +4221,7 @@ views:
               - type: entities
                 title: Cyan
                 show_header_toggle: true
-                state_color: true
+                color: state
                 theme: Black with Cyan
                 entities:
                   - entity: switch.smart_plug_tv
@@ -4237,7 +4237,7 @@ views:
               - type: entities
                 title: Blue
                 show_header_toggle: true
-                state_color: true
+                color: state
                 theme: Black with Blue
                 entities:
                   - entity: switch.smart_plug_tv
@@ -4253,7 +4253,7 @@ views:
               - type: entities
                 title: Indigo
                 show_header_toggle: true
-                state_color: true
+                color: state
                 theme: Black with Indigo
                 entities:
                   - entity: switch.smart_plug_tv
@@ -4272,7 +4272,7 @@ views:
               - type: entities
                 title: Violet
                 show_header_toggle: true
-                state_color: true
+                color: state
                 theme: Black with Violet
                 entities:
                   - entity: switch.smart_plug_tv
@@ -4288,7 +4288,7 @@ views:
               - type: entities
                 title: Pink
                 show_header_toggle: true
-                state_color: true
+                color: state
                 theme: Black with Pink
                 entities:
                   - entity: switch.smart_plug_tv
@@ -4304,7 +4304,7 @@ views:
               - type: entities
                 title: Orange
                 show_header_toggle: true
-                state_color: true
+                color: state
                 theme: Black with Orange
                 entities:
                   - entity: switch.smart_plug_tv
@@ -4320,7 +4320,7 @@ views:
               - type: entities
                 title: Red
                 show_header_toggle: true
-                state_color: true
+                color: state
                 theme: Black with Red
                 entities:
                   - entity: switch.smart_plug_tv
@@ -4339,7 +4339,7 @@ views:
               - type: entities
                 title: Silver
                 show_header_toggle: true
-                state_color: true
+                color: state
                 theme: Black with Silver
                 entities:
                   - entity: switch.smart_plug_tv
@@ -4355,7 +4355,7 @@ views:
               - type: entities
                 title: White
                 show_header_toggle: true
-                state_color: true
+                color: state
                 theme: Black with White
                 entities:
                   - entity: switch.smart_plug_tv

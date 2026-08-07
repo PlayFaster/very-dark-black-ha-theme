@@ -50,6 +50,10 @@ These are JavaScript API schema enhancements with no styling surface. **No actio
 
 The `entities` and `glance` cards now support the `color` configuration parameter (e.g. `color: state` or `color: none`) as a replacement for the legacy `state_color` boolean. This is a Lovelace dashboard configuration option/YAML syntax change, not a CSS custom property or theme variable set in theme YAML. **No theme YAML changes are required.**
 
+**However, the visual test dashboard was affected.** `.ha/ui-theme-test.yaml` used `state_color: true` in 46 places, all on `entities` cards. When HA drops the legacy boolean those rows would silently lose state coloring — which is precisely what the black-background contrast checks exercise, so the regression would be invisible in review and misleading in testing. Migrated 2026-08-07: all 46 occurrences replaced with `color: state`. No `glance` card in the test dashboard used the option.
+
+Safe-area padding (see §5) can be opted out of with `handle_safe_area: true` in a custom panel or add-on config. Not relevant to this theme, which ships no custom panel.
+
 ---
 
 #### 5. Custom Panels & App Iframes: Safe-Area Handling
@@ -73,6 +77,8 @@ These values are dynamic and device-dependent; the theme does not customize or o
 
 ### Theme Impact
 
-**None.** No color-related CSS custom properties were added, renamed, or deprecated in 2026.8. The theme YAML requires no changes for this release.
+**None to the theme YAML.** No color-related CSS custom properties were added, renamed, or deprecated in 2026.8.
+
+One repo change was required outside the theme: the `state_color` → `color: state` migration in the test dashboard (see §4).
 
 Reviewed: 2026-08-07

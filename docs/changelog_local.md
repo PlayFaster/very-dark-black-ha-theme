@@ -5,6 +5,7 @@ All changes to this project will be documented in this file. This is the detaile
 ---
 
 - [Internal Detailed Changelog: Very Dark Black Home Assistant Theme](#internal-detailed-changelog-very-dark-black-home-assistant-theme)
+  - [\[1.4.2-dev4\] - 2026-08-07 - Update Theme Test Dashboard](#142-dev4---2026-08-07---update-theme-test-dashboard)
   - [\[1.4.2-dev3\] - 2026-08-07 - No Known Theme Changes 2026.8](#142-dev3---2026-08-07---no-known-theme-changes-20268)
   - [\[1.4.2-dev2\] - 2026-08-07 - CI Bumps; Docs, Formats \& Spelling](#142-dev2---2026-08-07---ci-bumps-docs-formats--spelling)
   - [\[1.4.2-dev1\] - 2026-08-03 - Docs Readme Agents](#142-dev1---2026-08-03---docs-readme-agents)
@@ -67,11 +68,17 @@ All changes to this project will be documented in this file. This is the detaile
 
 ---
 
+## [1.4.2-dev4] - 2026-08-07 - Update Theme Test Dashboard
+
+### Changed
+
+- **`color: state`**: HA 2026.8 Changes to `color: state` from `state_color: true` in dashboards. Updated `ui-theme-test.yaml` to reflect this.
+
 ## [1.4.2-dev3] - 2026-08-07 - No Known Theme Changes 2026.8
 
 ### Changed
 
-- **2026.8 Change Blog**: Reviewed 2026.8 Frontend change bloag. No known theme relevant changes documented. Created `docs/change_ref_ha_v2026_8.md`to record this.
+- **2026.8 Change Blog**: Reviewed 2026.8 Frontend change blog. No known theme relevant changes documented. Created `docs/change_ref_ha_v2026_8.md`to record this.
 
 ## [1.4.2-dev2] - 2026-08-07 - CI Bumps; Docs, Formats & Spelling
 
