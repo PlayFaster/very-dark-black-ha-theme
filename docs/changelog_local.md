@@ -5,6 +5,7 @@ All changes to this project will be documented in this file. This is the detaile
 ---
 
 - [Internal Detailed Changelog: Very Dark Black Home Assistant Theme](#internal-detailed-changelog-very-dark-black-home-assistant-theme)
+  - [\[1.4.2-dev3\] - 2026-08-07 - No Known Theme Changes 2026.8](#142-dev3---2026-08-07---no-known-theme-changes-20268)
   - [\[1.4.2-dev2\] - 2026-08-07 - CI Bumps; Docs, Formats \& Spelling](#142-dev2---2026-08-07---ci-bumps-docs-formats--spelling)
   - [\[1.4.2-dev1\] - 2026-08-03 - Docs Readme Agents](#142-dev1---2026-08-03---docs-readme-agents)
   - [\[1.4.1\] - 2026-08-02 - Visible Controls on the No-Accent Theme](#141---2026-08-02---visible-controls-on-the-no-accent-theme)
@@ -65,6 +66,12 @@ All changes to this project will be documented in this file. This is the detaile
   - [\[1.0.1\] - 2025-11-18 - Initial Release, Cyan Accent](#101---2025-11-18---initial-release-cyan-accent)
 
 ---
+
+## [1.4.2-dev3] - 2026-08-07 - No Known Theme Changes 2026.8
+
+### Changed
+
+- **2026.8 Change Blog**: Reviewed 2026.8 Frontend change bloag. No known theme relevant changes documented. Created `docs/change_ref_ha_v2026_8.md`to record this.
 
 ## [1.4.2-dev2] - 2026-08-07 - CI Bumps; Docs, Formats & Spelling
 
