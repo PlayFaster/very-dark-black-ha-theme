@@ -268,8 +268,8 @@ views:
 
 
               **ha-progress-bar** — not directly triggerable from dashboard. Test via:
-              Tools → Updates (trigger an install), or open the more-info
-              dialog for a `backup_manager` or `update` entity.
+              Tools → Updates (trigger an install), or open the more-info dialog for a
+              `backup_manager` or `update` entity.
 
           - type: entities
             title: Date & Time Inputs
@@ -1114,9 +1114,9 @@ views:
         content: >
           ## Very Dark Black — Theme Test Dashboard
 
-          All major HA UI element types and states in one place. Use **Tools →
-          YAML → Reload Lovelace** to refresh after theme changes. Each section is
-          labelled with what it exercises.
+          All major HA UI element types and states in one place. Use **Tools → YAML →
+          Reload Lovelace** to refresh after theme changes. Each section is labelled
+          with what it exercises.
 
       # ════════════════════════════════════════════════════════════════════
       # MORE INFO DIALOG NOTE
@@ -2524,8 +2524,8 @@ views:
 
 
               **ha-progress-bar** — not directly triggerable from dashboard. Test via:
-              Tools → Updates (trigger an install), or open the more-info
-              dialog for a `backup_manager` or `update` entity.
+              Tools → Updates (trigger an install), or open the more-info dialog for a
+              `backup_manager` or `update` entity.
 
           - type: entities
             title: Date & Time Inputs
@@ -3578,8 +3578,8 @@ views:
 
 
               **ha-progress-bar** — not directly triggerable from dashboard. Test via:
-              Tools → Updates (trigger an install), or open the more-info
-              dialog for a `backup_manager` or `update` entity.
+              Tools → Updates (trigger an install), or open the more-info dialog for a
+              `backup_manager` or `update` entity.
 
           - type: entities
             title: Date & Time Inputs
