@@ -254,4 +254,6 @@ These are deliberate choices in `README.md`. Do not raise findings against them 
 
 Markdown rules (the single-codepoint emoji ban for headings), temporary-file placement, the no-nuclear-restart rule, and progress reporting are centralized — see [`.shared/dev_std/agent_conventions.md`](.shared/dev_std/agent_conventions.md) §5–7. Sections 1–4 of that file are integration-specific; only §1 (`docker exec`) and §3 (HA interrogation) apply here, and the Python tooling in §2 and §4 does not.
 
+*   **[!] Note:** If you edit files inside directory junctions (`.notes/` or `.shared/`), do not run container validation on them. Validate them on the Windows host from the `shared/` folder.
+
 The emoji rule matters for this project in particular: `README.md` uses emoji in almost every heading.

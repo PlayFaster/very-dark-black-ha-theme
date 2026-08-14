@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
-- Fixes washed-out controls on **Black with White**, the no-accent variant. A switch that was on showed only a faint outline with no fill, making it hard to tell apart from one that was off.
+- **Monochrome controls visibility**: Restored fill and contrast to active controls (such as switches) on **Black with White**, the no-accent variant.
 - The ten accent variants — Blue, Cyan, Emerald, Green, Indigo, Orange, Pink, Red, Silver, Violet — are unchanged.
 
 ## [1.4.0] - 2026-07-04 - Release - Eleven Accent Colors; Violet and Pink Renamed
@@ -18,7 +18,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - **Two new accent variants — Blue and Emerald**, bringing the picker to 11 selectable themes.
-- **Lock entity colors**: lock states now follow the theme's accent/neutral scheme (locked = accent, unlocked/transitional = muted grey, jammed = red) instead of HA's fixed green/red.
+- **Lock entity colors**: lock states now follow the theme's accent/neutral scheme (locked = accent, unlocked/transitional = muted gray, jammed = red) instead of HA's fixed green/red.
 - **Inline code contrast**: inline code text color is now set for readability on the dark code background.
 - **Code editor surface**: the YAML/automation/template editor now uses a pure-black background instead of a lighter default panel.
 
@@ -107,7 +107,7 @@ Home Assistant 2026.6 Compatibility
 
 ### Fixed
 
-- **Grey Drop-down Placeholder**: Fixed an issue where some element changes introduced in HA 2026.4.x caused drop-down placeholders to be grey.
+- **Dropdown placeholder contrast**: Restored visibility of gray dropdown placeholders following frontend changes introduced in HA 2026.4.x.
 
 ### Added
 

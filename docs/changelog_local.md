@@ -5,6 +5,7 @@ All changes to this project will be documented in this file. This is the detaile
 ---
 
 - [Internal Detailed Changelog: Very Dark Black Home Assistant Theme](#internal-detailed-changelog-very-dark-black-home-assistant-theme)
+  - [\[1.4.2-dev5\] - 2026-08-14 - CI Bumps Zizmor JSONSchema; AGENTS.md; CHANGELOG.md](#142-dev5---2026-08-14---ci-bumps-zizmor-jsonschema-agentsmd-changelogmd)
   - [\[1.4.2-dev4\] - 2026-08-07 - Update Theme Test Dashboard](#142-dev4---2026-08-07---update-theme-test-dashboard)
   - [\[1.4.2-dev3\] - 2026-08-07 - No Known Theme Changes 2026.8](#142-dev3---2026-08-07---no-known-theme-changes-20268)
   - [\[1.4.2-dev2\] - 2026-08-07 - CI Bumps; Docs, Formats \& Spelling](#142-dev2---2026-08-07---ci-bumps-docs-formats--spelling)
@@ -67,6 +68,21 @@ All changes to this project will be documented in this file. This is the detaile
   - [\[1.0.1\] - 2025-11-18 - Initial Release, Cyan Accent](#101---2025-11-18---initial-release-cyan-accent)
 
 ---
+
+## [1.4.2-dev5] - 2026-08-14 - CI Bumps Zizmor JSONSchema; AGENTS.md; CHANGELOG.md
+
+### Bumps
+
+- **Validate Bump**: Update `zizmor` from 1.28.0 to 1.29.0
+- **Validate Bump**: Update `check-jsonschema` from 0.37.4 to 0.38.0
+- Shared CI Bumps That Do Not Affect This Project
+  - **Validate Bump**: Update `mypy` from 2.1.0 to 2.3.0
+  - **Validate Bump**: Bumped PHACC `pytest-homeassistant-custom-component` from 0.13.354 to 0.13.355
+
+### Changed
+
+- **`AGENTS.md`**: Added note about different linting for `.notes` and `.shared`.
+- **`CHANGELOG.md`**: Rewrote some entries for clarity and tone.
 
 ## [1.4.2-dev4] - 2026-08-07 - Update Theme Test Dashboard
 
