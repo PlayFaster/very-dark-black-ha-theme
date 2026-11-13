@@ -4,7 +4,7 @@ This file provides guidance to AI coding agents when working with code in this r
 
 > [!CAUTION]
 >
-> **Never run `git checkout`, `git restore`, `git reset`, `git stash` or `git clean`. Ask first, every time — no exceptions, whoever's changes you think they are.** Reading git (`status`, `diff`, `log`, `show`) is always fine. Full rule and the incident behind it: [`agent_conventions.md`](.shared/dev_std/agent_conventions.md).
+> **Never run `git checkout`, `git restore`, `git reset`, `git stash` or `git clean`. Ask first, every time — no exceptions, whoever's changes you think they are.** Reading git (`status`, `diff`, `log`, `show`) is always fine. Full rule and the incident behind it: `agent_conventions.md` (`.shared/dev_std/agent_conventions.md`).
 
 ## What This Theme Does
 
@@ -55,13 +55,15 @@ Run via **Terminal → Run Task** inside the devcontainer:
 | `Codespell: Check (View Only)` | Spell check (config from root `pyproject.toml`)   |
 | `Zizmor: GitHub Actions Audit` | Security audit of `.github/` workflows            |
 | `Prettier: Check (View Only)`  | Prettier format check on md, json, yaml           |
-| **Fix All**                    | Runs all auto-fix tasks in sequence               |
+| **Fix All Fast**               | Runs all auto-fix tasks and fast checks in sequence |
 
-Python-specific tasks (`Ruff`, `Mypy`, `Pytest`, `Pre-commit`) are present in the shared task list but skip automatically for this project via `project.category = theme` in `.vscode/settings.json`.
+Python-specific tasks (`Ruff`, `Mypy`, `Pytest`, `Pre-commit`) are present in the shared task list but skip automatically for this project via `project.category = theme` in `.vscode/settings.json`. A skipped task writes its own report and shows as a neutral `–` in the summary, so a skip is distinguishable from a task that did not run.
+
+Tasks can also be run headlessly by label; see `agent_conventions.md` §2 for how and when.
 
 ### Running tools directly inside the devcontainer
 
-Agents run on the Windows host and reach the container via `docker exec` — the full workflow, the `.devcontainer/.env` identity lookup, and the Git Bash path-mangling trap are in [shared conventions §1](.shared/dev_std/agent_conventions.md). Theme-flavoured examples:
+Agents run on the Windows host and reach the container via `docker exec` — the full workflow, the `.devcontainer/.env` identity lookup, and the Git Bash path-mangling trap are in shared conventions §1 (`.shared/dev_std/agent_conventions.md`). Theme-flavoured examples:
 
 ```bash
 docker exec -w /workspaces/<PROJECT_DIR> <CONTAINER_NAME> bash -c "codespell ."
@@ -143,7 +145,7 @@ A value ending in `,` is truncated. This occurred on 2026-08-02 and broke 20 tok
 | 2026.5+ | Web Awesome tokens: `ha-switch`, `ha-checkbox`, `ha-progress-bar` |
 | 2026.6+ | Web Awesome tokens: `ha-radio-group`, `ha-radio-option` |
 | 2026.7+ | Component behavior only — no token changes |
-| 2026.8+ | `ha-bottom-sheet-*` tokens (adaptive dialogs). `paper-item-icon-color` and `state-icon-active-color` no longer referenced by the frontend |
+| 2026.8+ | `ha-bottom-sheet-*` tokens (adaptive dialogs). `paper-item-icon-color` no longer referenced by the frontend; `state-icon-active-color` unused since 2022.12 (developer blog, 2022-12-07) |
 
 The `hsl(from ...)` relative color syntax used for the `ha-color-neutral-*` and `ha-color-primary-*` scales requires HA 2026.4+ and a modern browser.
 
@@ -177,13 +179,13 @@ Avoid deep shadow-DOM selectors (e.g., `ha-card-picker $ ha-sub-page`) — they 
 
 ## Modern Token Migration Context
 
-HA is migrating from `paper-` / `mdc-` variables to **Web Awesome** (Shoelace/Lit) and **Material 3** tokens. When a UI element appears unstyled after an HA update, the likely cause is a renamed or new token. Reference themes used for comparison: [`Frosted Glass`](https://github.com/wessamlauf/homeassistant-frosted-glass-themes) and [`Graphite`](https://github.com/TilmanGriesel/graphite).
+HA is migrating from `paper-` / `mdc-` variables to **Web Awesome** (Shoelace/Lit) and **Material 3** tokens. When a UI element appears unstyled after an HA update, the likely cause is a renamed or new token. Reference themes used for comparison: [`Frosted Glass`](https://github.com/wessamlauf/homeassistant-frosted-glass-themes) and [`Graphite`](https://github.com/TilmanGriesel/graphite). `theme_review.md` reads both repositories online; the `.notes/ref_themes/` copies are dated 2026-06-27 history and are not a source.
 
 Token hierarchy for icons — all three are defined **once in the base anchor** (Section 4) as `var(--primary-color, #aaaaaa)`, so each variant picks up its own accent through the merge. Do **not** redefine them per variant: there is no "Section C", and duplicating a base key into a Section B variant violates Critical Rule 4 and makes HA log a duplicate-key warning for every theme in the file.
 
 - `state-icon-color` — **the live token on HA 2026.8.** The only one of the three the compiled frontend still references
 - `paper-item-icon-color` — **legacy.** Zero occurrences in the 2026.8 bundles. Retained for older HA
-- `state-icon-active-color` — **legacy.** Zero occurrences in the 2026.8 bundles. Retained for older HA
+- `state-icon-active-color` — **legacy.** Unused since 2022.12 (developer blog, 2022-12-07); zero occurrences in the 2026.8 bundles. Retained for HA 2022.11
 
 Modern HA also builds per-domain icon colors at runtime as `--state-<domain>-<state>-color`, which take precedence over the tokens above. A literal search for those names in the bundles finds nothing — they are constructed from template strings, so absence from a grep does not mean absence from the product.
 
@@ -205,9 +207,9 @@ The project uses a VS Code devcontainer running a live Home Assistant instance f
 
 ### Interrogating the running HA instance
 
-Use **HAB → MCP → Script**, in that order — the full protocol (the host-side `hab` executable, its per-project credential trap, the availability pre-flight) is in [shared conventions §3](.shared/dev_std/agent_conventions.md). For this project the common needs are reading theme state and forcing a reload; both work over any of the three.
+Use **HAB → MCP → Script**, in that order — the full protocol (the host-side `hab` executable, its per-project credential trap, the availability pre-flight) is in shared conventions §3 (`.shared/dev_std/agent_conventions.md`). For this project the common needs are reading theme state and forcing a reload; both work over any of the three.
 
-**After any modification, follow the post-modification process** — see [`.shared/prompts/post_mod_process.md`](.shared/prompts/post_mod_process.md). Specify a `SCOPE` when invoking it. Python-specific steps (mypy, pytest, pre-commit, ruff) skip automatically — `project.category = theme` guards them in the shared task definitions.
+**After any modification, follow the post-modification process** — see `.shared/prompts/post_mod_process.md`. Specify a `SCOPE` when invoking it. Python-specific steps (mypy, pytest, pre-commit, ruff) skip automatically — `project.category = theme` guards them in the shared task definitions.
 
 The SCOPE table below is **theme-specific** and replaces the integration table in the shared conventions file — the `Full` and `Complete` rows differ because there is nothing Python to run.
 
@@ -233,13 +235,13 @@ document.querySelector("home-assistant").hass.selectedTheme; // {theme: ""} = OK
 document.documentElement.__themes.cacheKey; // what is ACTUALLY applied
 ```
 
-Two related traps: `frontend.set_theme` needs `"mode": "dark"` when a dark-mode default is set, and the `theme-test` dashboard pins per-card themes in places, so a card may not reflect the page theme. Full detail and the five-layer precedence order are in [`.shared/prompts/theme_review.md`](.shared/prompts/theme_review.md) STEP 0.
+Two related traps: `frontend.set_theme` needs `"mode": "dark"` when a dark-mode default is set, and the `theme-test` dashboard pins per-card themes in places, so a card may not reflect the page theme. Full detail and the five-layer precedence order are in `.shared/prompts/theme_review.md` STEP 0.
 
 ### Skill Prompts
 
-The shared prompt catalogue is listed in [shared conventions §3](.shared/dev_std/agent_conventions.md) — `devcon_run_gen.md` for arbitrary commands inside the devcontainer, `post_mod_process.md` for the SCOPE-driven validation pass. Container identity values (`CONTAINER_NAME`, `PROJECT_DIR`) are in `.devcontainer/.env`.
+The shared prompt catalogue is listed in shared conventions §3 (`.shared/dev_std/agent_conventions.md`) — `devcon_run_gen.md` for arbitrary commands inside the devcontainer, `post_mod_process.md` for the SCOPE-driven validation pass. Container identity values (`CONTAINER_NAME`, `PROJECT_DIR`) are in `.devcontainer/.env`.
 
-One prompt is specific to this project: `.shared/prompts/theme_review.md`, the theme token drift review guide. Use it when an HA update is suspected to have renamed or removed tokens. It provides a Playwright-based workflow for inspecting component shadow DOMs, reading `adoptedStyleSheets`, and cross-referencing against the theme YAML to detect invalid `var()` chains, dead tokens, and missing Category B overrides.
+One prompt is specific to this project: `.shared/prompts/theme_review.md`, the theme review. Its `SCOPE` selects the reference-theme read, the Home Assistant frontend issue and PR read, the live measurement, or all three (the default). The live measurement is a Playwright-based workflow for inspecting component shadow DOMs, reading `adoptedStyleSheets`, and cross-referencing against the theme YAML to detect invalid `var()` chains, dead tokens, and missing Category B overrides. Findings go to `.notes/info/theme_findings_register.md`, with source baselines in `.notes/info/theme_overview.md`, and are decided by `.shared/prompts/external_findings_triage.md`.
 
 ## README Known Decisions
 
@@ -252,8 +254,8 @@ These are deliberate choices in `README.md`. Do not raise findings against them 
 
 ## Shared Conventions
 
-Markdown rules (the single-codepoint emoji ban for headings), temporary-file placement, the no-nuclear-restart rule, and progress reporting are centralized — see [`.shared/dev_std/agent_conventions.md`](.shared/dev_std/agent_conventions.md) §5–7. Sections 1–4 of that file are integration-specific; only §1 (`docker exec`) and §3 (HA interrogation) apply here, and the Python tooling in §2 and §4 does not.
+Markdown rules (the single-codepoint emoji ban for headings), temporary-file placement, the no-nuclear-restart rule, and progress reporting are centralized — see `.shared/dev_std/agent_conventions.md` §5–7. Sections 1–4 of that file are integration-specific; only §1 (`docker exec`) and §3 (HA interrogation) apply here, and the Python tooling in §2 and §4 does not.
 
-*   **[!] Note:** If you edit files inside directory junctions (`.notes/` or `.shared/`), do not run container validation on them. Validate them on the Windows host from the `shared/` folder.
+- **[!] Note:** If you edit files inside directory junctions (`.notes/` or `.shared/`), do not run container validation on them. Validate them on the Windows host from the `shared/` folder.
 
 The emoji rule matters for this project in particular: `README.md` uses emoji in almost every heading.

@@ -211,3 +211,11 @@ When writing or editing the README, always use **always-color single-codepoint e
 **Why**: VS16 (U+FE0F, Variation Selector-16) is an invisible byte that forces emoji rendering. GitHub's anchor generator strips it when computing heading anchors, but Markdown tooling includes it in `href` values — causing Table of Contents links to 404. The problem is completely invisible in source editors.
 
 See root `CLAUDE.md` → "Shared Markdown Notes" for the full replacement table and a detection script.
+
+---
+
+## Version Control
+
+| Version | Date | Change |
+| :-- | :-- | :-- |
+| 1.5.0 | 2026-10-26 | Version history started at 1.5.0; earlier changes were not recorded. Initialized version tracking table. |

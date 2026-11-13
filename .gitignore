@@ -25,7 +25,9 @@ htmlcov/
 *cache/
 coverage.xml
 .coverage
+.coverage.*
 .reports/
+.hypothesis/
 mutants/
 
 # Home Assistant
@@ -85,6 +87,7 @@ uv.lock
 .notes
 .shared
 .workbench
+.mdbase/
 .obsidian/
 .notes/
 .shared/
@@ -92,10 +95,12 @@ uv.lock
 loc_only/
 scratch/
 .scratch/
+.scratch_*
 
 # AI
 .aider/
 .antigravitycli/
+.agents/
 .claude/
 .continue/
 .cursor/
