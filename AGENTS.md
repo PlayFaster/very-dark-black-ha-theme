@@ -16,12 +16,15 @@ Available accent color variants: Blue, Cyan, Emerald, Green, Indigo, Orange, Pin
 
 ```text
 themes/very_dark_black_ha_theme.yaml          ← The entire theme (single file, ~600 lines)
+docs/CAPABILITIES.md                          ← Architectural & functional capabilities dossier
 docs/DEVELOPMENT.md                           ← Critical dev reference: pitfalls & architecture
 docs/change_ref_ha_v2026_4.md                 ← HA 2026.4 frontend migration notes
 docs/change_ref_ha_v2026_5.md                 ← HA 2026.5 Web Awesome component notes
 docs/change_ref_ha_v2026_6.md                 ← HA 2026.6 Web Awesome radio component notes
 docs/change_ref_ha_v2026_7.md                 ← HA 2026.7 — component behavior only, no token changes
+docs/change_ref_ha_v2026_8.md                 ← HA 2026.8 — entity card color: state notes
 docs/color_picks_202606.md                    ← Accent color selection rationale
+docs/ha_compatibility.md                      ← HA version floor & frontend deprecation ledger
 docs/changelog_local.md                       ← Working changelog notes
 hacs.json                                     ← HACS metadata
 .ha/                                          ← GIT-TRACKED devcontainer config files

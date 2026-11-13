@@ -17,6 +17,7 @@ All changes to this project will be documented in this file. This is the detaile
 ---
 
 - [Internal Detailed Changelog: Very Dark Black Home Assistant Theme](#internal-detailed-changelog-very-dark-black-home-assistant-theme)
+  - [\[1.4.2-dev9\] - 2026-11-13 - Docs \& Notes: Capabilities Dossier Added and .notes Reorganized](#142-dev9---2026-11-13---docs--notes-capabilities-dossier-added-and-notes-reorganized)
   - [\[1.4.2-dev8\] - 2026-11-13 - Tooling \& Docs: Shared CI, Validation Suite Tasks, and Schemas Synced](#142-dev8---2026-11-13---tooling--docs-shared-ci-validation-suite-tasks-and-schemas-synced)
   - [\[1.4.2-dev7\] - 2026-11-02 - Docs: Home Assistant Compatibility Dossier Added](#142-dev7---2026-11-02---docs-home-assistant-compatibility-dossier-added)
   - [\[1.4.2-dev6\] - 2026-09-23 - AGENTS.md: Junction Links Converted to Inline Code](#142-dev6---2026-09-23---agentsmd-junction-links-converted-to-inline-code)
@@ -81,6 +82,20 @@ All changes to this project will be documented in this file. This is the detaile
   - [\[1.2.1\] - 2026-01-16 - TEST Visibility Marker](#121---2026-01-16---test-visibility-marker)
   - [\[1.1.1\] - 2025-12-04 - Green, Red, Fuchsia and Orange Variants](#111---2025-12-04---green-red-fuchsia-and-orange-variants)
   - [\[1.0.1\] - 2025-11-18 - Initial Release, Cyan Accent](#101---2025-11-18---initial-release-cyan-accent)
+
+---
+
+## [1.4.2-dev9] - 2026-11-13 - Docs & Notes: Capabilities Dossier Added and .notes Reorganized
+
+### Summary
+
+Created the project's capabilities dossier (`docs/CAPABILITIES.md`), audited and reorganized `.notes/` file placement, refreshed `.notes/proj_structure.md`, and updated `AGENTS.md` to list all current `docs/` references. No theme YAML or styling changes.
+
+### Documentation
+
+- **`docs/CAPABILITIES.md`**: Created the theme capabilities dossier covering `1.0.1`–`1.4.2-dev8` across 5 domains (`capabilities_build.md`).
+- **`.notes/` File Audit & Structure**: Audited `.notes/` (`proj_file_audit`), initialized `file_placement_decisions.json`, moved `hacs_release.md` and `repo_note.md` to `.notes/info/`, moved research notes out of `.notes/issues/` into `.notes/info/token_research/` and `.notes/info/theme_switching/`, moved four token-probe scripts into `.notes/local_only/probes/`, deleted empty `code_review_20260503_2.md`, updated inbound/outbound links, and refreshed `.notes/proj_structure.md` (`v1.0.10`).
+- **`AGENTS.md`**: Added `docs/CAPABILITIES.md`, `docs/change_ref_ha_v2026_8.md`, and `docs/ha_compatibility.md` to the `## Project Structure` file tree.
 
 ---
 
@@ -1022,6 +1037,6 @@ Entry structure — headers, titles, category headings and the split between thi
 
 ## Document Audit Status
 
-- **Headers Checked**: `1.4.2-dev8..1.0.1` (Complete)
-- **Bullets Checked**: `1.4.2-dev8..1.0.1` (Complete)
+- **Headers Checked**: `1.4.2-dev9..1.0.1` (Complete)
+- **Bullets Checked**: `1.4.2-dev9..1.0.1` (Complete)
 - **Specification**: Follows `changelog_format.md` (maintainer engineering voice; zero data loss)
