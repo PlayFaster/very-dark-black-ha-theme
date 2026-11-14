@@ -2,7 +2,7 @@
 
 An architectural and functional inventory of **Very Dark Black HA Theme** (`very-dark-black-ha-theme`), a pure-black Home Assistant theme suite with 11 selectable variants.
 
-**Current Through:** 1.4.2-dev8 (covering 1.0.1 to 1.4.2-dev8) · **Last Audited:** 2026-11-13 · **Status:** In-Progress Dev
+**Current Through:** 1.4.2-dev9 (covering 1.0.1 to 1.4.2-dev9; theme YAML unchanged since 1.4.1) · **Last Audited:** 2026-11-13 · **Status:** In-Progress Dev
 
 ---
 
@@ -11,9 +11,9 @@ An architectural and functional inventory of **Very Dark Black HA Theme** (`very
 ### 1.1 11-Variant Theme Architecture
 
 - **Purpose**: Provides a pure-black (`#000000`) base theme alongside 10 selectable accent color variants without duplicating shared styling rules.
-- **Entities & Interfaces**: `Black with White` (`&base_logic`) plus `Black with Blue`, `Black with Cyan`, `Black with Emerald`, `Black with Green`, `Black with Indigo`, `Black with Orange`, `Black with Pink`, `Black with Red`, `Black with Silver`, and `Black with Violet` (`themes/very_dark_black_ha_theme.yaml:19,524-595`).
+- **Entities & Interfaces**: `Black with White` (`&base_logic`) plus `Black with Blue`, `Black with Cyan`, `Black with Emerald`, `Black with Green`, `Black with Indigo`, `Black with Orange`, `Black with Pink`, `Black with Red`, `Black with Silver`, and `Black with Violet` (`themes/very_dark_black_ha_theme.yaml:19,524-599`).
 - **Technical Guarantees**:
-  - Single-anchor YAML merge inheritance (`<<: *base_logic`): variant-specific keys (`primary-color`, `state-active-color`, `card-mod-theme`) are isolated to Section B so Home Assistant logs zero duplicate-key warnings.
+  - Single-anchor YAML merge inheritance (`<<: *base_logic`): variant-specific keys (`primary-color`, `state-active-color`, `card-mod-theme`) are isolated to Section B so Home Assistant logs zero duplicate-key warnings. `Black with Orange` additionally overrides `state-active-color`, `state-switch-active-color`, `state-plug-active-color`, and `state-binary_sensor-active-color` to `*acc_red` (`very_dark_black_ha_theme.yaml:568-571`).
   - Monochrome control visibility: `Black with White` omits `primary-color` intentionally, so active controls fall back to `"var(--primary-color, #aaaaaa)"` / `"var(--primary-color, #e0e0e0)"` rather than rendering invisible.
 - **Lifecycle Timeline**:
   - `1.0.1`: Initial release (`Black with Cyan`).
@@ -26,7 +26,7 @@ An architectural and functional inventory of **Very Dark Black HA Theme** (`very
 ### 1.2 Light-Mode Dark Fallback & Backward Compatibility
 
 - **Purpose**: Keeps Home Assistant dark on systems configured for light mode and preserves legacy CSS variable names for user `card-mod` snippets.
-- **Entities & Interfaces**: `modes.dark` / `modes.light` block (`very_dark_black_ha_theme.yaml:197`), `purple-color`, and `fuchsia-color` (`very_dark_black_ha_theme.yaml:26,31`).
+- **Entities & Interfaces**: `modes.dark` / `modes.light` block (`very_dark_black_ha_theme.yaml:199-201`), `purple-color`, and `fuchsia-color` (`very_dark_black_ha_theme.yaml:26,31`).
 - **Technical Guarantees**:
   - Explicit `modes.light` mirror prevents light-mode OS/browser settings from reverting surfaces to light defaults.
   - Legacy `var(--purple-color)` (`#9c27b0`) and `var(--fuchsia-color)` (`#ff00ff`) tokens remain defined after the `1.4.0` rename to Violet/Pink.
@@ -65,11 +65,12 @@ An architectural and functional inventory of **Very Dark Black HA Theme** (`very
 ### 2.3 Optional Accent Emphasis
 
 - **Purpose**: Allows users to opt into accent-colored card and heading titles without altering default white/light-grey text hierarchy.
-- **Entities & Interfaces**: Commented-out Section 4b (`ha-heading-card-title-color`, `ha-heading-card-subtitle-color`, `ha-card-header-color`) and `card-mod` `.card-header` hook (`very_dark_black_ha_theme.yaml:113-135,450+`).
+- **Entities & Interfaces**: Section 4b (`ha-card-header-color` and `ha-heading-card-title-color` commented out as opt-ins; `ha-heading-card-subtitle-color` active at `very_dark_black_ha_theme.yaml:130`) and `card-mod` `.card-header` hook (`very_dark_black_ha_theme.yaml:113-134,450+`).
 - **Technical Guarantees**:
   - `.card-header` reads `var(--ha-card-header-color, #ffffff) !important`, ensuring user overrides take effect while preserving `#ffffff` as the default.
 - **Lifecycle Timeline**:
   - `1.4.0`: Added Section 4b opt-in block and live `ha-card-header-color` hook.
+  - `1.4.1-dev8`: Activated `ha-heading-card-subtitle-color: var(--primary-color)` for accent subtitle emphasis.
 
 ---
 
@@ -91,7 +92,7 @@ An architectural and functional inventory of **Very Dark Black HA Theme** (`very
 ### 3.2 Accessibility & State Color Mappings
 
 - **Purpose**: Ensures WCAG AA legibility on pure-black surfaces and harmonizes semantic state colors with the active accent variant.
-- **Entities & Interfaces**: `secondary-text-color` (`#a8a8a8`), `ha-tooltip-*`, `label-badge-*`, `ha-color-on-danger/warning-*`, `state-lock-*-color`, Energy dashboard tokens, and 10-series `graph-color-*` palette (`very_dark_black_ha_theme.yaml:93,244-297`).
+- **Entities & Interfaces**: `secondary-text-color` (`#a8a8a8`), `ha-tooltip-*`, `label-badge-*`, `ha-color-on-danger/warning-*`, `state-lock-*-color`, Energy dashboard tokens, and 10-series `graph-color-*` palette (`very_dark_black_ha_theme.yaml:93,244-297,311-312,403-409`).
 - **Technical Guarantees**:
   - Secondary text (`#a8a8a8`), darkened `label-badge-*` fills, and translucent `rgba(var(--token-rgb-*), ...)` danger/warning tags maintain contrast against `#000000` and `#ffffff`.
   - Lock states map to accent (locked), muted grey (unlocked/transitional), and red (jammed) instead of HA's fixed green/red.
@@ -103,7 +104,7 @@ An architectural and functional inventory of **Very Dark Black HA Theme** (`very
 ### 3.3 Optional `card-mod` & Third-Party Exclusions
 
 - **Purpose**: Enhances scrollbars, data-table headers, and more-info dialogs when `card-mod` is installed while avoiding visual breakage on third-party cards.
-- **Entities & Interfaces**: `card-mod-theme` (all 11 variants), `card-mod-card`, and `card-mod-more-info` (`very_dark_black_ha_theme.yaml:450-523`).
+- **Entities & Interfaces**: `card-mod-theme` (all 10 Section B accent variants; `very_dark_black_ha_theme.yaml:529-599`), `card-mod-card`, and `card-mod-more-info` (`very_dark_black_ha_theme.yaml:450-521`).
 - **Technical Guarantees**:
   - `card-mod` is strictly optional; all core colors and controls work via native CSS custom properties.
   - Every `card-mod-theme` string matches its exact HA theme picker name (`1.3.3-dev11`); CSS exclusions cover Mushroom (Title/Chips), Bubble Card, Conditional, Custom Button, Heading, and Glance cards (`1.3.3`).
@@ -146,12 +147,12 @@ An architectural and functional inventory of **Very Dark Black HA Theme** (`very
 ### 5.2 Theme Test Dashboard & Mock Entities
 
 - **Purpose**: Provides a repeatable live Home Assistant dashboard to visually inspect all 11 variants across native and custom cards.
-- **Entities & Interfaces**: `.devcontainer/.devconfig/ui-theme-test.yaml` and mock sensor packages.
+- **Entities & Interfaces**: `.ha/ui-theme-test.yaml` and `.ha/mock_package.yaml`.
 - **Technical Guarantees**:
-  - Includes a Compare view and mock entities covering card, form, control, and graph states; updated to `color: state` for HA 2026.8 (`1.4.2-dev4`).
+  - Git-tracked outside `.devcontainer/.devconfig/` and loaded at `/workspaces/${PROJECT_NAME}/.ha/`; includes a Compare view and mock entities covering card, form, control, and graph states, updated to `color: state` for HA 2026.8 (`1.4.2-dev4`).
 - **Lifecycle Timeline**:
   - `1.3.8-dev2`: Created `ui-theme-test.yaml` and dummy sensors.
-  - `1.3.8-dev6`: Added git-tracked mock sensor packages and Compare view.
+  - `1.3.8-dev6`: Relocated to `.ha/ui-theme-test.yaml` and `.ha/mock_package.yaml` with Compare view.
   - `1.4.2-dev4`: Migrated `state_color: true` to `color: state` for HA 2026.8.
 
 ### 5.3 Changelog & Compatibility Audit Tooling
@@ -159,11 +160,12 @@ An architectural and functional inventory of **Very Dark Black HA Theme** (`very
 - **Purpose**: Keeps public release notes, local engineering logs, and compatibility ledgers synchronized and machine-validated.
 - **Entities & Interfaces**: `CHANGELOG.md`, `docs/changelog_local.md`, and `docs/ha_compatibility.md`.
 - **Technical Guarantees**:
-  - `docs/changelog_local.md` carries the canonical Authoring Rules callout (`check_changelog_header.py`) and `Document Audit Status` (`1.4.2-dev8..1.0.1` verified); `CHANGELOG.md` carries `Summary`, `Highlights`, lineage tags, and `Under the hood` sections (`1.4.1`–`1.0.1`).
+  - `docs/changelog_local.md` carries the canonical Authoring Rules callout (`check_changelog_header.py`) and `Document Audit Status` (`1.4.2-dev9..1.0.1` verified); `CHANGELOG.md` carries `Summary`, `Highlights`, lineage tags, and `Under the hood` sections (`1.4.1`–`1.0.1`).
 - **Lifecycle Timeline**:
   - `1.4.2-dev7`: Added `docs/ha_compatibility.md`.
   - `1.4.2-dev8`: Remediated `docs/changelog_local.md` (`CF-101`/`CF-202`) and aligned `CHANGELOG.md` (`1.4.1`–`1.0.1`).
+  - `1.4.2-dev9`: Added `docs/CAPABILITIES.md`, reorganized `.notes/`, and updated `.notes/proj_structure.md` (`v1.0.10`) and `AGENTS.md`.
 
 ---
 
-*Capabilities dossier audited against codebase and changelogs up to 1.4.2-dev8 on 2026-11-13. Maintained via `capabilities_build.md`.*
+*Capabilities dossier audited against codebase and changelogs up to 1.4.2-dev9 on 2026-11-13. Maintained via `capabilities_build.md`.*

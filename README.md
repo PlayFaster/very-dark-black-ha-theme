@@ -2,7 +2,7 @@
 
 # Very Dark Black Theme for Home Assistant
 
-[![HACS Theme](https://img.shields.io/badge/HACS-Theme-orange.svg)](https://hacs.xyz/) [![HACS Badge](https://img.shields.io/badge/Available%20in-HACS-41BDF5?logo=home-assistant&logoColor=white)](https://my.home-assistant.io/redirect/hacs_repository/?owner=PlayFaster&repository=very-dark-black-ha-theme&category=theme) [![Latest Release](https://img.shields.io/github/v/release/PlayFaster/very-dark-black-ha-theme?label=Release&logo=github)](https://github.com/PlayFaster/very-dark-black-ha-theme/releases) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Validate](https://github.com/PlayFaster/very-dark-black-ha-theme/actions/workflows/validate.yaml/badge.svg)](https://github.com/PlayFaster/very-dark-black-ha-theme/actions/workflows/validate.yaml) [![Last Commit](https://img.shields.io/github/last-commit/PlayFaster/very-dark-black-ha-theme?label=Last%20commit)](https://github.com/PlayFaster/very-dark-black-ha-theme/commits/main)
+[![Marketplace Theme](https://img.shields.io/badge/Marketplace-Theme-orange.svg)](https://hacs.xyz/) [![Marketplace Badge](https://img.shields.io/badge/Available%20in-Marketplace-41BDF5?logo=home-assistant&logoColor=white)](https://my.home-assistant.io/redirect/marketplace_repository/?owner=PlayFaster&repository=very-dark-black-ha-theme&category=theme) [![Latest Release](https://img.shields.io/github/v/release/PlayFaster/very-dark-black-ha-theme?label=Release&logo=github)](https://github.com/PlayFaster/very-dark-black-ha-theme/releases) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Validate](https://github.com/PlayFaster/very-dark-black-ha-theme/actions/workflows/validate.yaml/badge.svg)](https://github.com/PlayFaster/very-dark-black-ha-theme/actions/workflows/validate.yaml) [![Last Commit](https://img.shields.io/github/last-commit/PlayFaster/very-dark-black-ha-theme?label=Last%20commit)](https://github.com/PlayFaster/very-dark-black-ha-theme/commits/main)
 
 ---
 
@@ -123,7 +123,7 @@ The theme is fully usable from HA 2022.11 onwards. Newer versions have additiona
 
 ### Prerequisites: Enable themes and install card-mod
 
-1. [_Optional_ but recommended] Install `card-mod` via [HACS](https://hacs.xyz/) or per the instructions on its [GitHub page](https://github.com/thomasloven/lovelace-card-mod "card-mod").
+1. [_Optional_ but recommended] Install `card-mod` via **Marketplace** (or [HACS](https://hacs.xyz/) on HA < 2026.11) or per the instructions on its [GitHub page](https://github.com/thomasloven/lovelace-card-mod "card-mod").
 
 2. [**Mandatory**] Add the following to your `configuration.yaml` file if not present (HA restart required):
 
@@ -132,13 +132,13 @@ frontend:
   themes: !include_dir_merge_named themes
 ```
 
-### ✨ HACS (Recommended)
+### ✨ Marketplace / HACS (Recommended)
 
-[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=PlayFaster&repository=very-dark-black-ha-theme&category=theme)
+[![Open your Home Assistant instance and open a repository inside the Home Assistant Marketplace.](https://my.home-assistant.io/badges/marketplace_repository.svg)](https://my.home-assistant.io/redirect/marketplace_repository/?owner=PlayFaster&repository=very-dark-black-ha-theme&category=theme)
 
 Use the **shortcut badge** above, then click **Download** — or just …
 
-1. Open HACS in Home Assistant and search for **Very Dark Black HA Theme**
+1. Open **Settings > Marketplace** in Home Assistant (or **HACS** on HA < 2026.11) and search for **Very Dark Black HA Theme**
 2. Click into _Very Dark Black HA Theme_ and then Click **Download** (bottom right)
 3. Run the `frontend.reload_themes` action (Restart Home Assistant if `configuration.yaml` changes were made).
 
@@ -161,7 +161,7 @@ Use the **shortcut badge** above, then click **Download** — or just …
 
 ### 🔄 Updating
 
-Standard HACS Theme update behavior:
+Standard Marketplace / HACS Theme update behavior:
 
 <details>
 
@@ -169,7 +169,7 @@ Standard HACS Theme update behavior:
 &nbsp; &nbsp; ➕ &nbsp; &nbsp; Click to Expand for Details:
 </summary><br>
 
-- New releases show up in **HACS** as normal. Update there, then run the `frontend.reload_themes` action.
+- New releases show up in **Settings > Updates** / **Marketplace** (or **HACS** on HA < 2026.11) as normal. Update there, then run the `frontend.reload_themes` action.
 - For manual updates, follow the procedure from [Manual Installation](#-manual-installation) above, overwrite the existing theme file with the new one, then run the `frontend.reload_themes` action.
 
 ---
@@ -466,9 +466,9 @@ If you installed manually:
 - Under the Home Assistant `config/themes` folder, delete the `very_dark_black_ha_theme.yaml` file.
 - Run the `frontend.reload_themes` action (or restart Home Assistant) to clear the theme from the picker
 
-If you installed via HACS:
+If you installed via Marketplace or HACS:
 
-1. Go to **HACS**.
+1. Go to **Settings > Marketplace** (or **HACS** on HA < 2026.11).
 2. Find **Very Dark Black HA Theme** and click into it.
 3. Click the **three dots** (⋮) at the top right and select **Remove**.
 4. Run the `frontend.reload_themes` action (or restart Home Assistant) to clear the theme from the picker.

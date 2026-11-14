@@ -26,7 +26,13 @@ docs/change_ref_ha_v2026_8.md                 ← HA 2026.8 — entity card colo
 docs/color_picks_202606.md                    ← Accent color selection rationale
 docs/ha_compatibility.md                      ← HA version floor & frontend deprecation ledger
 docs/changelog_local.md                       ← Working changelog notes
+README.md                                     ← End-user installation and usage guide
 hacs.json                                     ← HACS metadata
+pyproject.toml                                ← Codespell and project tooling config
+.prettierignore                               ← Skips Markdown so markdownlint owns .md
+.validate/                                    ← Shared linter, prettier, and schema configs
+.vscode/                                      ← VS Code settings and validation tasks
+.github/workflows/validate.yaml               ← Reusable CI workflow caller
 .ha/                                          ← GIT-TRACKED devcontainer config files
   mock_package.yaml                           ←   Mock entities (multi-domain HA package)
   ui-theme-test.yaml                          ←   Theme test Lovelace dashboard (4 views)
@@ -50,14 +56,15 @@ Run via **Terminal → Run Task** inside the devcontainer:
 | :----------------------------- | :------------------------------------------------ |
 | **Validate All**               | Runs all validation tasks in sequence             |
 | `YAML: Lint Project`           | yamllint against tracked YAML files               |
-| `JSON: Verify All Files`       | check-jsonschema on all tracked JSON              |
+| `JSON: Verify All Files`       | `jq empty` on tracked JSON + `check-jsonschema --check-metaschema` on `.validate/*_schema.json` |
 | `HACS: Verify Manifest`        | Schema-validates `hacs.json`                      |
 | `HA: Check Config`             | Live HA config check against the running instance |
 | `Markdown: Check Links`        | markdown-link-check on README                     |
 | `Markdown: Lint (View Only)`   | markdownlint on all tracked `.md` files           |
 | `Codespell: Check (View Only)` | Spell check (config from root `pyproject.toml`)   |
 | `Zizmor: GitHub Actions Audit` | Security audit of `.github/` workflows            |
-| `Prettier: Check (View Only)`  | Prettier format check on md, json, yaml           |
+| `Prettier: Check (View Only)`  | Prettier format check on json, yaml (`.md` skipped via `.prettierignore`) |
+| **Validate Fast (Docs & Style)** | Runs fast doc and style checks in sequence       |
 | **Fix All Fast**               | Runs all auto-fix tasks and fast checks in sequence |
 
 Python-specific tasks (`Ruff`, `Mypy`, `Pytest`, `Pre-commit`) are present in the shared task list but skip automatically for this project via `project.category = theme` in `.vscode/settings.json`. A skipped task writes its own report and shows as a neutral `–` in the summary, so a skip is distinguishable from a task that did not run.
@@ -133,7 +140,7 @@ yamllint -c .validate/.yamllint themes/
 Two things make this dangerous. It is a **warning, not an error**, so a broken file still passes CI. And `codespell` cannot see it at all — a spell checker is not a validator. After editing any value containing `#`, run `yamllint` and confirm the value survives:
 
 ```bash
-python -c "import yaml;print(yaml.safe_load(open('themes/very_dark_black_ha_theme.yaml'))['Black with White']['ha-color-primary-05'])"
+python -c "import yaml; d=yaml.safe_load(open('themes/very_dark_black_ha_theme.yaml')); bad=[(t,k,v) for t,m in d.items() for k,v in m.items() if isinstance(v,str) and v.rstrip().endswith(',')]; assert not bad, bad; print('OK')"
 ```
 
 A value ending in `,` is truncated. This occurred on 2026-08-02 and broke 20 tokens across all 11 themes.
@@ -173,7 +180,7 @@ Verified against HA 2026.8.0b3 on 2026-08-02. Per-version notes are in `docs/cha
 `card-mod` (optional dependency) is used in the `card-mod-card` block in the base theme to inject global CSS. Key behaviors:
 
 - Forces all `ha-card` elements to a black background with the theme border.
-- Explicitly sets `background: transparent; border: none` for cards intended to be transparent: `hui-heading-card`, `mushroom-title-card`, `mushroom-chips-card`, `.type-custom-bubble-card`, `hui-conditional-card`, `custom-button-card`.
+- Explicitly sets `background: transparent; border: none` for cards intended to be transparent: `hui-heading-card`, `mushroom-title-card`, `mushroom-chips-card`, `.type-custom-bubble-card`, `hui-conditional-card`, `custom-button-card`, `hui-glance-card`.
 - Applies custom scrollbar styling and `-webkit-font-smoothing: antialiased`.
 - `card-mod-more-info` overrides dialog heading/surface text to pure white (needed for black backgrounds; standard themes don't require this).
 - References both native HA tokens (`var(--ha-card-background)`, `var(--divider-color)`) **and** the theme's own Neutral Ramp tokens (`var(--token-neutral-line-strong, #333333)`, `var(--token-neutral-deep, …)`, `var(--token-neutral-white, …)`). Theme-defined tokens in `card-mod` are a sanctioned pattern as of the Section 1c consolidation — always keep the literal `var()` fallback so the block still renders if a token is unset.

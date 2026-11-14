@@ -17,6 +17,7 @@ All changes to this project will be documented in this file. This is the detaile
 ---
 
 - [Internal Detailed Changelog: Very Dark Black Home Assistant Theme](#internal-detailed-changelog-very-dark-black-home-assistant-theme)
+  - [\[1.4.2-dev10\] - 2026-11-14 - Docs \& Changelog: Marketplace Migration and Format Alignment](#142-dev10---2026-11-14---docs--changelog-marketplace-migration-and-format-alignment)
   - [\[1.4.2-dev9\] - 2026-11-13 - Docs \& Notes: Capabilities Dossier Added and .notes Reorganized](#142-dev9---2026-11-13---docs--notes-capabilities-dossier-added-and-notes-reorganized)
   - [\[1.4.2-dev8\] - 2026-11-13 - Tooling \& Docs: Shared CI, Validation Suite Tasks, and Schemas Synced](#142-dev8---2026-11-13---tooling--docs-shared-ci-validation-suite-tasks-and-schemas-synced)
   - [\[1.4.2-dev7\] - 2026-11-02 - Docs: Home Assistant Compatibility Dossier Added](#142-dev7---2026-11-02---docs-home-assistant-compatibility-dossier-added)
@@ -36,7 +37,7 @@ All changes to this project will be documented in this file. This is the detaile
   - [\[1.4.1-dev3\] - 2026-07-12 - Codespell Alignment Across Docs](#141-dev3---2026-07-12---codespell-alignment-across-docs)
   - [\[1.4.1-dev2\] - 2026-07-12 - PHACC Bump; Codespell Alignment](#141-dev2---2026-07-12---phacc-bump-codespell-alignment)
   - [\[1.4.1-dev1\] - 2026-07-06 - Shared CI v2.0.6; Ruff and IQS Checks Extended](#141-dev1---2026-07-06---shared-ci-v206-ruff-and-iqs-checks-extended)
-  - [\[1.4.0\] - 2026-07-04 - Release - Eleven Accent Colors; Violet and Pink Renamed](#140---2026-07-04---release---eleven-accent-colors-violet-and-pink-renamed)
+  - [\[1.4.0\] - 2026-07-04 - Release - Eleven Theme Variants; Violet and Pink Renamed](#140---2026-07-04---release---eleven-theme-variants-violet-and-pink-renamed)
   - [\[1.4.0-dev9\] - 2026-07-04 - Neutral Ramp: Single-Source Neutral Tokens](#140-dev9---2026-07-04---neutral-ramp-single-source-neutral-tokens)
   - [\[1.4.0-dev8\] - 2026-07-04 - Optional Accent Emphasis, Section 4b](#140-dev8---2026-07-04---optional-accent-emphasis-section-4b)
   - [\[1.4.0-dev7\] - 2026-07-04 - Four Tokens Adopted From ha-lcars; Lock State Colors](#140-dev7---2026-07-04---four-tokens-adopted-from-ha-lcars-lock-state-colors)
@@ -85,6 +86,22 @@ All changes to this project will be documented in this file. This is the detaile
 
 ---
 
+## [1.4.2-dev10] - 2026-11-14 - Docs & Changelog: Marketplace Migration and Format Alignment
+
+### Summary
+
+Updated `README.md` to lead with Home Assistant Marketplace while preserving HACS fallback instructions for HA `< 2026.11`, and aligned `AGENTS.md`, `CHANGELOG.md`, `docs/CAPABILITIES.md`, and `docs/changelog_local.md` with current repository structure and `changelog_format.md` rules. No theme YAML or styling changes.
+
+### Documentation
+
+- **`README.md`**: Updated header badges, `my.home-assistant.io` redirect links (`marketplace_repository`), installation/update/removal steps, and `card-mod` prerequisite wording to lead with **Settings > Marketplace** while keeping **HACS** fallback references for HA `< 2026.11`.
+- **`AGENTS.md`**: Added `README.md`, `pyproject.toml`, `.prettierignore`, `.validate/`, `.vscode/`, and `.github/workflows/validate.yaml` to the Project Structure tree; updated the Validation Tasks table (`JSON: Verify All Files`, `Prettier: Check (View Only)`, `Validate Fast (Docs & Style)`); and updated the trailing-comma YAML verification snippet.
+- **`CHANGELOG.md`**: Aligned `1.4.0` title/ToC (`Eleven Theme Variants`), `1.4.0` variant count (`10 accent colors (11 variants total)`), `1.3.5` summary (`CF-201`), `1.3.7` tooltip punctuation, and `## Format` heading level (`H2`).
+- **`docs/CAPABILITIES.md`**: Updated line-range references in Sections 3.2 and 3.3, updated `.ha/` test-dashboard paths in Section 5.2, added the `1.4.2-dev9` lifecycle entry, and updated the audit footer to `1.4.2-dev9`.
+- **`docs/changelog_local.md`**: Grouped Python/test `Validate Bump` bullets under `1.4.2-dev8`, aligned `1.4.0` ToC title, replaced non-standard `Rejected` / `Design rationale` headings with `Declined` / `Notes`, fixed minor historical typos (`hover`, `tasks.json`, `symlinked`), and updated `## Document Audit Status`.
+
+---
+
 ## [1.4.2-dev9] - 2026-11-13 - Docs & Notes: Capabilities Dossier Added and .notes Reorganized
 
 ### Summary
@@ -110,9 +127,10 @@ Synchronized shared validation tooling, CI workflow pins, and project configurat
 - **Shared CI**: Bump `.github` Shared CI Validation via SHA from `v2.0.10` to `v2.0.18` in `.github/workflows/validate.yaml`.
 - **Validate Bump**: Update `ruff` from `0.16.1` to `0.17.4` in `.validate/version_matrix.json`.
 - **Validate Bump**: Update `zizmor` from `1.29.0` to `1.32.0` in `.validate/version_matrix.json`.
-- **Validate Bump**: Update `mypy` from `2.3.0` to `2.4.1` in `.validate/version_matrix.json`.
 - **Validate Bump**: Update `check-jsonschema` from `0.38.0` to `0.39.0` in `.validate/version_matrix.json`.
-- **Validate Bump**: Replace `pytest-homeassistant-custom-component` (`0.13.355`) and `python-typing-update` (`0.8.1`) with unversioned `pytest-homeassistant` (`derived`), and add `homeassistant` (`stable`), `hypothesis` (`6.170.15`), and `mutmut` (`3.8.1`) in `.validate/version_matrix.json` — `PHACC` cannot be imported on Home Assistant 2026.11 and is retired upstream, so the matrix tracks `pytest-homeassistant` (versioned with HA) instead.
+- **Shared CI Bumps (Python/Test Tools — Do Not Affect This Theme Project)**:
+  - **Validate Bump**: Update `mypy` from `2.3.0` to `2.4.1` in `.validate/version_matrix.json`.
+  - **Validate Bump**: Replace `pytest-homeassistant-custom-component` (`0.13.355`) and `python-typing-update` (`0.8.1`) with unversioned `pytest-homeassistant` (`derived`), and add `homeassistant` (`stable`), `hypothesis` (`6.170.15`), and `mutmut` (`3.8.1`) in `.validate/version_matrix.json` — `PHACC` cannot be imported on Home Assistant 2026.11 and is retired upstream, so the matrix tracks `pytest-homeassistant` (versioned with HA) instead.
 
 ### Changed
 
@@ -245,7 +263,7 @@ Documentation and process only — no change to `very_dark_black_ha_theme.yaml`.
 - **HAB command table** (`.shared/dev_std/agent_conventions.md`): the log row was listed as `log`, which does not exist. Corrected to `system logs` (`-n N`, default 100). Notes it returns the error log, not the full `home-assistant.log`. Shared file — the fix applies to all five projects.
 - **`invisible_elements.md`**: marked as a historical record. It describes the superseded three-section layout with `Black (Background Only)` / `Black (Standard)` and nine variants; the current file is two sections with ten accent variants.
 
-### Rejected
+### Declined
 
 - **Web Awesome system token shim** (`wa-color-*`, `wa-form-control-*`): the sweep found no `wa-*` token resolving to empty on `Black with White`. With no observed defect, the risk of overriding low-level design-system tokens at `:root` — affecting third-party cards, popovers and dialogs — is the deciding factor.
 
@@ -291,7 +309,7 @@ Documentation and process only — no change to `very_dark_black_ha_theme.yaml`.
 ### Bumps
 
 - **Shared CI Bumps (No Project Impact)**:
-  - **Validate Bump**: Update `ruff`from 0.15.21 to 0.15.22
+  - **Validate Bump**: Update `ruff` from 0.15.21 to 0.15.22
 
 ## [1.4.1-dev4] - 2026-07-26 - README Logo and Collapsible Sections; AGENTS Synced
 
@@ -304,10 +322,10 @@ Documentation and process only — no change to `very_dark_black_ha_theme.yaml`.
 ### Bumps
 
 - **Shared .github CI Validation**: Bump .github Shared CI Validation via SHA from v2.0.5 to v2.0.6
-- **Validate Bump**: Update `codespell`from 2.42 to 2.43
+- **Validate Bump**: Update `codespell` from 2.42 to 2.43
 - **Shared CI Bumps (No Project Impact)**:
   - **Validate Bump**: Bumped PHACC `pytest-homeassistant-custom-component` from 0.13.346 to 0.13.348
-  - **Validate Bump**: Update `ruff`from 0.15.20 to 0.15.21
+  - **Validate Bump**: Update `ruff` from 0.15.20 to 0.15.21
 
 ## [1.4.1-dev3] - 2026-07-12 - Codespell Alignment Across Docs
 
@@ -338,11 +356,11 @@ Documentation and process only — no change to `very_dark_black_ha_theme.yaml`.
   - **Ruff Checks Extended**: As of shared CI Dev-workbench v2.2.1, Ruff checks have been extended to align with Home Assistant. This involves INcluding a wide range of checks and then EXcluding several items because of the wider range. In this project, that lead to 17 issues to be addressed.
   - **IQS Validation**: `dev-workbench` script `iqs_static_check.py` added via `tasks.json` now checks for Home Assistant Integration Quality Scale ( IQS ) compliance to 7 basic IQS rules.
 
-## [1.4.0] - 2026-07-04 - Release - Eleven Accent Colors; Violet and Pink Renamed
+## [1.4.0] - 2026-07-04 - Release - Eleven Theme Variants; Violet and Pink Renamed
 
 ### Summary
 
-- Expands the theme from 8 to 11 accent colors — adding Blue and Emerald, and renaming/re-hueing Purple → Violet and Fuchsia → Pink — alongside a large amount of under-the-hood token and structural work.
+- Expands the theme from 8 to 10 accent colors (11 variants total) — adding Blue and Emerald, and renaming/re-hueing Purple → Violet and Fuchsia → Pink — alongside a large amount of under-the-hood token and structural work.
 
 ### Added
 
@@ -424,7 +442,7 @@ Documentation and process only — no change to `very_dark_black_ha_theme.yaml`.
 
 ### Changed
 
-- **Documentation**: Updated the README to align with the ZTE/Huwaei/WiFI Project README files.
+- **Documentation**: Updated the README to align with the ZTE/Huawei/WiFI Project README files.
 
 ## [1.4.0-dev5] - 2026-07-04 - Ruff and PHACC Bumps
 
@@ -490,11 +508,13 @@ Documentation and process only — no change to `very_dark_black_ha_theme.yaml`.
 
 ### Documentation
 
-- **AGENTS.md**: Accent variant list updated to 11 (Blue, Cyan, Emerald, Green, Indigo, Orange, Pink, Red, Silver, Violet, White); line count estimate updated (~480 → ~540); Section B description updated to enumerate all 11 variants and note Orange's red state overrides; Critical Rule 6 added (`card-mod-theme` must exactly match the HA picker name).
+- **AGENTS.md**: Variant list updated to 11 (Blue, Cyan, Emerald, Green, Indigo, Orange, Pink, Red, Silver, Violet, White); line count estimate updated (~480 → ~540); Section B description updated to enumerate all 11 variants and note Orange's red state overrides; Critical Rule 6 added (`card-mod-theme` must exactly match the HA picker name).
 - **README.md**: Features list reordered alphabetically; emoji updated; new entries (Blue 💙, Emerald 💚, Pink 🩷, Violet 🟣) added; Fuchsia/Purple entries removed; "Various sub-themes" updated to "11 sub-themes"; monochrome use-case line extended to mention Violet/Indigo as subtle accent options.
 - **`.notes/proj_structure.md`**: Section B table updated — 8 → 11 variants with hex and hue columns; `color_picks_202606.md` added to docs table; version bumped to v1.0.6.
 
-### Design Rationale (See `docs/color_picks_202606.md` for Full Detail)
+### Notes
+
+See `docs/color_picks_202606.md` for full design rationale.
 
 - **Yellow/Amber rejected**: Yellow is a standard HA semantic icon color (warning/attention states) — an accent theme in that range creates confusion with HA's own state indicators.
 - **Teal at 173° rejected**: Only 14° from Cyan (187°) — too close to justify a separate theme. Emerald at 161° fills the same gap with better separation.
@@ -558,7 +578,7 @@ Documentation and process only — no change to `very_dark_black_ha_theme.yaml`.
 
 - **control-switch-on-color** added to Section A (`var(--primary-color, #aaaaaa)`). This is the actual token `<ha-control-switch>` binds its active color to. Currently has no effect because the component redeclares it via a `:host` CSS rule (overriding inheritance), but is kept for potential future component changes.
 
-### Investigation Notes
+### Notes
 
 Full investigation documented in `.notes/issues/base_theme_issues/`. The original symptom (switch ON and slider invisible) was initially investigated against HA 2026.5b0 (beta), which produced misleading results. Re-investigation on HA 2026.6.4 (release) produced definitive findings. The key discovery: `ha-switch-checked-*` and `paper-slider-*` tokens, added to the theme in 1.3.4, are not consumed by the actual components in HA 2026.6.4. Those tokens are retained for backward compatibility (as with all prev version tokens, they fail silently).
 
@@ -570,7 +590,7 @@ Full investigation documented in `.notes/issues/base_theme_issues/`. The origina
 
 ### Added
 
-- **"ui-theme-test.yaml**: Added file /.devcontainer/.devconfig/ui-theme-test.yaml as the Theme Test dashboard.
+- **`ui-theme-test.yaml`**: Added file `.devcontainer/.devconfig/ui-theme-test.yaml` as the Theme Test dashboard.
 - **Dummy Sensors**: Added a large number of dummy sensors based on the setup used by the **Graphite** theme
 
 ## [1.3.8-dev1] - 2026-06-25 - Code-Review Changes; Sections Renumbered
@@ -581,7 +601,7 @@ Full investigation documented in `.notes/issues/base_theme_issues/`. The origina
 
 ### Changed
 
-- **Form Backgrounds**: Changed form (text-field) hoover [ ha-color-form-background-hover ] to very dark grey and form disabled to a different very dark grey. Subtle but helpful.
+- **Form Backgrounds**: Changed form (text-field) hover [ ha-color-form-background-hover ] to very dark grey and form disabled to a different very dark grey. Subtle but helpful.
 - **Section Numbers**: Previous re-orgs and updates of the theme file structure meant that the sections numbers were out of order. Re-numbers, sections 1 to 19 now.
 - **Comments**: Added several comments to confirm some decisions to that they would not be flagged again. Also ensured all comments are under 80 chars
 
@@ -673,7 +693,7 @@ Full investigation documented in `.notes/issues/base_theme_issues/`. The origina
 ### Changed
 
 - **CI Validation Sync**: Moved to a shared CI validation, similar to the integration/python projects.
-- **Local Validation Sync**: Moved to a shared tasks,json for local validation and fixes, now shared and in sync with the integration/python projects.
+- **Local Validation Sync**: Moved to a shared tasks.json for local validation and fixes, now shared and in sync with the integration/python projects.
 - **CI — Permissions**: Removed job-level `permissions` block from `test_val` in the shared `validate-specific.yaml`. Permissions now flow through from the calling stub, fixing a GitHub Actions parse-time rejection caused by the theme stub's `contents: read` grant being exceeded.
 - **CI — Secrets**: Removed `secrets: inherit` from the theme stub. The theme passes no secrets to the shared workflow — `GIST_SECRET` is integration-only and optional.
 - **Dev — Shared tasks.json**: Theme project now uses the shared `tasks.json` (synced from monorepo). All Python-specific tasks (`Ruff`, `Mypy`, `Pytest`, `Pre-commit`) skip automatically via `project.category = theme` in `.vscode/settings.json`. Active validation tasks: YAML lint, JSON verify, HACS manifest, HA Check Config, markdown link check, markdown lint, codespell, Zizmor, Prettier.
@@ -781,7 +801,7 @@ Full investigation documented in `.notes/issues/base_theme_issues/`. The origina
 
 ### Changed
 
-- **DevCon Improvements**: Changes to the devcontainer for better symm-linked folder mapping and additional checks (prettier) in tasks.json.
+- **DevCon Improvements**: Changes to the devcontainer for better symlinked folder mapping and additional checks (prettier) in tasks.json.
 
 ## [1.3.3] - 2026-05-02 - M3 and Web Awesome Tokens; Energy and Graph Palettes
 
@@ -839,7 +859,7 @@ Full investigation documented in `.notes/issues/base_theme_issues/`. The origina
 
 - **`ha-card-background` / `card-background-color` moved to Section B** (`&black_surfaces`): Previously in `base_logic` (Section A). Moved because card background is a surface decision. Themes using `<<: *base_logic` directly (`Black More Contrast`, `Black More More`) must define these tokens explicitly — both do so at `*base_black` (`#000000`).
 
-### Design rationale
+### Notes
 
 Core ethos: pure black everywhere. The contrast themes exist to prevent confusion, not to add grey. Signal improvements target specific failure modes:
 
@@ -848,8 +868,6 @@ Core ethos: pure black everywhere. The contrast themes exist to prevent confusio
 - **"What's selected in this list?"** — selected container from `#333333` (~invisible on black) to `rgba(255,255,255,0.1)`
 
 `Black More Contrast` uses accent color as the signal (colored borders = interactive). `Black More More` uses neutral grey visibility (everything stays non-chromatic, just more visible).
-
-### Notes
 
 - **WA Input Tokens**: `wa-text-field-fill-background-color` and `wa-select-fill-background-color` are WA tokens — take effect on HA 2026.4+. On older versions silently ignored.
 - **Portal Elevation Scope**: `mdc-theme-surface` controls both dialog surfaces AND dropdown panel backgrounds in `Black More More`. Single token elevates both portal types.
@@ -1037,6 +1055,6 @@ Entry structure — headers, titles, category headings and the split between thi
 
 ## Document Audit Status
 
-- **Headers Checked**: `1.4.2-dev9..1.0.1` (Complete)
-- **Bullets Checked**: `1.4.2-dev9..1.0.1` (Complete)
-- **Specification**: Follows `changelog_format.md` (maintainer engineering voice; zero data loss)
+- **Headers Checked (`CF-101`)**: `1.4.2-dev10..1.0.1` (Complete)
+- **Bullets Checked (`CF-202`)**: `1.4.2-dev10..1.0.1` (Complete)
+- **Lead-In Summaries (`CF-201`)**: Present on `1.4.2-dev10..1.4.2-dev6`, `1.4.1`, `1.4.0`, `1.4.0-dev9`, `1.3.8-dev9..1.3.8-dev1`, `1.3.7`, `1.3.7-dev9..1.3.7-dev7`, `1.3.7-dev4`, `1.3.6`, `1.3.3-dev13`, and `1.3.3-dev12`; earlier entries (`1.4.2-dev5..1.0.1` outside that set) retain historical pre-`CF-201` structure.

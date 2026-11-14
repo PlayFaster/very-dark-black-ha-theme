@@ -13,7 +13,7 @@ All notable changes to this project will be documented in this file.
 
 - **Monochrome controls visibility** *(refines Black with White controls, introduced in 1.3.8)*: Restored fill and contrast to active controls (such as switches) on **Black with White**, the no-accent variant. The ten accent variants — Blue, Cyan, Emerald, Green, Indigo, Orange, Pink, Red, Silver, Violet — remain unchanged.
 
-## [1.4.0] - 2026-07-04 - Release - Eleven Accent Colors; Violet and Pink Renamed
+## [1.4.0] - 2026-07-04 - Release - Eleven Theme Variants; Violet and Pink Renamed
 
 ### Highlights
 
@@ -24,7 +24,7 @@ All notable changes to this project will be documented in this file.
 
 ### Summary
 
-- Expands the theme from 8 to 11 accent colors — adding Blue and Emerald, and renaming/re-hueing Purple → Violet and Fuchsia → Pink — alongside a large amount of under-the-hood token and structural work.
+- Expands the theme from 8 to 10 accent colors (11 variants total) — adding Blue and Emerald, and renaming/re-hueing Purple → Violet and Fuchsia → Pink — alongside a large amount of under-the-hood token and structural work.
 
 ### Added
 
@@ -67,7 +67,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- **Tooltips**: Added ha-tooltip-background-color and ha-tooltip-text-color overrides to resolve the dark-mode issue where tooltips could render with white text on a white background. This is inspired by the **Graphite** theme
+- **Tooltips**: Added ha-tooltip-background-color and ha-tooltip-text-color overrides to resolve the dark-mode issue where tooltips could render with white text on a white background. This is inspired by the **Graphite** theme.
 - **Danger/Warning Tag Fills**: Added translucent background fills (rgba) and vivid foreground text for resting, hover, and active states of danger and warning tags, resolving illegible low-contrast element rendering on black backgrounds.
 
 ### Changed
@@ -92,11 +92,9 @@ All notable changes to this project will be documented in this file.
 
 ## [1.3.5] - 2026-06-05 - HA 2026.6 Radio Tokens; README Use Cases
 
-Home Assistant 2026.6 Compatibility
-
 ### Summary
 
-- Adds Home Assistant 2026.6 Web Awesome radio button styling (`ha-radio-group`, `ha-radio-option`) and expands `README.md` with new automation use cases and structured FAQ sections.
+- Home Assistant 2026.6 compatibility: adds Web Awesome radio button styling (`ha-radio-group`, `ha-radio-option`) and expands `README.md` with new automation use cases and structured FAQ sections.
 
 ### Added
 
@@ -269,7 +267,7 @@ Home Assistant 2026.6 Compatibility
 
 ---
 
-### Format
+## Format
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
@@ -279,7 +277,7 @@ Entry structure — headers, titles, category headings and the split between thi
 
 - [Changelog](#changelog)
   - [\[1.4.1\] - 2026-08-02 - Visible Controls on the No-Accent Theme](#141---2026-08-02---visible-controls-on-the-no-accent-theme)
-  - [\[1.4.0\] - 2026-07-04 - Release - Eleven Accent Colors; Violet and Pink Renamed](#140---2026-07-04---release---eleven-accent-colors-violet-and-pink-renamed)
+  - [\[1.4.0\] - 2026-07-04 - Release - Eleven Theme Variants; Violet and Pink Renamed](#140---2026-07-04---release---eleven-theme-variants-violet-and-pink-renamed)
   - [\[1.3.8\] - 2026-06-25 - Release - Black with White Base Theme](#138---2026-06-25---release---black-with-white-base-theme)
   - [\[1.3.7\] - 2026-06-24 - Release - HACS Listing; WCAG AA Contrast Fixes](#137---2026-06-24---release---hacs-listing-wcag-aa-contrast-fixes)
   - [\[1.3.6\] - 2026-06-15 - CI Validation Test Release](#136---2026-06-15---ci-validation-test-release)
