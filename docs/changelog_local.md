@@ -17,8 +17,9 @@ All changes to this project will be documented in this file. This is the detaile
 ---
 
 - [Internal Detailed Changelog: Very Dark Black Home Assistant Theme](#internal-detailed-changelog-very-dark-black-home-assistant-theme)
-  - [\[1.4.2-dev12\] - 2026-11-14 - Docs, Screenshots & Test Fixture: README Fixes, Profile Picker Screenshots, and Broken-State Checker](#142-dev12---2026-11-14---docs-screenshots--test-fixture-readme-fixes-profile-picker-screenshots-and-broken-state-checker)
-  - [\[1.4.2-dev11\] - 2026-11-14 - Theme & Test Dashboard: Quiet Status Fills and Broken View Added](#142-dev11---2026-11-14---theme--test-dashboard-quiet-status-fills-and-broken-view-added)
+  - [\[1.4.2\] - 2026-11-14 - Release: Unknown Picker Contrast Fix and Marketplace Docs](#142---2026-11-14---release-unknown-picker-contrast-fix-and-marketplace-docs)
+  - [\[1.4.2-dev12\] - 2026-11-14 - Docs, Screenshots \& Test Fixture: README Fixes, Profile Picker Screenshots, and Broken-State Checker](#142-dev12---2026-11-14---docs-screenshots--test-fixture-readme-fixes-profile-picker-screenshots-and-broken-state-checker)
+  - [\[1.4.2-dev11\] - 2026-11-14 - Theme \& Test Dashboard: Quiet Status Fills and Broken View Added](#142-dev11---2026-11-14---theme--test-dashboard-quiet-status-fills-and-broken-view-added)
   - [\[1.4.2-dev10\] - 2026-11-14 - Docs \& Changelog: Marketplace Migration and Format Alignment](#142-dev10---2026-11-14---docs--changelog-marketplace-migration-and-format-alignment)
   - [\[1.4.2-dev9\] - 2026-11-13 - Docs \& Notes: Capabilities Dossier Added and .notes Reorganized](#142-dev9---2026-11-13---docs--notes-capabilities-dossier-added-and-notes-reorganized)
   - [\[1.4.2-dev8\] - 2026-11-13 - Tooling \& Docs: Shared CI, Validation Suite Tasks, and Schemas Synced](#142-dev8---2026-11-13---tooling--docs-shared-ci-validation-suite-tasks-and-schemas-synced)
@@ -85,8 +86,29 @@ All changes to this project will be documented in this file. This is the detaile
   - [\[1.2.1\] - 2026-01-16 - TEST Visibility Marker](#121---2026-01-16---test-visibility-marker)
   - [\[1.1.1\] - 2025-12-04 - Green, Red, Fuchsia and Orange Variants](#111---2025-12-04---green-red-fuchsia-and-orange-variants)
   - [\[1.0.1\] - 2025-11-18 - Initial Release, Cyan Accent](#101---2025-11-18---initial-release-cyan-accent)
+  - [Document Audit Status](#document-audit-status)
 
 ---
+
+## [1.4.2] - 2026-11-14 - Release: Unknown Picker Contrast Fix and Marketplace Docs
+
+### Summary
+
+- **Fix missing dropdown visibility**: Fixes dropdowns and action pickers (such as a renamed or deleted automation action) that previously showed light grey text on a near-white background.
+- **Marketplace and HACS**: Updates the README for Home Assistant `2026.11` Marketplace (retaining HACS instructions for older versions) and refreshes the theme-picker screenshots for the redesigned Profile page.
+
+### Fixed
+
+- **Unknown picker field contrast** *(refines Danger/Warning Tag Fills, introduced in 1.3.7)*: Missing or unknown selections in picker fields (such as an unknown automation action) now render on a dark tinted surface instead of falling back to Home Assistant's pale light-mode background against light grey text. Added dark overrides for `ha-color-fill-warning-quiet-*`, `ha-color-fill-danger-quiet-*`, `ha-color-fill-success-quiet-*`, and their corresponding `ha-color-on-*-quiet` tokens.
+
+### Added
+
+- **Success semantic fills**: Added dark-mode `ha-color-fill-success-normal-*` and `ha-color-on-success-normal` overrides to match the existing danger and warning tag fills.
+
+### Changed
+
+- **Marketplace installation & alert example**: Updated `README.md` to lead with **Settings > Marketplace** on Home Assistant `2026.11+` while keeping HACS instructions for `< 2026.11`, and added `from: "off"` / `from: "on"` state guards to the `Visual Alert - Theme` automation example.
+- **Theme-picker screenshots**: Updated the Blue, Green, and Violet selection previews to show the new theme picker on the redesigned Home Assistant Profile page.
 
 ## [1.4.2-dev12] - 2026-11-14 - Docs, Screenshots & Test Fixture: README Fixes, Profile Picker Screenshots, and Broken-State Checker
 
@@ -348,7 +370,7 @@ Documentation and process only — no change to `very_dark_black_ha_theme.yaml`.
 
 ### Changed
 
-- **README**: Updated to add _Documentation Accuracy_ section, standard now across all project README files. **`changelog_local` ToC**: Added Table of Contents to `changelog_local` (top-of-file) and to end of `CHANGELOG`.
+- **README**: Updated to add *Documentation Accuracy* section, standard now across all project README files. **`changelog_local` ToC**: Added Table of Contents to `changelog_local` (top-of-file) and to end of `CHANGELOG`.
 
 ### Bumps
 
@@ -438,14 +460,14 @@ Documentation and process only — no change to `very_dark_black_ha_theme.yaml`.
 
 ### Added
 
-- **Section 1c — Neutral Ramp**: Ten keyed tokens as the single source for repeated neutrals — `token-neutral-white` `#ffffff`, `-black` `#000000`, `-deep` `#050505`, `-surface` `#0a0a0a`, `-hover` `#151515`, `-border` `#1a1a1a`, `-line-strong` `#333333`, `-line-medium` `#444444`, `-line-soft` `#666666`, `-outline` `#606060`. Legacy anchor names (`base_black`, `base_surface`, `base_border`, `acc_charcoal`, `acc_graphite`, `acc_medium`) were retained on these definitions so every existing `*alias` keeps resolving; the anchor _definition sites_ simply moved up into 1c. Follows the existing `token-rgb-*` / `token-size-radius-*` convention. `token-neutral-white` is kept deliberately separate from `primary-text-color` (`#e1e1e1`): white = max-contrast emphasis, `#e1e1e1` = body.
+- **Section 1c — Neutral Ramp**: Ten keyed tokens as the single source for repeated neutrals — `token-neutral-white` `#ffffff`, `-black` `#000000`, `-deep` `#050505`, `-surface` `#0a0a0a`, `-hover` `#151515`, `-border` `#1a1a1a`, `-line-strong` `#333333`, `-line-medium` `#444444`, `-line-soft` `#666666`, `-outline` `#606060`. Legacy anchor names (`base_black`, `base_surface`, `base_border`, `acc_charcoal`, `acc_graphite`, `acc_medium`) were retained on these definitions so every existing `*alias` keeps resolving; the anchor *definition sites* simply moved up into 1c. Follows the existing `token-rgb-*` / `token-size-radius-*` convention. `token-neutral-white` is kept deliberately separate from `primary-text-color` (`#e1e1e1`): white = max-contrast emphasis, `#e1e1e1` = body.
 
 ### Changed
 
 - **Option A — `#ffffff` consolidated**: 17 standalone `#ffffff` YAML values now alias `*base_white` (`token-neutral-white`). `var(..., #ffffff)` fallbacks and comment references left untouched.
 - **Option B — anchor stragglers**: ~11 literals that duplicated an existing anchor's value (`#000000`, `#0a0a0a`, `#1a1a1a`, `#333333`, `#444444`, `#666666`) swapped to their anchors, eliminating "same color, two forms" drift.
 - **Option C — new neutral anchors**: repeated-but-unnamed `#151515` (control hover ×3), `#606060` (input outline ×3), and `#050505` (deep panel) given anchors and aliased.
-- **Option D — card-mod de-literalized**: the 5 hard hex literals inside the card-mod blocks (`#333333` scrollbar ×2, `#050505` data-table header, `#ffffff` more-info dialog ×2) now read from the Neutral Ramp via `var(--token-neutral-*, <literal>)`, each keeping its original hex as a fallback. This is the first time a card-mod block references a _theme-defined_ token (previously only native HA tokens), extending the established `token-*`-as-CSS-var pattern.
+- **Option D — card-mod de-literalized**: the 5 hard hex literals inside the card-mod blocks (`#333333` scrollbar ×2, `#050505` data-table header, `#ffffff` more-info dialog ×2) now read from the Neutral Ramp via `var(--token-neutral-*, <literal>)`, each keeping its original hex as a fallback. This is the first time a card-mod block references a *theme-defined* token (previously only native HA tokens), extending the established `token-*`-as-CSS-var pattern.
 
 ### Notes
 
@@ -580,7 +602,7 @@ See `docs/color_picks_202606.md` for full design rationale.
 
 ### Changed
 
-- **Black with White Theme**: A new monochrome theme has been implemented as the base anchor, replacing the previous _Standard_ and _Background Only_ themes.
+- **Black with White Theme**: A new monochrome theme has been implemented as the base anchor, replacing the previous *Standard* and *Background Only* themes.
 - **Form field hover state**: Changed Input field hover background from black to dark gray for better visual separation from surrounding surfaces.
 
 ## [1.3.8-dev9] - 2026-06-25 - Base Theme Consolidated and Renamed to Black with White

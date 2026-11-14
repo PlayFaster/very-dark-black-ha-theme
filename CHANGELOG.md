@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.2] - 2026-11-14 - Release: Unknown Picker Contrast Fix and Marketplace Docs
+
+### Summary
+
+- **Fix missing dropdown visibility**: Fixes dropdowns and action pickers (such as a renamed or deleted automation action) that previously showed light grey text on a near-white background.
+- **Marketplace and HACS**: Updates the README for Home Assistant `2026.11` Marketplace (retaining HACS instructions for older versions) and refreshes the theme-picker screenshots for the redesigned Profile page.
+
+### Fixed
+
+- **Unknown picker field contrast** *(refines Danger/Warning Tag Fills, introduced in 1.3.7)*: Missing or unknown selections in picker fields (such as an unknown automation action) now render on a dark tinted surface instead of falling back to Home Assistant's pale light-mode background against light grey text. Added dark overrides for `ha-color-fill-warning-quiet-*`, `ha-color-fill-danger-quiet-*`, `ha-color-fill-success-quiet-*`, and their corresponding `ha-color-on-*-quiet` tokens.
+
+### Added
+
+- **Success semantic fills**: Added dark-mode `ha-color-fill-success-normal-*` and `ha-color-on-success-normal` overrides to match the existing danger and warning tag fills.
+
+### Changed
+
+- **Marketplace installation & alert example**: Updated `README.md` to lead with **Settings > Marketplace** on Home Assistant `2026.11+` while keeping HACS instructions for `< 2026.11`, and added `from: "off"` / `from: "on"` state guards to the `Visual Alert - Theme` automation example.
+- **Theme-picker screenshots**: Updated the Blue, Green, and Violet selection previews to show the new theme picker on the redesigned Home Assistant Profile page.
+
 ## [1.4.1] - 2026-08-02 - Visible Controls on the No-Accent Theme
 
 ### Summary
@@ -276,6 +296,7 @@ Entry structure — headers, titles, category headings and the split between thi
 ---
 
 - [Changelog](#changelog)
+  - [\[1.4.2\] - 2026-11-14 - Release: Unknown Picker Contrast Fix and Marketplace Docs](#142---2026-11-14---release-unknown-picker-contrast-fix-and-marketplace-docs)
   - [\[1.4.1\] - 2026-08-02 - Visible Controls on the No-Accent Theme](#141---2026-08-02---visible-controls-on-the-no-accent-theme)
   - [\[1.4.0\] - 2026-07-04 - Release - Eleven Theme Variants; Violet and Pink Renamed](#140---2026-07-04---release---eleven-theme-variants-violet-and-pink-renamed)
   - [\[1.3.8\] - 2026-06-25 - Release - Black with White Base Theme](#138---2026-06-25---release---black-with-white-base-theme)
@@ -290,5 +311,6 @@ Entry structure — headers, titles, category headings and the split between thi
   - [\[1.2.1\] - 2026-01-16 - TEST Visibility Marker](#121---2026-01-16---test-visibility-marker)
   - [\[1.1.1\] - 2025-12-04 - Green, Red, Fuchsia and Orange Variants](#111---2025-12-04---green-red-fuchsia-and-orange-variants)
   - [\[1.0.1\] - 2025-11-18 - Initial Release, Cyan Accent](#101---2025-11-18---initial-release-cyan-accent)
+  - [Format](#format)
 
 ---
