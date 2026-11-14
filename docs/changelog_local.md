@@ -17,6 +17,7 @@ All changes to this project will be documented in this file. This is the detaile
 ---
 
 - [Internal Detailed Changelog: Very Dark Black Home Assistant Theme](#internal-detailed-changelog-very-dark-black-home-assistant-theme)
+  - [\[1.4.2-dev11\] - 2026-11-14 - Theme & Test Dashboard: Quiet Status Fills and Broken View Added](#142-dev11---2026-11-14---theme--test-dashboard-quiet-status-fills-and-broken-view-added)
   - [\[1.4.2-dev10\] - 2026-11-14 - Docs \& Changelog: Marketplace Migration and Format Alignment](#142-dev10---2026-11-14---docs--changelog-marketplace-migration-and-format-alignment)
   - [\[1.4.2-dev9\] - 2026-11-13 - Docs \& Notes: Capabilities Dossier Added and .notes Reorganized](#142-dev9---2026-11-13---docs--notes-capabilities-dossier-added-and-notes-reorganized)
   - [\[1.4.2-dev8\] - 2026-11-13 - Tooling \& Docs: Shared CI, Validation Suite Tasks, and Schemas Synced](#142-dev8---2026-11-13---tooling--docs-shared-ci-validation-suite-tasks-and-schemas-synced)
@@ -83,6 +84,32 @@ All changes to this project will be documented in this file. This is the detaile
   - [\[1.2.1\] - 2026-01-16 - TEST Visibility Marker](#121---2026-01-16---test-visibility-marker)
   - [\[1.1.1\] - 2025-12-04 - Green, Red, Fuchsia and Orange Variants](#111---2025-12-04---green-red-fuchsia-and-orange-variants)
   - [\[1.0.1\] - 2025-11-18 - Initial Release, Cyan Accent](#101---2025-11-18---initial-release-cyan-accent)
+
+---
+
+## [1.4.2-dev11] - 2026-11-14 - Theme & Test Dashboard: Quiet Status Fills and Broken View Added
+
+### Summary
+
+Fixed unreadable light-grey-on-cream unknown-selection fields in `<ha-picker-field>` (such as unknown automation actions in HA `2026.10`–`2026.11`) by adding dark `-quiet-*` and `success` semantic fill tokens to `themes/very_dark_black_ha_theme.yaml`, and added a fifth `Broken` view to `.ha/ui-theme-test.yaml` covering error cards, missing entities, unavailable controls, and manual editor checks.
+
+### Fixed
+
+- **Unknown picker field contrast (`themes/very_dark_black_ha_theme.yaml`)**: Added dark-mode `ha-color-fill-{danger,warning,success}-quiet-{resting,hover,active}` (`0.08` / `0.15` / `0.08` over `token-rgb-{red,orange,green}`) and `ha-color-on-{danger,warning,success}-quiet` (`var(--md-sys-color-{error,warning,success})`) overrides in Section 15 so `:host([unknown]) .field` in `<ha-picker-field>` no longer falls back to HA's light-mode `--ha-color-orange-95` (`#fff0e4`) against `#e1e1e1` text.
+
+### Added
+
+- **Success semantic fills (`themes/very_dark_black_ha_theme.yaml`)**: Added `ha-color-fill-success-normal-{resting,hover,active}` (`0.15` / `0.22` / `0.28` over `token-rgb-green`) and `ha-color-on-success-normal` (`var(--md-sys-color-success)`) to Section 15, and updated the Section 1b `token-rgb-*` comment to note `green` as an internal consumer.
+- **Fifth `Broken` view (`.ha/ui-theme-test.yaml`)**: Added `Broken` (`path: broken`, `type: sections`) with `hui-error-card` / invalid-config cards, missing entities across 18 domains and standalone cards (`tile`, `entity`, `button`, `gauge`, `thermostat`, `media-control`, `alarm-panel`, `weather-forecast`, `history-graph`, `statistics-graph`), `unavailable` controls and problem alerts, and a manual editor/dialog checklist for `<ha-picker-field unknown>` and `-quiet-*` automation states.
+
+### Documentation
+
+- **`AGENTS.md`**: Updated `.ha/ui-theme-test.yaml` references from 4 views (`sections × 3, masonry × 1`) to 5 views (`sections × 4, masonry × 1`).
+
+### Verified
+
+- **Theme YAML & Live HA (`2026.11.1`)**: `npx prettier --check`, `yamllint`, and `yaml.safe_load` trailing-comma check passed on `themes/very_dark_black_ha_theme.yaml`; `frontend.reload_themes` (`200`) and WebSocket `frontend/get_themes` confirmed the new tokens on `Black with Orange`.
+- **Dashboard YAML & Live HA (`2026.11.1`)**: `npx prettier --check` and `yamllint` passed on `.ha/ui-theme-test.yaml`; WebSocket `lovelace/config` (`theme-test`) loaded all five views (`Controls & States`, `Data & Themes`, `Theme Test`, `Compare`, `Broken`).
 
 ---
 
@@ -1055,6 +1082,6 @@ Entry structure — headers, titles, category headings and the split between thi
 
 ## Document Audit Status
 
-- **Headers Checked (`CF-101`)**: `1.4.2-dev10..1.0.1` (Complete)
-- **Bullets Checked (`CF-202`)**: `1.4.2-dev10..1.0.1` (Complete)
-- **Lead-In Summaries (`CF-201`)**: Present on `1.4.2-dev10..1.4.2-dev6`, `1.4.1`, `1.4.0`, `1.4.0-dev9`, `1.3.8-dev9..1.3.8-dev1`, `1.3.7`, `1.3.7-dev9..1.3.7-dev7`, `1.3.7-dev4`, `1.3.6`, `1.3.3-dev13`, and `1.3.3-dev12`; earlier entries (`1.4.2-dev5..1.0.1` outside that set) retain historical pre-`CF-201` structure.
+- **Headers Checked (`CF-101`)**: `1.4.2-dev11..1.0.1` (Complete)
+- **Bullets Checked (`CF-202`)**: `1.4.2-dev11..1.0.1` (Complete)
+- **Lead-In Summaries (`CF-201`)**: Present on `1.4.2-dev11..1.4.2-dev6`, `1.4.1`, `1.4.0`, `1.4.0-dev9`, `1.3.8-dev9..1.3.8-dev1`, `1.3.7`, `1.3.7-dev9..1.3.7-dev7`, `1.3.7-dev4`, `1.3.6`, `1.3.3-dev13`, and `1.3.3-dev12`; earlier entries (`1.4.2-dev5..1.0.1` outside that set) retain historical pre-`CF-201` structure.

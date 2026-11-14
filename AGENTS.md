@@ -35,14 +35,14 @@ pyproject.toml                                ← Codespell and project tooling 
 .github/workflows/validate.yaml               ← Reusable CI workflow caller
 .ha/                                          ← GIT-TRACKED devcontainer config files
   mock_package.yaml                           ←   Mock entities (multi-domain HA package)
-  ui-theme-test.yaml                          ←   Theme test Lovelace dashboard (4 views)
+  ui-theme-test.yaml                          ←   Theme test Lovelace dashboard (5 views)
 .devcontainer/.devconfig/                     ← GITIGNORED — runtime HA config dir
   configuration.yaml                          ←   Entry point; loads .ha/ files via packages
 ```
 
 No build system, no scripts, no dependencies to install. Changes are made directly to the YAML file and reloaded in Home Assistant via `frontend.reload_themes`.
 
-> **Note:** `.devcontainer/.devconfig/` is gitignored and never committed — it contains the HA database, `.storage/`, cache, and the `configuration.yaml` entry point. The two files that matter for development are git-tracked in `.ha/` and referenced from `configuration.yaml` at their absolute container paths (`/workspaces/${PROJECT_NAME}/.ha/`). `mock_package.yaml` is loaded via `homeassistant.packages:` (multi-domain entities, not just `template:`). `ui-theme-test.yaml` is a 4-view Lovelace dashboard (sections × 3, masonry × 1) referenced via its absolute container path in the dashboard config. See `docs/DEVELOPMENT.md` Section 7 for the full devcontainer tracked-config approach.
+> **Note:** `.devcontainer/.devconfig/` is gitignored and never committed — it contains the HA database, `.storage/`, cache, and the `configuration.yaml` entry point. The two files that matter for development are git-tracked in `.ha/` and referenced from `configuration.yaml` at their absolute container paths (`/workspaces/${PROJECT_NAME}/.ha/`). `mock_package.yaml` is loaded via `homeassistant.packages:` (multi-domain entities, not just `template:`). `ui-theme-test.yaml` is a 5-view Lovelace dashboard (sections × 4, masonry × 1) referenced via its absolute container path in the dashboard config. See `docs/DEVELOPMENT.md` Section 7 for the full devcontainer tracked-config approach.
 
 ## Commands
 

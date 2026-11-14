@@ -4410,3 +4410,193 @@ views:
               ```
 
               Link: [Home Assistant](https://www.home-assistant.io)
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # VIEW 5: Broken — Error cards, missing entities, unavailable controls, and
+  #         manual editor/dialog broken-state checklist.
+  # ═══════════════════════════════════════════════════════════════════════════
+  - title: Broken
+    path: broken
+    type: sections
+    max_columns: 3
+    sections:
+      - title: Broken Cards & Configs
+        cards:
+          - type: heading
+            heading: Error Cards (hui-error-card)
+            heading_style: title
+            icon: mdi:alert-circle-outline
+
+          - type: nonexistent-card
+
+          - type: custom:nonexistent-card
+
+          - type: gauge
+            name: Gauge — missing entity
+
+          - type: history-graph
+            title: History Graph — empty entities
+            entities: []
+
+          - type: entities
+            title: Entities — empty list
+            entities: []
+
+      - title: Missing Entities — Rows & Cards
+        cards:
+          - type: heading
+            heading: Non-existent Entities (All Domains)
+            heading_style: title
+            icon: mdi:help-circle-outline
+
+          - type: entities
+            title: Missing Entity Rows
+            entities:
+              - entity: sensor.missing_sensor
+                name: Sensor (missing)
+              - entity: binary_sensor.missing_binary_sensor
+                name: Binary Sensor (missing)
+              - entity: input_select.missing_dropdown
+                name: Input Select / Dropdown (missing)
+              - entity: select.missing_select
+                name: Select / Dropdown (missing)
+              - entity: input_number.missing_slider
+                name: Input Number / Slider (missing)
+              - entity: number.missing_number
+                name: Number / Slider (missing)
+              - entity: input_boolean.missing_toggle
+                name: Input Boolean (missing)
+              - entity: switch.missing_switch
+                name: Switch (missing)
+              - entity: light.missing_light
+                name: Light (missing)
+              - entity: cover.missing_cover
+                name: Cover (missing)
+              - entity: lock.missing_lock
+                name: Lock (missing)
+              - entity: fan.missing_fan
+                name: Fan (missing)
+              - entity: climate.missing_climate
+                name: Climate (missing)
+              - entity: media_player.missing_media_player
+                name: Media Player (missing)
+              - entity: alarm_control_panel.missing_alarm
+                name: Alarm Panel (missing)
+              - entity: input_text.missing_text
+                name: Input Text (missing)
+              - entity: input_datetime.missing_datetime
+                name: Input Datetime (missing)
+              - entity: input_button.missing_button
+                name: Input Button (missing)
+
+          - type: horizontal-stack
+            cards:
+              - type: tile
+                entity: sensor.missing_sensor
+                name: Tile Sensor Missing
+              - type: tile
+                entity: select.missing_select
+                name: Tile Select Missing
+              - type: tile
+                entity: switch.missing_switch
+                name: Tile Switch Missing
+
+          - type: entity
+            entity: sensor.missing_sensor
+            name: Entity Card (missing)
+
+          - type: button
+            entity: input_button.missing_button
+            name: Button Card (missing)
+
+          - type: gauge
+            entity: sensor.missing_sensor
+            name: Gauge Card (missing)
+
+          - type: thermostat
+            entity: climate.missing_climate
+            name: Thermostat (missing)
+
+          - type: media-control
+            entity: media_player.missing_media_player
+
+          - type: alarm-panel
+            entity: alarm_control_panel.missing_alarm
+            name: Alarm Panel (missing)
+
+          - type: weather-forecast
+            entity: weather.missing_weather
+            name: Weather (missing)
+
+          - type: history-graph
+            title: History Graph (missing)
+            entities:
+              - sensor.missing_sensor
+
+          - type: statistics-graph
+            title: Statistics Graph (missing)
+            entities:
+              - sensor.missing_sensor
+
+      - title: Unavailable & Alert States
+        cards:
+          - type: heading
+            heading: Unavailable Controls & Alerts
+            heading_style: title
+            icon: mdi:alert-outline
+
+          - type: entities
+            title: Unavailable Controls & Sensors
+            entities:
+              - entity: sensor.unavailable_sensor
+                name: Sensor — unavailable
+              - entity: binary_sensor.unavailable_contact
+                name: Binary — unavailable
+              - entity: select.unavailable_select
+                name: Select / Dropdown — unavailable
+              - entity: number.unavailable_number
+                name: Number / Slider — unavailable
+              - entity: switch.unavailable_switch
+                name: Switch — unavailable
+              - entity: light.unavailable_light
+                name: Light — unavailable
+              - entity: fan.unavailable_fan
+                name: Fan — unavailable
+
+          - type: entities
+            title: Active Problem & Heat Alerts
+            entities:
+              - entity: binary_sensor.mock_problem_alert
+                name: Problem Alert
+              - entity: binary_sensor.mock_heat_alert
+                name: Heat Alert
+
+          - type: horizontal-stack
+            cards:
+              - type: tile
+                entity: select.unavailable_select
+                name: Tile Select Unavail
+              - type: tile
+                entity: number.unavailable_number
+                name: Tile Slider Unavail
+              - type: tile
+                entity: binary_sensor.mock_problem_alert
+                name: Tile Problem Alert
+
+          - type: markdown
+            title: "Editor & Dialog Broken States (Manual Checklist)"
+            content: |
+              Lovelace view mode cannot natively embed `<ha-generic-picker>` or
+              automation/dialog editors. Verify these manually:
+
+              - **Unknown picker item (`<ha-picker-field unknown>`)**: Edit an
+                automation in YAML, set `action: non_existent.service`, and
+                switch to Visual Editor. Check `"Unknown action selected"` and
+                the bad action text against `--ha-color-fill-warning-quiet-resting`.
+              - **Automation warnings & destructive rows**: Inspect
+                `ha-automation-editor-warning` and delete/danger rows
+                (`--ha-color-fill-danger-quiet-resting`).
+              - **Radio buttons (`ha-radio-option`)**: Check Settings → System →
+                General or card editor mode selectors (including disabled options).
+              - **Form validation errors**: Enter an invalid value in a helper
+                or config-flow dialog to verify `--error-color` and helper text.
