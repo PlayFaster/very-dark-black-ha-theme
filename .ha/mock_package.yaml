@@ -907,3 +907,43 @@ input_datetime:
     has_time: false
     icon: mdi:calendar
 # --- Scene --------------------------------------------------------------------
+
+# --- Automation (Broken-State Theme Checker) ----------------------------------
+automation:
+  - id: theme_test_broken_checker
+    alias: "Theme Test — Broken State Checker"
+    description: >-
+      Disabled test fixture for verifying unknown/missing automation pickers and
+      warning/danger row contrast in the Visual Automation Editor.
+    initial_state: false
+    mode: single
+    triggers:
+      - trigger: state
+        entity_id: sensor.missing_sensor
+        to: "on"
+      - trigger: numeric_state
+        entity_id: number.missing_number
+        above: 10
+    conditions:
+      - condition: state
+        entity_id: select.missing_select
+        state: "missing_option"
+      - condition: zone
+        entity_id: person.missing_person
+        zone: zone.missing_zone
+    actions:
+      - action: non_existent.broken_service
+      - enabled: false
+        action: light.turn_on
+        target:
+          entity_id: light.missing_light
+      - action: switch.turn_off
+        target:
+          area_id: nonexistent_area
+      - choose:
+          - conditions:
+              - condition: state
+                entity_id: binary_sensor.missing_binary_sensor
+                state: "on"
+            sequence:
+              - action: non_existent.nested_broken_service

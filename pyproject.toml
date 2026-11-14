@@ -1,3 +1,11 @@
+# SYNCED FILE — DO NOT EDIT IN A PROJECT.
+# Edit dev-workbench/workbench/python/pyproject_theme.toml and re-sync.
+
+[project]
+name = "theme"
+version = "0.1.0"
+requires-python = ">=3.13"
+
 [tool.codespell]
-skip = ".git,.venv,.ruff_cache,.pytest_cache"
+skip = ".git,.venv,.ruff_cache,.pytest_cache,local_only,mutants,scratch,temp_check,CLAUDE.md,uv.lock,*.code-workspace"
 ignore-words-list = "hass"

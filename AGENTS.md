@@ -2,6 +2,10 @@
 
 This file provides guidance to AI coding agents when working with code in this repository.
 
+> [!CAUTION]
+>
+> **Never run `git checkout`, `git restore`, `git reset`, `git stash` or `git clean`. Ask first, every time — no exceptions, whoever's changes you think they are.** Reading git (`status`, `diff`, `log`, `show`) is always fine. Full rule and the incident behind it: `agent_conventions.md` (`.shared/dev_std/agent_conventions.md`).
+
 ## What This Theme Does
 
 **Very Dark Black HA Theme** is a Home Assistant theme pack that provides pure black backgrounds with a choice of accent colors. The entire project ships as a single YAML file (`themes/very_dark_black_ha_theme.yaml`) that Home Assistant loads directly.
@@ -12,24 +16,33 @@ Available accent color variants: Blue, Cyan, Emerald, Green, Indigo, Orange, Pin
 
 ```text
 themes/very_dark_black_ha_theme.yaml          ← The entire theme (single file, ~600 lines)
+docs/CAPABILITIES.md                          ← Architectural & functional capabilities dossier
 docs/DEVELOPMENT.md                           ← Critical dev reference: pitfalls & architecture
 docs/change_ref_ha_v2026_4.md                 ← HA 2026.4 frontend migration notes
 docs/change_ref_ha_v2026_5.md                 ← HA 2026.5 Web Awesome component notes
 docs/change_ref_ha_v2026_6.md                 ← HA 2026.6 Web Awesome radio component notes
-docs/change_ref_ha_v2026_7.md                 ← HA 2026.7 — component behaviour only, no token changes
-docs/color_picks_202606.md                    ← Accent colour selection rationale
+docs/change_ref_ha_v2026_7.md                 ← HA 2026.7 — component behavior only, no token changes
+docs/change_ref_ha_v2026_8.md                 ← HA 2026.8 — entity card color: state notes
+docs/color_picks_202606.md                    ← Accent color selection rationale
+docs/ha_compatibility.md                      ← HA version floor & frontend deprecation ledger
 docs/changelog_local.md                       ← Working changelog notes
+README.md                                     ← End-user installation and usage guide
 hacs.json                                     ← HACS metadata
+pyproject.toml                                ← Codespell and project tooling config
+.prettierignore                               ← Skips Markdown so markdownlint owns .md
+.validate/                                    ← Shared linter, prettier, and schema configs
+.vscode/                                      ← VS Code settings and validation tasks
+.github/workflows/validate.yaml               ← Reusable CI workflow caller
 .ha/                                          ← GIT-TRACKED devcontainer config files
   mock_package.yaml                           ←   Mock entities (multi-domain HA package)
-  ui-theme-test.yaml                          ←   Theme test Lovelace dashboard (4 views)
+  ui-theme-test.yaml                          ←   Theme test Lovelace dashboard (5 views)
 .devcontainer/.devconfig/                     ← GITIGNORED — runtime HA config dir
   configuration.yaml                          ←   Entry point; loads .ha/ files via packages
 ```
 
 No build system, no scripts, no dependencies to install. Changes are made directly to the YAML file and reloaded in Home Assistant via `frontend.reload_themes`.
 
-> **Note:** `.devcontainer/.devconfig/` is gitignored and never committed — it contains the HA database, `.storage/`, cache, and the `configuration.yaml` entry point. The two files that matter for development are git-tracked in `.ha/` and referenced from `configuration.yaml` at their absolute container paths (`/workspaces/${PROJECT_NAME}/.ha/`). `mock_package.yaml` is loaded via `homeassistant.packages:` (multi-domain entities, not just `template:`). `ui-theme-test.yaml` is a 4-view Lovelace dashboard (sections × 3, masonry × 1) referenced via its absolute container path in the dashboard config. See `docs/DEVELOPMENT.md` Section 7 for the full devcontainer tracked-config approach.
+> **Note:** `.devcontainer/.devconfig/` is gitignored and never committed — it contains the HA database, `.storage/`, cache, and the `configuration.yaml` entry point. The two files that matter for development are git-tracked in `.ha/` and referenced from `configuration.yaml` at their absolute container paths (`/workspaces/${PROJECT_NAME}/.ha/`). `mock_package.yaml` is loaded via `homeassistant.packages:` (multi-domain entities, not just `template:`). `ui-theme-test.yaml` is a 5-view Lovelace dashboard (sections × 4, masonry × 1) referenced via its absolute container path in the dashboard config. See `docs/DEVELOPMENT.md` Section 7 for the full devcontainer tracked-config approach.
 
 ## Commands
 
@@ -43,28 +56,20 @@ Run via **Terminal → Run Task** inside the devcontainer:
 | :----------------------------- | :------------------------------------------------ |
 | **Validate All**               | Runs all validation tasks in sequence             |
 | `YAML: Lint Project`           | yamllint against tracked YAML files               |
-| `JSON: Verify All Files`       | check-jsonschema on all tracked JSON              |
+| `JSON: Verify All Files`       | `jq empty` on tracked JSON + `check-jsonschema --check-metaschema` on `.validate/*_schema.json` |
 | `HACS: Verify Manifest`        | Schema-validates `hacs.json`                      |
 | `HA: Check Config`             | Live HA config check against the running instance |
 | `Markdown: Check Links`        | markdown-link-check on README                     |
 | `Markdown: Lint (View Only)`   | markdownlint on all tracked `.md` files           |
 | `Codespell: Check (View Only)` | Spell check (config from root `pyproject.toml`)   |
 | `Zizmor: GitHub Actions Audit` | Security audit of `.github/` workflows            |
-| `Prettier: Check (View Only)`  | Prettier format check on md, json, yaml           |
-| **Fix All**                    | Runs all auto-fix tasks in sequence               |
+| `Prettier: Check (View Only)`  | Prettier format check on json, yaml (`.md` skipped via `.prettierignore`) |
+| **Validate Fast (Docs & Style)** | Runs fast doc and style checks in sequence       |
+| **Fix All Fast**               | Runs all auto-fix tasks and fast checks in sequence |
 
-Python-specific tasks (`Ruff`, `Mypy`, `Pytest`, `Pre-commit`) are present in the shared task list but skip automatically for this project via `project.category = theme` in `.vscode/settings.json`.
+Python-specific tasks (`Ruff`, `Mypy`, `Pytest`, `Pre-commit`) are present in the shared task list but skip automatically for this project via `project.category = theme` in `.vscode/settings.json`. A skipped task writes its own report and shows as a neutral `–` in the summary, so a skip is distinguishable from a task that did not run.
 
-### Running tools directly inside the devcontainer
-
-Agents run on the Windows host and reach the container via `docker exec` — the full workflow, the `.devcontainer/.env` identity lookup, and the Git Bash path-mangling trap are in [shared conventions §1](.shared/dev_std/agent_conventions.md). Theme-flavoured examples:
-
-```bash
-docker exec -w /workspaces/<PROJECT_DIR> <CONTAINER_NAME> bash -c "codespell ."
-docker exec -w /workspaces/<PROJECT_DIR> <CONTAINER_NAME> bash -c "yamllint -c .validate/.yamllint themes/"
-```
-
-Note that §2 of that file (pytest, ruff, mypy, pre-commit) does **not** apply here — this project has no Python source and no tests.
+Tasks are run headlessly inside the devcontainer via `docker exec` using `python3 .workbench/run_task.py "Fix All Fast"` (or `"Validate All"` / `"Validate Fast (Docs & Style)"`), citing the `.reports/` output per `agent_conventions.md` §1–2 (`.shared/dev_std/agent_conventions.md`). Only the Python-specific commands in §2 (`pytest`, `ruff`, `mypy`, `pre-commit`) do not apply here; the §2 `run_task.py` workflow applies in full.
 
 ## Theme File Architecture (2-Section YAML)
 
@@ -124,7 +129,7 @@ yamllint -c .validate/.yamllint themes/
 Two things make this dangerous. It is a **warning, not an error**, so a broken file still passes CI. And `codespell` cannot see it at all — a spell checker is not a validator. After editing any value containing `#`, run `yamllint` and confirm the value survives:
 
 ```bash
-python -c "import yaml;print(yaml.safe_load(open('themes/very_dark_black_ha_theme.yaml'))['Black with White']['ha-color-primary-05'])"
+python -c "import yaml; d=yaml.safe_load(open('themes/very_dark_black_ha_theme.yaml')); bad=[(t,k,v) for t,m in d.items() for k,v in m.items() if isinstance(v,str) and v.rstrip().endswith(',')]; assert not bad, bad; print('OK')"
 ```
 
 A value ending in `,` is truncated. This occurred on 2026-08-02 and broke 20 tokens across all 11 themes.
@@ -139,7 +144,7 @@ A value ending in `,` is truncated. This occurred on 2026-08-02 and broke 20 tok
 | 2026.5+ | Web Awesome tokens: `ha-switch`, `ha-checkbox`, `ha-progress-bar` |
 | 2026.6+ | Web Awesome tokens: `ha-radio-group`, `ha-radio-option` |
 | 2026.7+ | Component behavior only — no token changes |
-| 2026.8+ | `ha-bottom-sheet-*` tokens (adaptive dialogs). `paper-item-icon-color` and `state-icon-active-color` no longer referenced by the frontend |
+| 2026.8+ | `ha-bottom-sheet-*` tokens (adaptive dialogs). `paper-item-icon-color` no longer referenced by the frontend; `state-icon-active-color` unused since 2022.12 (developer blog, 2022-12-07) |
 
 The `hsl(from ...)` relative color syntax used for the `ha-color-neutral-*` and `ha-color-primary-*` scales requires HA 2026.4+ and a modern browser.
 
@@ -164,7 +169,7 @@ Verified against HA 2026.8.0b3 on 2026-08-02. Per-version notes are in `docs/cha
 `card-mod` (optional dependency) is used in the `card-mod-card` block in the base theme to inject global CSS. Key behaviors:
 
 - Forces all `ha-card` elements to a black background with the theme border.
-- Explicitly sets `background: transparent; border: none` for cards intended to be transparent: `hui-heading-card`, `mushroom-title-card`, `mushroom-chips-card`, `.type-custom-bubble-card`, `hui-conditional-card`, `custom-button-card`.
+- Explicitly sets `background: transparent; border: none` for cards intended to be transparent: `hui-heading-card`, `mushroom-title-card`, `mushroom-chips-card`, `.type-custom-bubble-card`, `hui-conditional-card`, `custom-button-card`, `hui-glance-card`.
 - Applies custom scrollbar styling and `-webkit-font-smoothing: antialiased`.
 - `card-mod-more-info` overrides dialog heading/surface text to pure white (needed for black backgrounds; standard themes don't require this).
 - References both native HA tokens (`var(--ha-card-background)`, `var(--divider-color)`) **and** the theme's own Neutral Ramp tokens (`var(--token-neutral-line-strong, #333333)`, `var(--token-neutral-deep, …)`, `var(--token-neutral-white, …)`). Theme-defined tokens in `card-mod` are a sanctioned pattern as of the Section 1c consolidation — always keep the literal `var()` fallback so the block still renders if a token is unset.
@@ -173,13 +178,13 @@ Avoid deep shadow-DOM selectors (e.g., `ha-card-picker $ ha-sub-page`) — they 
 
 ## Modern Token Migration Context
 
-HA is migrating from `paper-` / `mdc-` variables to **Web Awesome** (Shoelace/Lit) and **Material 3** tokens. When a UI element appears unstyled after an HA update, the likely cause is a renamed or new token. Reference themes used for comparison: [`Frosted Glass`](https://github.com/wessamlauf/homeassistant-frosted-glass-themes) and [`Graphite`](https://github.com/TilmanGriesel/graphite).
+HA is migrating from `paper-` / `mdc-` variables to **Web Awesome** (Shoelace/Lit) and **Material 3** tokens. When a UI element appears unstyled after an HA update, the likely cause is a renamed or new token. Reference themes used for comparison: [`Frosted Glass`](https://github.com/wessamlauf/homeassistant-frosted-glass-themes) and [`Graphite`](https://github.com/TilmanGriesel/graphite). `theme_review.md` reads both repositories online; the `.notes/ref_themes/` copies are dated 2026-06-27 history and are not a source.
 
 Token hierarchy for icons — all three are defined **once in the base anchor** (Section 4) as `var(--primary-color, #aaaaaa)`, so each variant picks up its own accent through the merge. Do **not** redefine them per variant: there is no "Section C", and duplicating a base key into a Section B variant violates Critical Rule 4 and makes HA log a duplicate-key warning for every theme in the file.
 
 - `state-icon-color` — **the live token on HA 2026.8.** The only one of the three the compiled frontend still references
 - `paper-item-icon-color` — **legacy.** Zero occurrences in the 2026.8 bundles. Retained for older HA
-- `state-icon-active-color` — **legacy.** Zero occurrences in the 2026.8 bundles. Retained for older HA
+- `state-icon-active-color` — **legacy.** Unused since 2022.12 (developer blog, 2022-12-07); zero occurrences in the 2026.8 bundles. Retained for HA 2022.11
 
 Modern HA also builds per-domain icon colors at runtime as `--state-<domain>-<state>-color`, which take precedence over the tokens above. A literal search for those names in the bundles finds nothing — they are constructed from template strings, so absence from a grep does not mean absence from the product.
 
@@ -197,13 +202,13 @@ See `docs/DEVELOPMENT.md` Section 5 for full detail and examples.
 
 ## Development Environment
 
-The project uses a VS Code devcontainer running a live Home Assistant instance for manual theme testing. The container image is `ha-dev-base:latest`. Theme changes take effect immediately without restarting HA — reload via `Developer Tools → YAML → Reload Themes` or the `frontend.reload_themes` service call.
+The project uses a VS Code devcontainer running a live Home Assistant instance for manual theme testing. The container image is `ha-dev-base:latest`. Theme changes take effect immediately without restarting HA — reload via `Tools → YAML → Reload Themes` or the `frontend.reload_themes` service call.
 
 ### Interrogating the running HA instance
 
-Use **HAB → MCP → Script**, in that order — the full protocol (the host-side `hab` executable, its per-project credential trap, the availability pre-flight) is in [shared conventions §3](.shared/dev_std/agent_conventions.md). For this project the common needs are reading theme state and forcing a reload; both work over any of the three.
+Use **HAB → MCP → Script**, in that order — the full protocol (the host-side `hab` executable, its per-project credential trap, the availability pre-flight) is in shared conventions §3 (`.shared/dev_std/agent_conventions.md`). For this project the common needs are reading theme state and forcing a reload; both work over any of the three.
 
-**After any modification, follow the post-modification process** — see [`.shared/prompts/post_mod_process.md`](.shared/prompts/post_mod_process.md). Specify a `SCOPE` when invoking it. Python-specific steps (mypy, pytest, pre-commit, ruff) skip automatically — `project.category = theme` guards them in the shared task definitions.
+**After any modification, follow the post-modification process** — see `.shared/prompts/post_mod_process.md`. Specify a `SCOPE` when invoking it. Python-specific steps (mypy, pytest, pre-commit, ruff) skip automatically — `project.category = theme` guards them in the shared task definitions.
 
 The SCOPE table below is **theme-specific** and replaces the integration table in the shared conventions file — the `Full` and `Complete` rows differ because there is nothing Python to run.
 
@@ -218,11 +223,24 @@ For rapid visual iteration between restarts, trigger a theme reload without rest
 
 - Call `ha_call_service` with domain `frontend`, service `reload_themes`
 
+### Switching themes — check the profile first
+
+`frontend.set_theme` sets the **backend default** only. An explicit theme selected in the user's HA profile **overrides it and the call is silently ignored** — the service still returns success. This is deliberate Home Assistant behavior: a backend action never overwrites a human's per-device choice. No service call clears it, and writing the value directly does not survive a reload.
+
+Before switching themes, check — and if a theme is set, ask the user to clear it (**Profile → Theme → X**, leaving _Use default theme_) rather than trying to work around it:
+
+```javascript
+document.querySelector("home-assistant").hass.selectedTheme; // {theme: ""} = OK
+document.documentElement.__themes.cacheKey; // what is ACTUALLY applied
+```
+
+Two related traps: `frontend.set_theme` needs `"mode": "dark"` when a dark-mode default is set, and the `theme-test` dashboard pins per-card themes in places, so a card may not reflect the page theme. Full detail and the five-layer precedence order are in `.shared/prompts/theme_review.md` STEP 0.
+
 ### Skill Prompts
 
-The shared prompt catalogue is listed in [shared conventions §3](.shared/dev_std/agent_conventions.md) — `devcon_run_gen.md` for arbitrary commands inside the devcontainer, `post_mod_process.md` for the SCOPE-driven validation pass. Container identity values (`CONTAINER_NAME`, `PROJECT_DIR`) are in `.devcontainer/.env`.
+The shared prompt catalogue is listed in shared conventions §3 (`.shared/dev_std/agent_conventions.md`) — `devcon_run_gen.md` for arbitrary commands inside the devcontainer, `post_mod_process.md` for the SCOPE-driven validation pass. Container identity values (`CONTAINER_NAME`, `PROJECT_DIR`) are in `.devcontainer/.env`.
 
-One prompt is specific to this project: `.shared/prompts/theme_review.md`, the theme token drift review guide. Use it when an HA update is suspected to have renamed or removed tokens. It provides a Playwright-based workflow for inspecting component shadow DOMs, reading `adoptedStyleSheets`, and cross-referencing against the theme YAML to detect invalid `var()` chains, dead tokens, and missing Category B overrides.
+One prompt is specific to this project: `.shared/prompts/theme_review.md`, the theme review. Its `SCOPE` selects the reference-theme read, the Home Assistant frontend issue and PR read, the live measurement, or all three (the default). The live measurement is a Playwright-based workflow for inspecting component shadow DOMs, reading `adoptedStyleSheets`, and cross-referencing against the theme YAML to detect invalid `var()` chains, dead tokens, and missing Category B overrides. Findings go to `.notes/info/theme_findings_register.md`, with source baselines in `.notes/info/theme_overview.md`, and are decided by `.shared/prompts/external_findings_triage.md`.
 
 ## README Known Decisions
 
@@ -235,6 +253,8 @@ These are deliberate choices in `README.md`. Do not raise findings against them 
 
 ## Shared Conventions
 
-Markdown rules (the single-codepoint emoji ban for headings), temporary-file placement, the no-nuclear-restart rule, and progress reporting are centralized — see [`.shared/dev_std/agent_conventions.md`](.shared/dev_std/agent_conventions.md) §5–7. Sections 1–4 of that file are integration-specific; only §1 (`docker exec`) and §3 (HA interrogation) apply here, and the Python tooling in §2 and §4 does not.
+Markdown rules (the single-codepoint emoji ban for headings), temporary-file placement, the no-nuclear-restart rule, and progress reporting are centralized — see `.shared/dev_std/agent_conventions.md` §5–7. Sections 1–4 of that file are integration-specific; only §1 (`docker exec`) and §3 (HA interrogation) apply here, and the Python tooling in §2 and §4 does not.
+
+- **[!] Note:** If you edit files inside directory junctions (`.notes/` or `.shared/`), do not run container validation on them. Validate them on the Windows host from the `shared/` folder.
 
 The emoji rule matters for this project in particular: `README.md` uses emoji in almost every heading.
