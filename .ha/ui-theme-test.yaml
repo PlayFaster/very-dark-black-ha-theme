@@ -4589,10 +4589,12 @@ views:
               Lovelace view mode cannot natively embed `<ha-generic-picker>` or
               automation/dialog editors. Verify these manually:
 
-              - **Unknown picker item (`<ha-picker-field unknown>`)**: Edit an
-                automation in YAML, set `action: non_existent.service`, and
-                switch to Visual Editor. Check `"Unknown action selected"` and
-                the bad action text against `--ha-color-fill-warning-quiet-resting`.
+              - **Unknown picker item (`<ha-picker-field unknown>`)**: Open
+                [Broken State Checker Automation](/config/automation/edit/theme_test_broken_checker)
+                in the Visual Editor (or set `action: non_existent.service` in
+                YAML and switch to Visual). Check `"Unknown action selected"`
+                and the bad action text against
+                `--ha-color-fill-warning-quiet-resting`.
               - **Automation warnings & destructive rows**: Inspect
                 `ha-automation-editor-warning` and delete/danger rows
                 (`--ha-color-fill-danger-quiet-resting`).

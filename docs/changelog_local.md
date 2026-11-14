@@ -17,6 +17,7 @@ All changes to this project will be documented in this file. This is the detaile
 ---
 
 - [Internal Detailed Changelog: Very Dark Black Home Assistant Theme](#internal-detailed-changelog-very-dark-black-home-assistant-theme)
+  - [\[1.4.2-dev12\] - 2026-11-14 - Docs, Screenshots & Test Fixture: README Fixes, Profile Picker Screenshots, and Broken-State Checker](#142-dev12---2026-11-14---docs-screenshots--test-fixture-readme-fixes-profile-picker-screenshots-and-broken-state-checker)
   - [\[1.4.2-dev11\] - 2026-11-14 - Theme & Test Dashboard: Quiet Status Fills and Broken View Added](#142-dev11---2026-11-14---theme--test-dashboard-quiet-status-fills-and-broken-view-added)
   - [\[1.4.2-dev10\] - 2026-11-14 - Docs \& Changelog: Marketplace Migration and Format Alignment](#142-dev10---2026-11-14---docs--changelog-marketplace-migration-and-format-alignment)
   - [\[1.4.2-dev9\] - 2026-11-13 - Docs \& Notes: Capabilities Dossier Added and .notes Reorganized](#142-dev9---2026-11-13---docs--notes-capabilities-dossier-added-and-notes-reorganized)
@@ -84,6 +85,33 @@ All changes to this project will be documented in this file. This is the detaile
   - [\[1.2.1\] - 2026-01-16 - TEST Visibility Marker](#121---2026-01-16---test-visibility-marker)
   - [\[1.1.1\] - 2025-12-04 - Green, Red, Fuchsia and Orange Variants](#111---2025-12-04---green-red-fuchsia-and-orange-variants)
   - [\[1.0.1\] - 2025-11-18 - Initial Release, Cyan Accent](#101---2025-11-18---initial-release-cyan-accent)
+
+---
+
+## [1.4.2-dev12] - 2026-11-14 - Docs, Screenshots & Test Fixture: README Fixes, Profile Picker Screenshots, and Broken-State Checker
+
+### Summary
+
+Added the disabled `theme_test_broken_checker` automation to `.ha/mock_package.yaml` and linked it from the `Broken` view in `.ha/ui-theme-test.yaml`, applied `readme_review` and `readme_automation_validate` fixes to `README.md`, and updated `.github/images/` theme-selection screenshots to reflect the redesigned Home Assistant Profile page and theme picker.
+
+### Added
+
+- **Broken-state checker automation (`.ha/mock_package.yaml`)**: Added `automation` (`id: theme_test_broken_checker`, `alias: "Theme Test — Broken State Checker"`, `initial_state: false`) with schema-valid triggers, conditions, and actions targeting non-existent entities, services (`non_existent.broken_service`), areas, and zones to exercise `<ha-picker-field unknown>` and warning/danger rows in the Visual Automation Editor.
+- **Dashboard link (`.ha/ui-theme-test.yaml`)**: Linked `[Broken State Checker Automation](/config/automation/edit/theme_test_broken_checker)` inside the `Broken` view's manual checklist card.
+
+### Changed
+
+- **Theme-picker screenshots (`.github/images/`)**: Updated `vdbt_preview_theme_select_blue_1.png`, `vdbt_preview_theme_select_green.png`, and `vdbt_preview_theme_select_violet_2.png` to show the new Home Assistant theme picker on the redesigned Profile page (previous captures archived under `*_old*.png` and duplicate `.png.png` extension removed).
+
+### Documentation
+
+- **`README.md`**: Fixed mid-sentence capitalization (`click **Download**`), aligned US spelling (`initializing`), updated phrasing (`separate from`, `whenever the theme changes`), and added `from: "off"` / `from: "on"` transient-state guards to the `Visual Alert - Theme` example triggers.
+- **`AGENTS.md`**: Replaced the bare `docker exec` tool examples and broad §2 exemption in `## Commands` with an explicit `python3 .workbench/run_task.py` instruction referencing `agent_conventions.md` §1–2 and clarifying that only the Python-specific commands in §2 do not apply.
+
+### Verified
+
+- **Test fixture & HA config**: `yamllint`, `npx prettier --check`, `hass --script check_config`, and `automation.reload` passed with `automation.theme_test_broken_state_checker` loaded as `off`.
+- **README automations (`readme_automation_validate`, `Full` mode)**: All 3 README automations (`Set (Default) Theme at Startup`, `Startup Indicator - Theme`, `Visual Alert - Theme`) created via HAB API, reloaded, restarted cleanly (`20s`), and passed `hab repairs list`, read-back fidelity, and `automation.trigger` simulation with zero errors.
 
 ---
 
@@ -1082,6 +1110,6 @@ Entry structure — headers, titles, category headings and the split between thi
 
 ## Document Audit Status
 
-- **Headers Checked (`CF-101`)**: `1.4.2-dev11..1.0.1` (Complete)
-- **Bullets Checked (`CF-202`)**: `1.4.2-dev11..1.0.1` (Complete)
-- **Lead-In Summaries (`CF-201`)**: Present on `1.4.2-dev11..1.4.2-dev6`, `1.4.1`, `1.4.0`, `1.4.0-dev9`, `1.3.8-dev9..1.3.8-dev1`, `1.3.7`, `1.3.7-dev9..1.3.7-dev7`, `1.3.7-dev4`, `1.3.6`, `1.3.3-dev13`, and `1.3.3-dev12`; earlier entries (`1.4.2-dev5..1.0.1` outside that set) retain historical pre-`CF-201` structure.
+- **Headers Checked (`CF-101`)**: `1.4.2-dev12..1.0.1` (Complete)
+- **Bullets Checked (`CF-202`)**: `1.4.2-dev12..1.0.1` (Complete)
+- **Lead-In Summaries (`CF-201`)**: Present on `1.4.2-dev12..1.4.2-dev6`, `1.4.1`, `1.4.0`, `1.4.0-dev9`, `1.3.8-dev9..1.3.8-dev1`, `1.3.7`, `1.3.7-dev9..1.3.7-dev7`, `1.3.7-dev4`, `1.3.6`, `1.3.3-dev13`, and `1.3.3-dev12`; earlier entries (`1.4.2-dev5..1.0.1` outside that set) retain historical pre-`CF-201` structure.

@@ -139,7 +139,7 @@ frontend:
 Use the **shortcut badge** above, then click **Download** — or just …
 
 1. Open **Settings > Marketplace** in Home Assistant (or **HACS** on HA < 2026.11) and search for **Very Dark Black HA Theme**
-2. Click into _Very Dark Black HA Theme_ and then Click **Download** (bottom right)
+2. Click into _Very Dark Black HA Theme_ and then click **Download** (bottom right)
 3. Run the `frontend.reload_themes` action (Restart Home Assistant if `configuration.yaml` changes were made).
 
 ### 💾 Manual Installation
@@ -258,7 +258,7 @@ mode: single
 ```yaml
 alias: Startup Indicator - Theme
 description: |-
-  Sets Orange at startup to signal Home Assistant is initialising.
+  Sets Orange at startup to signal Home Assistant is initializing.
   Switches back to your preferred theme after 2 minutes.
 triggers:
   - trigger: homeassistant
@@ -298,10 +298,12 @@ triggers:
   - trigger: state
     entity_id: binary_sensor.your_alert_sensor
     to: "on"
+    from: "off"
     id: alert_on
   - trigger: state
     entity_id: binary_sensor.your_alert_sensor
     to: "off"
+    from: "on"
     id: alert_off
 conditions: []
 actions:
@@ -364,7 +366,7 @@ For technical details on the YAML standards, logic, and various display element 
 &nbsp; &nbsp; ➕ &nbsp; &nbsp; Click to Expand for Details:
 </summary><br>
 
-- Items like custom dashboards (dashboard views), cards and card elements can have specific themes applied, separate to the system theme.
+- Items like custom dashboards (dashboard views), cards and card elements can have specific themes applied, separate from the system theme.
 - To check or modify this for views or sections, see [Apply Theme](#-apply-theme) above.
 - If one element has a different (unexpected) theme, it may be a theme or color setting inside the individual card:
   - To check use the pencil icon (top right), then click into the specific card and look for theme and/or color options in the settings.
@@ -485,7 +487,7 @@ This is a **personal project**. Support and updates are provided on a **"best-ef
 
 ### 📖 Documentation Accuracy
 
-- This README is updated whenever the integration changes, and is intended to describe the current release accurately.
+- This README is updated whenever the theme changes, and is intended to describe the current release accurately.
 - Two things can put it out of step: a passage this document missed during a revision, or a Home Assistant screen or setting that has been renamed or moved since it was written.
 - If you find either, please [open an issue](https://github.com/PlayFaster/very-dark-black-ha-theme/issues). It will be corrected.
 

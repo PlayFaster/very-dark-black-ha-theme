@@ -69,18 +69,7 @@ Run via **Terminal → Run Task** inside the devcontainer:
 
 Python-specific tasks (`Ruff`, `Mypy`, `Pytest`, `Pre-commit`) are present in the shared task list but skip automatically for this project via `project.category = theme` in `.vscode/settings.json`. A skipped task writes its own report and shows as a neutral `–` in the summary, so a skip is distinguishable from a task that did not run.
 
-Tasks can also be run headlessly by label; see `agent_conventions.md` §2 for how and when.
-
-### Running tools directly inside the devcontainer
-
-Agents run on the Windows host and reach the container via `docker exec` — the full workflow, the `.devcontainer/.env` identity lookup, and the Git Bash path-mangling trap are in shared conventions §1 (`.shared/dev_std/agent_conventions.md`). Theme-flavoured examples:
-
-```bash
-docker exec -w /workspaces/<PROJECT_DIR> <CONTAINER_NAME> bash -c "codespell ."
-docker exec -w /workspaces/<PROJECT_DIR> <CONTAINER_NAME> bash -c "yamllint -c .validate/.yamllint themes/"
-```
-
-Note that §2 of that file (pytest, ruff, mypy, pre-commit) does **not** apply here — this project has no Python source and no tests.
+Tasks are run headlessly inside the devcontainer via `docker exec` using `python3 .workbench/run_task.py "Fix All Fast"` (or `"Validate All"` / `"Validate Fast (Docs & Style)"`), citing the `.reports/` output per `agent_conventions.md` §1–2 (`.shared/dev_std/agent_conventions.md`). Only the Python-specific commands in §2 (`pytest`, `ruff`, `mypy`, `pre-commit`) do not apply here; the §2 `run_task.py` workflow applies in full.
 
 ## Theme File Architecture (2-Section YAML)
 
