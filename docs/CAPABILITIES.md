@@ -11,9 +11,9 @@ An architectural and functional inventory of **Very Dark Black HA Theme** (`very
 ### 1.1 11-Variant Theme Architecture
 
 - **Purpose**: Provides a pure-black (`#000000`) base theme alongside 10 selectable accent color variants without duplicating shared styling rules.
-- **Entities & Interfaces**: `Black with White` (`&base_logic`) plus `Black with Blue`, `Black with Cyan`, `Black with Emerald`, `Black with Green`, `Black with Indigo`, `Black with Orange`, `Black with Pink`, `Black with Red`, `Black with Silver`, and `Black with Violet` (`themes/very_dark_black_ha_theme.yaml:19,540-615`).
+- **Entities & Interfaces**: `Black with White` (`&base_logic`) plus `Black with Blue`, `Black with Cyan`, `Black with Emerald`, `Black with Green`, `Black with Indigo`, `Black with Orange`, `Black with Pink`, `Black with Red`, `Black with Silver`, and `Black with Violet` (`themes/very_dark_black_ha_theme.yaml:19,545-615`).
 - **Technical Guarantees**:
-  - Single-anchor YAML merge inheritance (`<<: *base_logic`): variant-specific keys (`primary-color`, `state-active-color`, `card-mod-theme`) are isolated to Section B so Home Assistant logs zero duplicate-key warnings. `Black with Orange` additionally overrides `state-active-color`, `state-switch-active-color`, `state-plug-active-color`, and `state-binary_sensor-active-color` to `*acc_red` (`very_dark_black_ha_theme.yaml:568-571`).
+  - Single-anchor YAML merge inheritance (`<<: *base_logic`): variant-specific keys (`primary-color`, `state-active-color`, `card-mod-theme`) are isolated to Section B so Home Assistant logs zero duplicate-key warnings. `Black with Orange` additionally overrides `state-active-color`, `state-switch-active-color`, `state-plug-active-color`, and `state-binary_sensor-active-color` to `*acc_red` (`very_dark_black_ha_theme.yaml:584-587`).
   - Monochrome control visibility: `Black with White` omits `primary-color` intentionally, so active controls fall back to `"var(--primary-color, #aaaaaa)"` / `"var(--primary-color, #e0e0e0)"` rather than rendering invisible.
 - **Lifecycle Timeline**:
   - `1.0.1`: Initial release (`Black with Cyan`).
@@ -65,7 +65,7 @@ An architectural and functional inventory of **Very Dark Black HA Theme** (`very
 ### 2.3 Optional Accent Emphasis
 
 - **Purpose**: Allows users to opt into accent-colored card and heading titles without altering default white/light-grey text hierarchy.
-- **Entities & Interfaces**: Section 4b (`ha-card-header-color` and `ha-heading-card-title-color` commented out as opt-ins; `ha-heading-card-subtitle-color` active at `very_dark_black_ha_theme.yaml:130`) and `card-mod` `.card-header` hook (`very_dark_black_ha_theme.yaml:113-134,450+`).
+- **Entities & Interfaces**: Section 4b (`ha-card-header-color` and `ha-heading-card-title-color` commented out as opt-ins; `ha-heading-card-subtitle-color` active at `very_dark_black_ha_theme.yaml:130`) and `card-mod` `.card-header` hook (`very_dark_black_ha_theme.yaml:113-134,466+`).
 - **Technical Guarantees**:
   - `.card-header` reads `var(--ha-card-header-color, #ffffff) !important`, ensuring user overrides take effect while preserving `#ffffff` as the default.
 - **Lifecycle Timeline**:

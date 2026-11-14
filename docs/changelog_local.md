@@ -17,6 +17,7 @@ All changes to this project will be documented in this file. This is the detaile
 ---
 
 - [Internal Detailed Changelog: Very Dark Black Home Assistant Theme](#internal-detailed-changelog-very-dark-black-home-assistant-theme)
+  - [\[1.4.3-dev1\] - 2026-11-14 - Docs \& Changelogs: Line Citations, Orange Override Note, and Screenshot Scope Aligned](#143-dev1---2026-11-14---docs--changelogs-line-citations-orange-override-note-and-screenshot-scope-aligned)
   - [\[1.4.2\] - 2026-11-14 - Release: Unknown Picker Contrast Fix and Marketplace Docs](#142---2026-11-14---release-unknown-picker-contrast-fix-and-marketplace-docs)
   - [\[1.4.2-dev12\] - 2026-11-14 - Docs, Screenshots \& Test Fixture: README Fixes, Profile Picker Screenshots, and Broken-State Checker](#142-dev12---2026-11-14---docs-screenshots--test-fixture-readme-fixes-profile-picker-screenshots-and-broken-state-checker)
   - [\[1.4.2-dev11\] - 2026-11-14 - Theme \& Test Dashboard: Quiet Status Fills and Broken View Added](#142-dev11---2026-11-14---theme--test-dashboard-quiet-status-fills-and-broken-view-added)
@@ -90,11 +91,23 @@ All changes to this project will be documented in this file. This is the detaile
 
 ---
 
+## [1.4.3-dev1] - 2026-11-14 - Docs & Changelogs: Line Citations, Orange Override Note, and Screenshot Scope Aligned
+
+### Summary
+
+Applies post-release documentation review fixes across `docs/CAPABILITIES.md`, `AGENTS.md`, `CHANGELOG.md`, and `docs/changelog_local.md` so line citations, Orange variant overrides, and `[1.4.2]` screenshot and summary wording match the repository state.
+
+### Changed
+
+- **`docs/CAPABILITIES.md` line citations**: Updated the Section B variant range from `19,540-615` to `19,545-615`, the `Black with Orange` `*acc_red` override citation from `568-571` to `584-587`, and the Section 20 `card-mod` hook citation from `450+` to `466+`.
+- **`AGENTS.md` Orange override note**: Added `state-active-color` alongside `state-switch-active-color`, `state-plug-active-color`, and `state-binary_sensor-active-color` in the Section B Orange Red-override description.
+- **`CHANGELOG.md` and `docs/changelog_local.md` `[1.4.2]` wording**: Renamed the `[1.4.2]` Summary bullet from `Fix missing dropdown visibility` to `Unknown picker contrast`, removed the unreferenced `Blue` preview mention from the theme-picker screenshots `Changed` bullet (retaining Green and Violet to match `README.md`), and updated `Document Audit Status` to `1.4.3-dev1..1.0.1`.
+
 ## [1.4.2] - 2026-11-14 - Release: Unknown Picker Contrast Fix and Marketplace Docs
 
 ### Summary
 
-- **Fix missing dropdown visibility**: Fixes dropdowns and action pickers (such as a renamed or deleted automation action) that previously showed light grey text on a near-white background.
+- **Unknown picker contrast**: Fixes dropdowns and action pickers (such as a renamed or deleted automation action) that previously showed light grey text on a near-white background.
 - **Marketplace and HACS**: Updates the README for Home Assistant `2026.11` Marketplace (retaining HACS instructions for older versions) and refreshes the theme-picker screenshots for the redesigned Profile page.
 
 ### Fixed
@@ -108,7 +121,7 @@ All changes to this project will be documented in this file. This is the detaile
 ### Changed
 
 - **Marketplace installation & alert example**: Updated `README.md` to lead with **Settings > Marketplace** on Home Assistant `2026.11+` while keeping HACS instructions for `< 2026.11`, and added `from: "off"` / `from: "on"` state guards to the `Visual Alert - Theme` automation example.
-- **Theme-picker screenshots**: Updated the Blue, Green, and Violet selection previews to show the new theme picker on the redesigned Home Assistant Profile page.
+- **Theme-picker screenshots**: Updated the Green and Violet selection previews to show the new theme picker on the redesigned Home Assistant Profile page.
 
 ## [1.4.2-dev12] - 2026-11-14 - Docs, Screenshots & Test Fixture: README Fixes, Profile Picker Screenshots, and Broken-State Checker
 
@@ -1132,6 +1145,6 @@ Entry structure — headers, titles, category headings and the split between thi
 
 ## Document Audit Status
 
-- **Headers Checked (`CF-101`)**: `1.4.2-dev12..1.0.1` (Complete)
-- **Bullets Checked (`CF-202`)**: `1.4.2-dev12..1.0.1` (Complete)
-- **Lead-In Summaries (`CF-201`)**: Present on `1.4.2-dev12..1.4.2-dev6`, `1.4.1`, `1.4.0`, `1.4.0-dev9`, `1.3.8-dev9..1.3.8-dev1`, `1.3.7`, `1.3.7-dev9..1.3.7-dev7`, `1.3.7-dev4`, `1.3.6`, `1.3.3-dev13`, and `1.3.3-dev12`; earlier entries (`1.4.2-dev5..1.0.1` outside that set) retain historical pre-`CF-201` structure.
+- **Headers Checked (`CF-101`)**: `1.4.3-dev1..1.0.1` (Complete)
+- **Bullets Checked (`CF-202`)**: `1.4.3-dev1..1.0.1` (Complete)
+- **Lead-In Summaries (`CF-201`)**: Present on `1.4.3-dev1..1.4.2-dev6`, `1.4.1`, `1.4.0`, `1.4.0-dev9`, `1.3.8-dev9..1.3.8-dev1`, `1.3.7`, `1.3.7-dev9..1.3.7-dev7`, `1.3.7-dev4`, `1.3.6`, `1.3.3-dev13`, and `1.3.3-dev12`; earlier entries (`1.4.2-dev5..1.0.1` outside that set) retain historical pre-`CF-201` structure.

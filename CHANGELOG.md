@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Summary
 
-- **Fix missing dropdown visibility**: Fixes dropdowns and action pickers (such as a renamed or deleted automation action) that previously showed light grey text on a near-white background.
+- **Unknown picker contrast**: Fixes dropdowns and action pickers (such as a renamed or deleted automation action) that previously showed light grey text on a near-white background.
 - **Marketplace and HACS**: Updates the README for Home Assistant `2026.11` Marketplace (retaining HACS instructions for older versions) and refreshes the theme-picker screenshots for the redesigned Profile page.
 
 ### Fixed
@@ -20,7 +20,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 - **Marketplace installation & alert example**: Updated `README.md` to lead with **Settings > Marketplace** on Home Assistant `2026.11+` while keeping HACS instructions for `< 2026.11`, and added `from: "off"` / `from: "on"` state guards to the `Visual Alert - Theme` automation example.
-- **Theme-picker screenshots**: Updated the Blue, Green, and Violet selection previews to show the new theme picker on the redesigned Home Assistant Profile page.
+- **Theme-picker screenshots**: Updated the Green and Violet selection previews to show the new theme picker on the redesigned Home Assistant Profile page.
 
 ## [1.4.1] - 2026-08-02 - Visible Controls on the No-Accent Theme
 
